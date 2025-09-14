@@ -17,6 +17,7 @@
             --card-bg: #FFFFFF;
             --card-border: #FF0000;
             --header-bg: linear-gradient(135deg, #110C0C 0%, #4E0303 100%);
+            --track-card-border: #ccc; /* světlý režim */
         }
 
         [data-theme="dark"] {
@@ -432,6 +433,82 @@
             border-top: 1px solid #444;
             color: #aaa;
         }
+
+        /* ===== OKRUHY ===== */
+        .tracks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .track-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease, border 0.3s ease;
+            border: 1px solid var(--track-card-border);
+        }
+
+        .track-card:hover {
+            transform: scale(1.02);
+        }
+
+        .track-map {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .track-info {
+            padding: 15px;
+        }
+
+        .track-info h3 {
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+
+        [data-theme="dark"] {
+            --track-card-border: #4E0303; /* tmavý režim, tmavě červená */
+        }
+
+        .results {
+            background: var(--card-bg, #fff);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border: 1px solid var(--card-border, #ddd);
+        }
+
+        .results h2 {
+            margin-bottom: 1rem;
+            color: var(--vrl-blue, #b30000);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        table th, table td {
+            border: 1px solid var(--card-border, #ddd);
+            padding: 8px;
+            text-align: center;
+        }
+
+        table th {
+            background: linear-gradient(to right, var(--vrl-blue, #b30000), var(--vrl-purple, #660066));
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: rgba(0,0,0,0.05);
+        }
+
         
         @media (max-width: 768px) {
             .header-content {
@@ -467,166 +544,172 @@
         }
     </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <img src="VRL_logo_nove_png.png" alt="F1 VRL Logo" class="logo-img">
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="index.html">Domů</a></li>
-                        <li><a href="calendar.html">Kalendář</a></li>
-                        <li><a href="jezdci.html">Jezdci</a></li>
-                        <li><a href="tymy.html">Týmy</a></li>
-                        <li><a href="okruh.html">Okruhy</a></li>
-                        <li><a href="vysledky.html">Výsledky</a></li>
-                        <li><a href="https://discord.gg/ZaGQ8dCrC5" class="discord-btn"><i class="fab fa-discord"></i> Discord</a></li>
-                    </ul>
-                </nav>
-                <button class="theme-switch" id="themeSwitch">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
+<header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <img src="VRL_logo_nove_png.png" alt="F1 VRL Logo" class="logo-img">
         </div>
-    </header>
+        <nav>
+          <ul>
+            <li><a href="index.html">Domů</a></li>
+            <li><a href="calendar.html">Kalendář</a></li>
+            <li><a href="jezdci.html">Jezdci</a></li>
+            <li><a href="tymy.html">Týmy</a></li>
+            <li><a href="okruh.html">Okruhy</a></li>
+            <li><a href="vysledky.html" class="active">Výsledky</a></li>
+            <li><a href="https://discord.gg/ZaGQ8dCrC5" class="discord-btn" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+          </ul>
+        </nav>
+        <button class="theme-switch" id="themeSwitch">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h2>Velocity Racing League</h2> 
-                <p>Prozkoumej kalendář naších závodů</p>
-                <div>
-                    <a href="https://discord.gg/ZaGQ8dCrC5" class="btn"><i class="fab fa-discord"></i> Připojit se na Discord</a>
-                </div>
-            </div>
+  <!-- OBSAH -->
+  <main class="container">
+    <h2 class="section-title">Výsledky závodů</h2>
+    <div id="resultsContainer"></div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>F1 VRL Liga</h3>
+          <p>Virtuální závodní liga pro nadšence Formule 1. Připoj se k nám a zažij motorsport z pohodlí domova.</p>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/vrl_velocityracingleague/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@Velocity_Racing_League_VRL"><i class="fab fa-youtube"></i></a>
+            <a href="https://discord.gg/ZaGQ8dCrC5"><i class="fab fa-discord"></i></a>
+          </div>
         </div>
-    </section>
-
-        <h2 class="section-title">KALENDÁŘ ZÁVODŮ - SEZÓNA 2</h2>
-        <section class="calendar" id="calendar">
-            <!-- JavaScript naplní kalendář -->
-        </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>F1 VRL Liga</h3>
-                    <p>Virtuální závodní liga pro nadšence Formule 1. Připoj se k nám a zažij motorsport z pohodlí domova.</p>
-                    <div class="social-icons">
-                        <a href="https://www.instagram.com/vrl_velocityracingleague/"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@Velocity_Racing_League_VRL"><i class="fab fa-youtube"></i></a>
-                        <a href="https://discord.gg/ZaGQ8dCrC5"><i class="fab fa-discord"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Navigace</h3>
-                    <ul>
-                        <li><a href="index.html">Domů</a></li>
-                        <li><a href="calendar.html">Kalendář</a></li>
-                        <li><a href="jezdci.html">Jezdci</a></li>
-                        <li><a href="tymy.html">Týmy</a></li>
-                        <li><a href="okruh.html">Okruhy</a></li>
-                        <li><a href="vysledky.html">Výsledky</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Organizátoři</h3>
-                    <ul>
-                        <li><a href="#">Matěj Vaculík</a></li>
-                        <li><a href="#">Maxim Heligr</a></li>
-                        <li><a href="#">Ondra Duda</a></li>
-                        <li><a href="#">Martin Klaboch</a></li>
-                        <li><a href="#">Oliver Stavač</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 F1 VRL Liga. Všechna práva vyhrazena.</p>
-            </div>
+        <div class="footer-section">
+          <h3>Navigace</h3>
+          <ul>
+            <li><a href="index.html">Domů</a></li>
+            <li><a href="calendar.html">Kalendář</a></li>
+            <li><a href="jezdci.html">Jezdci</a></li>
+            <li><a href="tymy.html">Týmy</a></li>
+            <li><a href="okruh.html">Okruhy</a></li>
+            <li><a href="vysledky.html">Výsledky</a></li>
+          </ul>
         </div>
-    </footer>
+        <div class="footer-section">
+          <h3>Organizátoři</h3>
+          <ul>
+            <li><a href="#">Matěj Vaculík</a></li>
+            <li><a href="#">Maxim Heliger</a></li>
+            <li><a href="#">Ondra Duda</a></li>
+            <li><a href="#">Martin Klaboch</a></li>
+            <li><a href="#">Oliver Stavač</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 F1 VRL Liga. Všechna práva vyhrazena.</p>
+      </div>
+    </div>
+  </footer>
 
-    <script>
-        // Přepínání světlého/tmavého režimu
-        const themeSwitch = document.getElementById('themeSwitch');
+  <script>
+
+    // Přepínání světlého/tmavého režimu
+    const themeSwitch = document.getElementById('themeSwitch');
+
+    if (themeSwitch) {
         const themeIcon = themeSwitch.querySelector('i');
-        
+
+        // Načtení uloženého tématu nebo nastavení výchozího
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.dataset.theme = savedTheme;
+        themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+        // Kliknutí na tlačítko
         themeSwitch.addEventListener('click', () => {
-            document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
-            themeIcon.className = document.body.dataset.theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-            
+            const newTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+            document.body.dataset.theme = newTheme;
+            themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        
             // Uložení preference do localStorage
-            localStorage.setItem('theme', document.body.dataset.theme);
+            localStorage.setItem('theme', newTheme);
         });
-        
-        // Načtení uloženého tématu
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            document.body.dataset.theme = savedTheme;
-            themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-        }
-        
-        // Data pro závody VRL ligy
-        const races = [
-            { round: "R1", name: "AUSTRALIE", date: "9.9.2025", track: "Melbourne Grand Prix Circuit" },
-            { round: "R2", name: "Velká Británie", date: "16.9.2025", track: "Silverstone Circuit" },
-            { round: "R3", name: "Bahrain", date: "30.9.2025", track: "Bahrain International Circuit" },
-            { round: "R4", name: "Miami", date: "7.10.2025", track: "Miami International Autodrome" },
-            { round: "R5", name: "Imola", date: "14.10.2025", track: "Autodromo Enzo e Dino Ferrari" },
-            
-            { round: "R6", name: "Japonsko", date: "4.11.2025", track: "Suzuka International Racing Course" },
-            { round: "R7", name: "Kanada", date: "11.11.2025", track: "Circuit Gilles Villeneuve" },
-            { round: "R8", name: "Singapur", date: "18.11.2025", track: "Marina Bay Street Circuit" },
-            { round: "R9", name: "Belgie", date: "2.12.2025", track: "Circuit de Spa-Francorchamps" },
-            { round: "R10", name: "Španělsko", date: "16.12.2025", track: "Circuit de Barcelona-Catalunya" },
-            
-            { round: "R11", name: "Mexiko", date: "6.1.2026", track: "Autódromo Hermanos Rodríguez" },
-            { round: "R12", name: "Brazílie", date: "20.1.2026", track: "Autódromo José Carlos Pace" },
-            { round: "R13", name: "USA", date: "3.2.2026", track: "Circuit of the Americas" },
-            
-            { round: "R14", name: "Rakousko", date: "17.2.2026", track: "Red Bull Ring" },
-            { round: "R15", name: "Monako", date: "3.3.2026", track: "Circuit de Monaco" },
-            { round: "R16", name: "Itálie", date: "10.3.2026", track: "Autodromo Nazionale Monza" },
-            { round: "R17", name: "Maďarsko", date: "24.3.2026", track: "Hungaroring" },
-            
-            { round: "R18", name: "Katar", date: "7.4.2026", track: "Losail International Circuit" },
-            { round: "R19", name: "Saudská Arábie", date: "21.4.2026", track: "Jeddah Corniche Circuit" },
-            { round: "R20", name: "Abu Dhabi", date: "28.4.2026", track: "Yas Marina Circuit" }
-        ];
+    }
 
-        // Funkce pro naplnění kalendáře
-        function populateCalendar() {
-            const calendar = document.getElementById('calendar');
-            calendar.innerHTML = '';
-            
-            races.forEach(race => {
-                const raceCard = document.createElement('div');
-                raceCard.className = 'race-card';
-                
-                raceCard.innerHTML = `
-                    <div class="race-date">
-                        <div class="race-round">${race.round}</div>
-                        <strong>${race.date}</strong>
-                    </div>
-                    <div class="race-info">
-                        <h3>${race.name}</h3>
-                        <p class="race-track">${race.track}</p>
-                        <p>19:00 | Krátká kvalifikace | 50 % délky</p>
-                    </div>
-                `;
-                
-                calendar.appendChild(raceCard);
-            });
-        }
+    // Sem doplňuješ výsledky závodů
+    const raceResults = [
+      {
+        round: "R1 – Melbourne Grand Prix Circuit",
+        results: [
+          "Josef KUBEŠ",
+          "Martin KLABOCH",
+          "Maxim HELIGR",
+          "Matej CSIBA",
+          "Oliver MAŤKO",
+          "Andrej ERDELSKÝ",
+          "Tadeáš ŠMÍDL",
+          "Tomáš NOVÁK",
+          "Matěj VACULÍK",
+          "Matěj DOHA"
+        ]
+      },
+      {
+        round: "R2 – Silverstone Circuit",
+        results: [
+          "Jezdec B (Ferrari)",
+          "Jezdec A (Red Bull)",
+          "Jezdec D (McLaren)",
+          "Jezdec C (Mercedes)",
+          "Jezdec E",
+          "Jezdec F",
+          "Jezdec G",
+          "Jezdec H",
+          "Jezdec I",
+          "Jezdec J",
+          "Jezdec K",
+          "Jezdec L",
+          "Jezdec M",
+          "Jezdec N",
+          "Jezdec O",
+          "Jezdec P",
+          "Jezdec Q",
+          "Jezdec R",
+          "Jezdec S",
+          "Jezdec T"
+        ]
+      }
+    ];
 
-        // Inicializace při načtení stránky
-        document.addEventListener('DOMContentLoaded', () => {
-            populateCalendar();
-        });
-    </script>
+    const container = document.getElementById("resultsContainer");
+
+    raceResults.forEach(race => {
+      const div = document.createElement("div");
+      div.className = "results";
+      div.innerHTML = `
+        <h2>${race.round}</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Pozice</th>
+              <th>Jezdec</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${race.results.map((driver, index) => `
+              <tr>
+                <td>${index + 1}</td>
+                <td>${driver}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      `;
+      container.appendChild(div);
+    });
+  </script>
 </body>
-
 </html>
+
