@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Timing</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --f1-red: #FF4242;
+      --vrl-blue: #A10404;    
+      --vrl-purple: #4E0303;
+      --dark-bg: #110C0C;
+      --light-bg: #FFFFFF;
+      --text-light: #FFFFFF;
+      --text-dark: #110C0C;
+      --card-bg: #FFFFFF;
+      --card-border: #FF0000;
+      --header-bg: linear-gradient(135deg, #110C0C 0%, #4E0303 100%);
+      --bg-page: #ffffff;
+      --bg-card: #f8f8f8;
+      --text-color: #000000;
+      --accent-color: #c00000;
+      --soft-tyre: #FF9999;
+      --medium-tyre: #FFCC99;
+      --hard-tyre: #99CCFF;
+      --wet-tyre: #6666CC;
+      --intermediate-tyre: #66CC66;
+    }
+
+    body[data-theme="dark"] {
+      --bg-page: #121212;
+      --bg-card: #1e1e1e;
+      --text-color: #ffffff;
+      --accent-color: #0077ff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body {
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: var(--bg-page);
+      color: var(--text-color);
+    }
+
+    header {
+      background: var(--header-bg);
+      color: var(--text-light);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo h1 {
+      font-size: 1.8rem;
+      margin-left: 15px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(to right, var(--vrl-blue), var(--vrl-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .logo-img {
+      height: 70px;
+      width: auto;
+      margin-right: 20px;
+    }
+
+    .vrl-text {
+      font-weight: 900;
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      background: linear-gradient(to right, var(--f1-red), var(--vrl-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      align-items: center;
+    }
+
+    nav li {
+      margin-left: 20px;
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    nav a:hover, nav a.active {
+      background-color: var(--vrl-purple);
+    }
+
+    .discord-btn {
+      display: flex;
+      align-items: center;
+      background-color: #5865F2;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+    .discord-btn:hover {
+      background-color: #4752c4;
+      transform: translateY(-2px);
+    }
+
+    .discord-btn i {
+      margin-right: 8px;
+      font-size: 1.2rem;
+    }
+
+    .theme-switch {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-left: 20px;
+    }
+
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80') no-repeat center center/cover;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      text-align: center;
+    }
+
+    .hero-content {
+      position: relative;
+      color: white;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .hero h2 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(to right, var(--vrl-blue), var(--vrl-purple));
+      color: white;
+      padding: 12px 30px;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 0 10px;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 3rem 0 2rem;
+      color: var(--text-dark);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(to right, var(--vrl-blue), var(--vrl-purple));
+      margin: 10px auto;
+      border-radius: 2px;
+    }
+
+    .livetiming-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      background: var(--bg-card);
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .livetiming-container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .drivers-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .drivers-table th,
+    .drivers-table td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #555;
+    }
+
+    /* Světlý režim */
+    body[data-theme="light"] .drivers-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 20px;
+      background-color: #fff;
+      color: #000;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    body[data-theme="light"] .drivers-table th {
+      background-color: #f8d7da;
+      color: #000;
+      padding: 10px;
+      text-align: left;
+    }
+
+    body[data-theme="light"] .drivers-table td {
+      background-color: #fff;
+      color: #000;
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    /* Tmavý režim */
+    body[data-theme="dark"] .drivers-table {
+      background-color: #1e1e1e;
+      color: #fff;
+      border: 2px solid #444;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    body[data-theme="dark"] .drivers-table th {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: left;
+    }
+
+    body[data-theme="dark"] .drivers-table td {
+      background-color: #1a1a1a;
+      color: #fff;
+      padding: 8px;
+      border-bottom: 1px solid #444;
+      border-radius: 0;
+    }
+
+    /* Alternující tmavší řádky pro lepší čitelnost */
+    body[data-theme="dark"] .drivers-table tr:nth-child(even) td {
+      background-color: #151515;
+    }
+
+    .drivers-table thead {
+      background: var(--accent-color);
+      color: #fff;
+    }
+
+    .drivers-table th {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      padding: 12px 15px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .drivers-table td {
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+      color: #333;
+      background-color: #fafafa;
+    }
+
+    .drivers-table tbody tr:nth-child(even) td {
+      background-color: #f0f4f8;
+    }
+
+    .drivers-table tbody tr:hover td {
+      background-color: #dce4f0;
+      transition: background-color 0.3s;
+    }
+
+    .drivers-table tbody tr td:first-child {
+      font-weight: bold;
+    }
+
+    .drivers-table tbody tr:nth-child(1) td:first-child::before {
+      content: "🥇";
+      margin-right: 5px;
+    }
+
+    .drivers-table tbody tr:nth-child(2) td:first-child::before {
+      content: "🥈";
+      margin-right: 5px;
+    }
+
+    .drivers-table tbody tr:nth-child(3) td:first-child::before {
+      content: "🥉";
+      margin-right: 5px;
+    }
+
+    /* Pořadí TOP 3 - zvýraznění */
+    .drivers-table tbody tr:nth-child(1) {
+      background-color: rgba(255, 215, 0, 0.1);
+    }
+
+    .drivers-table tbody tr:nth-child(2) {
+      background-color: rgba(192, 192, 192, 0.1);
+    }
+
+    .drivers-table tbody tr:nth-child(3) {
+      background-color: rgba(205, 127, 50, 0.1);
+    }
+
+    /* Styl pro pneumatiky */
+    .tyre-soft {
+      background-color: var(--soft-tyre) !important;
+      color: #000;
+      font-weight: bold;
+      border-radius: 10px;
+      padding: 3px 8px;
+    }
+
+    .tyre-medium {
+      background-color: var(--medium-tyre) !important;
+      color: #000;
+      font-weight: bold;
+      border-radius: 10px;
+      padding: 3px 8px;
+    }
+
+    .tyre-hard {
+      background-color: var(--hard-tyre) !important;
+      color: #000;
+      font-weight: bold;
+      border-radius: 10px;
+      padding: 3px 8px;
+    }
+
+    .tyre-wet {
+      background-color: var(--wet-tyre) !important;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 10px;
+      padding: 3px 8px;
+    }
+
+    .tyre-intermediate {
+      background-color: var(--intermediate-tyre) !important;
+      color: #000;
+      font-weight: bold;
+      border-radius: 10px;
+      padding: 3px 8px;
+    }
+
+    /* Styl pro týmové barvy */
+    .team-redbull { border-left: 4px solid #3671C6; }
+    .team-ferrari { border-left: 4px solid #F91536; }
+    .team-mercedes { border-left: 4px solid #27F4D2; }
+    .team-mclaren { border-left: 4px solid #F58020; }
+    .team-alpine { border-left: 4px solid #2293D1; }
+    .team-aston-martin { border-left: 4px solid #358C75; }
+    .team-alfaromeo { border-left: 4px solid #C92D4B; }
+    .team-haas { border-left: 4px solid #B6BABD; }
+    .team-alphatauri { border-left: 4px solid #5E8FAA; }
+    .team-williams { border-left: 4px solid #37BEDD; }
+
+    /* Status bar */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .last-updated {
+      font-size: 0.9rem;
+    }
+
+    .connection-status {
+      display: flex;
+      align-items: center;
+    }
+
+    .connection-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+
+    .connected {
+      background-color: #4CAF50;
+    }
+
+    .disconnected {
+      background-color: #F44336;
+    }
+
+    /* Footer */
+    footer { 
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      padding: 12px 0;
+      font-size: 14px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+
+    .footer-section h3 {
+      color: var(--vrl-blue);
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 10px;
+    }
+
+    .footer-section a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-section a:hover {
+      color: var(--vrl-blue);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 20px;
+      border-top: 1px solid #444;
+      color: #aaa;
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      nav ul {
+        margin-top: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      nav li {
+        margin: 5px 10px;
+      }
+
+      .hero {
+        height: 400px;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .drivers-table {
+        font-size: 0.8rem;
+      }
+
+      .drivers-table th,
+      .drivers-table td {
+        padding: 6px 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <img src="VRL_logo_nove_png.png" alt="F1 VRL Logo" class="logo-img">
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Domů</a></li>
+            <li><a href="calendar.html">Kalendář</a></li>
+            <li><a href="jezdci.html">Jezdci</a></li>
+            <li><a href="tymy.html">Týmy</a></li>
+            <li><a href="okruh.html">Okruhy</a></li>
+            <li><a href="livetiming.html">Live Timing</a></li>
+            <li><a href="#">Výsledky</a></li>
+            <li><a href="#" class="discord-btn"><i class="fab fa-discord"></i> Discord</a></li>
+          </ul>
+        </nav>
+        <button class="theme-switch" id="themeSwitch">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h2>Velocity Racing League</h2> 
+        <p>Live Timing - Sledujte data ze hry F1 25 v reálném čase</p>
+        <div>
+          <a href="#" class="btn"><i class="fab fa-discord"></i> Připojit se na Discord</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="livetiming-container">
+      <h1>Live Timing</h1>
+      
+      <div class="status-bar">
+        <div class="last-updated" id="lastUpdated">Poslední aktualizace: --:--:--</div>
+        <div class="connection-status">
+          <div class="connection-dot connected" id="connectionStatus"></div>
+          <span>Připojeno k F1 25</span>
+        </div>
+      </div>
+      
+      <table class="drivers-table">
+        <thead>
+          <tr>
+            <th>Pořadí</th>
+            <th>Jméno</th>
+            <th>Tým</th>
+            <th>Rozestup</th>
+            <th>Interval</th>
+            <th>Pneumatiky</th>
+            <th>Stáří pneumatik</th>
+            <th>Nejrychlejší kolo</th>
+          </tr>
+        </thead>
+        <tbody id="livetimingTable">
+          <!-- Data doplní JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>F1 VRL Liga</h3>
+          <p>Virtuální závodní liga pro nadšence Formule 1. Připoj se k nám a zažij motorsport z pohodlí domova.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3>Navigace</h3>
+          <ul>
+            <li><a href="index.html">Domů</a></li>
+            <li><a href="calendar.html">Kalendář</a></li>
+            <li><a href="jezdci.html">Jezdci</a></li>
+            <li><a href="tymy.html">Týmy</a></li>
+            <li><a href="okruh.html">Okruhy</a></li>
+            <li><a href="livetiming.html">Live Timing</a></li>
+            <li><a href="#">Výsledky</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Organizátoři</h3>
+          <ul>
+            <li><a href="#">Petr Strouhal</a></li>
+            <li><a href="#">Matěj Vaculík</a></li>
+            <li><a href="#">Maxim Heliger</a></li>
+            <li><a href="#">Ondra Duda</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 F1 VRL Liga. Všechna práva vyhrazena.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Přepínání světlého/tmavého režimu
+    const themeSwitch = document.getElementById('themeSwitch');
+    const themeIcon = themeSwitch.querySelector('i');
+    
+    themeSwitch.addEventListener('click', () => {
+        document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+        themeIcon.className = document.body.dataset.theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        
+        // Uložení preference do localStorage
+        localStorage.setItem('theme', document.body.dataset.theme);
+    });
+    
+    // Načtení uloženého tématu
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.body.dataset.theme = savedTheme;
+        themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+
+    // Třídy pro týmy
+    const teamClasses = {
+        "Red Bull Racing": "team-redbull",
+        "Ferrari": "team-ferrari",
+        "Mercedes": "team-mercedes",
+        "McLaren": "team-mclaren",
+        "Alpine": "team-alpine",
+        "Aston Martin": "team-aston-martin",
+        "Alfa Romeo": "team-alfaromeo",
+        "Haas": "team-haas",
+        "AlphaTauri": "team-alphatauri",
+        "Williams": "team-williams"
+    };
+
+    // Třídy pro pneumatiky
+    function getTyreClass(compound) {
+        switch(compound) {
+            case "Soft": return "tyre-soft";
+            case "Medium": return "tyre-medium";
+            case "Hard": return "tyre-hard";
+            case "Wet": return "tyre-wet";
+            case "Intermediate": return "tyre-intermediate";
+            default: return "";
+        }
+    }
+
+    // Funkce pro formátování času
+    function formatTime(seconds) {
+        if (!seconds && seconds !== 0) return "N/A";
+        const mins = Math.floor(seconds / 60);
+        const secs = (seconds % 60).toFixed(3);
+        return `${mins}:${secs.padStart(6, '0')}`;
+    }
+
+    // Funkce pro vykreslení tabulky
+    function renderLiveTiming(data) {
+        const table = document.getElementById("livetimingTable");
+        table.innerHTML = "";
+
+        data.forEach(driver => {
+            const row = document.createElement("tr");
+            row.classList.add(teamClasses[driver.team] || "");
+            
+            row.innerHTML = `
+                <td>${driver.position}</td>
+                <td>${driver.name}</td>
+                <td>${driver.team}</td>
+                <td>${driver.gap}</td>
+                <td>${driver.interval}</td>
+                <td><span class="${getTyreClass(driver.tyreCompound)}">${driver.tyreCompound}</span></td>
+                <td>${driver.tyreAge} kol</td>
+                <td>${driver.bestLapTime}</td>
+            `;
+            table.appendChild(row);
+        });
+    }
+
+    // Funkce pro aktualizaci času
+    function updateLastUpdated() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('cs-CZ');
+        document.getElementById('lastUpdated').textContent = `Poslední aktualizace: ${timeString}`;
+    }
+
+    // Proměnné pro správu stavu
+    let connectionStatus = document.getElementById('connectionStatus');
+    let isConnected = false;
+    let retryCount = 0;
+    const maxRetries = 5;
+
+    // Funkce pro načítání dat ze SimHub
+    async function fetchDataFromSimHub() {
+        try {
+            const response = await fetch('http://localhost:8888/api/data', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                },
+                // Přidáme timeout 5 sekund
+                signal: AbortSignal.timeout(5000)
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            processSimHubData(data);
+            
+            // Resetujeme počítadlo pokusů při úspěchu
+            retryCount = 0;
+            
+            // Aktualizujeme stav připojení
+            if (!isConnected) {
+                isConnected = true;
+                connectionStatus.classList.remove('disconnected');
+                connectionStatus.classList.add('connected');
+                connectionStatus.nextElementSibling.textContent = 'Připojeno k F1 25 přes SimHub';
+            }
+            
+            return true;
+        } catch (error) {
+            console.error('Chyba při načítání dat ze SimHub:', error);
+            
+            // Zvýšíme počítadlo pokusů
+            retryCount++;
+            
+            // Pokud jsme překročili maximální počet pokusů, zobrazíme chybu
+            if (retryCount >= maxRetries) {
+                isConnected = false;
+                connectionStatus.classList.remove('connected');
+                connectionStatus.classList.add('disconnected');
+                connectionStatus.nextElementSibling.textContent = 'Odpojeno od F1 25 - SimHub nenalezen';
+                
+                // Použijeme mock data jako zálohu
+                useMockData();
+            }
+            
+            return false;
+        }
+    }
+
+    // Funkce pro zpracování dat ze SimHub
+    function processSimHubData(data) {
+        // Tato část se bude lišit podle struktury dat, které SimHub poskytuje
+        // Zde je příklad, jak by data mohla být strukturována
+        
+        // Předpokládáme, že data obsahují seznam jezdců
+        const drivers = [];
+        
+        // SimHub obvykle poskytuje data o všech jezdcích na trati
+        // Projdeme data a vytvoříme náš formát
+        for (let i = 0; i < data.Drivers.length; i++) {
+            const driverData = data.Drivers[i];
+            
+            drivers.push({
+                position: driverData.Position,
+                name: driverData.Name,
+                team: driverData.TeamName,
+                gap: formatGap(driverData.GapToLeader),
+                interval: formatGap(driverData.IntervalToPositionAhead),
+                tyreCompound: getTyreCompoundName(driverData.TyreCompound),
+                tyreAge: driverData.TyreAgeLaps || 0,
+                bestLapTime: formatTime(driverData.BestLapTime)
+            });
+        }
+        
+        // Seřadíme jezdce podle pozice
+        drivers.sort((a, b) => a.position - b.position);
+        
+        // Aktualizujeme tabulku
+        renderLiveTiming(drivers);
+        updateLastUpdated();
+    }
+
+    // Pomocné funkce pro formátování dat
+    function formatGap(gap) {
+        if (gap === 0 || gap === undefined) return "-";
+        return `+${gap.toFixed(3)}s`;
+    }
+
+    function getTyreCompoundName(compoundValue) {
+        // SimHub používá číselné hodnoty pro sloučeniny pneumatik
+        const compounds = {
+            0: "Intermediate",
+            1: "Wet",
+            16: "Soft",
+            17: "Medium",
+            18: "Hard"
+        };
+        return compounds[compoundValue] || "N/A";
+    }
+
+    // Funkce pro použití mock dat (jako záloha)
+    function useMockData() {
+        const mockDrivers = [
+            { position: 1, name: "Jan Novák", team: "Red Bull Racing", tyreCompound: "Soft", bestLapTime: "1:22.456", gap: "-", interval: "-", tyreAge: 5 },
+            { position: 2, name: "Petr Svoboda", team: "Ferrari", tyreCompound: "Medium", bestLapTime: "1:22.789", gap: "+0.333s", interval: "+0.333s", tyreAge: 7 },
+            { position: 3, name: "Martin Dvořák", team: "Mercedes", tyreCompound: "Hard", bestLapTime: "1:23.012", gap: "+0.556s", interval: "+0.223s", tyreAge: 10 },
+            { position: 4, name: "Jakub Horák", team: "McLaren", tyreCompound: "Soft", bestLapTime: "1:23.200", gap: "+0.744s", interval: "+0.188s", tyreAge: 3 },
+            { position: 5, name: "Lukáš Procházka", team: "Aston Martin", tyreCompound: "Medium", bestLapTime: "1:23.456", gap: "+1.000s", interval: "+0.256s", tyreAge: 8 }
+        ];
+        
+        renderLiveTiming(mockDrivers);
+        updateLastUpdated();
+    }
+
+    // Načtení počátečních dat
+    useMockData();
+
+    // Pokus o připojení k SimHub
+    fetchDataFromSimHub();
+
+    // Nastavení periodické aktualizace dat
+    setInterval(fetchDataFromSimHub, 2000); // Aktualizace každé 2 sekundy
+
+    // Simulace připojení k F1 25
+    const connectionStatusDot = document.getElementById('connectionStatus');
+    
+    // Náhodné změny stavu připojení (pro simulaci)
+    setInterval(() => {
+        if (Math.random() > 0.95) {
+            isConnected = !isConnected;
+            if (isConnected) {
+                connectionStatusDot.classList.remove('disconnected');
+                connectionStatusDot.classList.add('connected');
+                connectionStatusDot.nextElementSibling.textContent = 'Připojeno k F1 25 přes SimHub';
+            } else {
+                connectionStatusDot.classList.remove('connected');
+                connectionStatusDot.classList.add('disconnected');
+                connectionStatusDot.nextElementSibling.textContent = 'Odpojeno od F1 25 - SimHub nenalezen';
+            }
+        }
+    }, 10000);
+    </script>
+</body>
+
+</html>
+

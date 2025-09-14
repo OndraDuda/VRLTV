@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 VRL - Virtuální Racing Liga - Sezóna 2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --f1-red: #FF4242;
+            --vrl-blue: #A10404;    
+            --vrl-purple: #4E0303;
+            --dark-bg: #110C0C;
+            --light-bg: #FFFFFF;
+            --text-light: #FFFFFF;
+            --text-dark: #110C0C;
+            --card-bg: #FFFFFF;
+            --card-border: #FF0000;
+            --header-bg: linear-gradient(135deg, #110C0C 0%, #4E0303 100%);
+        }
+
+        [data-theme="dark"] {
+            --light-bg: #110C0C;
+            --text-dark: #FFFFFF;
+            --card-bg: #1a1a1a;
+            --card-border: #4E0303;
+            --header-bg: linear-gradient(135deg, #110C0C 0%, #A10404 100%);
+        }
+
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: var(--header-bg);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-left: 15px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, var(--vrl-blue), var(--vrl-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo-img {
+            height: 70px; /* původně 50px */
+            width: auto;
+            margin-right: 20px;
+        }
+
+
+        .f1-logo {
+            font-size: 2.5rem;
+            color: var(--f1-red);
+            font-weight: bold;
+        }
+        
+        .vrl-text {
+            font-weight: 900;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, var(--f1-red), var(--vrl-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav li {
+            margin-left: 20px;
+        }
+        
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: var(--vrl-purple);
+        }
+        
+        .discord-btn {
+            display: flex;
+            align-items: center;
+            background-color: #5865F2;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .discord-btn:hover {
+            background-color: #4752c4;
+            transform: translateY(-2px);
+        }
+        
+        .discord-btn i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .theme-switch {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            text-align: center;
+        }
+        
+        .hero-content {
+            position: relative;
+            color: white;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--vrl-blue), var(--vrl-purple));
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            color: var(--text-dark);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--vrl-blue), var(--vrl-purple));
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        .season-info {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            border: 1px solid var(--card-border);
+            text-align: center;
+        }
+        
+        .season-info h2 {
+            color: var(--vrl-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .season-details {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .detail-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 1rem;
+            flex: 1;
+            min-width: 200px;
+            border: 1px solid var(--card-border);
+            text-align: center;
+        }
+        
+        .detail-card h3 {
+            color: var(--vrl-purple);
+            margin-bottom: 1rem;
+        }
+        
+        .calendar {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            border: 1px solid var(--card-border);
+        }
+        
+        .race-card {
+            display: flex;
+            background: var(--card-bg);
+            border-left: 5px solid var(--vrl-blue);
+            margin-bottom: 15px;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 1px solid var(--card-border);
+        }
+        
+        .race-card:hover {
+            transform: translateX(10px);
+            border-left: 5px solid var(--vrl-purple);
+        }
+        
+        .race-date {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 20px;
+            min-width: 120px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .race-round {
+            font-size: 0.8rem;
+            color: var(--vrl-blue);
+            font-weight: bold;
+        }
+        
+        .race-info {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        .race-info h3 {
+            color: var(--vrl-blue);
+            margin-bottom: 5px;
+        }
+        
+        .race-info p {
+            color: var(--text-dark);
+        }
+        
+        .race-track {
+            font-weight: bold;
+            color: var(--vrl-purple);
+        }
+        
+        .standings-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .standings {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .standings-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid var(--card-border);
+        }
+        
+        .standings-header {
+            background: linear-gradient(to right, var(--vrl-blue), var(--vrl-purple));
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .standings-body {
+            padding: 20px;
+        }
+        
+        .driver-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--card-border);
+        }
+        
+        .driver-name {
+            font-weight: bold;
+        }
+        
+        .driver-points {
+            color: var(--vrl-purple);
+            font-weight: bold;
+        }
+        
+        .driver-team {
+            font-size: 0.8rem;
+            color: #777;
+        }
+        
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-section h3 {
+            color: var(--vrl-blue);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--vrl-blue);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #aaa;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav li {
+                margin: 5px 10px;
+            }
+            
+            .hero {
+                height: 400px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .season-details {
+                flex-direction: column;
+            }
+            
+            .standings {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="VRL_logo_nove_png.png" alt="F1 VRL Logo" class="logo-img">
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Domů</a></li>
+                        <li><a href="calendar.html">Kalendář</a></li>
+                        <li><a href="jezdci.html">Jezdci</a></li>
+                        <li><a href="tymy.html">Týmy</a></li>
+                        <li><a href="okruh.html">Okruhy</a></li>
+                        <li><a href="livetiming.html">Live Timing</a></li>
+                        <li><a href="#">Výsledky</a></li>
+                        <li><a href="#" class="discord-btn"><i class="fab fa-discord"></i> Discord</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-switch" id="themeSwitch">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Velocity Racing League</h2> 
+                <p>Prozkoumej kalendář naších závodů</p>
+                <div>
+                    <a href="#" class="btn"><i class="fab fa-discord"></i> Připojit se na Discord</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <h2 class="section-title">KALENDÁŘ ZÁVODŮ - SEZÓNA 2</h2>
+        <section class="calendar" id="calendar">
+            <!-- JavaScript naplní kalendář -->
+        </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>F1 VRL Liga</h3>
+                    <p>Virtuální závodní liga pro nadšence Formule 1. Připoj se k nám a zažij motorsport z pohodlí domova.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Navigace</h3>
+                    <ul>
+                        <li><a href="index.html">Domů</a></li>
+                        <li><a href="calendar.html">Kalendář</a></li>
+                        <li><a href="jezdci.html">Jezdci</a></li>
+                        <li><a href="tymy.html">Týmy</a></li>
+                        <li><a href="okruh.html">Okruhy</a></li>
+                        <li><a href="livetiming.html">Live Timing</a></li>
+                        <li><a href="#">Výsledky</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Organizátoři</h3>
+                    <ul>
+                        <li><a href="#">Petr Strouhal</a></li>
+                        <li><a href="#">Matěj Vaculík</a></li>
+                        <li><a href="#">Maxim Heliger</a></li>
+                        <li><a href="#">Ondra Duda</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 F1 VRL Liga. Všechna práva vyhrazena.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Přepínání světlého/tmavého režimu
+        const themeSwitch = document.getElementById('themeSwitch');
+        const themeIcon = themeSwitch.querySelector('i');
+        
+        themeSwitch.addEventListener('click', () => {
+            document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+            themeIcon.className = document.body.dataset.theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            
+            // Uložení preference do localStorage
+            localStorage.setItem('theme', document.body.dataset.theme);
+        });
+        
+        // Načtení uloženého tématu
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.body.dataset.theme = savedTheme;
+            themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+        
+        // Data pro závody VRL ligy
+        const races = [
+            { round: "R1", name: "AUSTRALIE", date: "9.9.2025", track: "Melbourne Grand Prix Circuit" },
+            { round: "R2", name: "Velká Británie", date: "16.9.2025", track: "Silverstone Circuit" },
+            { round: "R3", name: "Bahrain", date: "30.9.2025", track: "Bahrain International Circuit" },
+            { round: "R4", name: "Miami", date: "7.10.2025", track: "Miami International Autodrome" },
+            { round: "R5", name: "Imola", date: "14.10.2025", track: "Autodromo Enzo e Dino Ferrari" },
+            
+            { round: "R6", name: "Japonsko", date: "4.11.2025", track: "Suzuka International Racing Course" },
+            { round: "R7", name: "Kanada", date: "11.11.2025", track: "Circuit Gilles Villeneuve" },
+            { round: "R8", name: "Singapur", date: "18.11.2025", track: "Marina Bay Street Circuit" },
+            { round: "R9", name: "Belgie", date: "2.12.2025", track: "Circuit de Spa-Francorchamps" },
+            { round: "R10", name: "Španělsko", date: "16.12.2025", track: "Circuit de Barcelona-Catalunya" },
+            
+            { round: "R11", name: "Mexiko", date: "6.1.2026", track: "Autódromo Hermanos Rodríguez" },
+            { round: "R12", name: "Brazílie", date: "20.1.2026", track: "Autódromo José Carlos Pace" },
+            { round: "R13", name: "USA", date: "3.2.2026", track: "Circuit of the Americas" },
+            
+            { round: "R14", name: "Rakousko", date: "17.2.2026", track: "Red Bull Ring" },
+            { round: "R15", name: "Monako", date: "3.3.2026", track: "Circuit de Monaco" },
+            { round: "R16", name: "Itálie", date: "10.3.2026", track: "Autodromo Nazionale Monza" },
+            { round: "R17", name: "Maďarsko", date: "24.3.2026", track: "Hungaroring" },
+            
+            { round: "R18", name: "Katar", date: "7.4.2026", track: "Losail International Circuit" },
+            { round: "R19", name: "Saudská Arábie", date: "21.4.2026", track: "Jeddah Corniche Circuit" },
+            { round: "R20", name: "Abu Dhabi", date: "28.4.2026", track: "Yas Marina Circuit" }
+        ];
+
+        // Funkce pro naplnění kalendáře
+        function populateCalendar() {
+            const calendar = document.getElementById('calendar');
+            calendar.innerHTML = '';
+            
+            races.forEach(race => {
+                const raceCard = document.createElement('div');
+                raceCard.className = 'race-card';
+                
+                raceCard.innerHTML = `
+                    <div class="race-date">
+                        <div class="race-round">${race.round}</div>
+                        <strong>${race.date}</strong>
+                    </div>
+                    <div class="race-info">
+                        <h3>${race.name}</h3>
+                        <p class="race-track">${race.track}</p>
+                        <p>18:00 | Krátká kvalifikace | 50 % délky</p>
+                    </div>
+                `;
+                
+                calendar.appendChild(raceCard);
+            });
+        }
+
+        // Inicializace při načtení stránky
+        document.addEventListener('DOMContentLoaded', () => {
+            populateCalendar();
+        });
+    </script>
+</body>
+
+</html>
