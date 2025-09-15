@@ -618,6 +618,85 @@
             background: rgba(0,0,0,0.05);
         }
 
+        /* Nadpis tabulky */
+        .table-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 2rem 0;
+            background: linear-gradient(to right, var(--vrl-blue), var(--vrl-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Hlavní tabulka jezdců */
+        .drivers-table {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            background-color: var(--card-bg);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* Hlavička tabulky */
+        .drivers-table th {
+            background: linear-gradient(135deg, var(--vrl-blue), var(--vrl-purple));
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        /* Zaoblení rohů hlavičky */
+        .drivers-table thead tr:first-child th:first-child {
+            border-top-left-radius: 12px;
+        }
+        .drivers-table thead tr:first-child th:last-child {
+            border-top-right-radius: 12px;
+        }
+
+        /* Tělo tabulky */
+        .drivers-table td {
+            padding: 12px 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        /* Alternující řádky */
+        .drivers-table tbody tr:nth-child(even) {
+            background-color: rgba(0,0,0,0.03);
+        }
+
+        /* Hover efekt */
+        .drivers-table tbody tr:hover {
+            background-color: rgba(0,0,0,0.08);
+            transform: translateX(5px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Zvýraznění TOP 3 */
+        .drivers-table tbody tr td:first-child {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .drivers-table tbody tr:nth-child(1) td:first-child { color: #FFD700; } /* zlatá */
+        .drivers-table tbody tr:nth-child(2) td:first-child { color: #C0C0C0; } /* stříbrná */
+        .drivers-table tbody tr:nth-child(3) td:first-child { color: #CD7F32; } /* bronz */
+
+        .drivers-table td:nth-child(3) { 
+            font-weight: 700;
+            color: var(--vrl-purple); /* zvýraznění jména */
+        }
+
 
         
         @media (max-width: 768px) {
