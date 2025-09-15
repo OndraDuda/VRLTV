@@ -513,6 +513,32 @@
             color: #aaa;
         }
 
+        /* Styl pro select, aby odpovídal textovým inputům */
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background: var(--dark-bg);
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        /* Radio buttony blíž k sobě a hezky zarovnané */
+        .radio-group {
+            display: flex;
+            gap: 20px; /* vzdálenost mezi Ano a Ne */
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 5px;
+            accent-color: var(--vrl-blue); /* barevné zvýraznění při výběru */
+        }
+
+
         
         @media (max-width: 768px) {
             .header-content {
@@ -589,23 +615,61 @@
     <h2 class="section-title">Přihláška</h2>
 
     <div class="form-card">
-      <form action="mailto:maximheligr@gmail.com" method="POST" enctype="text/plain">
-        <label for="realname">Jméno a příjmení</label>
-        <input type="text" id="realname" name="realname" required>
+  <form action="mailto:maximheligr@gmail.com" method="POST" enctype="text/plain">
+    
+    <label for="discord">Discord Nick</label>
+    <input type="text" id="discord" name="discord" required>
 
-        <label for="gamename">Herní jméno</label>
-        <input type="text" id="gamename" name="gamename" required>
+    <label for="realname">Reálné Jméno</label>
+    <input type="text" id="realname" name="realname" required>
 
-        <label for="times">Časy z tratí</label>
-        <textarea id="times" name="times" placeholder="Zapiš časy z jednotlivých tratí..." required></textarea>
+    <label for="gamename">Jméno ve Hře</label>
+    <input type="text" id="gamename" name="gamename" required>
 
-        <button type="submit" class="btn">📧 Odeslat e-mailem</button>
-      </form>
+    <label for="eanick">EA Nick</label>
+    <input type="text" id="eanick" name="eanick" required>
 
-      <p class="alt-text">nebo</p>
+    <label for="platform">Platforma</label>
+    <select id="platform" name="platform" required>
+      <option value="">Vyber platformu</option>
+      <option value="PC Steam">PC Steam</option>
+      <option value="PC EA">PC EA</option>
+      <option value="XBOX">XBOX</option>
+      <option value="PS">PS</option>
+    </select>
 
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfsPsITOvOhgMYN6VWvu8PxFK-dv5KhFgKxBsvtMXVEtXEKvw/viewform?usp=header" class="btn">📲 Použít aplikaci</a>
-    </div>
+    <label for="assisty">Používáš assisty? Pokud ano, které</label>
+    <input type="text" id="assisty" name="assisty" placeholder="např. Traction Control, ABS, Driving Line">
+
+
+    <label for="vrlzkusenosti">Máš zkušenosti z VRL? Pokud ano, jaké tier a výsledky</label>
+    <textarea id="vrlzkusenosti" name="vrlzkusenosti" placeholder="Popiš své zkušenosti z VRL"></textarea>
+
+    <label for="jineLigy">Zkušenosti z jiných lig</label>
+    <textarea id="jineLigy" name="jineLigy" placeholder="Popiš své zkušenosti z jiných lig"></textarea>
+
+    <label for="kliklet">Kolik let jezdíš</label>
+    <input type="text" id="kliklet" name="kliklet" placeholder="např. 2019, 2020...">
+
+    <label for="procVRL">Proč chceš jezdit ve VRL?</label>
+    <textarea id="procVRL" name="procVRL" placeholder="Napiš důvod svého zájmu"></textarea>
+
+    <label for="ttSPA">Čas v TT na SPA a v kolika procentech jste</label>
+    <input type="text" id="ttSPA" name="ttSPA" placeholder="např. 1:32.456">
+
+    <label for="ttAustralia">Čas v TT v Austrálii a v kolika procentech jste</label>
+    <input type="text" id="ttAustralia" name="ttAustralia" placeholder="např. 1:22.789">
+
+    <label for="ttImola">Čas v TT na Imole a v kolika procentech jste</label>
+    <input type="text" id="ttImola" name="ttImola" placeholder="např. 1:14.321">
+
+    <label for="cislo">Preferované číslo? (Napiš 3 a seřaď je podle preference)</label>
+    <input type="text" id="cislo" name="cislo" placeholder="např. 28, 69, 87">
+
+    <button type="submit" class="btn">📧 Odeslat</button>
+  </form>
+</div>
+
   </main>
 
   <!-- FOOTER -->
@@ -636,11 +700,11 @@
         <div class="footer-section">
           <h3>Organizátoři</h3>
           <ul>
-            <li><a href="#">Matěj Vaculík</a></li>
-            <li><a href="#">Maxim Heligr</a></li>
-            <li><a href="#">Ondra Duda</a></li>
-            <li><a href="#">Martin Klaboch</a></li>
-            <li><a href="#">Oliver Stavač</a></li>
+            <li><a href="https://www.instagram.com/matyaasko/">Matěj Vaculík</a></li>
+            <li><a href="https://www.instagram.com/beeeeuuuuu/">Maxim Heligr</a></li>
+            <li><a href="https://www.instagram.com/_.duda.o._/">Ondra Duda</a></li>
+            <li><a href="https://www.instagram.com/klabochmartin?igsh=Ym1pN29hNTFmbjBx&utm_source=qr">Martin Klaboch</a></li>
+            <li><a href="https://www.instagram.com/olinkkt/">Oliver Stavač</a></li>
           </ul>
         </div>
       </div>
@@ -665,9 +729,44 @@
         localStorage.setItem('theme', newTheme);
       });
     }
+
+    const form = document.querySelector('form');
+    form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // zabrání standardnímu odeslání
+
+    // ID role, kterou chceš pingnout
+    const roleID = "1330097683750191134";
+
+  const data = {
+    content: `<@&${roleID}> Nová přihláška přišla!\n
+        Discord Nick: ${form.discord.value}
+        Reálné jméno: ${form.realname.value}
+        Jméno ve hře: ${form.gamename.value}
+        EA Nick: ${form.eanick.value}
+        Platforma: ${form.platform.value}
+        Assisty: ${form.assisty.value}
+        Zkušenosti VRL: ${form.vrlzkusenosti.value}
+        Zkušenosti jiné ligy: ${form.jineLigy.value}
+        Kolik let jezdíš: ${form.kliklet.value}
+        Proč VRL: ${form.procVRL.value}
+        Čas SPA: ${form.ttSPA.value}
+        Čas Austrálie: ${form.ttAustralia.value}
+        Čas Imola: ${form.ttImola.value}
+        Preferované číslo: ${form.cislo.value}
+            `
+    };
+
+    await fetch('https://discord.com/api/webhooks/1417205284618633297/4YivxIzOxprI2dLISpgKbinfOSvZf9W8Siv-u6PwpCYTBNhDTZ8Ojxq6Mgs1API95Gn6', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+
+    alert('Přihláška byla odeslána!');
+        form.reset();
+    });
   </script>
 </body>
 </html>
-
 
 
