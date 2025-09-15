@@ -582,6 +582,79 @@
         .drivers-table th {
             background: rgba(0,0,0,0.05);
         }
+        
+        .table-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 2rem 0;
+            background: linear-gradient(to right, var(--vrl-blue), var(--vrl-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .drivers-table {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            background-color: var(--card-bg);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .drivers-table th,
+        .drivers-table td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        .drivers-table th {
+            background: linear-gradient(135deg, var(--vrl-blue), var(--vrl-purple));
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .drivers-table tbody tr {
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .drivers-table tbody tr:nth-child(even) {
+            background-color: rgba(0,0,0,0.03);
+        }
+
+        .drivers-table tbody tr:hover {
+            background-color: rgba(0,0,0,0.08);
+            transform: translateX(5px);
+        }
+
+        .drivers-table td:first-child {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .drivers-table td:nth-child(3) {
+            color: var(--vrl-purple);
+            font-weight: 700;
+        }
+
+        /* TOP 3 zvýraznění */
+        .drivers-table tbody tr:nth-child(1) td:first-child {
+            color: #FFD700;
+        }
+        .drivers-table tbody tr:nth-child(2) td:first-child {
+            color: #C0C0C0;
+        }
+        .drivers-table tbody tr:nth-child(3) td:first-child {
+            color: #CD7F32;
+        }
+
 
         @media (max-width: 768px) {
             .header-content {
