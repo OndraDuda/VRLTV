@@ -159,13 +159,15 @@
         }
         
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80') no-repeat center center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('F1_25_photo_20250901_181850.png') no-repeat center center/cover;
             height: 500px;
             display: flex;
             align-items: center;
             position: relative;
             text-align: center;
         }
+
         
         .hero-content {
             position: relative;
@@ -508,6 +510,35 @@
         table tr:nth-child(even) {
             background-color: rgba(0,0,0,0.05);
         }
+        .results h2 {
+            margin-bottom: 1rem;
+            color: var(--f1-red);
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        table th, table td {
+            border: 1px solid var(--card-border);
+            padding: 10px;
+            text-align: center;
+        }
+
+        table th {
+            background: linear-gradient(to right, var(--vrl-blue), var(--vrl-purple));
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: rgba(0,0,0,0.05);
+        }
+
 
         
         @media (max-width: 768px) {
@@ -545,34 +576,48 @@
     </style>
 </head>
 <header>
-    <div class="container">
-      <div class="header-content">
-        <div class="logo">
-          <img src="VRL_logo_nove_png.png" alt="F1 VRL Logo" class="logo-img">
-        </div>
-        <nav>
-          <ul>
-            <li><a href="index.html">Domů</a></li>
-            <li><a href="calendar.html">Kalendář</a></li>
-            <li><a href="jezdci.html">Jezdci</a></li>
-            <li><a href="tymy.html">Týmy</a></li>
-            <li><a href="okruh.html">Okruhy</a></li>
-            <li><a href="vysledky.html" class="active">Výsledky</a></li>
-            <li><a href="https://discord.gg/ZaGQ8dCrC5" class="discord-btn" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
-          </ul>
-        </nav>
-        <button class="theme-switch" id="themeSwitch">
-          <i class="fas fa-moon"></i>
-        </button>
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <!-- Obrázek jako na přihláškách -->
+        <img src="VRL_logo_nove_png.png" alt="F1 VRL Logo" class="logo-img">
       </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Domů</a></li>
+          <li><a href="calendar.html">Kalendář</a></li>
+          <li><a href="jezdci.html">Jezdci</a></li>
+          <li><a href="tymy.html">Týmy</a></li>
+          <li><a href="okruh.html">Okruhy</a></li>
+          <li><a href="vysledky.html" class="active">Výsledky</a></li>
+          <li><a href="prihlasky.html">Přihlášení</a></li>
+          <li><a href="https://discord.gg/ZaGQ8dCrC5" class="discord-btn">
+            <i class="fab fa-discord"></i> Discord
+          </a></li>
+        </ul>
+      </nav>
+      <button class="theme-switch" id="themeSwitch">
+        <i class="fas fa-moon"></i>
+      </button>
     </div>
-  </header>
+  </div>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+      <h2>Výsledky</h2>
+      <p>Tady vždy vydíš výsledky závodu</p>
+    </div>
+  </section>
 
   <!-- OBSAH -->
   <main class="container">
-    <h2 class="section-title">Výsledky závodů</h2>
+  <h2 class="section-title">Výsledky závodů</h2>
+  <div class="form-card">
     <div id="resultsContainer"></div>
-  </main>
+  </div>
+</main>
+
 
   <!-- FOOTER -->
   <footer>
@@ -596,13 +641,14 @@
             <li><a href="tymy.html">Týmy</a></li>
             <li><a href="okruh.html">Okruhy</a></li>
             <li><a href="vysledky.html">Výsledky</a></li>
+            <li><a href="prihlasky.html">Přihlášení</a></li>
           </ul>
         </div>
         <div class="footer-section">
           <h3>Organizátoři</h3>
           <ul>
             <li><a href="#">Matěj Vaculík</a></li>
-            <li><a href="#">Maxim Heliger</a></li>
+            <li><a href="#">Maxim Heligr</a></li>
             <li><a href="#">Ondra Duda</a></li>
             <li><a href="#">Martin Klaboch</a></li>
             <li><a href="#">Oliver Stavač</a></li>
@@ -668,17 +714,7 @@
           "Jezdec G",
           "Jezdec H",
           "Jezdec I",
-          "Jezdec J",
-          "Jezdec K",
-          "Jezdec L",
-          "Jezdec M",
-          "Jezdec N",
-          "Jezdec O",
-          "Jezdec P",
-          "Jezdec Q",
-          "Jezdec R",
-          "Jezdec S",
-          "Jezdec T"
+          "Jezdec J"
         ]
       }
     ];
