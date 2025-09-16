@@ -457,67 +457,35 @@
         }
 
         
-        @media (max-width: 768px) {
+       @media (max-width: 768px) {
+            header {
+                position: fixed;       /* header fixně nahoře */
+                width: 100%;
+                top: 0;
+                left: 0;
+                z-index: 1000;
+                transition: top 0.3s;
+            }
+
             .header-content {
-                flex-direction: column;
-                align-items: center;
+                flex-direction: column; /* logo nahoře, navigace pod ním */
+                align-items: center;    /* vycentrované */
             }
 
             nav ul {
                 flex-direction: column;
                 gap: 10px;
-                margin-top: 15px;
-            }
-
-            .hero {
-                height: auto;
-                padding: 3rem 1rem;
-            }
-
-            .hero h2 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .season-details {
-                display: flex;
-                flex-direction: column;
-            }
-
-            .detail-card {
-                margin: 10px 0;
-                min-width: 100%;
-            }
-
-            .standings {
-                grid-template-columns: 1fr;
-            }   
-
-            .race-card {
-                flex-direction: column;
-            }
-
-            .race-date {
+                margin-top: 10px;
                 width: 100%;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;   /* sekce pod sebe */
                 text-align: center;
-                gap: 20px;
             }
 
-            .social-icons {
-                justify-content: center;
+            nav li {
+                margin: 5px 0;
             }
-            
-            nav ul {
-                margin-top: 15px;
-                justify-content: center;
-                flex-wrap: wrap;
+
+            body {
+                padding-top: 120px; /* aby se obsah nepřekrýval s fixed header */
             }
         }
     </style>
@@ -819,6 +787,25 @@
         // Inicializace při načtení stránky
         document.addEventListener('DOMContentLoaded', () => {
             populateCalendar();
+        });
+
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', () => {
+            const st = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (window.innerWidth <= 768) { // pouze mobil
+                if (st > lastScrollTop) {
+                    // scroll dolů → schovej header
+                    header.style.top = "-120px";
+                } else {
+                    // scroll nahoru → ukaž header
+                    header.style.top = "0";
+                }
+            }
+
+            lastScrollTop = st <= 0 ? 0 : st;
         });
     </script>
 </body>
