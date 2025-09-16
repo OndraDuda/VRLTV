@@ -751,9 +751,9 @@
             </div>
         `;
 
-        calendar.appendChild(raceCard);
-    });
-}
+            calendar.appendChild(raceCard);
+        });
+    }
 
     // === Automatické obnovení o půlnoci ===
     function scheduleMidnightRefresh(containerId, limit = null) {
@@ -774,7 +774,7 @@
     document.addEventListener("DOMContentLoaded", () => {
         populateCalendar("calendar", 5);         // inicializace (změň "calendar" na ID tvého kontejneru)
         scheduleMidnightRefresh("calendar", 5);  // automatické obnovování
-    });
+        });
 
 
         // Inicializace
