@@ -413,10 +413,11 @@
         }
         
         .footer-section h3 {
-            color: var(--vrl-blue);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
+            color: #ff6666; /* světlejší červená pro lepší čitelnost */
+            margin-bottom: 15px;
+            font-size: 1.2rem;
         }
+
         
         .footer-section ul {
             list-style: none;
@@ -459,33 +460,64 @@
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 15px;
+            }
+
+            .hero {
+                height: auto;
+                padding: 3rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .season-details {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .detail-card {
+                margin: 10px 0;
+                min-width: 100%;
+            }
+
+            .standings {
+                grid-template-columns: 1fr;
+            }   
+
+            .race-card {
+                flex-direction: column;
+            }
+
+            .race-date {
+                width: 100%;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;   /* sekce pod sebe */
                 text-align: center;
+                gap: 20px;
+            }
+
+            .social-icons {
+                justify-content: center;
             }
             
             nav ul {
                 margin-top: 15px;
                 justify-content: center;
                 flex-wrap: wrap;
-            }
-            
-            nav li {
-                margin: 5px 10px;
-            }
-            
-            .hero {
-                height: 400px;
-            }
-            
-            .hero h2 {
-                font-size: 2rem;
-            }
-            
-            .season-details {
-                flex-direction: column;
-            }
-            
-            .standings {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -688,47 +720,58 @@
         { round: "R4", name: "Miami", date: "2025-10-07", track: "Miami International Autodrome" },
         { round: "R5", name: "Imola", date: "2025-10-14", track: "Autodromo Enzo e Dino Ferrari" },
         
-        { round: "R6", name: "Japonsko", date: "4.11.2025", track: "Suzuka International Racing Course" },
-        { round: "R7", name: "Kanada", date: "11.11.2025", track: "Circuit Gilles Villeneuve" },
-        { round: "R8", name: "Singapur", date: "18.11.2025", track: "Marina Bay Street Circuit" },
-        { round: "R9", name: "Belgie", date: "2.12.2025", track: "Circuit de Spa-Francorchamps" },
-        { round: "R10", name: "Španělsko", date: "16.12.2025", track: "Circuit de Barcelona-Catalunya" },
+        { round: "R6", name: "Japonsko", date: "2025-11-4", track: "Suzuka International Racing Course" },
+        { round: "R7", name: "Kanada", date: "2025-11-11", track: "Circuit Gilles Villeneuve" },
+        { round: "R8", name: "Singapur", date: "2025-11-18", track: "Marina Bay Street Circuit" },
+        { round: "R9", name: "Belgie", date: "2025-12-2", track: "Circuit de Spa-Francorchamps" },
+        { round: "R10", name: "Španělsko", date: "2025-12-16", track: "Circuit de Barcelona-Catalunya" },
         
-        { round: "R11", name: "Mexiko", date: "6.1.2026", track: "Autódromo Hermanos Rodríguez" },
-        { round: "R12", name: "Brazílie", date: "20.1.2026", track: "Autódromo José Carlos Pace" },
-        { round: "R13", name: "USA", date: "3.2.2026", track: "Circuit of the Americas" },
+        { round: "R11", name: "Mexiko", date: "2026-1-6", track: "Autódromo Hermanos Rodríguez" },
+        { round: "R12", name: "Brazílie", date: "2026-1-20", track: "Autódromo José Carlos Pace" },
+        { round: "R13", name: "USA", date: "2026-2-3", track: "Circuit of the Americas" },
             
-        { round: "R14", name: "Rakousko", date: "17.2.2026", track: "Red Bull Ring" },
-        { round: "R15", name: "Monako", date: "3.3.2026", track: "Circuit de Monaco" },
-        { round: "R16", name: "Itálie", date: "10.3.2026", track: "Autodromo Nazionale Monza" },
-        { round: "R17", name: "Maďarsko", date: "24.3.2026", track: "Hungaroring" },
+        { round: "R14", name: "Rakousko", date: "2026-2-17", track: "Red Bull Ring" },
+        { round: "R15", name: "Monako", date: "3.3.2026-3-3", track: "Circuit de Monaco" },
+        { round: "R16", name: "Itálie", date: "2026-3-10", track: "Autodromo Nazionale Monza" },
+        { round: "R17", name: "Maďarsko", date: "2026-3-24", track: "Hungaroring" },
             
-        { round: "R18", name: "Katar", date: "7.4.2026", track: "Losail International Circuit" },
-        { round: "R19", name: "Saudská Arábie", date: "21.4.2026", track: "Jeddah Corniche Circuit" },
-        { round: "R20", name: "Abu Dhabi", date: "28.4.2026", track: "Yas Marina Circuit" }
+        { round: "R18", name: "Katar", date: "2026-4-7", track: "Losail International Circuit" },
+        { round: "R19", name: "Saudská Arábie", date: "2026-4-21", track: "Jeddah Corniche Circuit" },
+        { round: "R20", name: "Abu Dhabi", date: "2026-4-28", track: "Yas Marina Circuit" }
         ];
 
-        // Funkce pro vypsání závodů (limit je volitelný)
-        function populateCalendar(containerId, limit = null) {
+       // Funkce pro vypsání závodů (limit je volitelný)
+    function populateCalendar(containerId, limit = null) {
         const calendar = document.getElementById(containerId);
         calendar.innerHTML = '';
 
         const today = new Date();
 
-        // Převedeme string datum → objekt Date
+        // Převedeme string datum → objekt Date a nastavíme "cutoff" půlnoc dalšího dne
         const upcoming = races
-            .map(r => ({...r, dateObj: new Date(r.date) }))
-            .filter(r => r.dateObj >= today) // jen budoucí závody
+            .map(r => {
+                const dateObj = new Date(r.date);
+
+                // cutoff = půlnoc následujícího dne
+                const cutoff = new Date(dateObj);
+                cutoff.setDate(cutoff.getDate() + 1);
+                cutoff.setHours(0, 0, 0, 0);
+
+                return { ...r, dateObj, cutoff };
+            })
+            // závod zůstává do půlnoci po svém datu
+            .filter(r => r.cutoff > today)
             .sort((a, b) => a.dateObj - b.dateObj);
 
         // Omezíme na 5 (pokud limit je nastaven)
         const toShow = limit ? upcoming.slice(0, limit) : upcoming;
 
+        // Vykreslení závodů
         toShow.forEach(race => {
             const raceCard = document.createElement('div');
             raceCard.className = 'race-card';
-    
-            raceCard.innerHTML = `
+
+        raceCard.innerHTML = `
             <div class="race-date">
                 <div class="race-round">${race.round}</div>
                 <strong>${race.dateObj.toLocaleDateString("cs-CZ")}</strong>
@@ -738,11 +781,33 @@
                 <p class="race-track">${race.track}</p>
                 <p>19:00 | Krátká kvalifikace | 50 % délky</p>
             </div>
-            `;
-    
-            calendar.appendChild(raceCard);
-            });
-        }
+        `;
+
+        calendar.appendChild(raceCard);
+    });
+}
+
+    // === Automatické obnovení o půlnoci ===
+    function scheduleMidnightRefresh(containerId, limit = null) {
+        const now = new Date();
+        const midnight = new Date();
+
+        midnight.setHours(24, 0, 0, 0); // dnešní půlnoc
+
+        const msToMidnight = midnight.getTime() - now.getTime();
+
+        setTimeout(() => {
+            populateCalendar(containerId, limit);     // obnoví seznam
+            scheduleMidnightRefresh(containerId, limit); // naplánuje další refresh
+        }, msToMidnight);
+    }
+
+    // Spuštění při načtení stránky
+    document.addEventListener("DOMContentLoaded", () => {
+        populateCalendar("calendar", 5);         // inicializace (změň "calendar" na ID tvého kontejneru)
+        scheduleMidnightRefresh("calendar", 5);  // automatické obnovování
+    });
+
 
         // Inicializace
         document.addEventListener('DOMContentLoaded', () => {
