@@ -605,7 +605,7 @@ body[data-theme="dark"] .drivers-table tr:nth-child(even) td {
 
 .track-info h3 {
     margin-bottom: 10px;
-    color: var(--accent-color);
+    color: var(--f1-red);
 }
 
 /* ===== FORMS ===== */
