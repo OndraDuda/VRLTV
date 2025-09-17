@@ -53,26 +53,23 @@
     </section>
 
     <main>
-    <h2 class="table-title">Pořadí jezdců</h2>
+    <h2 class="table-title">Pořadí týmy</h2>
     <table class="drivers-table">
-      <thead>
-        <tr>
-          <th>Pořadí</th>
-          <th>#</th>
-          <th>Jméno</th>
-          <th>Tým</th>
-          <th>Země</th>
-          <th>Body</th>
-          <th>1. místa</th>
-          <th>2. místa</th>
-          <th>3. místa</th>
-        </tr>
-      </thead>
-      <tbody id="driversTable">
-        <!-- JS doplní jezdce -->
-      </tbody>
-    </table>
-  </main>
+        <thead>
+            <tr>
+                <th>Pořadí</th>
+                <th>Tým</th>
+                <th>Body</th>
+                <th>1. místa</th>
+                <th>2. místa</th>
+                <th>3. místa</th>
+            </tr>
+            </thead>
+            <tbody id="driversTable">
+                <!-- JS doplní jezdce -->
+            </tbody>
+        </table>
+    </main>
 
   <!-- FOOTER -->
   <footer>
@@ -106,7 +103,7 @@
                         <li><a href="https://www.instagram.com/beeeeuuuuu/">Maxim Heligr</a></li>
                         <li><a href="https://www.instagram.com/_.duda.o._/">Ondra Duda</a></li>
                         <li><a href="https://www.instagram.com/klabochmartin?igsh=Ym1pN29hNTFmbjBx&utm_source=qr">Martin Klaboch</a></li>
-                        <li><a href="https://www.instagram.com/olinkkt/">Oliver Stavač</a></li>
+                        <li><a href="https://www.instagram.com/olinkkt/">Oliver Seidl</a></li>
                     </ul>
                 </div>
             </div>
@@ -121,7 +118,7 @@
 
     const drivers = [
       { number: 71, name: "Petr Stouhal", team: "Red Bull Racing", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
-      { number: 7, name: "Josef Kubeš", team: "Ferrari", country: "🇨🇿 Česko", points: 32, wins: 1, second: 0, third: 0 },
+      { number: 7, name: "Josef Kubeš", team: "Ferrari", country: "🇨🇿 Česko", points: 37, wins: 1, second: 0, third: 0 },
       { number: 21, name: "Adam Gallus", team: "Mercedes", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
       { number: 1, name: "Maxim Heligr", team: "McLaren", country: "🇨🇿 Česko", points: 40, wins: 1, second: 0, third: 1 },
       { number: 56, name: "Filip Kratochvil", team: "Aston Martin", country: "🇨🇿 Česko", points: 6, wins: 0, second: 0, third: 0 },
@@ -132,7 +129,7 @@
       { number: 99, name: "Jakub Fabian", team: "Sauber", country: "🇨🇿 Česko", points: 1, wins: 0, second: 0, third: 0 },
 
       { number: 13, name: "Tadeáš Šmídl", team: "Red Bull Racing", country: "🇨🇿 Česko", points: 6, wins: 0, second: 0, third: 0 },
-      { number: 28, name: "Luboš Novotný", team: "Ferrari", country: "🇨🇿 Česko", points: 4, wins: 0, second: 0, third: 0 },
+      { number: 28, name: "Luboš Novotný", team: "Ferrari", country: "🇨🇿 Česko", points: 14, wins: 0, second: 0, third: 0 },
       { number: 12, name: "Martin Klaboch", team: "Mercedes", country: "🇨🇿 Česko", points: 36, wins: 0, second: 2, third: 0 },
       { number: 96, name: "Matěj Vaculík", team: "McLaren", country: "🇨🇿 Česko", points: 17, wins: 0, second: 0, third: 1 },
       { number: 3, name: "Oliver Maťko", team: "Aston Martin", country: "sk Slovensko", points: 20, wins: 0, second: 0, third: 0 },
@@ -142,31 +139,41 @@
       { number: 26, name: "Matyáš Kasl", team: "Williams", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
       { number: 66, name: "Oliver Stavač", team: "Sauber", country: "sk Slovensko", points: 0, wins: 0, second: 0, third: 0 }
     ];
+        // seskupení podle týmů
+        const teams = {};
 
-    // seřadit podle bodů
-    drivers.sort((a, b) => b.points - a.points);
+        drivers.forEach(driver => {
+        if (!teams[driver.team]) {
+            teams[driver.team] = { points: 0, wins: 0, second: 0, third: 0 };
+        }
+        teams[driver.team].points += driver.points;
+        teams[driver.team].wins += driver.wins;
+        teams[driver.team].second += driver.second;
+        teams[driver.team].third += driver.third;
+        });
 
-    const table = document.getElementById("driversTable");
+        // převod na pole a seřazení podle bodů
+        const sortedTeams = Object.entries(teams)
+        .map(([team, stats]) => ({ team, ...stats }))
+        .sort((a, b) => b.points - a.points);
 
-    drivers.forEach((driver, index) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td><strong>${index + 1}</strong></td>
-        <td>${driver.number}</td>
-        <td>${driver.name}</td>
-        <td>${driver.team}</td>
-        <td>${driver.country}</td>
-        <td><strong>${driver.points}</strong></td>
-        <td>${driver.wins}</td>
-        <td>${driver.second}</td>
-        <td>${driver.third}</td>
-      `;
-      table.appendChild(row);
+        const table = document.getElementById("driversTable");
+
+        sortedTeams.forEach((team, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td><strong>${index + 1}</strong></td>
+            <td>${team.team}</td>
+            <td><strong>${team.points}</strong></td>
+            <td>${team.wins}</td>
+            <td>${team.second}</td>
+            <td>${team.third}</td>
+        `;
+        table.appendChild(row);
     });
   </script>
 </body>
 </html>
-
 
 
 
