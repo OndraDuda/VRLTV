@@ -31,7 +31,6 @@
                         <li><a href="jezdci.html">Jezdci</a></li>
                         <li><a href="tymy.html">Týmy</a></li>
                         <li><a href="okruh.html">Okruhy</a></li>
-                        <li><a href="livetiming.html">Live Timing</a></li>
                         <li><a href="vysledky.html">Výsledky</a></li>
                         <li><a href="prihlasky.html">Přihlášení</a></li>
                         <li><a href="https://discord.gg/CMxscEUcRd" class="discord-btn"><i class="fab fa-discord"></i> Discord</a></li>
@@ -122,21 +121,21 @@
 
     const drivers = [
       { number: 71, name: "Petr Stouhal", team: "Red Bull Racing", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
-      { number: 7, name: "Josef Kubeš", team: "Ferrari", country: "🇨🇿 Česko", points: 25, wins: 1, second: 0, third: 0 },
+      { number: 7, name: "Josef Kubeš", team: "Ferrari", country: "🇨🇿 Česko", points: 32, wins: 1, second: 0, third: 0 },
       { number: 21, name: "Adam Gallus", team: "Mercedes", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
-      { number: 1, name: "Maxim Heligr", team: "McLaren", country: "🇨🇿 Česko", points: 15, wins: 0, second: 0, third: 1 },
-      { number: 56, name: "Filip Kratochvil", team: "Aston Martin", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
+      { number: 1, name: "Maxim Heligr", team: "McLaren", country: "🇨🇿 Česko", points: 40, wins: 1, second: 0, third: 1 },
+      { number: 56, name: "Filip Kratochvil", team: "Aston Martin", country: "🇨🇿 Česko", points: 6, wins: 0, second: 0, third: 0 },
       { number: 24, name: "Matěj Doha", team: "Alpine", country: "🇨🇿 Česko", points: 1, wins: 0, second: 0, third: 0 },
-      { number: 97, name: "Andrej Erdelský", team: "Vcarb", country: "sk Slovensko", points: 8, wins: 0, second: 0, third: 0 },
-      { number: 20, name: "Tomáš Novák", team: "Haas", country: "🇨🇿 Česko", points: 4, wins: 0, second: 0, third: 0 },
+      { number: 97, name: "Andrej Erdelský", team: "Vcarb", country: "sk Slovensko", points: 10, wins: 0, second: 0, third: 0 },
+      { number: 20, name: "Tomáš Novák", team: "Haas", country: "🇨🇿 Česko", points: 10, wins: 0, second: 0, third: 0 },
       { number: 33, name: "Matěj Csiba", team: "Williams", country: "sk Slovensko", points: 12, wins: 0, second: 0, third: 0 },
-      { number: 99, name: "Jakub Fabian", team: "Sauber", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
+      { number: 99, name: "Jakub Fabian", team: "Sauber", country: "🇨🇿 Česko", points: 1, wins: 0, second: 0, third: 0 },
 
       { number: 13, name: "Tadeáš Šmídl", team: "Red Bull Racing", country: "🇨🇿 Česko", points: 6, wins: 0, second: 0, third: 0 },
-      { number: 28, name: "Luboš Novotný", team: "Ferrari", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
-      { number: 12, name: "Martin Klaboch", team: "Mercedes", country: "🇨🇿 Česko", points: 18, wins: 0, second: 1, third: 0 },
-      { number: 96, name: "Matěj Vaculík", team: "McLaren", country: "🇨🇿 Česko", points: 2, wins: 0, second: 0, third: 0 },
-      { number: 3, name: "Oliver Maťko", team: "Aston Martin", country: "sk Slovensko", points: 10, wins: 0, second: 0, third: 0 },
+      { number: 28, name: "Luboš Novotný", team: "Ferrari", country: "🇨🇿 Česko", points: 4, wins: 0, second: 0, third: 0 },
+      { number: 12, name: "Martin Klaboch", team: "Mercedes", country: "🇨🇿 Česko", points: 36, wins: 0, second: 2, third: 0 },
+      { number: 96, name: "Matěj Vaculík", team: "McLaren", country: "🇨🇿 Česko", points: 17, wins: 0, second: 0, third: 1 },
+      { number: 3, name: "Oliver Maťko", team: "Aston Martin", country: "sk Slovensko", points: 20, wins: 0, second: 0, third: 0 },
       { number: 6, name: "Jan Vlach", team: "Alpine", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
       { number: 67, name: "Alex Výplach", team: "Vcarb", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
       { number: 25, name: "Matěj Švec", team: "Haas", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
