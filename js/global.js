@@ -14,12 +14,16 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('theme', document.body.dataset.theme);
         });
 
-        // Load saved theme
+        // Load saved theme or set default dark
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             document.body.dataset.theme = savedTheme;
             themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        } else {
+            document.body.dataset.theme = 'dark'; // default dark
+            themeIcon.className = 'fas fa-sun';
         }
+
     }
 
     // Mobile menu toggle functionality
