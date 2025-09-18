@@ -235,6 +235,14 @@ header {
     text-transform: uppercase;
 }
 
+.form-note {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: var(--text-color);
+}
+
+
 /* ===== NAVIGATION STYLES ===== */
 nav ul {
     display: flex;
@@ -264,7 +272,7 @@ nav a:hover, nav a.active {
     align-items: center;
     background-color: #5865F2;
     color: white;
-    padding: 8px 15px;
+    padding: 12px 30px;
     border-radius: 30px;
     text-decoration: none;
     font-weight: bold;
@@ -275,6 +283,26 @@ nav a:hover, nav a.active {
     background-color: #4752c4;
     transform: translateY(-2px);
 }
+
+.discord-btn2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px; /* mezera mezi logem a textem */
+  background-color: #5865F2;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s;
+  margin-top: 15px; /* odsazení od tlačítka Odeslat */
+}
+
+.discord-btn2:hover {
+  background-color: #4752c4;
+  transform: scale(1.05);
+}
+
 
 .discord-btn i {
     margin-right: 8px;
