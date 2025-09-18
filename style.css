@@ -65,8 +65,8 @@ body[data-theme="light"] .table-title,
 body[data-theme="light"] h1,
 body[data-theme="light"] h2,
 body[data-theme="light"] h3 {
-    color: #000 !important;
-    -webkit-text-fill-color: #000 !important; /* pro text s gradientem */
+    color: #291c1c !important;
+    -webkit-text-fill-color: #291c1c !important; /* pro text s gradientem */
     background: none !important; /* odstraní gradient */
     text-shadow: none !important;
 }
@@ -112,8 +112,8 @@ body[data-theme="light"] h2,
 body[data-theme="light"] h3,
 body[data-theme="light"] .section-title,
 body[data-theme="light"] .table-title {
-    color: #333 !important;
-    -webkit-text-fill-color: #333 !important;
+    color: #291c1c !important;
+    -webkit-text-fill-color: #291c1c !important;
     background: none !important;
     text-shadow: none !important;
 }
@@ -152,19 +152,11 @@ body[data-theme="light"] h2,
 body[data-theme="light"] h3,
 body[data-theme="light"] .section-title,
 body[data-theme="light"] .table-title {
-    color: #000 !important;
-    -webkit-text-fill-color: #000 !important;
+    color: #ff6161 !important;
+    -webkit-text-fill-color: #ff6161 !important;
     background: none !important;
     text-shadow: none !important;
 }
-
-/* Výjimka – nadpis v hero sekci zůstane bílý */
-body[data-theme="light"] .hero h1 {
-    color: #FF4242 !important;  /* výrazná červená */
-    -webkit-text-fill-color: #FF4242 !important;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* zvýraznění */
-}
-
 
 /* ===== GLOBAL RESET & BASE STYLES ===== */
 * {
