@@ -12,25 +12,25 @@
 
     /* Background Colors */
     --dark-bg: #110C0C;
-    --light-bg: #FFFFFF;
-
+    --light-bg: #110C0C; /* default dark */
+    
     /* Text Colors */
     --text-light: #FFFFFF;
-    --text-dark: #110C0C;
+    --text-dark: #FFFFFF; /* inverted for dark */
 
     /* Card/Component Colors */
-    --card-bg: #FFFFFF;
-    --card-border: #FF0000;
+    --card-bg: #1a1a1a;
+    --card-border: #4E0303;
 
     /* Gradients */
-    --header-bg: linear-gradient(135deg, #110C0C 0%, #4E0303 100%);
+    --header-bg: linear-gradient(135deg, #110C0C 0%, #A10404 100%);
 
     /* Additional Variables */
-    --track-card-border: #ccc;
-    --bg-page: #ffffff;
-    --bg-card: #f8f8f8;
-    --text-color: #000000;
-    --accent-color: #c00000;
+    --track-card-border: #4E0303;
+    --bg-page: #121212;
+    --bg-card: #1e1e1e;
+    --text-color: #ffffff;
+    --accent-color: #0077ff;
 
     /* Tire Colors */
     --soft-tyre: #FF9999;
@@ -40,19 +40,131 @@
     --intermediate-tyre: #66CC66;
 }
 
-/* Dark Theme Variables */
-[data-theme="dark"] {
-    --light-bg: #110C0C;
-    --text-dark: #FFFFFF;
-    --card-bg: #1a1a1a;
-    --card-border: #4E0303;
-    --header-bg: linear-gradient(135deg, #110C0C 0%, #A10404 100%);
-    --track-card-border: #4E0303;
-    --bg-page: #121212;
-    --bg-card: #1e1e1e;
-    --text-color: #ffffff;
-    --accent-color: #0077ff;
+
+/* ===== LIGHT THEME ===== */
+[data-theme="light"] {
+    --light-bg: #fdfdfd;
+    --text-dark: #111111;
+    --card-bg: #ffffff;
+    --card-border: #e0e0e0;
+    --header-bg: linear-gradient(135deg, #ffffff 0%, #f1f1f1 100%);
+    --track-card-border: #ccc;
+    --bg-page: #ffffff;
+    --bg-card: #fafafa;
+    --text-color: #000000;
+    --accent-color: #c00000;
 }
+
+/* ===== LIGHT THEME HEADER & FOOTER FIX ===== */
+body[data-theme="light"] header,
+body[data-theme="light"] nav a,
+body[data-theme="light"] .logo h1,
+body[data-theme="light"] .vrl-text,
+body[data-theme="light"] .section-title,
+body[data-theme="light"] .table-title,
+body[data-theme="light"] h1,
+body[data-theme="light"] h2,
+body[data-theme="light"] h3 {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important; /* pro text s gradientem */
+    background: none !important; /* odstraní gradient */
+    text-shadow: none !important;
+}
+
+/* ===== LIGHT THEME HEADER, FOOTER & HEADINGS FIX ===== */
+body[data-theme="light"] header {
+    background: #d9d9d9 !important;  /* tmavší šedý podklad menu */
+    color: #222 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+body[data-theme="light"] nav a {
+    color: #222 !important;
+}
+
+body[data-theme="light"] nav a:hover,
+body[data-theme="light"] nav a.active {
+    background-color: #bbb !important;
+    color: #000 !important;
+}
+
+/* Footer světlejší */
+body[data-theme="light"] footer {
+    background-color: #f5f5f5 !important;
+    color: #222 !important;
+}
+
+body[data-theme="light"] .footer-section h3 {
+    color: #333 !important;
+}
+
+body[data-theme="light"] .footer-section a {
+    color: #444 !important;
+}
+
+body[data-theme="light"] .footer-section a:hover {
+    color: #A10404 !important;
+}
+
+/* Nadpisy ve světlém režimu (jemně tmavé, ne černé) */
+body[data-theme="light"] h1,
+body[data-theme="light"] h2,
+body[data-theme="light"] h3,
+body[data-theme="light"] .section-title,
+body[data-theme="light"] .table-title {
+    color: #333 !important;
+    -webkit-text-fill-color: #333 !important;
+    background: none !important;
+    text-shadow: none !important;
+}
+
+/* Hero nadpis ve světlém režimu – výrazný */
+body[data-theme="light"] .hero h1 {
+    color: #FF4242 !important;  /* F1 červená */
+    -webkit-text-fill-color: #FF4242 !important;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25); /* lepší čitelnost */
+}
+
+body[data-theme="light"] .theme-switch {
+    color: #000 !important;
+}
+
+body[data-theme="light"] footer {
+    background-color: #f2f2f2 !important;
+    color: #000 !important;
+}
+
+body[data-theme="light"] .footer-section h3 {
+    color: #000 !important;
+}
+
+body[data-theme="light"] .footer-section a {
+    color: #333 !important;
+}
+
+body[data-theme="light"] .footer-section a:hover {
+    color: #A10404 !important;
+}
+
+/* ===== Nadpisy ve světlém režimu ===== */
+body[data-theme="light"] h1,
+body[data-theme="light"] h2,
+body[data-theme="light"] h3,
+body[data-theme="light"] .section-title,
+body[data-theme="light"] .table-title {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+    background: none !important;
+    text-shadow: none !important;
+}
+
+/* Výjimka – nadpis v hero sekci zůstane bílý */
+body[data-theme="light"] .hero h1 {
+    color: #FF4242 !important;  /* výrazná červená */
+    -webkit-text-fill-color: #FF4242 !important;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* zvýraznění */
+}
+
 
 /* ===== GLOBAL RESET & BASE STYLES ===== */
 * {
@@ -536,18 +648,28 @@ nav a:hover, nav a.active {
 body[data-theme="light"] .drivers-table {
     background-color: #fff;
     color: #000;
-    border: 2px solid #ccc;
+    border: 2px solid #e0e0e0;
 }
 
 body[data-theme="light"] .drivers-table th {
-    background-color: #f8d7da;
-    color: #000;
+    background: linear-gradient(135deg, #FF4242, #A10404); /* červený F1 přechod */
+    color: #fff;
 }
 
 body[data-theme="light"] .drivers-table td {
     background-color: #fff;
-    color: #000;
-    border-bottom: 1px solid #ddd;
+    color: #222;
+    border-bottom: 1px solid #eee;
+}
+
+body[data-theme="light"] .drivers-table tr:nth-child(even) td {
+    background-color: #f9f9f9;
+}
+
+body[data-theme="light"] .drivers-table tbody tr:hover {
+    background-color: #ffeaea;
+    transform: translateX(5px);
+    box-shadow: 0 3px 10px rgba(192, 0, 0, 0.2);
 }
 
 /* Dark Theme Table Styles */
