@@ -78,4 +78,36 @@ document.addEventListener('DOMContentLoaded', function() {
             lastScrollTop = st <= 0 ? 0 : st;
         });
     }
+
+    // === HERO SLIDESHOW ===
+    const hero = document.querySelector('.hero');
+    const fadeLayer = document.querySelector('.hero-fade');
+
+    if (hero && fadeLayer) {
+        const images = [
+            'F1_25_photo_20250901_181850.png',
+            'F1_25_photo_20250916_180838.png',
+            'F1_25_photo_20250916_181712.png',
+            'F1_25_photo_20250917_141309.png',
+            'F1_25_photo_20250917_141612.png',
+            'F1_25_photo_20250917_141732.png'
+        ];
+        let current = 0;
+
+        hero.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${images[0]})`;
+
+        setInterval(() => {
+            // nastavíme nový obrázek do fade vrstvy
+            fadeLayer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${images[(current + 1) % images.length]})`;
+            fadeLayer.style.opacity = 1;
+
+            // po 2s (délka fade) přepíšeme hlavní background a resetujeme fade
+            setTimeout(() => {
+                hero.style.backgroundImage = fadeLayer.style.backgroundImage;
+                fadeLayer.style.opacity = 0;
+                current = (current + 1) % images.length;
+            }, 2000); // délka fade
+        }, 10000); // interval mezi obrázky
+    }
+
 });
