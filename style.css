@@ -213,7 +213,7 @@ header {
 }
 
 .logo-img {
-    height: 70px;
+    height: 40px;
     width: auto;
     margin-right: 20px;
 }
@@ -358,22 +358,34 @@ nav a:hover, nav a.active {
 
 /* ===== HERO SECTION ===== */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url('F1_25_photo_20250901_181850.png') no-repeat center center/cover;
-    height: 500px;
-    display: flex;
-    align-items: center;
     position: relative;
-    text-align: center;
+    height: 500px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-fade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    z-index: 1;
 }
 
 .hero-content {
     position: relative;
+    z-index: 2;
+    text-align: center;
     color: white;
-    max-width: 800px;
-    margin: 0 auto;
     padding: 2rem;
 }
+
 
 .hero h2 {
     font-size: 3.5rem;
