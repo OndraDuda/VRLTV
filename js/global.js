@@ -92,22 +92,28 @@ document.addEventListener('DOMContentLoaded', function() {
             'F1_25_photo_20250917_141612.png',
             'F1_25_photo_20250917_141732.png'
         ];
-        let current = 0;
 
-        hero.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${images[0]})`;
+        // 1) načteme uložený index, nebo začneme od 0
+        let current = parseInt(localStorage.getItem("heroIndex"), 10) || 0;
+
+        hero.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${images[current]})`;
 
         setInterval(() => {
             // nastavíme nový obrázek do fade vrstvy
-            fadeLayer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${images[(current + 1) % images.length]})`;
+            const nextIndex = (current + 1) % images.length;
+            fadeLayer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${images[nextIndex]})`;
             fadeLayer.style.opacity = 1;
 
             // po 2s (délka fade) přepíšeme hlavní background a resetujeme fade
             setTimeout(() => {
                 hero.style.backgroundImage = fadeLayer.style.backgroundImage;
                 fadeLayer.style.opacity = 0;
-                current = (current + 1) % images.length;
-            }, 2000); // délka fade
-        }, 10000); // interval mezi obrázky
+                current = nextIndex;
+
+                // 2) uložíme index, aby se pokračovalo po reloadu
+                localStorage.setItem("heroIndex", current);
+            }, 2000);
+        }, 10000);
     }
 
 });
