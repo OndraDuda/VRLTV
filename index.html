@@ -75,6 +75,23 @@
             </div>
         </section>
 
+        <section class="next-race">
+            <div class="container">
+              <h2>Další závod</h2>
+              <div id="countdown">
+                <span id="cd-days">--</span> dny
+                <span id="cd-hours">--</span> hodin
+                <span id="cd-minutes">--</span> minut
+                <span id="cd-seconds">--</span> sekund
+              </div>
+              <div class="stream-link">
+                <a href="https://www.youtube.com/watch?v=OijphbuLhbs" id="stream-link" target="_blank">
+                  Sleduj stream na YouTube
+                </a>
+              </div>
+            </div>
+        </section>        
+
         <h2 class="section-title">Nadcházející závody</h2>
         <section class="calendar" id="calendar"></section>
 
@@ -217,7 +234,7 @@
         ];
 
        // Funkce pro vypsání závodů (limit je volitelný)
-    function populateCalendar(containerId, limit = null) {
+        function populateCalendar(containerId, limit = null) {
         const calendar = document.getElementById(containerId);
         calendar.innerHTML = '';
 
@@ -314,7 +331,108 @@
             }
 
             lastScrollTop = st <= 0 ? 0 : st;
-        });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const countdownEl = document.getElementById('countdown');
+    const streamLink = document.getElementById('stream-link');
+
+    function getNextRace() {
+    const now = new Date();
+
+    return races
+      .map(r => {
+        const [year, month, day] = r.date.split('-').map(Number);
+        // Vytvoříme čas závodu – 19:00 v Praze
+        const pragueTime = new Date(Date.UTC(year, month - 1, day, 17, 0)); // 19:00 Prague == 17:00 UTC (letní čas)
+        return { ...r, raceDate: pragueTime };
+      })
+      .filter(r => r.raceDate > now)
+      .sort((a, b) => a.raceDate - b.raceDate)[0];
+    }
+
+    const nextRace = getNextRace();
+
+    if (!nextRace) {
+        countdownEl.textContent = "Žádné další závody";
+        streamLink.style.display = 'none';
+        return;
+    }
+
+    // Můžeš zde dynamicky měnit text nebo odkaz streamu, např. podle `nextRace.round`
+    // streamLink.href = `https://www.youtube.com/watch?v=${nextRace.youtubeId}`
+
+    function updateCountdown() {
+        const now = new Date();
+        const diff = nextRace.raceDate - now;
+
+        if (diff <= 0) {
+        countdownEl.textContent = "Závod právě probíhá!";
+        clearInterval(interval);
+        return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+        document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const raceCards = document.querySelectorAll('.race-card');
+    const nextRaceName = document.getElementById('nextRaceName');
+    const nextRaceDate = document.getElementById('nextRaceDate');
+    const streamLink = document.getElementById('streamLink');
+    const streamThumb = document.getElementById('streamThumbnail');
+
+    const today = new Date();
+
+    let upcomingRace = null;
+
+    raceCards.forEach(card => {
+        const dateStr = card.dataset.date;
+        const raceDate = new Date(dateStr);
+
+        if (raceDate >= today && (!upcomingRace || raceDate < new Date(upcomingRace.dataset.date))) {
+            upcomingRace = card;
+        }
+    });
+
+    if (upcomingRace) {
+        const raceName = upcomingRace.querySelector('.race-info h3').textContent;
+        const raceDate = new Date(upcomingRace.dataset.date).toLocaleDateString('cs-CZ');
+
+        nextRaceName.textContent = raceName;
+        nextRaceDate.textContent = raceDate;
+
+        const streamUrl = upcomingRace.dataset.stream;
+        streamLink.href = streamUrl;
+
+        // Extrahování YouTube ID
+        let ytId = null;
+        const url = new URL(streamUrl);
+        if (url.searchParams.get('v')) {
+            ytId = url.searchParams.get('v');
+        } else if (url.hostname.includes('youtu.be')) {
+            ytId = url.pathname.slice(1);
+        }
+
+        if (ytId) {
+            streamThumb.src = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+        }
+    }
+    });
+
+
     </script>
 </body>
 
