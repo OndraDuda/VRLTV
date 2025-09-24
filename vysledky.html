@@ -1,46 +1,51 @@
 <!DOCTYPE html>
 <html lang="cs">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VRL - Velocity Racing League - Season 2</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<header>
-  <div class="container">
-    <div class="header-content">
-      <div class="logo">
-        <img src="vrl_high_res.png" alt="F1 VRL Logo" class="logo-img">
-      </div>
-      <div class="header-controls">
-        <button class="theme-switch" id="themeSwitch">
-          <i class="fas fa-moon"></i>
-        </button>
-        <button class="mobile-menu-toggle" id="mobileMenuToggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-      <nav id="mobileNav">
-        <ul>
-          <li><a href="index.html">Domů</a></li>
-          <li><a href="calendar.html">Kalendář</a></li>
-          <li><a href="jezdci.html">Jezdci</a></li>
-          <li><a href="tymy.html">Týmy</a></li>
-          <li><a href="okruh.html">Okruhy</a></li>
-          <li><a href="vysledky.html">Výsledky</a></li>
-          <li><a href="prihlasky.html">Přihlášení</a></li>
-          <li><a href="https://discord.gg/CMxscEUcRd" class="discord-btn"><i class="fab fa-discord"></i> Discord</a></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</header>
 
-<section class="hero">
-  <div class="hero-fade"></div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VRL - Velocity Racing League - Season 2</title>
+  <link rel="icon" type="image/png" href="VRL_logo_nove.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <img src="vrl_high_res.png" alt="F1 VRL Logo" class="logo-img">
+        </div>
+        <div class="header-controls">
+          <button class="theme-switch" id="themeSwitch">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <nav id="mobileNav">
+          <ul>
+            <li><a href="index.html">Domů</a></li>
+            <li><a href="calendar.html">Kalendář</a></li>
+            <li><a href="jezdci.html">Jezdci</a></li>
+            <li><a href="tymy.html">Týmy</a></li>
+            <li><a href="okruh.html">Okruhy</a></li>
+            <li><a href="vysledky.html">Výsledky</a></li>
+            <li><a href="prihlasky.html">Přihlášení</a></li>
+            <li><a href="https://discord.gg/CMxscEUcRd" class="discord-btn"><i class="fab fa-discord"></i> Discord</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-fade"></div>
     <div class="hero-content">
       <h2>Výsledky</h2>
       <p>Tady vždy vydíš výsledky závodu</p>
@@ -49,81 +54,80 @@
 
   <!-- OBSAH -->
   <main class="container">
-  <h2 class="section-title">Výsledky závodů</h2>
-  <div class="form-card">
-    <div id="resultsContainer"></div>
-  </div>
-</main>
-
+    <h2 class="section-title">Výsledky závodů</h2>
+    <div class="form-card">
+      <div id="resultsContainer"></div>
+    </div>
+  </main>
 
   <!-- FOOTER -->
   <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>VRL</h3>
-                    <p>Virtuální závodní liga pro nadšence Formule 1. Připoj se k nám a zažij motorsport z pohodlí domova.</p>
-                    <div class="social-icons">
-                        <a href="https://www.instagram.com/vrl_velocityracingleague/"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@Velocity_Racing_League_VRL"><i class="fab fa-youtube"></i></a>
-                        <a href="https://discord.gg/CMxscEUcRd"><i class="fab fa-discord"></i></a>
-                        <a href="https://www.tiktok.com/@velocity_racingleague" target="_blank"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Navigace</h3>
-                    <ul>
-                        <li><a href="index.html">Domů</a></li>
-                        <li><a href="calendar.html">Kalendář</a></li>
-                        <li><a href="jezdci.html">Jezdci</a></li>
-                        <li><a href="tymy.html">Týmy</a></li>
-                        <li><a href="okruh.html">Okruhy</a></li>
-                        <li><a href="vysledky.html">Výsledky</a></li>
-                        <li><a href="prihlasky.html">Přihlášení</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Organizátoři</h3>
-                    <ul>
-                        <li><a href="https://www.instagram.com/matyaasko/">Matěj Vaculík</a></li>
-                        <li><a href="https://www.instagram.com/beeeeuuuuu/">Maxim Heligr</a></li>
-                        <li><a href="https://www.instagram.com/_.duda.o._/">Ondra Duda</a></li>
-                        <li><a href="https://www.instagram.com/klabochmartin?igsh=Ym1pN29hNTFmbjBx&utm_source=qr">Martin Klaboch</a></li>
-                        <li><a href="https://www.instagram.com/olinkkt/">Oliver Seidl</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 VRL. Všechna práva vyhrazena.</p>
-            </div>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>VRL</h3>
+          <p>Virtuální závodní liga pro nadšence Formule 1. Připoj se k nám a zažij motorsport z pohodlí domova.</p>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/vrl_velocityracingleague/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@Velocity_Racing_League_VRL"><i class="fab fa-youtube"></i></a>
+            <a href="https://discord.gg/CMxscEUcRd"><i class="fab fa-discord"></i></a>
+            <a href="https://www.tiktok.com/@velocity_racingleague" target="_blank"><i class="fab fa-tiktok"></i></a>
+          </div>
         </div>
-    </footer>
+        <div class="footer-section">
+          <h3>Navigace</h3>
+          <ul>
+            <li><a href="index.html">Domů</a></li>
+            <li><a href="calendar.html">Kalendář</a></li>
+            <li><a href="jezdci.html">Jezdci</a></li>
+            <li><a href="tymy.html">Týmy</a></li>
+            <li><a href="okruh.html">Okruhy</a></li>
+            <li><a href="vysledky.html">Výsledky</a></li>
+            <li><a href="prihlasky.html">Přihlášení</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Organizátoři</h3>
+          <ul>
+            <li><a href="https://www.instagram.com/matyaasko/">Matěj Vaculík</a></li>
+            <li><a href="https://www.instagram.com/beeeeuuuuu/">Maxim Heligr</a></li>
+            <li><a href="https://www.instagram.com/_.duda.o._/">Ondra Duda</a></li>
+            <li><a href="https://www.instagram.com/klabochmartin?igsh=Ym1pN29hNTFmbjBx&utm_source=qr">Martin Klaboch</a>
+            </li>
+            <li><a href="https://www.instagram.com/olinkkt/">Oliver Seidl</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 VRL. Všechna práva vyhrazena.</p>
+      </div>
+    </div>
+  </footer>
 
   <script>
-
     // Přepínání světlého/tmavého režimu
     const themeSwitch = document.getElementById('themeSwitch');
 
     if (themeSwitch) {
-        const themeIcon = themeSwitch.querySelector('i');
+      const themeIcon = themeSwitch.querySelector('i');
 
-        // Načtení uloženého tématu nebo nastavení výchozího
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.body.dataset.theme = savedTheme;
-        themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+      // Načtení uloženého tématu nebo nastavení výchozího
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.body.dataset.theme = savedTheme;
+      themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
 
-        // Kliknutí na tlačítko
-        themeSwitch.addEventListener('click', () => {
-            const newTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
-            document.body.dataset.theme = newTheme;
-            themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-        
-            // Uložení preference do localStorage
-            localStorage.setItem('theme', newTheme);
-        });
+      // Kliknutí na tlačítko
+      themeSwitch.addEventListener('click', () => {
+        const newTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.body.dataset.theme = newTheme;
+        themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+        // Uložení preference do localStorage
+        localStorage.setItem('theme', newTheme);
+      });
     }
 
-    // Sem doplňuješ výsledky závodů
+    // Výsledky závodů
     const raceResults = [
       {
         round: "R1 – Melbourne Grand Prix Circuit",
@@ -163,29 +167,30 @@
       const div = document.createElement("div");
       div.className = "results";
       div.innerHTML = `
-        <h2>${race.round}</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Pozice</th>
-              <th>Jezdec</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${race.results.map((driver, index) => `
+          <h2>${race.round}</h2>
+          <table>
+            <thead>
               <tr>
-                <td>${index + 1}</td>
-                <td>${driver}</td>
+                <th>Pozice</th>
+                <th>Jezdec</th>
               </tr>
-            `).join("")}
-          </tbody>
-        </table>
-      `;
+            </thead>
+            <tbody>
+              ${race.results.map((driver, index) => `
+                <tr>
+                  <td>${index + 1}</td>
+                  <td>${driver}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
       container.appendChild(div);
     });
   </script>
+
+  <!-- Přidán odkaz na externí JS soubor -->
   <script src="js/global.js"></script>
 </body>
+
 </html>
-
-
