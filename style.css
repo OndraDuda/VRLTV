@@ -12,11 +12,13 @@
 
     /* Background Colors */
     --dark-bg: #110C0C;
-    --light-bg: #110C0C; /* default dark */
-    
+    --light-bg: #110C0C;
+    /* default dark */
+
     /* Text Colors */
     --text-light: #FFFFFF;
-    --text-dark: #FFFFFF; /* inverted for dark */
+    --text-dark: #FFFFFF;
+    /* inverted for dark */
 
     /* Card/Component Colors */
     --card-bg: #1a1a1a;
@@ -66,8 +68,10 @@ body[data-theme="light"] h1,
 body[data-theme="light"] h2,
 body[data-theme="light"] h3 {
     color: #291c1c !important;
-    -webkit-text-fill-color: #291c1c !important; /* pro text s gradientem */
-    background: none !important; /* odstraní gradient */
+    -webkit-text-fill-color: #291c1c !important;
+    /* pro text s gradientem */
+    background: none !important;
+    /* odstraní gradient */
     text-shadow: none !important;
 }
 
@@ -75,7 +79,7 @@ body[data-theme="light"] h3 {
 body[data-theme="light"] header {
     background: linear-gradient(135deg, #e80808 0%, #f2f2f2 100%) !important;
     color: #291c1c !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 body[data-theme="light"] nav a {
@@ -120,9 +124,11 @@ body[data-theme="light"] .table-title {
 
 /* Hero nadpis ve světlém režimu – výrazný */
 body[data-theme="light"] .hero h1 {
-    color: #971a1a !important;  /* F1 červená */
+    color: #971a1a !important;
+    /* F1 červená */
     -webkit-text-fill-color: #761818 !important;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25); /* lepší čitelnost */
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
+    /* lepší čitelnost */
 }
 
 body[data-theme="light"] .theme-switch {
@@ -187,7 +193,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
 }
 
@@ -231,15 +237,15 @@ header {
     background: linear-gradient(to right, var(--f1-red), var(--vrl-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
     text-transform: uppercase;
 }
 
 .form-note {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-size: 20px;
-  color: var(--text-color);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: var(--text-color);
 }
 
 
@@ -263,7 +269,8 @@ nav a {
     transition: all 0.3s;
 }
 
-nav a:hover, nav a.active {
+nav a:hover,
+nav a.active {
     background-color: var(--vrl-purple);
 }
 
@@ -285,22 +292,24 @@ nav a:hover, nav a.active {
 }
 
 .discord-btn2 {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px; /* mezera mezi logem a textem */
-  background-color: #5865F2;
-  color: white;
-  padding: 12px 30px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: all 0.3s;
-  margin-top: 15px; /* odsazení od tlačítka Odeslat */
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    /* mezera mezi logem a textem */
+    background-color: #5865F2;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+    margin-top: 15px;
+    /* odsazení od tlačítka Odeslat */
 }
 
 .discord-btn2:hover {
-  background-color: #4752c4;
-  transform: scale(1.05);
+    background-color: #4752c4;
+    transform: scale(1.05);
 }
 
 
@@ -390,7 +399,7 @@ nav a:hover, nav a.active {
 .hero h2 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero p {
@@ -401,7 +410,7 @@ nav a:hover, nav a.active {
 
 /* ===== BUTTONS ===== */
 .form-card form {
-  text-align: center;
+    text-align: center;
 }
 
 .btn {
@@ -422,7 +431,7 @@ nav a:hover, nav a.active {
 
 .btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* ===== SECTION TITLES ===== */
@@ -460,7 +469,7 @@ nav a:hover, nav a.active {
     background: var(--card-bg);
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     margin-bottom: 3rem;
     border: 1px solid var(--card-border);
     text-align: center;
@@ -482,7 +491,7 @@ nav a:hover, nav a.active {
     background: var(--card-bg);
     padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     margin: 1rem;
     flex: 1;
     min-width: 200px;
@@ -503,7 +512,7 @@ nav a:hover, nav a.active {
     background-color: var(--card-bg);
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     margin-bottom: 3rem;
     border: 1px solid var(--card-border);
 }
@@ -581,7 +590,7 @@ nav a:hover, nav a.active {
     background: var(--card-bg);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--card-border);
 }
 
@@ -632,7 +641,7 @@ nav a:hover, nav a.active {
     border-spacing: 0;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
     background-color: var(--card-bg);
     font-family: 'Segoe UI', sans-serif;
 }
@@ -653,13 +662,13 @@ nav a:hover, nav a.active {
 }
 
 .drivers-table tbody tr:nth-child(even) {
-    background-color: rgba(0,0,0,0.03);
+    background-color: rgba(0, 0, 0, 0.03);
 }
 
 .drivers-table tbody tr:hover {
-    background-color: rgba(0,0,0,0.08);
+    background-color: rgba(0, 0, 0, 0.08);
     transform: translateX(5px);
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .drivers-table tbody tr td:first-child {
@@ -667,9 +676,17 @@ nav a:hover, nav a.active {
     font-size: 1rem;
 }
 
-.drivers-table tbody tr:nth-child(1) td:first-child { color: #FFD700; }
-.drivers-table tbody tr:nth-child(2) td:first-child { color: #C0C0C0; }
-.drivers-table tbody tr:nth-child(3) td:first-child { color: #CD7F32; }
+.drivers-table tbody tr:nth-child(1) td:first-child {
+    color: #FFD700;
+}
+
+.drivers-table tbody tr:nth-child(2) td:first-child {
+    color: #C0C0C0;
+}
+
+.drivers-table tbody tr:nth-child(3) td:first-child {
+    color: #CD7F32;
+}
 
 .drivers-table td:nth-child(3) {
     font-weight: 700;
@@ -738,7 +755,7 @@ body[data-theme="dark"] .drivers-table tr:nth-child(even) td {
     background: var(--card-bg);
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s ease, border 0.3s ease;
     border: 1px solid var(--track-card-border);
 }
@@ -768,7 +785,7 @@ body[data-theme="dark"] .drivers-table tr:nth-child(even) td {
     border: 1px solid var(--card-border);
     border-radius: 12px;
     padding: 2rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     max-width: 700px;
     margin: 2rem auto 3rem;
 }
@@ -781,7 +798,9 @@ label {
     color: var(--f1-red);
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
     width: 100%;
     padding: 10px;
     border-radius: 8px;
@@ -813,7 +832,7 @@ textarea {
     background: var(--card-bg, #fff);
     padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
     border: 1px solid var(--card-border, #ddd);
 }
@@ -832,7 +851,8 @@ table {
     overflow: hidden;
 }
 
-table th, table td {
+table th,
+table td {
     border: 1px solid var(--card-border);
     padding: 10px;
     text-align: center;
@@ -844,7 +864,7 @@ table th {
 }
 
 table tr:nth-child(even) {
-    background-color: rgba(0,0,0,0.05);
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* ===== LIVE TIMING STYLES ===== */
@@ -854,7 +874,7 @@ table tr:nth-child(even) {
     padding: 20px;
     background: var(--bg-card);
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .status-bar {
@@ -934,16 +954,45 @@ table tr:nth-child(even) {
 }
 
 /* Team Color Borders */
-.team-redbull { border-left: 4px solid #3671C6; }
-.team-ferrari { border-left: 4px solid #F91536; }
-.team-mercedes { border-left: 4px solid #27F4D2; }
-.team-mclaren { border-left: 4px solid #F58020; }
-.team-alpine { border-left: 4px solid #2293D1; }
-.team-aston-martin { border-left: 4px solid #358C75; }
-.team-alfaromeo { border-left: 4px solid #C92D4B; }
-.team-haas { border-left: 4px solid #B6BABD; }
-.team-alphatauri { border-left: 4px solid #5E8FAA; }
-.team-williams { border-left: 4px solid #37BEDD; }
+.team-redbull {
+    border-left: 4px solid #3671C6;
+}
+
+.team-ferrari {
+    border-left: 4px solid #F91536;
+}
+
+.team-mercedes {
+    border-left: 4px solid #27F4D2;
+}
+
+.team-mclaren {
+    border-left: 4px solid #F58020;
+}
+
+.team-alpine {
+    border-left: 4px solid #2293D1;
+}
+
+.team-aston-martin {
+    border-left: 4px solid #358C75;
+}
+
+.team-alfaromeo {
+    border-left: 4px solid #C92D4B;
+}
+
+.team-haas {
+    border-left: 4px solid #B6BABD;
+}
+
+.team-alphatauri {
+    border-left: 4px solid #5E8FAA;
+}
+
+.team-williams {
+    border-left: 4px solid #37BEDD;
+}
 
 /* ===== FOOTER ===== */
 footer {
@@ -1011,22 +1060,33 @@ footer {
     padding: 1.5rem;
     text-align: center;
 }
-  
+
 .next-race .countdown {
     font-size: 1.5rem;
     margin-bottom: 1rem;
 }
-  
+
 .next-race .stream-link-wrapper a {
     color: var(--vrl-blue);
     font-weight: bold;
     text-decoration: none;
 }
-  
+
 .next-race .stream-link-wrapper a:hover {
     text-decoration: underline;
 }
-  
+
+body[data-theme="light"] input,
+body[data-theme="light"] textarea,
+body[data-theme="light"] select {
+    background: #fff;
+    /* světlé pozadí */
+    color: #000;
+    /* tmavý text */
+    border: 1px solid #ccc;
+    /* světlý okraj */
+}
+
 
 /* ===== UTILITY CLASSES ===== */
 main {
@@ -1080,7 +1140,7 @@ main {
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
     nav.mobile-menu-open {
