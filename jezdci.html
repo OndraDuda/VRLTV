@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VRL - Velocity Racing League - Season 2</title>
+
+    <head>
+        <title>VRL - Velocity Racing League - Season 2</title>
+        <link rel="icon" type="image/png" href="VRL_logo_nove.png">
+    </head>
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Vlajky -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css">
+
+    <!-- Vlastní CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <!-- HEADER -->
     <header>
         <div class="container">
             <div class="header-content">
@@ -33,60 +47,67 @@
                         <li><a href="okruh.html">Okruhy</a></li>
                         <li><a href="vysledky.html">Výsledky</a></li>
                         <li><a href="prihlasky.html">Přihlášení</a></li>
-                        <li><a href="https://discord.gg/CMxscEUcRd" class="discord-btn"><i class="fab fa-discord"></i> Discord</a></li>
+                        <li><a href="https://discord.gg/CMxscEUcRd" class="discord-btn"><i class="fab fa-discord"></i>
+                                Discord</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
 
+    <!-- HERO -->
     <section class="hero">
         <div class="hero-fade"></div>
         <div class="container">
             <div class="hero-content">
-                <h2>Velocity Racing League</h2> 
+                <h2>Velocity Racing League</h2>
                 <p>Zjisti jak na tom jsou tvoji oblíbení jezdci.</p>
                 <div>
-                    <a href="https://discord.gg/CMxscEUcRd" class="btn"><i class="fab fa-discord"></i> Připojit se na Discord</a>
+                    <a href="https://discord.gg/CMxscEUcRd" class="btn"><i class="fab fa-discord"></i> Připojit se na
+                        Discord</a>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- MAIN -->
     <main>
-    <h2 class="table-title">Pořadí jezdců</h2>
-    <table class="drivers-table">
-      <thead>
-        <tr>
-          <th>Pořadí</th>
-          <th>#</th>
-          <th>Jméno</th>
-          <th>Tým</th>
-          <th>Země</th>
-          <th>Body</th>
-          <th>1. místa</th>
-          <th>2. místa</th>
-          <th>3. místa</th>
-        </tr>
-      </thead>
-      <tbody id="driversTable">
-        <!-- JS doplní jezdce -->
-      </tbody>
-    </table>
-  </main>
+        <h2 class="table-title">Pořadí jezdců</h2>
+        <table class="drivers-table">
+            <thead>
+                <tr>
+                    <th>Pořadí</th>
+                    <th>#</th>
+                    <th>Jméno</th>
+                    <th>Tým</th>
+                    <th>Země</th>
+                    <th>Body</th>
+                    <th>1. místa</th>
+                    <th>2. místa</th>
+                    <th>3. místa</th>
+                </tr>
+            </thead>
+            <tbody id="driversTable">
+                <!-- JS doplní jezdce -->
+            </tbody>
+        </table>
+    </main>
 
-  <!-- FOOTER -->
-  <footer>
+    <!-- FOOTER -->
+    <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>VRL</h3>
-                    <p>Virtuální závodní liga pro nadšence Formule 1. Připoj se k nám a zažij motorsport z pohodlí domova.</p>
+                    <p>Virtuální závodní liga pro nadšence Formule 1. Připoj se k nám a zažij motorsport z pohodlí
+                        domova.</p>
                     <div class="social-icons">
-                        <a href="https://www.instagram.com/vrl_velocityracingleague/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/vrl_velocityracingleague/"><i
+                                class="fab fa-instagram"></i></a>
                         <a href="https://www.youtube.com/@Velocity_Racing_League_VRL"><i class="fab fa-youtube"></i></a>
                         <a href="https://discord.gg/CMxscEUcRd"><i class="fab fa-discord"></i></a>
-                        <a href="https://www.tiktok.com/@velocity_racingleague" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.tiktok.com/@velocity_racingleague" target="_blank"><i
+                                class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
@@ -107,7 +128,8 @@
                         <li><a href="https://www.instagram.com/matyaasko/">Matěj Vaculík</a></li>
                         <li><a href="https://www.instagram.com/beeeeuuuuu/">Maxim Heligr</a></li>
                         <li><a href="https://www.instagram.com/_.duda.o._/">Ondra Duda</a></li>
-                        <li><a href="https://www.instagram.com/klabochmartin?igsh=Ym1pN29hNTFmbjBx&utm_source=qr">Martin Klaboch</a></li>
+                        <li><a href="https://www.instagram.com/klabochmartin?igsh=Ym1pN29hNTFmbjBx&utm_source=qr">Martin
+                                Klaboch</a></li>
                         <li><a href="https://www.instagram.com/olinkkt/">Oliver Seidl</a></li>
                     </ul>
                 </div>
@@ -118,58 +140,54 @@
         </div>
     </footer>
 
+    <!-- Skripty -->
     <script src="js/global.js"></script>
     <script>
+        const drivers = [
+            { number: 71, name: "Petr Stouhal", team: "Red Bull", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
+            { number: 7, name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 37, wins: 1, second: 0, third: 0 },
+            { number: 21, name: "Adam Gallus", team: "Mercedes", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
+            { number: 1, name: "Maxim Heligr", team: "McLaren", country: "cz", points: 40, wins: 1, second: 0, third: 1 },
+            { number: 56, name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 6, wins: 0, second: 0, third: 0 },
+            { number: 24, name: "Matěj Doha", team: "Alpine", country: "cz", points: 1, wins: 0, second: 0, third: 0 },
+            { number: 97, name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 10, wins: 0, second: 0, third: 0 },
+            { number: 20, name: "Tomáš Novák", team: "Haas", country: "cz", points: 10, wins: 0, second: 0, third: 0 },
+            { number: 33, name: "Matěj Csiba", team: "Williams", country: "sk", points: 12, wins: 0, second: 0, third: 0 },
+            { number: 99, name: "Jakub Fabian", team: "Sauber", country: "cz", points: 1, wins: 0, second: 0, third: 0 },
 
-    const drivers = [
-      { number: 71, name: "Petr Stouhal", team: "Red Bull", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
-      { number: 7, name: "Josef Kubeš", team: "Ferrari", country: "🇨🇿 Česko", points: 37, wins: 1, second: 0, third: 0 },
-      { number: 21, name: "Adam Gallus", team: "Mercedes", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
-      { number: 1, name: "Maxim Heligr", team: "McLaren", country: "🇨🇿 Česko", points: 40, wins: 1, second: 0, third: 1 },
-      { number: 56, name: "Filip Kratochvil", team: "Aston Martin", country: "🇨🇿 Česko", points: 6, wins: 0, second: 0, third: 0 },
-      { number: 24, name: "Matěj Doha", team: "Alpine", country: "🇨🇿 Česko", points: 1, wins: 0, second: 0, third: 0 },
-      { number: 97, name: "Andrej Erdelský", team: "Racing Bulls", country: "sk Slovensko", points: 10, wins: 0, second: 0, third: 0 },
-      { number: 20, name: "Tomáš Novák", team: "Haas", country: "🇨🇿 Česko", points: 10, wins: 0, second: 0, third: 0 },
-      { number: 33, name: "Matěj Csiba", team: "Williams", country: "sk Slovensko", points: 12, wins: 0, second: 0, third: 0 },
-      { number: 99, name: "Jakub Fabian", team: "Sauber", country: "🇨🇿 Česko", points: 1, wins: 0, second: 0, third: 0 },
+            { number: 13, name: "Tadeáš Šmídl", team: "Red Bull", country: "cz", points: 6, wins: 0, second: 0, third: 0 },
+            { number: 28, name: "Luboš Novotný", team: "Ferrari", country: "cz", points: 4, wins: 0, second: 0, third: 0 },
+            { number: 12, name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 36, wins: 0, second: 2, third: 0 },
+            { number: 96, name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 17, wins: 0, second: 0, third: 1 },
+            { number: 3, name: "Oliver Maťko", team: "Aston Martin", country: "sk", points: 20, wins: 0, second: 0, third: 0 },
+            { number: 6, name: "Jan Vlach", team: "Alpine", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
+            { number: 67, name: "Alex Výplach", team: "Racing Bulls", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
+            { number: 25, name: "Matěj Švec", team: "Haas", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
+            { number: 26, name: "Matyáš Kasl", team: "Williams", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
+            { number: 66, name: "Oliver Stavač", team: "Sauber", country: "sk", points: 0, wins: 0, second: 0, third: 0 }
+        ];
 
-      { number: 13, name: "Tadeáš Šmídl", team: "Red Bull", country: "🇨🇿 Česko", points: 6, wins: 0, second: 0, third: 0 },
-      { number: 28, name: "Luboš Novotný", team: "Ferrari", country: "🇨🇿 Česko", points: 4, wins: 0, second: 0, third: 0 },
-      { number: 12, name: "Martin Klaboch", team: "Mercedes", country: "🇨🇿 Česko", points: 36, wins: 0, second: 2, third: 0 },
-      { number: 96, name: "Matěj Vaculík", team: "McLaren", country: "🇨🇿 Česko", points: 17, wins: 0, second: 0, third: 1 },
-      { number: 3, name: "Oliver Maťko", team: "Aston Martin", country: "sk Slovensko", points: 20, wins: 0, second: 0, third: 0 },
-      { number: 6, name: "Jan Vlach", team: "Alpine", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
-      { number: 67, name: "Alex Výplach", team: "Racing Bulls", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
-      { number: 25, name: "Matěj Švec", team: "Haas", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
-      { number: 26, name: "Matyáš Kasl", team: "Williams", country: "🇨🇿 Česko", points: 0, wins: 0, second: 0, third: 0 },
-      { number: 66, name: "Oliver Stavač", team: "Sauber", country: "sk Slovensko", points: 0, wins: 0, second: 0, third: 0 }
-    ];
+        // seřadit podle bodů
+        drivers.sort((a, b) => b.points - a.points);
 
-    // seřadit podle bodů
-    drivers.sort((a, b) => b.points - a.points);
+        const table = document.getElementById("driversTable");
 
-    const table = document.getElementById("driversTable");
-
-    drivers.forEach((driver, index) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
+        drivers.forEach((driver, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
         <td><strong>${index + 1}</strong></td>
         <td>${driver.number}</td>
         <td>${driver.name}</td>
         <td>${driver.team}</td>
-        <td>${driver.country}</td>
+        <td><span class="fi fi-${driver.country}"></span></td>
         <td><strong>${driver.points}</strong></td>
         <td>${driver.wins}</td>
         <td>${driver.second}</td>
         <td>${driver.third}</td>
       `;
-      table.appendChild(row);
-    });
-  </script>
+            table.appendChild(row);
+        });
+    </script>
 </body>
+
 </html>
-
-
-
-
-
