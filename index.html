@@ -358,18 +358,19 @@
             const streamLink = document.getElementById('stream-link');
 
             function getNextRace() {
-                const now = new Date();
+            const now = new Date();
 
-                return races
-                    .map(r => {
-                        const [year, month, day] = r.date.split('-').map(Number);
-                        // Vytvoříme čas závodu – 19:00 v Praze
-                        const pragueTime = new Date(Date.UTC(year, month - 1, day, 17, 0)); // 19:00 Prague == 17:00 UTC (letní čas)
-                        return { ...r, raceDate: pragueTime };
-                    })
-                    .filter(r => r.raceDate > now)
-                    .sort((a, b) => a.raceDate - b.raceDate)[0];
+            return races
+                .map(r => {
+                    const [day, month, year] = r.date.split('.').map(Number); 
+                    // vytvoříme datum závodu v 19:00 (Praha = UTC+2 v létě, UTC+1 v zimě)
+                    const raceDate = new Date(year, month - 1, day, 19, 0); 
+                    return { ...r, raceDate };
+                })
+                .filter(r => r.raceDate > now)
+                .sort((a, b) => a.raceDate - b.raceDate)[0];
             }
+
 
             const nextRace = getNextRace();
 
