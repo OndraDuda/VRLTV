@@ -84,7 +84,8 @@
                 <div class="detail-card">
                     <h3><i class="fas fa-book"></i> Pravidla</h3>
                     <p>Pravidla ligy a závodění</p>
-                    <a href="https://docs.google.com/document/d/1o9ULOGPHiwvApBRguubZ3BCT3zQkdIPZtWpjO5tcUpc/edit?tab=t.0" class="btn"> Pravidla</a>
+                    <a href="https://docs.google.com/document/d/1o9ULOGPHiwvApBRguubZ3BCT3zQkdIPZtWpjO5tcUpc/edit?tab=t.0"
+                        class="btn"> Pravidla</a>
                 </div>
             </div>
         </section>
@@ -227,31 +228,32 @@
 
         // Data závodů (ponecháš jak máš)
         const races = [
-            { round: "R1", name: "Austrálie", date: "9.9.2025", track: "Melbourne Grand Prix Circuit" },
-            { round: "R2", name: "Velká Británie", date: "16.9.2025", track: "Silverstone Circuit" },
-            { round: "R3", name: "Bahrain", date: "30.9.2025", track: "Bahrain International Circuit" },
-            { round: "R4", name: "Miami", date: "7.10.2025", track: "Miami International Autodrome" },
-            { round: "R5", name: "Imola", date: "14.10.2025", track: "Autodromo Enzo e Dino Ferrari" },
-            
-            { round: "R6", name: "Japonsko", date: "4.11.2025", track: "Suzuka International Racing Course" },
-            { round: "R7", name: "Kanada", date: "11.11.2025", track: "Circuit Gilles Villeneuve" },
-            { round: "R8", name: "Singapur", date: "18.11.2025", track: "Marina Bay Street Circuit" },
-            { round: "R9", name: "Belgie", date: "2.12.2025", track: "Circuit de Spa-Francorchamps" },
-            { round: "R10", name: "Španělsko", date: "16.12.2025", track: "Circuit de Barcelona-Catalunya" },
-            
-            { round: "R11", name: "Mexiko", date: "6.1.2026", track: "Autódromo Hermanos Rodríguez" },
-            { round: "R12", name: "Brazílie", date: "20.1.2026", track: "Autódromo José Carlos Pace" },
-            { round: "R13", name: "USA", date: "3.2.2026", track: "Circuit of the Americas" },
-            
-            { round: "R14", name: "Rakousko (Reverse Sprint)", date: "17.2.2026", track: "Red Bull Ring" },
-            { round: "R15", name: "Monako", date: "3.3.2026", track: "Circuit de Monaco" },
-            { round: "R16", name: "Itálie", date: "10.3.2026", track: "Autodromo Nazionale Monza" },
-            { round: "R17", name: "Maďarsko", date: "24.3.2026", track: "Hungaroring" },
-            
-            { round: "R18", name: "Katar", date: "7.4.2026", track: "Losail International Circuit" },
-            { round: "R19", name: "Saudská Arábie", date: "21.4.2026", track: "Jeddah Corniche Circuit" },
-            { round: "R20", name: "Abu Dhabi", date: "28.4.2026", track: "Yas Marina Circuit" }
+            { round: "R1", name: "Australia", date: "2025-09-09", track: "Melbourne Grand Prix Circuit" },
+            { round: "R2", name: "United Kingdom", date: "2025-09-16", track: "Silverstone Circuit" },
+            { round: "R3", name: "Bahrain", date: "2025-09-30", track: "Bahrain International Circuit" },
+            { round: "R4", name: "Miami", date: "2025-10-07", track: "Miami International Autodrome" },
+            { round: "R5", name: "Imola", date: "2025-10-14", track: "Autodromo Enzo e Dino Ferrari" },
+
+            { round: "R6", name: "Japan", date: "2025-11-04", track: "Suzuka International Racing Course" },
+            { round: "R7", name: "Canada", date: "2025-11-11", track: "Circuit Gilles Villeneuve" },
+            { round: "R8", name: "Singapore", date: "2025-11-18", track: "Marina Bay Street Circuit" },
+            { round: "R9", name: "Belgium", date: "2025-12-02", track: "Circuit de Spa-Francorchamps" },
+            { round: "R10", name: "Spain", date: "2025-12-16", track: "Circuit de Barcelona-Catalunya" },
+
+            { round: "R11", name: "Mexico", date: "2026-01-06", track: "Autódromo Hermanos Rodríguez" },
+            { round: "R12", name: "Brazil", date: "2026-01-20", track: "Autódromo José Carlos Pace" },
+            { round: "R13", name: "USA", date: "2026-02-03", track: "Circuit of the Americas" },
+
+            { round: "R14", name: "Austria (Reverse Sprint)", date: "2026-02-17", track: "Red Bull Ring" },
+            { round: "R15", name: "Monaco", date: "2026-03-03", track: "Circuit de Monaco" },
+            { round: "R16", name: "Italy", date: "2026-03-10", track: "Autodromo Nazionale Monza" },
+            { round: "R17", name: "Hungary", date: "2026-03-24", track: "Hungaroring" },
+
+            { round: "R18", name: "Qatar", date: "2026-04-07", track: "Losail International Circuit" },
+            { round: "R19", name: "Saudi Arabia", date: "2026-04-21", track: "Jeddah Corniche Circuit" },
+            { round: "R20", name: "Abu Dhabi", date: "2026-04-28", track: "Yas Marina Circuit" }
         ];
+
 
         // Funkce pro vypsání závodů (limit je volitelný)
         function populateCalendar(containerId, limit = null) {
@@ -358,19 +360,17 @@
             const streamLink = document.getElementById('stream-link');
 
             function getNextRace() {
-            const now = new Date();
+                const now = new Date();
 
-            return races
-                .map(r => {
-                    const [day, month, year] = r.date.split('.').map(Number); 
-                    // vytvoříme datum závodu v 19:00 (Praha = UTC+2 v létě, UTC+1 v zimě)
-                    const raceDate = new Date(year, month - 1, day, 19, 0); 
-                    return { ...r, raceDate };
-                })
-                .filter(r => r.raceDate > now)
-                .sort((a, b) => a.raceDate - b.raceDate)[0];
+                return races
+                    .map(r => {
+                        // Vytvoříme datum závodu v 19:00 místního času
+                        const raceDate = new Date(`${r.date}T19:00:00`);
+                        return { ...r, raceDate };
+                    })
+                    .filter(r => r.raceDate > now)
+                    .sort((a, b) => a.raceDate - b.raceDate)[0];
             }
-
 
             const nextRace = getNextRace();
 
@@ -407,6 +407,7 @@
             updateCountdown();
             const interval = setInterval(updateCountdown, 1000);
         });
+
 
     </script>
 </body>
