@@ -82,11 +82,13 @@
                     <th>Tým</th>
                     <th>Země</th>
                     <th>Body</th>
+                    <th>Ztráta</th> <!-- nový sloupec -->
                     <th>1. místa</th>
                     <th>2. místa</th>
                     <th>3. místa</th>
                 </tr>
             </thead>
+
             <tbody id="driversTable">
                 <!-- JS doplní jezdce -->
             </tbody>
@@ -167,27 +169,38 @@
             { number: 66, name: "Oliver Stavač", team: "Sauber", country: "sk", points: 4, wins: 0, second: 0, third: 0 }
         ];
 
-        // seřadit podle bodů
-        drivers.sort((a, b) => b.points - a.points);
+        // Seřadit podle bodů (a pokud shoda, tak podle výher)
+        drivers.sort((a, b) => {
+            if (b.points !== a.points) return b.points - a.points;
+            if (b.wins !== a.wins) return b.wins - a.wins;
+            if (b.second !== a.second) return b.second - a.second;
+            return b.third - a.third;
+        });
+
+        // Nejlepší jezdec má nejvíc bodů
+        const leaderPoints = drivers[0].points;
 
         const table = document.getElementById("driversTable");
 
         drivers.forEach((driver, index) => {
+            const loss = leaderPoints - driver.points; // ztráta na lídra
             const row = document.createElement("tr");
             row.innerHTML = `
-        <td><strong>${index + 1}</strong></td>
-        <td>${driver.number}</td>
-        <td>${driver.name}</td>
-        <td>${driver.team}</td>
-        <td><span class="fi fi-${driver.country}"></span></td>
-        <td><strong>${driver.points}</strong></td>
-        <td>${driver.wins}</td>
-        <td>${driver.second}</td>
-        <td>${driver.third}</td>
-      `;
+            <td><strong>${index + 1}</strong></td>
+            <td>${driver.number}</td>
+            <td>${driver.name}</td>
+            <td>${driver.team}</td>
+            <td><span class="fi fi-${driver.country}"></span></td>
+            <td><strong>${driver.points}</strong></td>
+            <td>${loss === 0 ? "-" : loss}</td>
+            <td>${driver.wins}</td>
+            <td>${driver.second}</td>
+            <td>${driver.third}</td>
+        `;
             table.appendChild(row);
         });
     </script>
+
 </body>
 
 </html>
