@@ -65,6 +65,7 @@
                     <th>Pořadí</th>
                     <th>Tým</th>
                     <th>Body</th>
+                    <th>Ztráta</th>
                     <th>1. místa</th>
                     <th>2. místa</th>
                     <th>3. místa</th>
@@ -122,22 +123,6 @@
 
     <script src="js/global.js"></script>
     <script>
-        // Přepínání světlého/tmavého režimu
-        const themeSwitch = document.getElementById('themeSwitch');
-        if (themeSwitch) {
-            const themeIcon = themeSwitch.querySelector('i');
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.body.dataset.theme = savedTheme;
-            themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-
-            themeSwitch.addEventListener('click', () => {
-                const newTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
-                document.body.dataset.theme = newTheme;
-                themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-                localStorage.setItem('theme', newTheme);
-            });
-        }
-
         const drivers = [
             { number: 71, name: "Petr Stouhal", team: "Red Bull", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
             { number: 7, name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 57, wins: 1, second: 0, third: 0 },
@@ -162,7 +147,7 @@
             { number: 66, name: "Oliver Stavač", team: "Sauber", country: "sk", points: 4, wins: 0, second: 0, third: 0 }
         ];
 
-        // seskupení podle týmů a přiřazení jezdců
+        // seskupení podle týmů
         const teams = {};
         drivers.forEach(driver => {
             if (!teams[driver.team]) teams[driver.team] = { points: 0, wins: 0, second: 0, third: 0, drivers: [] };
@@ -178,13 +163,18 @@
             .map(([team, stats]) => ({ team, ...stats }))
             .sort((a, b) => b.points - a.points);
 
+        // nejvíc bodů = lídr
+        const leaderPoints = sortedTeams[0].points;
+
         const table = document.getElementById("driversTable");
         sortedTeams.forEach((team, index) => {
+            const loss = leaderPoints - team.points; // ztráta na lídra
             const row = document.createElement("tr");
             row.innerHTML = `
             <td><strong>${index + 1}</strong></td>
             <td class="team-cell" data-drivers="${team.drivers.join(', ')}">${team.team}</td>
             <td><strong>${team.points}</strong></td>
+            <td>${loss === 0 ? "-" : loss}</td>
             <td>${team.wins}</td>
             <td>${team.second}</td>
             <td>${team.third}</td>
@@ -217,6 +207,7 @@
             });
         });
     </script>
+
 </body>
 
 </html>
