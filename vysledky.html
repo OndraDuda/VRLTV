@@ -105,28 +105,6 @@
   </footer>
 
   <script>
-    // Přepínání světlého/tmavého režimu
-    const themeSwitch = document.getElementById('themeSwitch');
-
-    if (themeSwitch) {
-      const themeIcon = themeSwitch.querySelector('i');
-
-      // Načtení uloženého tématu nebo nastavení výchozího
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      document.body.dataset.theme = savedTheme;
-      themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-
-      // Kliknutí na tlačítko
-      themeSwitch.addEventListener('click', () => {
-        const newTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
-        document.body.dataset.theme = newTheme;
-        themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-
-        // Uložení preference do localStorage
-        localStorage.setItem('theme', newTheme);
-      });
-    }
-
     // Výsledky závodů
     const raceResults = [
       {
