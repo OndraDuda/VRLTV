@@ -111,25 +111,6 @@
     </footer>
 
     <script>
-        // Přepínání světlého/tmavého režimu
-        const themeSwitch = document.getElementById('themeSwitch');
-        const themeIcon = themeSwitch.querySelector('i');
-
-        themeSwitch.addEventListener('click', () => {
-            document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
-            themeIcon.className = document.body.dataset.theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-
-            // Uložení preference do localStorage
-            localStorage.setItem('theme', document.body.dataset.theme);
-        });
-
-        // Načtení uloženého tématu
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            document.body.dataset.theme = savedTheme;
-            themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-        }
-
         const tracks = [
             { round: "R1", name: "Melbourne Grand Prix Circuit", country: "Austrálie", length: "5.303 km", laps: 29 },
             { round: "R2", name: "Silverstone Circuit", country: "Velká Británie", length: "5.891 km", laps: 26 },
