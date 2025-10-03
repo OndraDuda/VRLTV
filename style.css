@@ -1093,6 +1093,7 @@ main {
     margin-bottom: 50px;
 }
 
+
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
     header {
@@ -1331,5 +1332,40 @@ main {
 @media (max-width: 768px) {
     .header-mobile-hide {
         transform: translateY(-100%);
+    }
+}
+
+/* ===== RESPONSIVE TABLE ===== */
+@media (max-width: 768px) {
+
+    .drivers-table th:nth-child(2),
+    .drivers-table td:nth-child(2) {
+        display: none;
+        /* skryje číslo jezdce */
+    }
+
+    .drivers-table th,
+    .drivers-table td {
+        padding: 8px 6px;
+        font-size: 0.8rem;
+    }
+
+    .drivers-table td {
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .drivers-table th:nth-child(1),
+    .drivers-table td:nth-child(1) {
+        /* Volitelně můžeš skrýt i pozici, pokud je potřeba */
+        display: none;
+    }
+
+    .drivers-table th,
+    .drivers-table td {
+        font-size: 0.7rem;
+        padding: 6px 4px;
     }
 }
