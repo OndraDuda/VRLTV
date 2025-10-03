@@ -159,37 +159,40 @@
     const container = document.getElementById("resultsContainer");
 
     raceResults.forEach(race => {
-      const div = document.createElement("div");
-      div.className = "results";
-      div.innerHTML = `
-    <h2>${race.round}</h2>
-    <table class="race-results-table">
-      <thead>
-        <tr>
-          <th>Pozice</th>
-          <th>#</th>
-          <th>Jméno</th>
-          <th>Tým</th>
-          <th>Země</th>
-          <th>Body</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${race.results.map((driver, index) => `
+        const div = document.createElement("div");
+        div.className = "results";
+        div.innerHTML = `
+      <h2>${race.round}</h2>
+      <table class="drivers-table">
+        <thead>
           <tr>
-            <td>${index + 1}</td>
-            <td>${driver.number}</td>
-            <td>${driver.name}</td>
-            <td>${driver.team}</td>
-            <td><span class="fi fi-${driver.country}"></span></td>
-            <td>${driver.points}</td>
+            <th>Pozice</th>
+            <th>#</th>
+            <th>Jméno</th>
+            <th>Tým</th>
+            <th>Země</th>
+            <th>Body</th>
           </tr>
-        `).join("")}
-      </tbody>
-    </table>
-  `;
+        </thead>
+        <tbody>
+          ${race.results.map((driver, index) => `
+            <tr>
+              <td>${index + 1}</td>
+              <td>${driver.number}</td>
+              <td>${driver.name}</td>
+              <td>${driver.team}</td>
+              <td><span class="fi fi-${driver.country}"></span></td>
+              <td>${driver.points}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    `;
       container.appendChild(div);
     });
+
+
+
   </script>
 
   <!-- Přidán odkaz na externí JS soubor -->
