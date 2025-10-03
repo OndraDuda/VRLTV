@@ -7,6 +7,7 @@
   <title>VRL - Velocity Racing League - Season 2</title>
   <link rel="icon" type="image/png" href="VRL_logo_nove.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -110,49 +111,50 @@
       {
         round: "R1 – Melbourne Grand Prix Circuit",
         results: [
-          "Josef KUBEŠ",
-          "Martin KLABOCH",
-          "Maxim HELIGR",
-          "Matej CSIBA",
-          "Oliver MAŤKO",
-          "Andrej ERDELSKÝ",
-          "Tadeáš ŠMÍDL",
-          "Tomáš NOVÁK",
-          "Matěj VACULÍK",
-          "Matěj DOHA"
+          { number: 1, name: "Maxim Heligr", team: "McLaren", country: "cz", points: 25 },
+          { number: 12, name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 18 },
+          { number: 7, name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 15 },
+          { number: 33, name: "Matěj Csiba", team: "Williams", country: "sk", points: 12 },
+          { number: 3, name: "Oliver Maťko", team: "Aston Martin", country: "sk", points: 10 },
+          { number: 20, name: "Tomáš Novák", team: "Haas", country: "cz", points: 8 },
+          { number: 97, name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 6 },
+          { number: 13, name: "Tadeáš Šmídl", team: "Red Bull", country: "cz", points: 4 },
+          { number: 56, name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 2 },
+          { number: 24, name: "Matěj Doha", team: "Alpine", country: "cz", points: 1 }
         ]
       },
       {
         round: "R2 – Silverstone Circuit",
         results: [
-          "Maxim HELIGR",
-          "Martin KLABOCH",
-          "Matěj VACULÍK",
-          "Josef KUBEŠ",
-          "Oliver MAŤKO",
-          "Filip KRATOCHVÍL",
-          "Tomáš NOVÁK",
-          "Luboš NOVOTNÝ",
-          "Andrej ERDELSKÝ",
-          "Jakub FABIÁN"
+          { number: 1, name: "Maxim Heligr", team: "McLaren", country: "cz", points: 25 },
+          { number: 12, name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 18 },
+          { number: 96, name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 15 },
+          { number: 7, name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 12 },
+          { number: 3, name: "Oliver Maťko", team: "Aston Martin", country: "sk", points: 10 },
+          { number: 56, name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 8 },
+          { number: 20, name: "Tomáš Novák", team: "Haas", country: "cz", points: 6 },
+          { number: 28, name: "Luboš Novotný", team: "Ferrari", country: "cz", points: 4 },
+          { number: 97, name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 2 },
+          { number: 99, name: "Jakub Fabian", team: "Sauber", country: "cz", points: 1 }
         ]
       },
       {
         round: "R3 – Bahrain International Circuit",
         results: [
-          "Maxim HELIGR",
-          "Martin KLABOCH",
-          "Matyáš KASL",
-          "Oliver MAŤKO",
-          "Tomáš NOVÁK",
-          "Josef KUBEŠ ",
-          "Matěj Vaculík",
-          "Oliver STAVAČ",
-          "Zdeněk POHLREICH",
-          "Jakub FABIÁN"
+          { number: 1, name: "Maxim Heligr", team: "McLaren", country: "cz", points: 25 },
+          { number: 12, name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 18 },
+          { number: 26, name: "Matyáš Kasl", team: "Williams", country: "cz", points: 15 },
+          { number: 3, name: "Oliver Maťko", team: "Aston Martin", country: "sk", points: 12 },
+          { number: 20, name: "Tomáš Novák", team: "Haas", country: "cz", points: 10 },
+          { number: 7, name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 8 },
+          { number: 96, name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 6 },
+          { number: 66, name: "Oliver Stavač", team: "Sauber", country: "sk", points: 4 },
+          { number: 2, name: "Zdeněk Pohlreich", team: "Mercedes", country: "cz", points: 2 },
+          { number: 99, name: "Jakub Fabian", team: "Sauber", country: "cz", points: 1 }
         ]
       }
     ];
+
 
     const container = document.getElementById("resultsContainer");
 
@@ -160,24 +162,32 @@
       const div = document.createElement("div");
       div.className = "results";
       div.innerHTML = `
-          <h2>${race.round}</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Pozice</th>
-                <th>Jezdec</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${race.results.map((driver, index) => `
-                <tr>
-                  <td>${index + 1}</td>
-                  <td>${driver}</td>
-                </tr>
-              `).join("")}
-            </tbody>
-          </table>
-        `;
+    <h2>${race.round}</h2>
+    <table class="race-results-table">
+      <thead>
+        <tr>
+          <th>Pozice</th>
+          <th>#</th>
+          <th>Jméno</th>
+          <th>Tým</th>
+          <th>Země</th>
+          <th>Body</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${race.results.map((driver, index) => `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${driver.number}</td>
+            <td>${driver.name}</td>
+            <td>${driver.team}</td>
+            <td><span class="fi fi-${driver.country}"></span></td>
+            <td>${driver.points}</td>
+          </tr>
+        `).join("")}
+      </tbody>
+    </table>
+  `;
       container.appendChild(div);
     });
   </script>
