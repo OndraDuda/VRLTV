@@ -111,17 +111,18 @@
       {
         round: "R1 – Melbourne Grand Prix Circuit",
         results: [
-          { number: 1, name: "Maxim Heligr", team: "McLaren", country: "cz", points: 25 },
-          { number: 12, name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 18 },
-          { number: 7, name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 15 },
-          { number: 33, name: "Matěj Csiba", team: "Williams", country: "sk", points: 12 },
-          { number: 3, name: "Oliver Maťko", team: "Aston Martin", country: "sk", points: 10 },
-          { number: 20, name: "Tomáš Novák", team: "Haas", country: "cz", points: 8 },
-          { number: 97, name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 6 },
-          { number: 13, name: "Tadeáš Šmídl", team: "Red Bull", country: "cz", points: 4 },
-          { number: 56, name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 2 },
-          { number: 24, name: "Matěj Doha", team: "Alpine", country: "cz", points: 1 }
+          { position: 1, number: 7, name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 25 },
+          { position: 2, number: 12, name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 18 },
+          { position: 3, number: 1, name: "Maxim Heligr", team: "McLaren", country: "cz", points: 15 },
+          { position: 4, number: 33, name: "Matěj Csiba", team: "Williams", country: "sk", points: 12 },
+          { position: 5, number: 3, name: "Oliver Maťko", team: "Ferrari", country: "sk", points: 10 }, // přeřazen do Ferrari
+          { position: 6, number: 97, name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 8 },
+          { position: 7, number: 13, name: "Tadeáš Šmídl", team: "Red Bull", country: "cz", points: 6 },
+          { position: 8, number: 20, name: "Tomáš Novák", team: "Haas", country: "cz", points: 4 },
+          { position: 9, number: 96, name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 2 },
+          { position: 10, number: 24, name: "Matěj Doha", team: "Alpine", country: "cz", points: 1 }
         ]
+
       },
       {
         round: "R2 – Silverstone Circuit",
@@ -159,9 +160,9 @@
     const container = document.getElementById("resultsContainer");
 
     raceResults.forEach(race => {
-        const div = document.createElement("div");
-        div.className = "results";
-        div.innerHTML = `
+      const div = document.createElement("div");
+      div.className = "results";
+      div.innerHTML = `
       <h2>${race.round}</h2>
       <table class="drivers-table">
         <thead>
