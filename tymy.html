@@ -125,7 +125,7 @@
     <script>
         const drivers = [
             { number: 71, name: "Petr Stouhal", team: "Red Bull", country: "cz", points: 2, wins: 0, second: 0, third: 0 },
-            { number: 7, name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 56, wins: 1, second: 0, third: 0 },
+            { number: 7, name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 46, wins: 1, second: 0, third: 0 },
             { number: 2, name: "Zdeněk Pohlreich", team: "Mercedes", country: "cz", points: 2, wins: 0, second: 0, third: 0 },
             { number: 1, name: "Maxim Heligr", team: "McLaren", country: "cz", points: 90, wins: 3, second: 0, third: 1 },
             { number: 56, name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 26, wins: 0, second: 1, third: 0 },
@@ -134,20 +134,26 @@
             { number: 20, name: "Tomáš Novák", team: "Haas", country: "cz", points: 26, wins: 0, second: 0, third: 0 },
             { number: 33, name: "Matěj Csiba", team: "Williams", country: "sk", points: 27, wins: 0, second: 0, third: 1 },
             { number: 99, name: "Jakub Fabian", team: "Sauber", country: "cz", points: 2, wins: 0, second: 0, third: 0 },
-
             { number: 13, name: "Tadeáš Šmídl", team: "Red Bull", country: "cz", points: 6, wins: 0, second: 0, third: 0 },
             { number: 28, name: "Luboš Novotný", team: "Ferrari", country: "cz", points: 4, wins: 0, second: 0, third: 0 },
             { number: 12, name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 54, wins: 0, second: 3, third: 0 },
             { number: 96, name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 33, wins: 0, second: 0, third: 1 },
-            { number: 3, name: "Oliver Maťko", team: "Aston Martin", country: "sk", points: 44, wins: 0, second: 0, third: 0 },
+            { number: 3, name: "Oliver Maťko", team: "Williams", country: "sk", points: 0, wins: 0, second: 0, third: 0 },
             { number: 6, name: "Jan Vlach", team: "Alpine", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
             { number: 67, name: "Alex Výplach", team: "Racing Bulls", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
             { number: 25, name: "Matěj Švec", team: "Haas", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 26, name: "Matyáš Kasl", team: "Williams", country: "cz", points: 15, wins: 0, second: 0, third: 1 },
+            { number: 26, name: "Matyáš Kasl", team: "Aston Martin", country: "cz", points: 0, wins: 0, second: 0, third: 1 },
             { number: 66, name: "Oliver Stavač", team: "Sauber", country: "sk", points: 12, wins: 0, second: 0, third: 0 },
         ];
 
-        // seskupení podle týmů
+        // 🔹 Tady můžeš přidat body navíc pro tým (např. záloha)
+        const extraPoints = {
+            "Ferrari": 10,
+            "Red Bull": 1,         // např. záložní jezdec získal 2 body
+            "Williams": 15,
+            "Aston Martin": 44
+        };
+
         const teams = {};
         drivers.forEach(driver => {
             if (!teams[driver.team]) teams[driver.team] = { points: 0, wins: 0, second: 0, third: 0, drivers: [] };
@@ -158,31 +164,35 @@
             teams[driver.team].drivers.push(driver.name);
         });
 
-        // převod na pole a seřazení podle bodů
+        // 🔹 přičtení extra bodů (bez zobrazení)
+        for (const [team, pts] of Object.entries(extraPoints)) {
+            if (teams[team]) teams[team].points += pts;
+        }
+
+        // převod na pole a seřazení
         const sortedTeams = Object.entries(teams)
             .map(([team, stats]) => ({ team, ...stats }))
             .sort((a, b) => b.points - a.points);
 
-        // nejvíc bodů = lídr
         const leaderPoints = sortedTeams[0].points;
 
         const table = document.getElementById("driversTable");
         sortedTeams.forEach((team, index) => {
-            const loss = leaderPoints - team.points; // ztráta na lídra
+            const loss = leaderPoints - team.points;
             const row = document.createElement("tr");
             row.innerHTML = `
-            <td><strong>${index + 1}</strong></td>
-            <td class="team-cell" data-drivers="${team.drivers.join(', ')}">${team.team}</td>
-            <td><strong>${team.points}</strong></td>
-            <td>${loss === 0 ? "-" : loss}</td>
-            <td>${team.wins}</td>
-            <td>${team.second}</td>
-            <td>${team.third}</td>
-        `;
+        <td><strong>${index + 1}</strong></td>
+        <td class="team-cell" data-drivers="${team.drivers.join(', ')}">${team.team}</td>
+        <td><strong>${team.points}</strong></td>
+        <td>${loss === 0 ? "-" : loss}</td>
+        <td>${team.wins}</td>
+        <td>${team.second}</td>
+        <td>${team.third}</td>
+    `;
             table.appendChild(row);
         });
 
-        // tooltip pro jezdce v týmu
+        // tooltip
         const tooltip = document.createElement('div');
         tooltip.style.position = 'absolute';
         tooltip.style.background = 'rgba(0,0,0,0.8)';
@@ -206,6 +216,7 @@
                 tooltip.style.display = 'none';
             });
         });
+
     </script>
 
 </body>
