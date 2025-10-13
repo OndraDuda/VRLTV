@@ -1597,3 +1597,142 @@ main {
         text-align: right;
     }
 }
+
+/* ============================================================
+   VLASTNÍ STYL PRO TABULKU VÝSLEDKŮ (vysledky.html)
+   Zachovává design ostatních tabulek (drivers-table / teams-table)
+   ============================================================ */
+
+.race-results-table {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto 3rem;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    background-color: var(--card-bg);
+    font-family: 'Segoe UI', sans-serif;
+    color: var(--text-color);
+    border: 1px solid var(--card-border);
+}
+
+/* Hlavička tabulky */
+.race-results-table th {
+    background: linear-gradient(135deg, var(--vrl-blue), var(--vrl-purple));
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 12px 15px;
+    text-align: center;
+}
+
+/* Buňky */
+.race-results-table td {
+    padding: 12px 15px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+/* Pruhované řádky a hover efekt */
+.race-results-table tbody tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.race-results-table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+    transform: translateX(5px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Zvýraznění prvních tří míst */
+.race-results-table tbody tr:nth-child(1) td:first-child {
+    color: #FFD700;
+}
+
+.race-results-table tbody tr:nth-child(2) td:first-child {
+    color: #C0C0C0;
+}
+
+.race-results-table tbody tr:nth-child(3) td:first-child {
+    color: #CD7F32;
+}
+
+/* Light / Dark režim */
+body[data-theme="light"] .race-results-table {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #e0e0e0;
+}
+
+body[data-theme="light"] .race-results-table th {
+    background: linear-gradient(135deg, #e80808 0%, #f2f2f2 100%) !important;
+    color: #fff;
+}
+
+body[data-theme="dark"] .race-results-table {
+    background-color: #1e1e1e;
+    color: #fff;
+    border: 2px solid #444;
+}
+
+body[data-theme="dark"] .race-results-table th {
+    background-color: #333;
+    color: #fff;
+}
+
+/* ================================
+   📱 MOBILNÍ VERZE TABULKY
+   (zobrazí jen Jméno, Tým, Body)
+   ================================ */
+@media (max-width: 768px) {
+    .race-results-table th:nth-child(1),
+    .race-results-table td:nth-child(1),
+    /* Pozice */
+    .race-results-table th:nth-child(4),
+    .race-results-table td:nth-child(4)
+
+    /* Země */
+        {
+        display: none;
+    }
+
+    .race-results-table {
+        font-size: 0.85rem;
+        width: 100%;
+    }
+
+    .race-results-table th,
+    .race-results-table td {
+        padding: 8px 5px;
+        text-align: left;
+    }
+
+    .race-results-table th:nth-child(2),
+    .race-results-table td:nth-child(2) {
+        width: 45%;
+    }
+
+    .race-results-table th:nth-child(3),
+    .race-results-table td:nth-child(3) {
+        width: 35%;
+    }
+
+    .race-results-table th:nth-child(5),
+    .race-results-table td:nth-child(5) {
+        text-align: right;
+        width: 20%;
+    }
+}
+
+@media (max-width: 480px) {
+    .race-results-table {
+        font-size: 0.75rem;
+    }
+
+    .race-results-table th,
+    .race-results-table td {
+        padding: 6px 4px;
+    }
+}
