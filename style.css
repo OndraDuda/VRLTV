@@ -1736,3 +1736,47 @@ body[data-theme="dark"] .race-results-table th {
         padding: 6px 4px;
     }
 }
+
+/* ===== FORM FIELD ERROR BUBBLE WITH ARROW ===== */
+.field-error-bubble {
+    position: relative;
+    display: block;
+    margin-top: 6px;
+}
+
+.field-error-bubble::before {
+    content: "Toto pole je povinné";
+    position: absolute;
+    left: 0;
+    top: 100%;
+    transform: translateY(6px);
+    background-color: #ff4d4d;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+}
+
+/* Šipka pod bublinou */
+.field-error-bubble::after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: calc(100% + 6px);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #ff4d4d transparent transparent transparent;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.field-error-bubble.show::before,
+.field-error-bubble.show::after {
+    opacity: 1;
+}
