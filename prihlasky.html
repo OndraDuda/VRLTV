@@ -269,15 +269,25 @@
       const active = document.querySelector(`#${formType.value}Form`);
       const inputs = active.querySelectorAll('input, textarea, select');
 
-      // kontrola prázdných polí
-      for (const input of inputs) {
-        if (!input.value.trim()) {
-          alert(`Pole "${input.previousElementSibling ? input.previousElementSibling.innerText : input.name}" nesmí být prázdné.`);
-          input.focus();
-          return;
-        }
-      }
+      // kontrola prázdných polí s jednou bublinou
+      document.querySelectorAll('.field-error-bubble').forEach(el => el.remove());
 
+      const firstEmpty = Array.from(inputs).find(input => !input.value.trim());
+      if (firstEmpty) {
+        // vytvoř bublinu jen pro první nevyplněné pole
+        const bubble = document.createElement('div');
+        bubble.classList.add('field-error-bubble', 'show');
+        firstEmpty.insertAdjacentElement('afterend', bubble);
+
+        // posuň stránku, aby bylo vidět pole s chybou
+        firstEmpty.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstEmpty.focus();
+
+        // odstraní bublinu po 3 sekundách
+        setTimeout(() => bubble.remove(), 3000);
+        return;
+      }
+      
       const roleID = "1330097683750191134";
       let content = `<@&${roleID}> Nová přihláška (${formType.value}):\n`;
 
