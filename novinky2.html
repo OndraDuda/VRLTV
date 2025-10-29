@@ -2,133 +2,136 @@
 <html lang="cs">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VRL SMP – Minecraft projekt</title>
-  <link rel="icon" type="image/png" href="VRL_logo_nove.png">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRL SMP – Minecraft projekt</title>
+    <link rel="icon" type="image/png" href="VRL_logo_nove.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-  <!-- === HEADER (stejný jako na hlavní stránce) === -->
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <div class="logo">
-          <a href="index.html">
-            <img src="vrl_high_res.png" alt="VRL Logo" class="logo-img">
-          </a>
+    <!-- === HEADER (stejný jako na hlavní stránce) === -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="vrl_high_res.png" alt="VRL Logo" class="logo-img">
+                    </a>
+                </div>
+                <div class="header-controls">
+                    <button class="theme-switch" id="themeSwitch">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+                <nav id="mobileNav">
+                    <ul>
+                        <li><a href="index.html">Domů</a></li>
+                        <li><a href="calendar.html">Kalendář</a></li>
+                        <li><a href="jezdci.html">Jezdci</a></li>
+                        <li><a href="tymy.html">Týmy</a></li>
+                        <li><a href="okruh.html">Okruhy</a></li>
+                        <li><a href="vysledky.html">Výsledky</a></li>
+                        <li><a href="prihlasky.html">Přihlášky</a></li>
+                        <li><a href="https://discord.gg/CMxscEUcRd" class="discord-btn"><i class="fab fa-discord"></i>
+                                Discord</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-        <div class="header-controls">
-          <button class="theme-switch" id="themeSwitch">
-            <i class="fas fa-moon"></i>
-          </button>
-          <button class="mobile-menu-toggle" id="mobileMenuToggle">
-            <span></span><span></span><span></span>
-          </button>
+    </header>
+
+    <!-- === OBSAH STRÁNKY === -->
+    <section class="news-detail container">
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Zpět na hlavní stránku</a>
+
+        <h1 class="news-title">VRL SMP – Nový Minecraft projekt</h1>
+        <p class="news-meta">Publikováno: 29. října 2025 • Kategorie: Komunita</p>
+
+        <article class="news-text">
+            <p>
+                🏁 <strong>Velká cena Ázerbajdžánu</strong> byla opět plná napětí a skvělých výkonů!
+                Na závodní dráze VRL se tentokrát nejlépe vedlo <strong>Martinovi Klabochovi</strong>, který si zajistil
+                první místo.
+            </p>
+
+            <h2>🥇 Výsledky závodu</h2>
+            <ul>
+                <li>1️⃣ Martin Klaboch – vítěz závodu</li>
+                <li>2️⃣ Josef Kubeš – druhé místo</li>
+                <li>3️⃣ Maxim Heligr – třetí místo</li>
+            </ul>
+
+            <p>
+                Závod přinesl napínavé momenty, nečekané sefty a skvělé souboje mezi jezdci. Fans VRL si tak mohli užít
+                skvělou podívanou od startu až do cíle.
+            </p>
+
+            <div class="join-section">
+                <a href="https://www.youtube.com/watch?v=Boq5FrJFBV0&t=5212s" class="btn">
+                    <i class="fab fa-youtube"></i> Podívej se na celý závod
+                </a>
+            </div>
+            <div class="join-section">
+                <a href="https://www.youtube.com/watch?v=Boq5FrJFBV0&t=5212s" class="btn">
+                    <i class="fab fa-youtube"></i> Podívej se na Highlights
+                </a>
+            </div>
+        </article>
+
+    </section>
+
+    <!-- === FOOTER (stejný jako na hlavní stránce) === -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>VRL</h3>
+                    <p>Virtuální závodní liga pro nadšence Formule 1 a nyní i Minecraftu!</p>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/vrl_velocityracingleague/"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@Velocity_Racing_League_VRL"><i class="fab fa-youtube"></i></a>
+                        <a href="https://discord.gg/CMxscEUcRd"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.tiktok.com/@velocity_racingleague" target="_blank"><i
+                                class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Navigace</h3>
+                    <ul>
+                        <li><a href="index.html">Domů</a></li>
+                        <li><a href="calendar.html">Kalendář</a></li>
+                        <li><a href="jezdci.html">Jezdci</a></li>
+                        <li><a href="tymy.html">Týmy</a></li>
+                        <li><a href="okruh.html">Okruhy</a></li>
+                        <li><a href="vysledky.html">Výsledky</a></li>
+                        <li><a href="prihlasky.html">Přihlášky</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Organizátoři</h3>
+                    <ul>
+                        <li><a href="https://www.instagram.com/matyaasko/">Matěj Vaculík</a></li>
+                        <li><a href="https://www.instagram.com/beeeeuuuuu/">Maxim Heligr</a></li>
+                        <li><a href="https://www.instagram.com/_.duda.o._/">Ondra Duda</a></li>
+                        <li><a href="https://www.instagram.com/klabochmartin?igsh=Ym1pN29hNTFmbjBx&utm_source=qr">Martin
+                                Klaboch</a></li>
+                        <li><a href="https://www.instagram.com/olinkkt/">Oliver Seidl</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 VRL. Všechna práva vyhrazena.</p>
+            </div>
         </div>
-        <nav id="mobileNav">
-          <ul>
-            <li><a href="index.html">Domů</a></li>
-            <li><a href="calendar.html">Kalendář</a></li>
-            <li><a href="jezdci.html">Jezdci</a></li>
-            <li><a href="tymy.html">Týmy</a></li>
-            <li><a href="okruh.html">Okruhy</a></li>
-            <li><a href="vysledky.html">Výsledky</a></li>
-            <li><a href="prihlasky.html">Přihlášky</a></li>
-            <li><a href="https://discord.gg/CMxscEUcRd" class="discord-btn"><i class="fab fa-discord"></i> Discord</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </header>
+    </footer>
 
-  <!-- === OBSAH STRÁNKY === -->
-  <section class="news-detail container">
-    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Zpět na hlavní stránku</a>
-
-    <h1 class="news-title">VRL SMP – Nový Minecraft projekt</h1>
-    <p class="news-meta">Publikováno: 29. října 2025 • Kategorie: Komunita</p>
-
-    <article class="news-text">
-      <p>
-        🌍 **VRL SMP** přináší úplně nový rozměr zábavy mimo závodní tratě!  
-        Po úspěchu druhé sezóny <strong>Velocity Racing League</strong> jsme se rozhodli rozšířit komunitu
-        o vlastní <strong>Minecraft survival server</strong>, kde se můžeš zapojit i ty!
-      </p>
-
-      <h2>🔥 Co je VRL SMP?</h2>
-      <p>
-        Jde o komunitní server, kde se spojují hráči z VRL, závodní fanoušci i noví členové.  
-        Server je zaměřený na <strong>čistý survival s komunitní ekonomikou</strong>, eventy a přátelským přístupem.
-      </p>
-
-      <h2>🧭 Funkce serveru</h2>
-      <ul>
-        <li>✅ Survival svět (verze 1.21+)</li>
-        <li>🏡 Ekonomika, obchodní zóna a vlastní města</li>
-        <li>⚔️ Eventy – PvP, závody lodí, parkour</li>
-        <li>👑 Aktivní moderátoři z VRL komunity</li>
-      </ul>
-
-      <h2>🎮 Jak se připojit</h2>
-      <p>
-        Připoj se k nám na <strong>Discordu VRL</strong> a získej IP adresu a whitelist!  
-        Server je určen pro všechny fanoušky, kteří chtějí trávit čas s přáteli i mimo tratě.
-      </p>
-
-      <div class="join-section">
-        <a href="https://discord.gg/ZaGQ8dCrC5" class="btn">
-          <i class="fab fa-discord"></i> Připojit se na Discord
-        </a>
-      </div>
-    </article>
-  </section>
-
-  <!-- === FOOTER (stejný jako na hlavní stránce) === -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>VRL</h3>
-          <p>Virtuální závodní liga pro nadšence Formule 1 a nyní i Minecraftu!</p>
-          <div class="social-icons">
-            <a href="https://www.instagram.com/vrl_velocityracingleague/"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.youtube.com/@Velocity_Racing_League_VRL"><i class="fab fa-youtube"></i></a>
-            <a href="https://discord.gg/CMxscEUcRd"><i class="fab fa-discord"></i></a>
-            <a href="https://www.tiktok.com/@velocity_racingleague" target="_blank"><i class="fab fa-tiktok"></i></a>
-          </div>
-        </div>
-        <div class="footer-section">
-          <h3>Navigace</h3>
-          <ul>
-            <li><a href="index.html">Domů</a></li>
-            <li><a href="calendar.html">Kalendář</a></li>
-            <li><a href="jezdci.html">Jezdci</a></li>
-            <li><a href="tymy.html">Týmy</a></li>
-            <li><a href="okruh.html">Okruhy</a></li>
-            <li><a href="vysledky.html">Výsledky</a></li>
-            <li><a href="prihlasky.html">Přihlášky</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Organizátoři</h3>
-          <ul>
-            <li><a href="https://www.instagram.com/matyaasko/">Matěj Vaculík</a></li>
-            <li><a href="https://www.instagram.com/beeeeuuuuu/">Maxim Heligr</a></li>
-            <li><a href="https://www.instagram.com/_.duda.o._/">Ondra Duda</a></li>
-            <li><a href="https://www.instagram.com/klabochmartin?igsh=Ym1pN29hNTFmbjBx&utm_source=qr">Martin Klaboch</a></li>
-            <li><a href="https://www.instagram.com/olinkkt/">Oliver Seidl</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="copyright">
-        <p>&copy; 2025 VRL. Všechna práva vyhrazena.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/global.js"></script>
+    <script src="js/global.js"></script>
 </body>
+
 </html>
