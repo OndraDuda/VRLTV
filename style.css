@@ -1,49 +1,42 @@
-/* ===============================================
-   F1 VRL - GLOBAL STYLESHEET
-   Velocity Racing League - Sezóna 2
-   =============================================== */
-
-/* ===== CSS VARIABLES ===== */
 :root {
-    /* Brand Colors */
+
     --f1-red: #FF4242;
     --vrl-blue: #A10404;
     --vrl-purple: #4E0303;
 
-    /* Background Colors */
+
     --dark-bg: #110C0C;
     --light-bg: #110C0C;
-    /* default dark */
 
-    /* Text Colors */
+
+
     --text-light: #FFFFFF;
     --text-dark: #FFFFFF;
-    /* inverted for dark */
 
-    /* Card/Component Colors */
+
+
     --card-bg: #1a1a1a;
     --card-border: #4E0303;
 
-    /* Gradients */
+
     --header-bg: linear-gradient(135deg, #110C0C 0%, #A10404 100%);
 
-    /* Additional Variables */
+
     --track-card-border: #4E0303;
     --bg-page: #121212;
     --bg-card: #1e1e1e;
     --text-color: #ffffff;
     --accent-color: #0077ff;
 
-    /* Tire Colors */
-    --soft-tyre: #FF9999;
-    --medium-tyre: #FFCC99;
-    --hard-tyre: #99CCFF;
+
+    --soft-tyre: #ff0000;
+    --medium-tyre: #ff8000;
+    --hard-tyre: #ffffff;
     --wet-tyre: #6666CC;
     --intermediate-tyre: #66CC66;
 }
 
 
-/* ===== LIGHT THEME ===== */
 [data-theme="light"] {
     --light-bg: #fdfdfd;
     --text-dark: #000000;
@@ -57,7 +50,7 @@
     --accent-color: #c00000;
 }
 
-/* ===== LIGHT THEME HEADER & FOOTER FIX ===== */
+
 body[data-theme="light"] header,
 body[data-theme="light"] nav a,
 body[data-theme="light"] .logo h1,
@@ -69,13 +62,13 @@ body[data-theme="light"] h2,
 body[data-theme="light"] h3 {
     color: #291c1c !important;
     -webkit-text-fill-color: #291c1c !important;
-    /* pro text s gradientem */
+
     background: none !important;
-    /* odstraní gradient */
+
     text-shadow: none !important;
 }
 
-/* ===== LIGHT THEME HEADER, FOOTER & HEADINGS FIX ===== */
+
 body[data-theme="light"] header {
     background: linear-gradient(135deg, #e80808 0%, #f2f2f2 100%) !important;
     color: #291c1c !important;
@@ -92,7 +85,7 @@ body[data-theme="light"] nav a.active {
     color: #000 !important;
 }
 
-/* Footer světlejší */
+
 body[data-theme="light"] footer {
     background-color: #322222 !important;
     color: #222 !important;
@@ -110,7 +103,7 @@ body[data-theme="light"] .footer-section a:hover {
     color: #A10404 !important;
 }
 
-/* Nadpisy ve světlém režimu (jemně tmavé, ne černé) */
+
 body[data-theme="light"] h1,
 body[data-theme="light"] h2,
 body[data-theme="light"] h3,
@@ -122,13 +115,13 @@ body[data-theme="light"] .table-title {
     text-shadow: none !important;
 }
 
-/* Hero nadpis ve světlém režimu – výrazný */
+
 body[data-theme="light"] .hero h1 {
     color: #971a1a !important;
-    /* F1 červená */
+
     -webkit-text-fill-color: #761818 !important;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
-    /* lepší čitelnost */
+
 }
 
 body[data-theme="light"] .theme-switch {
@@ -152,7 +145,7 @@ body[data-theme="light"] .footer-section a:hover {
     color: #A10404 !important;
 }
 
-/* ===== Nadpisy ve světlém režimu ===== */
+
 body[data-theme="light"] h1,
 body[data-theme="light"] h2,
 body[data-theme="light"] h3,
@@ -164,7 +157,7 @@ body[data-theme="light"] .table-title {
     text-shadow: none !important;
 }
 
-/* ===== GLOBAL RESET & BASE STYLES ===== */
+
 * {
     margin: 0;
     padding: 0;
@@ -185,7 +178,7 @@ body {
     margin: 0 auto;
 }
 
-/* ===== HEADER STYLES ===== */
+
 header {
     background: var(--header-bg);
     color: var(--text-light);
@@ -249,7 +242,6 @@ header {
 }
 
 
-/* ===== NAVIGATION STYLES ===== */
 nav ul {
     display: flex;
     list-style: none;
@@ -295,7 +287,7 @@ nav a.active {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    /* mezera mezi logem a textem */
+
     background-color: #5865F2;
     color: white;
     padding: 12px 30px;
@@ -304,14 +296,13 @@ nav a.active {
     font-weight: bold;
     transition: all 0.3s;
     margin-top: 15px;
-    /* odsazení od tlačítka Odeslat */
+
 }
 
 .discord-btn2:hover {
     background-color: #4752c4;
     transform: scale(1.05);
 }
-
 
 .discord-btn i {
     margin-right: 8px;
@@ -332,7 +323,7 @@ nav a.active {
     cursor: pointer;
 }
 
-/* ===== MOBILE HAMBURGER MENU ===== */
+
 .mobile-menu-toggle {
     display: none;
     background: none;
@@ -365,7 +356,7 @@ nav a.active {
     transform: rotate(45deg) translate(-5px, -6px);
 }
 
-/* ===== HERO SECTION ===== */
+
 .hero {
     position: relative;
     height: 500px;
@@ -395,7 +386,6 @@ nav a.active {
     padding: 2rem;
 }
 
-
 .hero h2 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
@@ -408,7 +398,7 @@ nav a.active {
     line-height: 1.6;
 }
 
-/* ===== BUTTONS ===== */
+
 .form-card form {
     text-align: center;
 }
@@ -434,7 +424,7 @@ nav a.active {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* ===== SECTION TITLES ===== */
+
 .section-title {
     text-align: center;
     margin: 3rem 0 2rem;
@@ -464,7 +454,7 @@ nav a.active {
     letter-spacing: 1px;
 }
 
-/* ===== CARDS & COMPONENTS ===== */
+
 .season-info {
     background: var(--card-bg);
     padding: 2rem;
@@ -517,7 +507,7 @@ nav a.active {
     border: 1px solid var(--card-border);
 }
 
-/* ===== RACE CARDS ===== */
+
 .race-card {
     display: flex;
     background: var(--card-bg);
@@ -570,7 +560,7 @@ nav a.active {
     color: var(--vrl-purple);
 }
 
-/* ===== STANDINGS ===== */
+
 .standings-container {
     display: flex;
     justify-content: center;
@@ -632,7 +622,7 @@ nav a.active {
     color: #777;
 }
 
-/* ===== TABLES ===== */
+
 .drivers-table {
     width: 90%;
     max-width: 1000px;
@@ -693,7 +683,7 @@ nav a.active {
     color: var(--vrl-purple);
 }
 
-/* Light Theme Table Styles */
+
 body[data-theme="light"] .drivers-table {
     background-color: #fff;
     color: #000;
@@ -721,7 +711,7 @@ body[data-theme="light"] .drivers-table tbody tr:hover {
     box-shadow: 0 3px 10px rgba(192, 0, 0, 0.2);
 }
 
-/* Dark Theme Table Styles */
+
 body[data-theme="dark"] .drivers-table {
     background-color: #1e1e1e;
     color: #fff;
@@ -803,7 +793,7 @@ body[data-theme="dark"] .drivers-table tr:nth-child(even) td {
     color: var(--vrl-purple);
 }
 
-/* Light Theme Table Styles */
+
 body[data-theme="light"] .teams-table {
     background-color: #fff;
     color: #000;
@@ -831,7 +821,7 @@ body[data-theme="light"] .teams-table tbody tr:hover {
     box-shadow: 0 3px 10px rgba(192, 0, 0, 0.2);
 }
 
-/* Dark Theme Table Styles */
+
 body[data-theme="dark"] .teams-table {
     background-color: #1e1e1e;
     color: #fff;
@@ -853,7 +843,7 @@ body[data-theme="dark"] .teams-table tr:nth-child(even) td {
     background-color: #151515;
 }
 
-/* ===== TRACKS GRID ===== */
+
 .tracks-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -889,7 +879,7 @@ body[data-theme="dark"] .teams-table tr:nth-child(even) td {
     color: var(--f1-red);
 }
 
-/* ===== FORMS ===== */
+
 .form-card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -937,7 +927,7 @@ textarea {
     accent-color: var(--vrl-blue);
 }
 
-/* ===== RESULTS STYLES ===== */
+
 .results {
     background: var(--card-bg, #fff);
     padding: 1.5rem;
@@ -977,7 +967,6 @@ table tr:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
-/* ===== LIVE TIMING STYLES ===== */
 .livetiming-container {
     max-width: 1200px;
     margin: 40px auto;
@@ -1022,7 +1011,6 @@ table tr:nth-child(even) {
     background-color: #F44336;
 }
 
-/* Tire Compound Styles */
 .tyre-soft {
     background-color: var(--soft-tyre) !important;
     color: #000;
@@ -1063,7 +1051,6 @@ table tr:nth-child(even) {
     padding: 3px 8px;
 }
 
-/* Team Color Borders */
 .team-redbull {
     border-left: 4px solid #3671C6;
 }
@@ -1104,7 +1091,7 @@ table tr:nth-child(even) {
     border-left: 4px solid #37BEDD;
 }
 
-/* ===== FOOTER ===== */
+
 footer {
     background-color: #222;
     color: #fff;
@@ -1190,21 +1177,19 @@ body[data-theme="light"] input,
 body[data-theme="light"] textarea,
 body[data-theme="light"] select {
     background: #fff;
-    /* světlé pozadí */
+
     color: #000;
-    /* tmavý text */
+
     border: 1px solid #ccc;
-    /* světlý okraj */
+
 }
 
 
-/* ===== UTILITY CLASSES ===== */
 main {
     margin-bottom: 50px;
 }
 
 
-/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
     header {
         position: fixed;
@@ -1403,7 +1388,7 @@ main {
     }
 }
 
-/* Additional mobile improvements for very small screens */
+
 @media (max-width: 480px) {
     .hero h2 {
         font-size: 2rem;
@@ -1444,7 +1429,7 @@ main {
     }
 }
 
-/* Tablet responsive improvements */
+
 @media (min-width: 769px) and (max-width: 1024px) {
     .container {
         width: 95%;
@@ -1463,43 +1448,43 @@ main {
     }
 }
 
-/* Mobile navigation hide/show */
+
 @media (max-width: 768px) {
     .header-mobile-hide {
         transform: translateY(-100%);
     }
 }
 
-/* ===== RESPONSIVE TABLE ===== */
-/* --- Mobilní verze tabulky jezdců: zobraz jen jméno, body a ztrátu --- */
+
+
 @media (max-width: 768px) {
 
-    /* Schováme nepotřebné sloupce */
+
     .drivers-table th:nth-child(1),
-    /* Pořadí */
+
     .drivers-table td:nth-child(1),
     .drivers-table th:nth-child(2),
-    /* Číslo jezdce */
+
     .drivers-table td:nth-child(2),
     .drivers-table th:nth-child(4),
-    /* Tým */
+
     .drivers-table td:nth-child(4),
     .drivers-table th:nth-child(5),
-    /* Země */
+
     .drivers-table td:nth-child(5),
     .drivers-table th:nth-child(8),
-    /* 1. místa */
+
     .drivers-table td:nth-child(8),
     .drivers-table th:nth-child(9),
-    /* 2. místa */
+
     .drivers-table td:nth-child(9),
     .drivers-table th:nth-child(10),
-    /* 3. místa */
+
     .drivers-table td:nth-child(10) {
         display: none;
     }
 
-    /* Udělej tabulku čitelnější na mobilu */
+
     .drivers-table {
         font-size: 0.9rem;
         width: 100%;
@@ -1512,12 +1497,11 @@ main {
     }
 }
 
-
 @media (max-width: 480px) {
 
     .drivers-table th:nth-child(1),
     .drivers-table td:nth-child(1) {
-        /* Volitelně můžeš skrýt i pozici, pokud je potřeba */
+
         display: none;
     }
 
@@ -1528,7 +1512,7 @@ main {
     }
 }
 
-/* --- Stylování tabulky týmů --- */
+
 .teams-table {
     width: 100%;
     border-collapse: collapse;
@@ -1554,26 +1538,26 @@ main {
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* --- Mobilní verze: zobraz jen Tým, Body a Ztráta --- */
+
 @media (max-width: 768px) {
 
-    /* Skrytí nepotřebných sloupců */
+
     .teams-table th:nth-child(1),
-    /* Pořadí */
+
     .teams-table td:nth-child(1),
     .teams-table th:nth-child(5),
-    /* 1. místa */
+
     .teams-table td:nth-child(5),
     .teams-table th:nth-child(6),
-    /* 2. místa */
+
     .teams-table td:nth-child(6),
     .teams-table th:nth-child(7),
-    /* 3. místa */
+
     .teams-table td:nth-child(7) {
         display: none;
     }
 
-    /* Úprava vzhledu pro přehlednost */
+
     .teams-table {
         font-size: 0.9rem;
     }
@@ -1598,10 +1582,7 @@ main {
     }
 }
 
-/* ============================================================
-   VLASTNÍ STYL PRO TABULKU VÝSLEDKŮ (vysledky.html)
-   Zachovává design ostatních tabulek (drivers-table / teams-table)
-   ============================================================ */
+
 
 .race-results-table {
     width: 90%;
@@ -1618,7 +1599,7 @@ main {
     border: 1px solid var(--card-border);
 }
 
-/* Hlavička tabulky */
+
 .race-results-table th {
     background: linear-gradient(135deg, var(--vrl-blue), var(--vrl-purple));
     color: #fff;
@@ -1628,14 +1609,14 @@ main {
     text-align: center;
 }
 
-/* Buňky */
+
 .race-results-table td {
     padding: 12px 15px;
     text-align: center;
     transition: all 0.3s;
 }
 
-/* Pruhované řádky a hover efekt */
+
 .race-results-table tbody tr:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.03);
 }
@@ -1646,7 +1627,7 @@ main {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Zvýraznění prvních tří míst */
+
 .race-results-table tbody tr:nth-child(1) td:first-child {
     color: #FFD700;
 }
@@ -1659,7 +1640,7 @@ main {
     color: #CD7F32;
 }
 
-/* Light / Dark režim */
+
 body[data-theme="light"] .race-results-table {
     background-color: #fff;
     color: #000;
@@ -1682,19 +1663,13 @@ body[data-theme="dark"] .race-results-table th {
     color: #fff;
 }
 
-/* ================================
-   📱 MOBILNÍ VERZE TABULKY
-   (zobrazí jen Jméno, Tým, Body)
-   ================================ */
+
 @media (max-width: 768px) {
     .race-results-table th:nth-child(1),
     .race-results-table td:nth-child(1),
-    /* Pozice */
-    .race-results-table th:nth-child(4),
-    .race-results-table td:nth-child(4)
 
-    /* Země */
-        {
+    .race-results-table th:nth-child(4),
+    .race-results-table td:nth-child(4) {
         display: none;
     }
 
@@ -1737,7 +1712,7 @@ body[data-theme="dark"] .race-results-table th {
     }
 }
 
-/* ===== FORM FIELD ERROR BUBBLE WITH ARROW ===== */
+
 .field-error-bubble {
     position: relative;
     display: block;
@@ -1763,7 +1738,7 @@ body[data-theme="dark"] .race-results-table th {
     z-index: 20;
 }
 
-/* Šipka pod bublinou */
+
 .field-error-bubble::after {
     content: "";
     position: absolute;
@@ -1780,3 +1755,270 @@ body[data-theme="dark"] .race-results-table th {
 .field-error-bubble.show::after {
     opacity: 1;
 }
+
+/* === NOVINKY / NEWS SECTION === */
+.news-section {
+  margin: 80px auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.news-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(255, 66, 66, 0.25);
+}
+
+.news-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.news-content {
+  padding: 20px;
+}
+
+.news-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: var(--f1-red);
+}
+
+.news-content p {
+  color: var(--text-light);
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+
+.news-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, var(--f1-red), var(--vrl-purple));
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.news-btn:hover {
+  background: linear-gradient(135deg, var(--vrl-blue), var(--vrl-purple));
+  transform: scale(1.05);
+}
+
+/* Responsivní úpravy */
+@media (max-width: 768px) {
+  .news-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .news-content p {
+    font-size: 0.95rem;
+  }
+}
+
+/* === VRL SMP STRÁNKA === */
+
+.smp-hero {
+  position: relative;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(10, 10, 20, 0.9)),
+    url("images/vrl_smp_banner.jpg") center/cover no-repeat;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  border-bottom: 3px solid var(--vrl-accent, #e60023);
+}
+
+.smp-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  text-shadow: 0 0 20px rgba(255, 0, 100, 0.5);
+  font-family: 'Orbitron', sans-serif;
+}
+
+.smp-hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.smp-content {
+  max-width: 950px;
+  margin: 60px auto;
+  padding: 0 20px;
+  color: #ddd;
+}
+
+.smp-article {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+}
+
+.smp-content h2 {
+  color: #fff;
+  border-left: 4px solid var(--vrl-accent, #e60023);
+  padding-left: 10px;
+  margin-top: 40px;
+  margin-bottom: 15px;
+  font-size: 1.6rem;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.smp-content p {
+  line-height: 1.8;
+  margin-bottom: 15px;
+  font-size: 1.05rem;
+}
+
+.smp-content ul {
+  margin-left: 25px;
+  list-style: none;
+}
+
+.smp-content ul li {
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.smp-content ul li::before {
+  content: "•";
+  color: var(--vrl-accent, #e60023);
+  position: absolute;
+  left: -15px;
+  font-size: 1.3rem;
+}
+
+.join-section {
+  text-align: center;
+  margin: 50px 0 30px;
+}
+
+.join-section .btn {
+  background: linear-gradient(135deg, #e60023, #7b2ff7);
+  color: #fff;
+  padding: 12px 40px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.join-section .btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #7b2ff7, #e60023);
+  box-shadow: 0 0 15px rgba(123, 47, 247, 0.4);
+}
+
+.back-btn {
+  display: inline-block;
+  margin: 25px 0 15px;
+  color: #aaa;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.back-btn:hover {
+  color: #fff;
+}
+
+.smp-meta {
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: 30px;
+  text-align: center;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .smp-hero {
+    height: 45vh;
+  }
+
+  .smp-hero h1 {
+    font-size: 2rem;
+  }
+
+  .smp-content {
+    margin: 40px 15px;
+    padding: 20px;
+  }
+
+  .smp-article {
+    padding: 25px;
+  }
+}
+
+/* === VRL SMP STYLING === */
+.news-text {
+  line-height: 1.7;
+  color: var(--text-color);
+  margin-bottom: 3rem;
+}
+
+.news-text h2 {
+  margin-top: 3rem;         /* větší mezera před nadpisem */
+  margin-bottom: 1rem;      /* menší mezera pod nadpisem */
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  border-left: 4px solid var(--accent-color);
+  padding-left: 10px;
+}
+
+.news-text p {
+  margin-bottom: 1.2rem;    /* mezery mezi odstavci */
+}
+
+.news-text ul {
+  margin: 1rem 0 2rem 1.5rem;  /* mezery mezi sekcemi s odrážkami */
+  list-style-type: none;
+}
+
+.news-text ul li {
+  margin-bottom: 0.6rem;
+  padding-left: 1.6rem;
+  position: relative;
+}
+
+.news-text ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+.join-section {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.join-section .btn {
+  font-size: 1.1rem;
+  padding: 0.8rem 1.6rem;
+}
+
