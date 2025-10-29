@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <img src="vrl_high_res.png" alt=" VRL Logo" class="logo-img">
+                    <a href="index.html">
+                        <img src="vrl_high_res.png" alt="F1 VRL Logo" class="logo-img">
+                    </a>
                 </div>
                 <div class="header-controls">
                     <button class="theme-switch" id="themeSwitch">
@@ -33,7 +37,8 @@
                         <li><a href="okruh.html">Okruhy</a></li>
                         <li><a href="vysledky.html">Výsledky</a></li>
                         <li><a href="prihlasky.html">Příhlášky</a></li>
-                        <li><a href="https://discord.gg/CMxscEUcRd" class="discord-btn"><i class="fab fa-discord"></i> Discord</a></li>
+                        <li><a href="https://discord.gg/CMxscEUcRd" class="discord-btn"><i class="fab fa-discord"></i>
+                                Discord</a></li>
                     </ul>
                 </nav>
             </div>
@@ -44,31 +49,35 @@
         <div class="hero-fade"></div>
         <div class="container">
             <div class="hero-content">
-                <h2>Velocity Racing League</h2> 
+                <h2>Velocity Racing League</h2>
                 <p>Prozkoumej kalendář naších závodů</p>
                 <div>
-                    <a href="https://discord.gg/CMxscEUcRd" class="btn"><i class="fab fa-discord"></i> Připojit se na Discord</a>
+                    <a href="https://discord.gg/CMxscEUcRd" class="btn"><i class="fab fa-discord"></i> Připojit se na
+                        Discord</a>
                 </div>
             </div>
         </div>
     </section>
 
-        <h2 class="section-title">KALENDÁŘ ZÁVODŮ - SEZÓNA 2</h2>
-        <section class="calendar" id="calendar">
-            <!-- JavaScript naplní kalendář -->
-        </section>
+    <h2 class="section-title">KALENDÁŘ ZÁVODŮ - SEZÓNA 2</h2>
+    <section class="calendar" id="calendar">
+        <!-- JavaScript naplní kalendář -->
+    </section>
 
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>VRL</h3>
-                    <p>Virtuální závodní liga pro nadšence Formule 1. Připoj se k nám a zažij motorsport z pohodlí domova.</p>
+                    <p>Virtuální závodní liga pro nadšence Formule 1. Připoj se k nám a zažij motorsport z pohodlí
+                        domova.</p>
                     <div class="social-icons">
-                        <a href="https://www.instagram.com/vrl_velocityracingleague/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/vrl_velocityracingleague/"><i
+                                class="fab fa-instagram"></i></a>
                         <a href="https://www.youtube.com/@Velocity_Racing_League_VRL"><i class="fab fa-youtube"></i></a>
                         <a href="https://discord.gg/CMxscEUcRd"><i class="fab fa-discord"></i></a>
-                        <a href="https://www.tiktok.com/@velocity_racingleague" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.tiktok.com/@velocity_racingleague" target="_blank"><i
+                                class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
@@ -89,7 +98,8 @@
                         <li><a href="https://www.instagram.com/matyaasko/">Matěj Vaculík</a></li>
                         <li><a href="https://www.instagram.com/beeeeuuuuu/">Maxim Heligr</a></li>
                         <li><a href="https://www.instagram.com/_.duda.o._/">Ondra Duda</a></li>
-                        <li><a href="https://www.instagram.com/klabochmartin?igsh=Ym1pN29hNTFmbjBx&utm_source=qr">Martin Klaboch</a></li>
+                        <li><a href="https://www.instagram.com/klabochmartin?igsh=Ym1pN29hNTFmbjBx&utm_source=qr">Martin
+                                Klaboch</a></li>
                         <li><a href="https://www.instagram.com/olinkkt/">Oliver Seidl</a></li>
                     </ul>
                 </div>
@@ -103,7 +113,7 @@
 
     <script src="js/global.js"></script>
     <script>
-        
+
         // Data pro závody VRL ligy
         const races = [
             { round: "R1", name: "Austrálie", date: "9.9.2025", track: "Melbourne Grand Prix Circuit" },
@@ -112,22 +122,22 @@
             { round: "R4", name: "Miami", date: "7.10.2025", track: "Miami International Autodrome" },
             { round: "R5", name: "Imola", date: "14.10.2025", track: "Autodromo Enzo e Dino Ferrari" },
             { round: "R6", name: "Ázerbájdžán", date: "21.10.2025", track: "Baku City Circuit" },
-            
+
             { round: "R7", name: "Japonsko", date: "4.11.2025", track: "Suzuka International Racing Course" },
             { round: "R8", name: "Kanada", date: "11.11.2025", track: "Circuit Gilles Villeneuve" },
             { round: "R9", name: "Singapur", date: "18.11.2025", track: "Marina Bay Street Circuit" },
             { round: "R10", name: "Belgie", date: "2.12.2025", track: "Circuit de Spa-Francorchamps" },
             { round: "R11", name: "Španělsko", date: "16.12.2025", track: "Circuit de Barcelona-Catalunya" },
-            
+
             { round: "R12", name: "Mexiko", date: "6.1.2026", track: "Autódromo Hermanos Rodríguez" },
             { round: "R13", name: "Brazílie", date: "20.1.2026", track: "Autódromo José Carlos Pace" },
             { round: "R14", name: "USA", date: "3.2.2026", track: "Circuit of the Americas" },
-            
+
             { round: "R15", name: "Rakousko (Reverse Sprint)", date: "17.2.2026", track: "Red Bull Ring" },
             { round: "R16", name: "Monako", date: "3.3.2026", track: "Circuit de Monaco" },
             { round: "R17", name: "Itálie", date: "10.3.2026", track: "Autodromo Nazionale Monza" },
             { round: "R18", name: "Maďarsko", date: "24.3.2026", track: "Hungaroring" },
-            
+
             { round: "R19", name: "Katar", date: "7.4.2026", track: "Losail International Circuit" },
             { round: "R20", name: "Saudská Arábie", date: "21.4.2026", track: "Jeddah Corniche Circuit" },
             { round: "R21", name: "Abu Dhabi", date: "28.4.2026", track: "Yas Marina Circuit" }
@@ -137,11 +147,11 @@
         function populateCalendar() {
             const calendar = document.getElementById('calendar');
             calendar.innerHTML = '';
-            
+
             races.forEach(race => {
                 const raceCard = document.createElement('div');
                 raceCard.className = 'race-card';
-                
+
                 raceCard.innerHTML = `
                     <div class="race-date">
                         <div class="race-round">${race.round}</div>
@@ -153,7 +163,7 @@
                         <p>19:00 | Krátká kvalifikace | 50 % Závod</p>
                     </div>
                 `;
-                
+
                 calendar.appendChild(raceCard);
             });
         }
@@ -166,5 +176,3 @@
 </body>
 
 </html>
-
-
