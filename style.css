@@ -829,7 +829,7 @@ body[data-theme="dark"] .teams-table {
 }
 
 body[data-theme="dark"] .teams-table th {
-    background-color: #333;
+    background: linear-gradient(135deg, var(--vrl-blue), var(--vrl-purple));
     color: #fff;
 }
 
