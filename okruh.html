@@ -35,7 +35,7 @@
                         <li><a href="calendar.html">Kalendář</a></li>
                         <li><a href="jezdci.html">Jezdci</a></li>
                         <li><a href="tymy.html">Týmy</a></li>
-                        <li><a href="okruh.html">Okruhy</a></li>
+                        <li><a href="okruh.html" class="active">Okruhy</a></li>
                         <li><a href="vysledky.html">Výsledky</a></li>
                         <li><a href="prihlasky.html">Příhlášky</a></li>
                         <li><a href="https://discord.gg/CMxscEUcRd" class="discord-btn"><i class="fab fa-discord"></i>
@@ -114,49 +114,50 @@
 
     <script>
         const tracks = [
-            { round: "R1", name: "Melbourne Grand Prix Circuit", country: "Austrálie", length: "5.303 km", laps: 29 },
-            { round: "R2", name: "Silverstone Circuit", country: "Velká Británie", length: "5.891 km", laps: 26 },
-            { round: "R3", name: "Bahrain International Circuit", country: "Bahrajn", length: "5.412 km", laps: 29 },
-            { round: "R4", name: "Miami International Autodrome", country: "USA", length: "5.412 km", laps: 28 },
-            { round: "R5", name: "Autodromo Enzo e Dino Ferrari (Imola)", country: "Itálie", length: "4.909 km", laps: 31 },
+            { round: "R1", name: "Melbourne Grand Prix Circuit", country: "Austrálie", length: "5.303 km", laps: 29, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Australia_Circuit.png.transform/4col/image.png" },
+            { round: "R2", name: "Silverstone Circuit", country: "Velká Británie", length: "5.891 km", laps: 26, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Great_Britain_Circuit.png.transform/4col/image.png" },
+            { round: "R3", name: "Bahrain International Circuit", country: "Bahrajn", length: "5.412 km", laps: 29, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Bahrain_Circuit.png.transform/4col/image.png" },
+            { round: "R4", name: "Miami International Autodrome", country: "USA", length: "5.412 km", laps: 28, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Miami_Circuit.png.transform/4col/image.png" },
+            { round: "R5", name: "Autodromo Enzo e Dino Ferrari (Imola)", country: "Itálie", length: "4.909 km", laps: 31, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Emilia_Romagna_Circuit.png.transform/4col/image.png" },
 
-            { round: "R6", name: "Baku City Circuit", country: "Ázerbájdžán", length: "6.003 km", laps: 26 },
-            { round: "R7", name: "Suzuka International Racing Course", country: "Japonsko", length: "5.807 km", laps: 25 },
-            { round: "R8", name: "Circuit Gilles Villeneuve", country: "Kanada", length: "4.361 km", laps: 35 },
-            { round: "R9", name: "Marina Bay Street Circuit", country: "Singapur", length: "4.940 km", laps: 30 },
-            { round: "R10", name: "Circuit de Spa-Francorchamps", country: "Belgie", length: "7.004 km", laps: 22 },
-            { round: "R11", name: "Circuit de Barcelona-Catalunya", country: "Španělsko", length: "4.675 km", laps: 33 },
+            { round: "R6", name: "Baku City Circuit", country: "Ázerbájdžán", length: "6.003 km", laps: 26, map: "https://media.formula1.com/image/upload/c_fit,h_704/q_auto/v1740000000/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Baku_Circuit.webp" },
+            { round: "R7", name: "Suzuka International Racing Course", country: "Japonsko", length: "5.807 km", laps: 25, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Japan_Circuit.png.transform/4col/image.png" },
+            { round: "R8", name: "Circuit Gilles Villeneuve", country: "Kanada", length: "4.361 km", laps: 35, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Canada_Circuit.png.transform/4col/image.png" },
+            { round: "R9", name: "Marina Bay Street Circuit", country: "Singapur", length: "4.940 km", laps: 30, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Singapore_Circuit.png.transform/4col/image.png" },
+            { round: "R10", name: "Circuit de Spa-Francorchamps", country: "Belgie", length: "7.004 km", laps: 22, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Belgium_Circuit.png.transform/4col/image.png" },
+            { round: "R11", name: "Circuit de Barcelona-Catalunya", country: "Španělsko", length: "4.675 km", laps: 33, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Spain_Circuit.png.transform/4col/image.png" },
 
-            { round: "R12", name: "Autódromo Hermanos Rodríguez", country: "Mexiko", length: "4.304 km", laps: 35 },
-            { round: "R13", name: "Autódromo José Carlos Pace (Interlagos)", country: "Brazílie", length: "4.309 km", laps: 35 },
-            { round: "R14", name: "Circuit of the Americas", country: "USA", length: "5.513 km", laps: 28 },
+            { round: "R12", name: "Autódromo Hermanos Rodríguez", country: "Mexiko", length: "4.304 km", laps: 35, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Mexico_Circuit.png.transform/4col/image.png" },
+            { round: "R13", name: "Autódromo José Carlos Pace (Interlagos)", country: "Brazílie", length: "4.309 km", laps: 35, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Brazil_Circuit.png.transform/4col/image.png" },
+            { round: "R14", name: "Circuit of the Americas", country: "USA", length: "5.513 km", laps: 28, map: "https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/USA_Circuit.webp" },
 
-            { round: "R15", name: "Red Bull Ring", country: "Rakousko", length: "4.318 km", laps: 36 },
-            { round: "R16", name: "Circuit de Monaco", country: "Monako", length: "3.337 km", laps: 39 },
-            { round: "R17", name: "Autodromo Nazionale Monza", country: "Itálie", length: "5.793 km", laps: 27 },
-            { round: "R18", name: "Hungaroring", country: "Maďarsko", length: "4.381 km", laps: 35 },
+            { round: "R15", name: "Red Bull Ring", country: "Rakousko", length: "4.318 km", laps: 36, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Austria_Circuit.png.transform/4col/image.png" },
+            { round: "R16", name: "Circuit de Monaco", country: "Monako", length: "3.337 km", laps: 39, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Monaco_Circuit.png.transform/4col/image.png" },
+            { round: "R17", name: "Autodromo Nazionale Monza", country: "Itálie", length: "5.793 km", laps: 27, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Italy_Circuit.png.transform/4col/image.png" },
+            { round: "R18", name: "Hungaroring", country: "Maďarsko", length: "4.381 km", laps: 35, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Hungary_Circuit.png.transform/4col/image.png" },
 
-            { round: "R19", name: "Losail International Circuit", country: "Katar", length: "5.419 km", laps: 29 },
-            { round: "R20", name: "Jeddah Corniche Circuit", country: "Saudská Arábie", length: "6.174 km", laps: 25 },
-            { round: "R21", name: "Yas Marina Circuit", country: "Abu Dhabi", length: "5.281 km", laps: 29 }
+            { round: "R19", name: "Losail International Circuit", country: "Katar", length: "5.419 km", laps: 29, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Qatar_Circuit.png.transform/4col/image.png" },
+            { round: "R20", name: "Jeddah Corniche Circuit", country: "Saudská Arábie", length: "6.174 km", laps: 25, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Saudi_Arabia_Circuit.png.transform/4col/image.png" },
+            { round: "R21", name: "Yas Marina Circuit", country: "Abu Dhabi", length: "5.281 km", laps: 29, map: "https://media.formula1.com/image/upload/f_auto/q_auto/v1677244985/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Abu_Dhabi_Circuit.png.transform/4col/image.png" }
         ];
-
 
         const container = document.getElementById("tracksGrid");
         tracks.forEach(track => {
             const card = document.createElement("div");
             card.className = "track-card";
             card.innerHTML = `
-            <div class="track-info">
-                <h3>${track.name}</h3>
-                <p><strong>Země:</strong> ${track.country}</p>
-                <p><strong>Délka:</strong> ${track.length}</p>
-                <p><strong>Počet kol:</strong> ${track.laps}</p>
-            </div>
+                <div class="track-image">
+                    <img src="${track.map}" alt="Mapa tratě ${track.name}" loading="lazy">
+                </div>
+                <div class="track-info">
+                    <h3>${track.name}</h3>
+                    <p><strong>Země:</strong> ${track.country}</p>
+                    <p><strong>Délka:</strong> ${track.length}</p>
+                    <p><strong>Počet kol:</strong> ${track.laps}</p>
+                </div>
             `;
             container.appendChild(card);
         });
-
     </script>
     <script src="js/global.js"></script>
 </body>
