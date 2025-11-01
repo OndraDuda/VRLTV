@@ -1021,16 +1021,45 @@ table tr:nth-child(even) {
     padding: 3px 8px;
 }
 
-.team-redbull { border-left: 4px solid #3671C6; }
-.team-ferrari { border-left: 4px solid #F91536; }
-.team-mercedes { border-left: 4px solid #27F4D2; }
-.team-mclaren { border-left: 4px solid #F58020; }
-.team-alpine { border-left: 4px solid #2293D1; }
-.team-aston-martin { border-left: 4px solid #358C75; }
-.team-alfaromeo { border-left: 4px solid #C92D4B; }
-.team-haas { border-left: 4px solid #B6BABD; }
-.team-alphatauri { border-left: 4px solid #5E8FAA; }
-.team-williams { border-left: 4px solid #37BEDD; }
+.team-redbull {
+    border-left: 4px solid #3671C6;
+}
+
+.team-ferrari {
+    border-left: 4px solid #F91536;
+}
+
+.team-mercedes {
+    border-left: 4px solid #27F4D2;
+}
+
+.team-mclaren {
+    border-left: 4px solid #F58020;
+}
+
+.team-alpine {
+    border-left: 4px solid #2293D1;
+}
+
+.team-aston-martin {
+    border-left: 4px solid #358C75;
+}
+
+.team-alfaromeo {
+    border-left: 4px solid #C92D4B;
+}
+
+.team-haas {
+    border-left: 4px solid #B6BABD;
+}
+
+.team-alphatauri {
+    border-left: 4px solid #5E8FAA;
+}
+
+.team-williams {
+    border-left: 4px solid #37BEDD;
+}
 
 footer {
     background-color: var(--footer-bg);
@@ -1388,6 +1417,7 @@ main {
 }
 
 @media (max-width: 768px) {
+
     .drivers-table th:nth-child(1),
     .drivers-table td:nth-child(1),
     .drivers-table th:nth-child(2),
@@ -1418,6 +1448,7 @@ main {
 }
 
 @media (max-width: 480px) {
+
     .drivers-table th:nth-child(1),
     .drivers-table td:nth-child(1) {
         display: none;
@@ -1456,6 +1487,7 @@ main {
 }
 
 @media (max-width: 768px) {
+
     .teams-table th:nth-child(1),
     .teams-table td:nth-child(1),
     .teams-table th:nth-child(5),
@@ -1566,6 +1598,7 @@ body[data-theme="dark"] .race-results-table th {
 }
 
 @media (max-width: 768px) {
+
     .race-results-table th:nth-child(1),
     .race-results-table td:nth-child(1),
     .race-results-table th:nth-child(4),
@@ -1655,264 +1688,264 @@ body[data-theme="dark"] .race-results-table th {
 }
 
 .news-section {
-  margin: 80px auto;
-  max-width: 1200px;
-  padding: 0 20px;
+    margin: 80px auto;
+    max-width: 1200px;
+    padding: 0 20px;
 }
 
 .news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
 }
 
 .news-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  display: flex;
-  flex-direction: column;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .news-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 25px rgba(255, 66, 66, 0.25);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(255, 66, 66, 0.25);
 }
 
 .news-img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 }
 
 .news-content {
-  padding: 20px;
+    padding: 20px;
 }
 
 .news-content h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: var(--f1-red);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--f1-red);
 }
 
 .news-content p {
-  color: var(--text-light);
-  opacity: 0.85;
-  margin-bottom: 20px;
+    color: var(--text-light);
+    opacity: 0.85;
+    margin-bottom: 20px;
 }
 
 .news-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  border-radius: 25px;
-  background: linear-gradient(135deg, var(--f1-red), var(--vrl-purple));
-  color: var(--text-light);
-  text-decoration: none;
-  font-weight: bold;
-  transition: all 0.3s ease;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, var(--f1-red), var(--vrl-purple));
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
 }
 
 .news-btn:hover {
-  background: linear-gradient(135deg, var(--vrl-blue), var(--vrl-purple));
-  transform: scale(1.05);
+    background: linear-gradient(135deg, var(--vrl-blue), var(--vrl-purple));
+    transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
-  .news-content h3 {
-    font-size: 1.2rem;
-  }
+    .news-content h3 {
+        font-size: 1.2rem;
+    }
 
-  .news-content p {
-    font-size: 0.95rem;
-  }
+    .news-content p {
+        font-size: 0.95rem;
+    }
 }
 
 .smp-hero {
-  position: relative;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(10, 10, 20, 0.9)),
-    url("images/vrl_smp_banner.jpg") center/cover no-repeat;
-  height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--text-light);
-  border-bottom: 3px solid var(--accent-color);
+    position: relative;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(10, 10, 20, 0.9)),
+        url("images/vrl_smp_banner.jpg") center/cover no-repeat;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-light);
+    border-bottom: 3px solid var(--accent-color);
 }
 
 .smp-hero h1 {
-  font-size: 3rem;
-  margin-bottom: 10px;
-  text-shadow: 0 0 20px rgba(255, 0, 100, 0.5);
-  font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(255, 0, 100, 0.5);
+    font-family: 'Orbitron', sans-serif;
 }
 
 .smp-hero p {
-  font-size: 1.2rem;
-  opacity: 0.9;
+    font-size: 1.2rem;
+    opacity: 0.9;
 }
 
 .smp-content {
-  max-width: 950px;
-  margin: 60px auto;
-  padding: 0 20px;
-  color: var(--footer-text);
+    max-width: 950px;
+    margin: 60px auto;
+    padding: 0 20px;
+    color: var(--footer-text);
 }
 
 .smp-article {
-  background: rgba(255, 255, 255, 0.03);
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(6px);
 }
 
 .smp-content h2 {
-  color: var(--text-light);
-  border-left: 4px solid var(--accent-color);
-  padding-left: 10px;
-  margin-top: 40px;
-  margin-bottom: 15px;
-  font-size: 1.6rem;
-  font-family: 'Orbitron', sans-serif;
+    color: var(--text-light);
+    border-left: 4px solid var(--accent-color);
+    padding-left: 10px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    font-size: 1.6rem;
+    font-family: 'Orbitron', sans-serif;
 }
 
 .smp-content p {
-  line-height: 1.8;
-  margin-bottom: 15px;
-  font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-size: 1.05rem;
 }
 
 .smp-content ul {
-  margin-left: 25px;
-  list-style: none;
+    margin-left: 25px;
+    list-style: none;
 }
 
 .smp-content ul li {
-  margin-bottom: 10px;
-  position: relative;
+    margin-bottom: 10px;
+    position: relative;
 }
 
 .smp-content ul li::before {
-  content: "•";
-  color: var(--accent-color);
-  position: absolute;
-  left: -15px;
-  font-size: 1.3rem;
+    content: "•";
+    color: var(--accent-color);
+    position: absolute;
+    left: -15px;
+    font-size: 1.3rem;
 }
 
 .join-section {
-  text-align: center;
-  margin: 50px 0 30px;
+    text-align: center;
+    margin: 50px 0 30px;
 }
 
 .join-section .btn {
-  background: linear-gradient(135deg, var(--accent-color), var(--vrl-purple));
-  color: var(--text-light);
-  padding: 12px 40px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
+    background: linear-gradient(135deg, var(--accent-color), var(--vrl-purple));
+    color: var(--text-light);
+    padding: 12px 40px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
 }
 
 .join-section .btn:hover {
-  transform: scale(1.05);
-  background: linear-gradient(135deg, var(--vrl-purple), var(--accent-color));
-  box-shadow: 0 0 15px rgba(123, 47, 247, 0.4);
+    transform: scale(1.05);
+    background: linear-gradient(135deg, var(--vrl-purple), var(--accent-color));
+    box-shadow: 0 0 15px rgba(123, 47, 247, 0.4);
 }
 
 .back-btn {
-  display: inline-block;
-  margin: 25px 0 15px;
-  color: var(--footer-text);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
+    display: inline-block;
+    margin: 25px 0 15px;
+    color: var(--footer-text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
 }
 
 .back-btn:hover {
-  color: var(--text-light);
+    color: var(--text-light);
 }
 
 .smp-meta {
-  font-size: 0.9rem;
-  color: var(--footer-text);
-  margin-bottom: 30px;
-  text-align: center;
-  font-style: italic;
+    font-size: 0.9rem;
+    color: var(--footer-text);
+    margin-bottom: 30px;
+    text-align: center;
+    font-style: italic;
 }
 
 @media (max-width: 768px) {
-  .smp-hero {
-    height: 45vh;
-  }
+    .smp-hero {
+        height: 45vh;
+    }
 
-  .smp-hero h1 {
-    font-size: 2rem;
-  }
+    .smp-hero h1 {
+        font-size: 2rem;
+    }
 
-  .smp-content {
-    margin: 40px 15px;
-    padding: 20px;
-  }
+    .smp-content {
+        margin: 40px 15px;
+        padding: 20px;
+    }
 
-  .smp-article {
-    padding: 25px;
-  }
+    .smp-article {
+        padding: 25px;
+    }
 }
 
 .news-text {
-  line-height: 1.7;
-  color: var(--text-color);
-  margin-bottom: 3rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    margin-bottom: 3rem;
 }
 
 .news-text h2 {
-  margin-top: 3rem;
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--accent-color);
-  border-left: 4px solid var(--accent-color);
-  padding-left: 10px;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    border-left: 4px solid var(--accent-color);
+    padding-left: 10px;
 }
 
 .news-text p {
-  margin-bottom: 1.2rem;
+    margin-bottom: 1.2rem;
 }
 
 .news-text ul {
-  margin: 1rem 0 2rem 1.5rem;
-  list-style-type: none;
+    margin: 1rem 0 2rem 1.5rem;
+    list-style-type: none;
 }
 
 .news-text ul li {
-  margin-bottom: 0.6rem;
-  padding-left: 1.6rem;
-  position: relative;
+    margin-bottom: 0.6rem;
+    padding-left: 1.6rem;
+    position: relative;
 }
 
 .news-text ul li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: var(--accent-color);
-  font-weight: bold;
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-weight: bold;
 }
 
 .join-section {
-  text-align: center;
-  margin-top: 3rem;
+    text-align: center;
+    margin-top: 3rem;
 }
 
 .join-section .btn {
-  font-size: 1.1rem;
-  padding: 0.8rem 1.6rem;
+    font-size: 1.1rem;
+    padding: 0.8rem 1.6rem;
 }
 
 /* Opravy pro světlý režim - novinky a tabulky */
@@ -1936,4 +1969,170 @@ body[data-theme="light"] .race-results-table tbody tr:nth-child(2) td:first-chil
 body[data-theme="light"] .race-results-table tbody tr:nth-child(3) td:first-child {
     color: var(--text-dark) !important;
     font-weight: bold;
+}
+
+/* Styly pro oblíbeného jezdce */
+.favorite-driver-section {
+    background: linear-gradient(135deg, var(--vrl-blue) 0%, var(--vrl-purple) 100%);
+    color: var(--text-light);
+    padding: 2rem;
+    margin: 2rem auto;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 1000px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.favorite-driver-card {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.favorite-driver-info {
+    flex: 1;
+}
+
+.favorite-driver-name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+.favorite-driver-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.favorite-driver-detail {
+    text-align: center;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.favorite-driver-detail div:first-child {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 0.3rem;
+}
+
+.favorite-driver-detail div:last-child {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-light);
+}
+
+.driver-selector {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.driver-selector select {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    min-width: 300px;
+    cursor: pointer;
+    border: 1px solid var(--card-border);
+}
+
+.favorite-badge {
+    background: var(--gold);
+    color: #000;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+/* Zvýraznění oblíbeného jezdce v tabulce */
+.drivers-table tbody tr.favorite-driver-row {
+    background: rgba(139, 69, 19, 0.1);
+    border-left: 4px solid var(--vrl-blue);
+}
+
+.drivers-table tbody tr.favorite-driver-row:hover {
+    background: rgba(139, 69, 19, 0.2);
+    transform: translateX(5px);
+}
+
+.drivers-table tbody tr.favorite-driver-row td:nth-child(3)::after {
+    content: " ⭐";
+    color: var(--gold);
+}
+
+@media (max-width: 768px) {
+    .favorite-driver-section {
+        width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .favorite-driver-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .driver-selector select {
+        min-width: 250px;
+        width: 90%;
+    }
+    
+    .favorite-driver-name {
+        font-size: 1.5rem;
+    }
+    
+    .favorite-driver-details {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+}
+
+/* Styly pro světlý režim */
+[data-theme="light"] .favorite-driver-section {
+    background: linear-gradient(135deg, var(--accent-color) 0%, #f5f5f5 100%);
+    color: var(--text-dark);
+}
+
+[data-theme="light"] .favorite-driver-card {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="light"] .favorite-driver-name {
+    color: var(--text-dark);
+}
+
+[data-theme="light"] .favorite-driver-detail {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="light"] .favorite-driver-detail div:last-child {
+    color: var(--text-dark);
+}
+
+[data-theme="light"] .driver-selector select {
+    background: var(--card-bg);
+    color: var(--text-dark);
+    border: 1px solid var(--card-border);
+}
+
+[data-theme="light"] .drivers-table tbody tr.favorite-driver-row {
+    background: rgba(211, 47, 47, 0.1);
+    border-left: 4px solid var(--accent-color);
+}
+
+[data-theme="light"] .drivers-table tbody tr.favorite-driver-row:hover {
+    background: rgba(211, 47, 47, 0.2);
 }
