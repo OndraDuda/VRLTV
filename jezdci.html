@@ -4,12 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <head>
-        <title>VRL - Velocity Racing League - Season 2</title>
-        <link rel="icon" type="image/png" href="VRL_logo_nove.png">
-    </head>
-
+    <title>VRL - Velocity Racing League - Season 2</title>
+    <link rel="icon" type="image/png" href="VRL_logo_nove.png">
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -63,7 +60,7 @@
         <div class="container">
             <div class="hero-content">
                 <h2>Velocity Racing League</h2>
-                <p>Zjisti jak na tom jsou tvoji oblíbení jezdci.</p>
+                <p>Zjisti jak to jde naším jezdcům a taky tvým oblíbeným jezdcům.</p>
                 <div>
                     <a href="https://discord.gg/CMxscEUcRd" class="btn"><i class="fab fa-discord"></i> Připojit se na
                         Discord</a>
@@ -74,6 +71,51 @@
 
     <!-- MAIN -->
     <main>
+        <!-- SEKCHE PRO OBLÍBENÉHO JEZDCE -->
+         <h2 class="table-title">Oblíbený jezdec</h2>
+        <section class="favorite-driver-section">
+            <div class="driver-selector">
+                <select id="favoriteDriverSelect">
+                    <option value="">Vyberte svého oblíbeného jezdce</option>
+                </select>
+            </div>
+            
+            <div id="favoriteDriverCard" class="favorite-driver-card" style="display: none;">
+                <div class="favorite-driver-info">
+                    <div class="favorite-driver-name">
+                        <span id="favDriverName"></span>
+                        <span class="favorite-badge">OBLÍBENÝ</span>
+                    </div>
+                    <div>Tým: <strong id="favDriverTeam"></strong></div>
+                    <div>Číslo: <strong id="favDriverNumber"></strong></div>
+                    <div>Země: <span id="favDriverCountry"></span></div>
+                    
+                    <div class="favorite-driver-details">
+                        <div class="favorite-driver-detail">
+                            <div>Pořadí</div>
+                            <div><strong id="favDriverPosition"></strong></div>
+                        </div>
+                        <div class="favorite-driver-detail">
+                            <div>Body</div>
+                            <div><strong id="favDriverPoints"></strong></div>
+                        </div>
+                        <div class="favorite-driver-detail">
+                            <div>1. místa</div>
+                            <div><strong id="favDriverWins"></strong></div>
+                        </div>
+                        <div class="favorite-driver-detail">
+                            <div>2. místa</div>
+                            <div><strong id="favDriverSecond"></strong></div>
+                        </div>
+                        <div class="favorite-driver-detail">
+                            <div>3. místa</div>
+                            <div><strong id="favDriverThird"></strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <h2 class="table-title">Pořadí jezdců</h2>
         <table class="drivers-table">
             <thead>
@@ -84,7 +126,7 @@
                     <th>Tým</th>
                     <th>Země</th>
                     <th>Body</th>
-                    <th>Ztráta</th> <!-- nový sloupec -->
+                    <th>Ztráta</th>
                     <th>1. místa</th>
                     <th>2. místa</th>
                     <th>3. místa</th>
@@ -171,8 +213,68 @@
             { number: 67, name: "Alex Výplach", team: "Záloha", country: "cz", points: 0, wins: 0, second: 0, third: 0 }
         ];
 
+        // Naplníme select s jezdci
+        const favoriteSelect = document.getElementById('favoriteDriverSelect');
+        drivers.forEach(driver => {
+            const option = document.createElement('option');
+            option.value = driver.number;
+            option.textContent = `${driver.number} - ${driver.name} (${driver.team})`;
+            favoriteSelect.appendChild(option);
+        });
 
-        // Seřadit podle bodů (a pokud shoda, tak podle výher)
+        // Funkce pro zobrazení oblíbeného jezdce
+        function displayFavoriteDriver(driverNumber) {
+            const driver = drivers.find(d => d.number == driverNumber);
+            if (!driver) return;
+
+            // Najdeme pozici jezdce v pořadí
+            const sortedDrivers = [...drivers].sort((a, b) => {
+                if (b.points !== a.points) return b.points - a.points;
+                if (b.wins !== a.wins) return b.wins - a.wins;
+                if (b.second !== a.second) return b.second - a.second;
+                return b.third - a.third;
+            });
+            
+            const position = sortedDrivers.findIndex(d => d.number == driverNumber) + 1;
+            const leaderPoints = sortedDrivers[0].points;
+            const loss = leaderPoints - driver.points;
+
+            // Naplníme data do karty
+            document.getElementById('favDriverName').textContent = driver.name;
+            document.getElementById('favDriverTeam').textContent = driver.team;
+            document.getElementById('favDriverNumber').textContent = driver.number;
+            document.getElementById('favDriverCountry').innerHTML = `<span class="fi fi-${driver.country}"></span>`;
+            document.getElementById('favDriverPosition').textContent = position + '. místo';
+            document.getElementById('favDriverPoints').textContent = driver.points;
+            document.getElementById('favDriverWins').textContent = driver.wins;
+            document.getElementById('favDriverSecond').textContent = driver.second;
+            document.getElementById('favDriverThird').textContent = driver.third;
+
+            // Zobrazíme kartu
+            document.getElementById('favoriteDriverCard').style.display = 'flex';
+
+            // Uložíme do localStorage
+            localStorage.setItem('favoriteDriver', driverNumber);
+        }
+
+        // Event listener pro změnu výběru
+        favoriteSelect.addEventListener('change', function() {
+            if (this.value) {
+                displayFavoriteDriver(this.value);
+            } else {
+                document.getElementById('favoriteDriverCard').style.display = 'none';
+                localStorage.removeItem('favoriteDriver');
+            }
+        });
+
+        // Načtení uloženého oblíbeného jezdce při startu
+        const savedFavorite = localStorage.getItem('favoriteDriver');
+        if (savedFavorite) {
+            favoriteSelect.value = savedFavorite;
+            displayFavoriteDriver(savedFavorite);
+        }
+
+        // Vykreslení hlavní tabulky
         drivers.sort((a, b) => {
             if (b.points !== a.points) return b.points - a.points;
             if (b.wins !== a.wins) return b.wins - a.wins;
@@ -180,30 +282,33 @@
             return b.third - a.third;
         });
 
-        // Nejlepší jezdec má nejvíc bodů
         const leaderPoints = drivers[0].points;
-
         const table = document.getElementById("driversTable");
 
         drivers.forEach((driver, index) => {
-            const loss = leaderPoints - driver.points; // ztráta na lídra
+            const loss = leaderPoints - driver.points;
+            const isFavorite = driver.number == savedFavorite;
+            
             const row = document.createElement("tr");
+            if (isFavorite) {
+                row.style.background = 'rgba(255, 215, 0, 0.1)';
+                row.style.fontWeight = 'bold';
+            }
+            
             row.innerHTML = `
-            <td><strong>${index + 1}</strong></td>
-            <td>${driver.number}</td>
-            <td>${driver.name}</td>
-            <td>${driver.team}</td>
-            <td><span class="fi fi-${driver.country}"></span></td>
-            <td><strong>${driver.points}</strong></td>
-            <td>${loss === 0 ? "-" : loss}</td>
-            <td>${driver.wins}</td>
-            <td>${driver.second}</td>
-            <td>${driver.third}</td>
-        `;
+                <td><strong>${index + 1}</strong></td>
+                <td>${driver.number}</td>
+                <td>${driver.name} ${isFavorite ? '⭐' : ''}</td>
+                <td>${driver.team}</td>
+                <td><span class="fi fi-${driver.country}"></span></td>
+                <td><strong>${driver.points}</strong></td>
+                <td>${loss === 0 ? "-" : loss}</td>
+                <td>${driver.wins}</td>
+                <td>${driver.second}</td>
+                <td>${driver.third}</td>
+            `;
             table.appendChild(row);
         });
     </script>
-
 </body>
-
 </html>
