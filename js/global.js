@@ -90,7 +90,11 @@ document.addEventListener('DOMContentLoaded', function() {
             'F1_25_photo_20250916_181712.png',
             'F1_25_photo_20250917_141309.png',
             'F1_25_photo_20250917_141612.png',
-            'F1_25_photo_20250917_141732.png'
+            'F1_25_photo_20250917_141732.png',
+            'F1_25_photo_20250927_004038.png',
+            'F1_25_photo_20251002_181518.png',
+            'F1_25_photo_20251007_155826.png',
+            'F1_25_photo_20251008_175755.png'
         ];
 
         // 1) načteme uložený index, nebo začneme od 0
