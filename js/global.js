@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ];
 
         // 1) načteme uložený index, nebo začneme od 0
-        let current = parseInt(localStorage.getItem("heroIndex"), 10) || 0;
+        let current = parseInt(localStorage.getItem("heroIndex"), 9) || 0;
 
         hero.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${images[current]})`;
 
