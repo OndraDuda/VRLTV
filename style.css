@@ -892,7 +892,7 @@ body[data-theme="dark"] .teams-table tr:nth-child(even) td {
         gap: 20px;
         padding: 0 15px;
     }
-    
+
     .track-image {
         height: 110px;
     }
@@ -903,7 +903,7 @@ body[data-theme="dark"] .teams-table tr:nth-child(even) td {
         grid-template-columns: 1fr;
         gap: 15px;
     }
-    
+
     .track-image {
         height: 100px;
     }
@@ -2136,22 +2136,22 @@ body[data-theme="light"] .race-results-table tbody tr:nth-child(3) td:first-chil
         width: 95%;
         padding: 1.5rem;
     }
-    
+
     .favorite-driver-card {
         flex-direction: column;
         text-align: center;
         gap: 1rem;
     }
-    
+
     .driver-selector select {
         min-width: 250px;
         width: 90%;
     }
-    
+
     .favorite-driver-name {
         font-size: 1.5rem;
     }
-    
+
     .favorite-driver-details {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.8rem;
@@ -2193,4 +2193,208 @@ body[data-theme="light"] .race-results-table tbody tr:nth-child(3) td:first-chil
 
 [data-theme="light"] .drivers-table tbody tr.favorite-driver-row:hover {
     background: rgba(211, 47, 47, 0.2);
+}
+
+/* Styly pro sekci porovnání */
+.comparison-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.comparison-section h3 {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.comparison-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.comparison-controls select {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    min-width: 250px;
+    cursor: pointer;
+    border: 1px solid var(--card-border);
+}
+
+.btn-small {
+    display: inline-block;
+    background: linear-gradient(to right, var(--vrl-blue), var(--vrl-purple));
+    color: var(--text-light);
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-small:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.comparison-drivers-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.comparison-driver-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    position: relative;
+    min-width: 180px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Přidáno pro lepší pozicování křížku */
+    padding-right: 40px;
+}
+
+.comparison-driver-info {
+    width: 100%;
+}
+
+.comparison-driver-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.comparison-driver-name span:first-child {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.remove-comparison-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+    font-size: 0.8rem;
+}
+
+.remove-comparison-btn:hover {
+    background: rgba(255, 99, 132, 0.7);
+}
+
+.comparison-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Styly pro graf */
+.points-chart-section {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem auto;
+    width: 90%;
+    max-width: 1000px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--card-border);
+}
+
+.chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+
+/* Styly pro světlý režim */
+[data-theme="light"] .comparison-section {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .comparison-section h3 {
+    color: var(--text-dark);
+}
+
+[data-theme="light"] .comparison-driver-card {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .remove-comparison-btn {
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--text-dark);
+}
+
+[data-theme="light"] .remove-comparison-btn:hover {
+    background: rgba(255, 99, 132, 0.7);
+    color: white;
+}
+
+[data-theme="light"] .points-chart-section {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+}
+
+/* Responzivní design */
+@media (max-width: 768px) {
+    .comparison-controls {
+        flex-direction: column;
+    }
+    
+    .comparison-controls select {
+        min-width: 200px;
+        width: 100%;
+    }
+    
+    .comparison-drivers-container {
+        justify-content: center;
+    }
+    
+    .comparison-driver-card {
+        min-width: 150px;
+        padding-right: 40px;
+    }
+    
+    .chart-container {
+        height: 300px;
+    }
+    
+    .points-chart-section {
+        padding: 1.5rem;
+        width: 95%;
+    }
+    
+    .comparison-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .comparison-actions .btn {
+        width: 200px;
+    }
 }
