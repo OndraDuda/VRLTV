@@ -73,8 +73,16 @@
                     <th>3. místa</th>
                 </tr>
             </thead>
-            <tbody id="driversTable"></tbody>
+            <tbody id="teamsTableBody"></tbody>
         </table>
+
+        <!-- Přidání sekce s grafem -->
+        <div class="points-chart-section">
+            <h2 class="section-title">Vývoj bodů týmů v sezóně</h2>
+            <div class="chart-container">
+                <canvas id="teamsChart"></canvas>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -124,104 +132,356 @@
     </footer>
 
     <script src="js/global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const drivers = [
-            { number: 71, name: "Petr Stouhal", team: "Red Bull", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 7, name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 75, wins: 1, second: 1, third: 0 },
-            { number: 2, name: "Zdeněk Pohlreich", team: "Mercedes", country: "cz", points: 17, wins: 0, second: 0, third: 1 },
-            { number: 1, name: "Maxim Heligr", team: "McLaren", country: "cz", points: 117, wins: 3, second: 0, third: 2 },
-            { number: 56, name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 48, wins: 1, second: 0, third: 1 },
-            { number: 24, name: "Viktor Koutný", team: "Alpine", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 97, name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 18, wins: 0, second: 0, third: 0 },
-            { number: 20, name: "Tomáš Novák", team: "Haas", country: "cz", points: 44, wins: 0, second: 1, third: 0 },
-            { number: 19, name: "Ján Bubák", team: "Williams", country: "sk", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 99, name: "Jakub Fabian", team: "Sauber", country: "cz", points: 13, wins: 0, second: 0, third: 0 },
-            { number: 13, name: "Oscar Anděl", team: "Red Bull", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 28, name: "Luboš Novotný", team: "Ferrari", country: "cz", points: 12, wins: 0, second: 0, third: 0 },
-            { number: 12, name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 85, wins: 1, second: 3, third: 0 },
-            { number: 96, name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 39, wins: 0, second: 0, third: 1 },
-            { number: 4, name: "Marcel Chlaďák", team: "Williams", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 11, name: "Oliver Čobrde", team: "Alpine", country: "sk", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 67, name: "Jáchym Majvald", team: "Racing Bulls", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 25, name: "Matěj Švec", team: "Haas", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 26, name: "Matyáš Kasl", team: "Aston Martin", country: "cz", points: 15, wins: 0, second: 0, third: 1 },
-            { number: 66, name: "Oliver Stavač", team: "Sauber", country: "sk", points: 28, wins: 0, second: 0, third: 0 },
+        // Data závodů z výsledků
+        const raceResults = [
+            {
+                round: "R1 – Melbourne Grand Prix Circuit",
+                results: [
+                    { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 25 },
+                    { name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 18 },
+                    { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 15 },
+                    { name: "Matěj Csiba", team: "Williams", country: "sk", points: 12 },
+                    { name: "Oliver Maťko", team: "Ferrari", country: "sk", points: 10 },
+                    { name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 8 },
+                    { name: "Tadeáš Šmídl", team: "Red Bull", country: "cz", points: 6 },
+                    { name: "Tomáš Novák", team: "Haas", country: "cz", points: 4 },
+                    { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 2 },
+                    { name: "Matěj Doha", team: "Alpine", country: "cz", points: 1 }
+                ]
+            },
+            {
+                round: "R2 – Silverstone Circuit",
+                results: [
+                    { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 25 },
+                    { name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 18 },
+                    { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 15 },
+                    { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 12 },
+                    { name: "Oliver Maťko", team: "Aston Martin", country: "sk", points: 10 },
+                    { name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 8 },
+                    { name: "Tomáš Novák", team: "Haas", country: "cz", points: 6 },
+                    { name: "Luboš Novotný", team: "Ferrari", country: "cz", points: 4 },
+                    { name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 2 },
+                    { name: "Jakub Fabian", team: "Sauber", country: "cz", points: 1 }
+                ]
+            },
+            {
+                round: "R3 – Bahrain International Circuit",
+                results: [
+                    { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 25 },
+                    { name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 18 },
+                    { name: "Matyáš Kasl", team: "Williams", country: "cz", points: 15 },
+                    { name: "Oliver Maťko", team: "Aston Martin", country: "sk", points: 12 },
+                    { name: "Tomáš Novák", team: "Haas", country: "cz", points: 10 },
+                    { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 8 },
+                    { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 6 },
+                    { name: "Oliver Stavač", team: "Sauber", country: "sk", points: 4 },
+                    { name: "Zdeněk Pohlreich", team: "Mercedes", country: "cz", points: 2 },
+                    { name: "Jakub Fabian", team: "Sauber", country: "cz", points: 1 }
+                ]
+            },
+            {
+                round: "R4 – Miami International Autodrome",
+                results: [
+                    { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 25 },
+                    { name: "Matěj Csiba", team: "Williams", country: "sk", points: 18 },
+                    { name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 15 },
+                    { name: "Oliver Maťko", team: "Aston Martin", country: "sk", points: 12 },
+                    { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 10 },
+                    { name: "Oliver Stavač", team: "Sauber", country: "sk", points: 8 },
+                    { name: "Tomáš Novák", team: "Haas", country: "cz", points: 6 },
+                    { name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 4 },
+                    { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 2 },
+                    { name: "Viktor Koutný", team: "Red Bull", country: "cz", points: 1 }
+                ]
+            },
+            {
+                round: "R5 – Autodromo Enzo e Dino Ferrari (Imola)",
+                results: [
+                    { name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 25 },
+                    { name: "Tomáš Novák", team: "Haas", country: "cz", points: 18 },
+                    { name: "Zdeněk Pohlreich", team: "Mercedes", country: "cz", points: 15 },
+                    { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 12 },
+                    { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 10 },
+                    { name: "Matěj Csiba", team: "Williams", country: "sk", points: 8 },
+                    { name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 6 },
+                    { name: "Oliver Stavač", team: "Sauber", country: "sk", points: 4 },
+                    { name: "Oliver Maťko", team: "Williams", country: "sk", points: 2 },
+                    { name: "Matěj Švec", team: "Haas", country: "cz", points: 1 }
+                ]
+            },
+            {
+                round: "R6 – Baku City Circuit",
+                results: [
+                    { name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 25 },
+                    { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 18 },
+                    { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 15 },
+                    { name: "Oliver Stavač", team: "Sauber", country: "sk", points: 12 },
+                    { name: "Jakub Fabian", team: "Sauber", country: "cz", points: 10 },
+                    { name: "Luboš Novotný", team: "Ferrari", country: "cz", points: 8 },
+                    { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 6 },
+                    { name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 4 },
+                ]
+            },
         ];
 
-        // 🔹 Tady můžeš přidat body navíc pro tým (např. záloha)
-        const extraPoints = {
-            "Ferrari": 10,
-            "Red Bull": 7,         // např. záložní jezdec získal 2 body
-            "Williams": 55,
-            "Alpine": 1,
-            "Aston Martin": 34
-        };
+        // Funkce pro výpočet statistik týmů
+        function calculateTeamStats() {
+            const teams = {};
 
-        const teams = {};
-        drivers.forEach(driver => {
-            if (!teams[driver.team]) teams[driver.team] = { points: 0, wins: 0, second: 0, third: 0, drivers: [] };
-            teams[driver.team].points += driver.points;
-            teams[driver.team].wins += driver.wins;
-            teams[driver.team].second += driver.second;
-            teams[driver.team].third += driver.third;
-            teams[driver.team].drivers.push(driver.name);
-        });
+            // Projdeme všechny závody
+            raceResults.forEach(race => {
+                // Projdeme všechny výsledky v závodě
+                race.results.forEach(result => {
+                    const teamName = result.team;
 
-        // 🔹 přičtení extra bodů (bez zobrazení)
-        for (const [team, pts] of Object.entries(extraPoints)) {
-            if (teams[team]) teams[team].points += pts;
+                    // Pokud tým ještě neexistuje, vytvoříme ho
+                    if (!teams[teamName]) {
+                        teams[teamName] = {
+                            points: 0,
+                            wins: 0,
+                            second: 0,
+                            third: 0,
+                            drivers: new Set(),
+                            racePoints: {} // Body za každý závod
+                        };
+                    }
+
+                    // Přidáme body týmu
+                    teams[teamName].points += result.points;
+
+                    // Přidáme jezdce do týmu
+                    teams[teamName].drivers.add(result.name);
+
+                    // Spočítáme umístění
+                    if (result.points === 25) teams[teamName].wins++;
+                    if (result.points === 18) teams[teamName].second++;
+                    if (result.points === 15) teams[teamName].third++;
+
+                    // Uložíme body za tento závod
+                    const raceKey = race.round.split(' – ')[0];
+                    if (!teams[teamName].racePoints[raceKey]) {
+                        teams[teamName].racePoints[raceKey] = 0;
+                    }
+                    teams[teamName].racePoints[raceKey] += result.points;
+                });
+            });
+
+            return teams;
         }
 
-        // převod na pole a seřazení
-        const sortedTeams = Object.entries(teams)
-            .map(([team, stats]) => ({ team, ...stats }))
-            .sort((a, b) => b.points - a.points);
+        // Funkce pro vytvoření kumulativních bodů pro graf
+        function calculateCumulativePoints(teams) {
+            const raceOrder = raceResults.map(race => race.round.split(' – ')[0]);
+            const cumulativeData = {};
 
-        const leaderPoints = sortedTeams[0].points;
+            // Pro každý tým
+            Object.keys(teams).forEach(team => {
+                cumulativeData[team] = [];
+                let cumulative = 0;
 
-        const table = document.getElementById("driversTable");
-        sortedTeams.forEach((team, index) => {
-            const loss = leaderPoints - team.points;
-            const row = document.createElement("tr");
-            row.innerHTML = `
-        <td><strong>${index + 1}</strong></td>
-        <td class="team-cell" data-drivers="${team.drivers.join(', ')}">${team.team}</td>
-        <td><strong>${team.points}</strong></td>
-        <td>${loss === 0 ? "-" : loss}</td>
-        <td>${team.wins}</td>
-        <td>${team.second}</td>
-        <td>${team.third}</td>
-    `;
-            table.appendChild(row);
+                // Pro každý závod v pořadí
+                raceOrder.forEach(race => {
+                    const pointsInRace = teams[team].racePoints[race] || 0;
+                    cumulative += pointsInRace;
+                    cumulativeData[team].push(cumulative);
+                });
+            });
+
+            return cumulativeData;
+        }
+
+        // Funkce pro vyplnění tabulky týmů
+        function populateTeamsTable() {
+            const teams = calculateTeamStats();
+            const tableBody = document.getElementById('teamsTableBody');
+            tableBody.innerHTML = '';
+
+            // Převod na pole a seřazení podle bodů
+            const sortedTeams = Object.entries(teams)
+                .map(([team, stats]) => ({
+                    team,
+                    ...stats,
+                    drivers: Array.from(stats.drivers).join(', ')
+                }))
+                .sort((a, b) => b.points - a.points);
+
+            const leaderPoints = sortedTeams[0].points;
+
+            // Vyplnění tabulky
+            sortedTeams.forEach((team, index) => {
+                const loss = leaderPoints - team.points;
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td><strong>${index + 1}</strong></td>
+                    <td class="team-cell" data-drivers="${team.drivers}">${team.team}</td>
+                    <td><strong>${team.points}</strong></td>
+                    <td>${loss === 0 ? "-" : loss}</td>
+                    <td>${team.wins}</td>
+                    <td>${team.second}</td>
+                    <td>${team.third}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            return teams;
+        }
+
+        // Funkce pro vytvoření grafu
+        function createTeamsChart(teams) {
+            const ctx = document.getElementById('teamsChart').getContext('2d');
+
+            // Získání pořadí závodů
+            const raceOrder = raceResults.map(race => race.round.split(' – ')[0]);
+
+            // Barvy týmů
+            const teamColors = {
+                'McLaren': '#FF8000',
+                'Mercedes': '#00D2BE',
+                'Ferrari': '#DC0000',
+                'Aston Martin': '#006F62',
+                'Williams': '#005AFF',
+                'Haas': '#FFFFFF',
+                'Sauber': '#9B0000',
+                'Racing Bulls': '#0032FF',
+                'Alpine': '#0090FF',
+                'Red Bull': '#0600EF'
+            };
+
+            // Výpočet kumulativních bodů
+            const cumulativeData = calculateCumulativePoints(teams);
+
+            // Příprava datasetů
+            const datasets = Object.keys(cumulativeData).map(team => {
+                return {
+                    label: team,
+                    data: cumulativeData[team],
+                    borderColor: teamColors[team] || '#CCCCCC',
+                    backgroundColor: teamColors[team] ? teamColors[team] + '20' : '#CCCCCC20',
+                    tension: 0.3,
+                    fill: false,
+                    pointBackgroundColor: teamColors[team] || '#CCCCCC',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                };
+            });
+
+            // Vytvoření grafu
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: raceOrder,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Kumulativní body týmů během sezóny'
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            // Kompletně nahrazujeme obsah tooltipu
+                            callbacks: {
+                                title: function (context) {
+                                    // Vrátíme název závodu jako titulek
+                                    return context[0].label;
+                                },
+                                label: function () {
+                                    // Potlačíme standardní labely
+                                    return '';
+                                },
+                                afterBody: function (context) {
+                                    const dataIndex = context[0].dataIndex;
+                                    const datasetValues = [];
+
+                                    // Shromáždění hodnot pro všechny týmy v daném závodě
+                                    context.forEach(item => {
+                                        datasetValues.push({
+                                            label: item.dataset.label,
+                                            value: item.parsed.y,
+                                            color: item.dataset.borderColor
+                                        });
+                                    });
+
+                                    // Seřazení podle hodnoty sestupně
+                                    datasetValues.sort((a, b) => b.value - a.value);
+
+                                    // Vytvoření seřazeného seznamu jako jediný obsah tooltipu
+                                    let tooltipContent = [];
+                                    datasetValues.forEach((item, index) => {
+                                        tooltipContent.push(`${index + 1}. ${item.label}: ${item.value} bodů`);
+                                    });
+
+                                    return tooltipContent;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Kumulativní body'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Závody'
+                            }
+                        }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+        }
+
+        // Inicializace po načtení stránky
+        document.addEventListener('DOMContentLoaded', () => {
+            const teams = populateTeamsTable();
+            createTeamsChart(teams);
+
+            // Tooltip pro zobrazení jezdců v týmu
+            const tooltip = document.createElement('div');
+            tooltip.style.position = 'absolute';
+            tooltip.style.background = 'rgba(0,0,0,0.8)';
+            tooltip.style.color = '#fff';
+            tooltip.style.padding = '5px 10px';
+            tooltip.style.borderRadius = '5px';
+            tooltip.style.display = 'none';
+            tooltip.style.zIndex = '1000';
+            document.body.appendChild(tooltip);
+
+            document.querySelectorAll('.team-cell').forEach(cell => {
+                cell.addEventListener('mouseenter', e => {
+                    tooltip.textContent = 'Jezdci: ' + cell.dataset.drivers;
+                    tooltip.style.display = 'block';
+                });
+                cell.addEventListener('mousemove', e => {
+                    tooltip.style.top = e.pageY + 10 + 'px';
+                    tooltip.style.left = e.pageX + 10 + 'px';
+                });
+                cell.addEventListener('mouseleave', () => {
+                    tooltip.style.display = 'none';
+                });
+            });
         });
-
-        // tooltip
-        const tooltip = document.createElement('div');
-        tooltip.style.position = 'absolute';
-        tooltip.style.background = 'rgba(0,0,0,0.8)';
-        tooltip.style.color = '#fff';
-        tooltip.style.padding = '5px 10px';
-        tooltip.style.borderRadius = '5px';
-        tooltip.style.display = 'none';
-        tooltip.style.zIndex = '1000';
-        document.body.appendChild(tooltip);
-
-        document.querySelectorAll('.team-cell').forEach(cell => {
-            cell.addEventListener('mouseenter', e => {
-                tooltip.textContent = 'Jezdci: ' + cell.dataset.drivers;
-                tooltip.style.display = 'block';
-            });
-            cell.addEventListener('mousemove', e => {
-                tooltip.style.top = e.pageY + 10 + 'px';
-                tooltip.style.left = e.pageX + 10 + 'px';
-            });
-            cell.addEventListener('mouseleave', () => {
-                tooltip.style.display = 'none';
-            });
-        });
-
     </script>
-
 </body>
 
 </html>
