@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VRL - Velocity Racing League - Season 2</title>
     <link rel="icon" type="image/png" href="VRL_logo_nove.png">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Vlajky -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Vlastní CSS -->
     <link rel="stylesheet" href="style.css">
@@ -72,14 +75,14 @@
     <!-- MAIN -->
     <main>
         <!-- SEKCHE PRO OBLÍBENÉHO JEZDCE -->
-         <h2 class="table-title">Oblíbený jezdec</h2>
+        <h2 class="table-title">Oblíbený jezdec</h2>
         <section class="favorite-driver-section">
             <div class="driver-selector">
                 <select id="favoriteDriverSelect">
                     <option value="">Vyberte svého oblíbeného jezdce</option>
                 </select>
             </div>
-            
+
             <div id="favoriteDriverCard" class="favorite-driver-card" style="display: none;">
                 <div class="favorite-driver-info">
                     <div class="favorite-driver-name">
@@ -89,7 +92,7 @@
                     <div>Tým: <strong id="favDriverTeam"></strong></div>
                     <div>Číslo: <strong id="favDriverNumber"></strong></div>
                     <div>Země: <span id="favDriverCountry"></span></div>
-                    
+
                     <div class="favorite-driver-details">
                         <div class="favorite-driver-detail">
                             <div>Pořadí</div>
@@ -113,6 +116,34 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Sekce pro porovnání s dalšími jezdci -->
+                <div class="comparison-section">
+                    <h3>Porovnat s dalšími jezdci</h3>
+                    <div class="comparison-controls">
+                        <select id="comparisonDriverSelect">
+                            <option value="">Vyberte jezdce k porovnání</option>
+                        </select>
+                        <button id="addComparisonBtn" class="btn-small">Přidat</button>
+                    </div>
+
+                    <div class="comparison-drivers-container" id="comparisonDriversContainer">
+                        <!-- Zde se zobrazí jezdci přidaní k porovnání -->
+                    </div>
+
+                    <div class="comparison-actions">
+                        <button id="showComparisonBtn" class="btn" style="display: none;">Zobrazit porovnání</button>
+                        <button id="clearComparisonBtn" class="btn" style="display: none;">Vyčistit porovnání</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRAF BODŮ -->
+        <section class="points-chart-section" id="pointsChartSection" style="display: none;">
+            <h2 class="table-title">Porovnání bodů jezdců</h2>
+            <div class="chart-container">
+                <canvas id="pointsChart"></canvas>
             </div>
         </section>
 
@@ -189,31 +220,103 @@
     <!-- Skripty -->
     <script src="js/global.js"></script>
     <script>
+        // Rozšířená data jezdců s historií bodů podle skutečných závodů
         const drivers = [
-            { number: 71, name: "Petr Stouhal", team: "Red Bull", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 7, name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 75, wins: 1, second: 1, third: 0 },
-            { number: 2, name: "Zdeněk Pohlreich", team: "Mercedes", country: "cz", points: 17, wins: 0, second: 0, third: 1 },
-            { number: 1, name: "Maxim Heligr", team: "McLaren", country: "cz", points: 117, wins: 3, second: 0, third: 2 },
-            { number: 56, name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 48, wins: 1, second: 0, third: 1 },
-            { number: 24, name: "Viktor Koutný", team: "Alpine", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 97, name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 18, wins: 0, second: 0, third: 0 },
-            { number: 20, name: "Tomáš Novák", team: "Haas", country: "cz", points: 44, wins: 0, second: 1, third: 0 },
-            { number: 19, name: "Ján Bubák", team: "Williams", country: "sk", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 99, name: "Jakub Fabian", team: "Sauber", country: "cz", points: 13, wins: 0, second: 0, third: 0 },
-            { number: 13, name: "Oscar Anděl", team: "Red Bull", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 28, name: "Luboš Novotný", team: "Ferrari", country: "cz", points: 12, wins: 0, second: 0, third: 0 },
-            { number: 12, name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 85, wins: 1, second: 3, third: 0 },
-            { number: 96, name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 39, wins: 0, second: 0, third: 1 },
-            { number: 4, name: "Marcel Chlaďák", team: "Williams", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 11, name: "Oliver Čobrde", team: "Alpine", country: "sk", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 67, name: "Jáchym Majvald", team: "Racing Bulls", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 25, name: "Matěj Švec", team: "Haas", country: "cz", points: 0, wins: 0, second: 0, third: 0 },
-            { number: 26, name: "Matyáš Kasl", team: "Aston Martin", country: "cz", points: 15, wins: 0, second: 0, third: 1 },
-            { number: 66, name: "Oliver Stavač", team: "Sauber", country: "sk", points: 28, wins: 0, second: 0, third: 0 },
-            { number: 67, name: "Alex Výplach", team: "Záloha", country: "cz", points: 0, wins: 0, second: 0, third: 0 }
+            {
+                number: 71, name: "Petr Stouhal", team: "Red Bull", country: "cz", points: 0, wins: 0, second: 0, third: 0,
+                pointsHistory: [0, 0, 0, 0, 0, 0]
+            },
+            {
+                number: 7, name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 75, wins: 1, second: 1, third: 0,
+                pointsHistory: [25, 37, 45, 47, 57, 75]
+            }, // Kumulativní: R1:25, R2:37, R3:45, R4:47, R5:57, R6:75
+            {
+                number: 2, name: "Zdeněk Pohlreich", team: "Mercedes", country: "cz", points: 17, wins: 0, second: 0, third: 0,
+                pointsHistory: [0, 0, 2, 2, 17, 17]
+            }, // Kumulativní: R3:2, R5:17
+            {
+                number: 1, name: "Maxim Heligr", team: "McLaren", country: "cz", points: 117, wins: 3, second: 0, third: 2,
+                pointsHistory: [15, 40, 65, 90, 102, 117]
+            }, // Kumulativní: R1:15, R2:40, R3:65, R4:90, R5:102, R6:117
+            {
+                number: 56, name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 48, wins: 1, second: 0, third: 1,
+                pointsHistory: [0, 8, 8, 23, 48, 48]
+            }, // Kumulativní: R2:8, R4:23, R5:48
+            {
+                number: 24, name: "Viktor Koutný", team: "Alpine", country: "cz", points: 0, wins: 0, second: 0, third: 0,
+                pointsHistory: [0, 0, 0, 0, 0, 0]
+            },
+            {
+                number: 97, name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 18, wins: 0, second: 0, third: 0,
+                pointsHistory: [8, 10, 10, 14, 14, 18]
+            }, // Kumulativní: R1:8, R2:10, R4:14, R6:18
+            {
+                number: 20, name: "Tomáš Novák", team: "Haas", country: "cz", points: 44, wins: 0, second: 1, third: 0,
+                pointsHistory: [4, 10, 20, 26, 44, 44]
+            }, // Kumulativní: R1:4, R2:10, R3:20, R4:26, R5:44
+            {
+                number: 19, name: "Ján Bubák", team: "Williams", country: "sk", points: 0, wins: 0, second: 0, third: 0,
+                pointsHistory: [0, 0, 0, 0, 0, 0]
+            },
+            {
+                number: 99, name: "Jakub Fabian", team: "Sauber", country: "cz", points: 13, wins: 0, second: 0, third: 0,
+                pointsHistory: [0, 1, 2, 2, 2, 12]
+            }, // Kumulativní: R2:1, R3:2, R6:12
+            {
+                number: 13, name: "Oscar Anděl", team: "Red Bull", country: "cz", points: 0, wins: 0, second: 0, third: 0,
+                pointsHistory: [0, 0, 0, 0, 0, 0]
+            },
+            {
+                number: 28, name: "Luboš Novotný", team: "Ferrari", country: "cz", points: 12, wins: 0, second: 0, third: 0,
+                pointsHistory: [0, 4, 4, 4, 4, 12]
+            }, // Kumulativní: R2:4, R6:12
+            {
+                number: 12, name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 85, wins: 1, second: 3, third: 0,
+                pointsHistory: [18, 36, 54, 54, 60, 85]
+            }, // Kumulativní: R1:18, R2:36, R3:54, R5:60, R6:85
+            {
+                number: 96, name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 39, wins: 0, second: 0, third: 1,
+                pointsHistory: [2, 17, 23, 33, 33, 39]
+            }, // Kumulativní: R1:2, R2:17, R3:23, R4:33, R6:39
+            {
+                number: 4, name: "Marcel Chlaďák", team: "Williams", country: "cz", points: 0, wins: 0, second: 0, third: 0,
+                pointsHistory: [0, 0, 0, 0, 0, 0]
+            },
+            {
+                number: 11, name: "Oliver Čobrde", team: "Alpine", country: "sk", points: 0, wins: 0, second: 0, third: 0,
+                pointsHistory: [0, 0, 0, 0, 0, 0]
+            },
+            {
+                number: 67, name: "Jáchym Majvald", team: "Racing Bulls", country: "cz", points: 0, wins: 0, second: 0, third: 0,
+                pointsHistory: [0, 0, 0, 0, 0, 0]
+            },
+            {
+                number: 25, name: "Matěj Švec", team: "Haas", country: "cz", points: 1, wins: 0, second: 0, third: 0,
+                pointsHistory: [0, 0, 0, 0, 1, 1]
+            }, // Kumulativní: R5:1
+            {
+                number: 26, name: "Matyáš Kasl", team: "Aston Martin", country: "cz", points: 15, wins: 0, second: 0, third: 1,
+                pointsHistory: [0, 0, 15, 15, 15, 15]
+            }, // Kumulativní: R3:15
+            {
+                number: 66, name: "Oliver Stavač", team: "Sauber", country: "sk", points: 28, wins: 0, second: 0, third: 0,
+                pointsHistory: [0, 0, 4, 12, 16, 28]
+            }, // Kumulativní: R3:4, R4:12, R5:16, R6:28
+            {
+                number: 67, name: "Alex Výplach", team: "Záloha", country: "cz", points: 0, wins: 0, second: 0, third: 0,
+                pointsHistory: [0, 0, 0, 0, 0, 0]
+            }
         ];
 
-        // Naplníme select s jezdci
+        // Názvy závodů pro graf - pouze 6 odehraných závodů
+        const raceNames = ["R1", "R2", "R3", "R4", "R5", "R6"];
+
+        // Proměnné pro správu vybraných jezdců
+        let favoriteDriver = null;
+        let comparisonDrivers = [];
+        let pointsChart = null;
+
+        // Naplníme select s jezdci pro oblíbeného jezdce
         const favoriteSelect = document.getElementById('favoriteDriverSelect');
         drivers.forEach(driver => {
             const option = document.createElement('option');
@@ -221,6 +324,22 @@
             option.textContent = `${driver.number} - ${driver.name} (${driver.team})`;
             favoriteSelect.appendChild(option);
         });
+
+        // Naplníme select s jezdci pro porovnání (bez oblíbeného jezdce)
+        function updateComparisonSelect() {
+            const comparisonSelect = document.getElementById('comparisonDriverSelect');
+            comparisonSelect.innerHTML = '<option value="">Vyberte jezdce k porovnání</option>';
+
+            drivers.forEach(driver => {
+                // Přidáme všechny jezdce kromě oblíbeného
+                if (!favoriteDriver || driver.number !== favoriteDriver.number) {
+                    const option = document.createElement('option');
+                    option.value = driver.number;
+                    option.textContent = `${driver.number} - ${driver.name} (${driver.team})`;
+                    comparisonSelect.appendChild(option);
+                }
+            });
+        }
 
         // Funkce pro zobrazení oblíbeného jezdce
         function displayFavoriteDriver(driverNumber) {
@@ -234,7 +353,7 @@
                 if (b.second !== a.second) return b.second - a.second;
                 return b.third - a.third;
             });
-            
+
             const position = sortedDrivers.findIndex(d => d.number == driverNumber) + 1;
             const leaderPoints = sortedDrivers[0].points;
             const loss = leaderPoints - driver.points;
@@ -255,17 +374,212 @@
 
             // Uložíme do localStorage
             localStorage.setItem('favoriteDriver', driverNumber);
+
+            // Nastavíme oblíbeného jezdce a aktualizujeme select pro porovnání
+            favoriteDriver = driver;
+            updateComparisonSelect();
+
+            // Vyčistíme porovnání při změně oblíbeného jezdce
+            comparisonDrivers = [];
+            updateComparisonDisplay();
+            updateComparisonActions();
         }
 
-        // Event listener pro změnu výběru
-        favoriteSelect.addEventListener('change', function() {
+        // Event listener pro změnu výběru oblíbeného jezdce
+        favoriteSelect.addEventListener('change', function () {
             if (this.value) {
                 displayFavoriteDriver(this.value);
             } else {
                 document.getElementById('favoriteDriverCard').style.display = 'none';
                 localStorage.removeItem('favoriteDriver');
+                favoriteDriver = null;
+                updateComparisonSelect();
             }
         });
+
+        // Přidání jezdce k porovnání
+        document.getElementById('addComparisonBtn').addEventListener('click', function () {
+            const comparisonSelect = document.getElementById('comparisonDriverSelect');
+            const selectedDriverNumber = comparisonSelect.value;
+            if (!selectedDriverNumber) return;
+
+            const driver = drivers.find(d => d.number == selectedDriverNumber);
+            if (!driver) return;
+
+            // Kontrola, zda už není vybrán
+            if (comparisonDrivers.some(d => d.number == driver.number)) {
+                alert('Tento jezdec je již vybrán k porovnání.');
+                return;
+            }
+
+            comparisonDrivers.push(driver);
+            updateComparisonDisplay();
+            updateComparisonActions();
+
+            // Vyčistíme select
+            comparisonSelect.value = '';
+        });
+
+        // Aktualizace zobrazení jezdců k porovnání
+        function updateComparisonDisplay() {
+            const container = document.getElementById('comparisonDriversContainer');
+            container.innerHTML = '';
+
+            comparisonDrivers.forEach((driver, index) => {
+                const driverCard = document.createElement('div');
+                driverCard.className = 'comparison-driver-card';
+                driverCard.innerHTML = `
+                    <div class="comparison-driver-info">
+                        <div class="comparison-driver-name">
+                            <span>${driver.name}</span>
+                            <span class="driver-number">#${driver.number}</span>
+                        </div>
+                        <div>Tým: <strong>${driver.team}</strong></div>
+                        <div>Body: <strong>${driver.points}</strong></div>
+                    </div>
+                    <button class="remove-comparison-btn" data-index="${index}" title="Odebrat jezdce">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                container.appendChild(driverCard);
+            });
+
+            // Přidání event listenerů pro tlačítka odstranění
+            document.querySelectorAll('.remove-comparison-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    comparisonDrivers.splice(index, 1);
+                    updateComparisonDisplay();
+                    updateComparisonActions();
+
+                    // Pokud nejsou vybráni žádní jezdci, skryjeme graf
+                    if (comparisonDrivers.length === 0) {
+                        document.getElementById('pointsChartSection').style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Aktualizace ovládacích prvků porovnání
+        function updateComparisonActions() {
+            const showBtn = document.getElementById('showComparisonBtn');
+            const clearBtn = document.getElementById('clearComparisonBtn');
+
+            if (comparisonDrivers.length > 0) {
+                showBtn.style.display = 'inline-block';
+                clearBtn.style.display = 'inline-block';
+            } else {
+                showBtn.style.display = 'none';
+                clearBtn.style.display = 'none';
+            }
+        }
+
+        // Zobrazení porovnání
+        document.getElementById('showComparisonBtn').addEventListener('click', function () {
+            if (!favoriteDriver || comparisonDrivers.length === 0) return;
+
+            createPointsChart();
+            document.getElementById('pointsChartSection').style.display = 'block';
+
+            // Scroll k grafu
+            document.getElementById('pointsChartSection').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Vyčištění porovnání
+        document.getElementById('clearComparisonBtn').addEventListener('click', function () {
+            comparisonDrivers = [];
+            updateComparisonDisplay();
+            updateComparisonActions();
+            document.getElementById('pointsChartSection').style.display = 'none';
+        });
+
+        // Vytvoření grafu bodů
+        function createPointsChart() {
+            const ctx = document.getElementById('pointsChart').getContext('2d');
+
+            // Pokud již existuje graf, zničíme ho
+            if (pointsChart) {
+                pointsChart.destroy();
+            }
+
+            // Vytvoříme pole všech jezdců k zobrazení (oblíbený + porovnávaní)
+            const driversToShow = [favoriteDriver, ...comparisonDrivers];
+
+            // Příprava dat pro graf
+            const datasets = driversToShow.map((driver, index) => {
+                // Barvy pro různé jezdce
+                const colors = [
+                    'rgba(255, 215, 0, 1)', // Zlatá pro oblíbeného jezdce
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ];
+
+                // Speciální styl pro oblíbeného jezdce
+                const isFavorite = index === 0;
+
+                return {
+                    label: `${driver.name} (${driver.team})${isFavorite ? ' ⭐' : ''}`,
+                    data: driver.pointsHistory,
+                    borderColor: colors[index % colors.length],
+                    backgroundColor: colors[index % colors.length].replace('1)', '0.1)'),
+                    borderWidth: isFavorite ? 3 : 2,
+                    pointBackgroundColor: colors[index % colors.length],
+                    pointBorderColor: '#fff',
+                    pointRadius: isFavorite ? 5 : 4,
+                    tension: 0.1
+                };
+            });
+
+            // Vytvoření grafu
+            pointsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: raceNames,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Celkové body v průběhu sezóny',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Celkové body'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Závody'
+                            }
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'nearest'
+                    }
+                }
+            });
+        }
 
         // Načtení uloženého oblíbeného jezdce při startu
         const savedFavorite = localStorage.getItem('favoriteDriver');
@@ -288,13 +602,13 @@
         drivers.forEach((driver, index) => {
             const loss = leaderPoints - driver.points;
             const isFavorite = driver.number == savedFavorite;
-            
+
             const row = document.createElement("tr");
             if (isFavorite) {
                 row.style.background = 'rgba(255, 215, 0, 0.1)';
                 row.style.fontWeight = 'bold';
             }
-            
+
             row.innerHTML = `
                 <td><strong>${index + 1}</strong></td>
                 <td>${driver.number}</td>
@@ -311,4 +625,5 @@
         });
     </script>
 </body>
+
 </html>
