@@ -114,20 +114,63 @@
             </div>
         </section>
 
+        <h2 class="section-title">Další Závod</h2>
 
-        <section>
-            <h2 class="section-title">Další Závod</h2>
-            <div class="next-race">
-                <div id="countdown">
-                    <span id="cd-days">--</span> dny
-                    <span id="cd-hours">--</span> hodin
-                    <span id="cd-minutes">--</span> minut
-                    <span id="cd-seconds">--</span> sekund
+        <section class="next-race-section">
+            <div class="next-race-container">
+                <!-- Informace o nadcházejícím závodě -->
+                <div class="next-race-info" id="nextRaceInfo">
+                    <div class="race-basic-info">
+                        <h3 id="nextRaceName">--</h3>
+                        <p class="race-track" id="nextRaceTrack">--</p>
+                        <p class="race-datetime" id="nextRaceDateTime">--</p>
+                    </div>
                 </div>
-                <div class="stream-link">
-                    <a href="https://www.youtube.com/watch?v=gV-F7vFL0vA" id="stream-link" target="_blank">
-                        Sleduj stream na YouTube
-                    </a>
+
+                <!-- Countdown a stream status -->
+                <div class="race-status">
+                    <!-- LIVE indikátor -->
+                    <div class="live-indicator hidden" id="liveIndicator">
+                        <span class="live-pulse"></span>
+                        <span class="live-text">LIVE NOW</span>
+                    </div>
+
+                    <!-- Countdown -->
+                    <div class="countdown-container">
+                        <div id="countdown" class="countdown">
+                            <div class="countdown-item">
+                                <span id="cd-days">--</span>
+                                <span class="countdown-label">dní</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span id="cd-hours">--</span>
+                                <span class="countdown-label">hodin</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span id="cd-minutes">--</span>
+                                <span class="countdown-label">minut</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span id="cd-seconds">--</span>
+                                <span class="countdown-label">sekund</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stream link -->
+                    <div class="stream-link-container">
+                        <a href="https://www.youtube.com/watch?v=gV-F7vFL0vA" id="stream-link" class="stream-link"
+                            target="_blank">
+                            <i class="fab fa-youtube"></i>
+                            <span id="stream-text">Sleduj stream na YouTube</span>
+                        </a>
+
+                        <!-- Dodatečné stream info -->
+                        <div class="stream-meta hidden" id="streamMeta">
+                            <span class="viewers-count" id="viewersCount">• Počet diváků: --</span>
+                            <span class="stream-uptime" id="streamUptime">• Stream běží: --</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -431,6 +474,145 @@
                 document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
                 document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
             }
+
+            updateCountdown();
+            const interval = setInterval(updateCountdown, 1000);
+        });
+
+        // Rozšířená funkce pro správu závodů a streamu
+        document.addEventListener('DOMContentLoaded', () => {
+            const countdownEl = document.getElementById('countdown');
+            const streamLink = document.getElementById('stream-link');
+            const streamText = document.getElementById('stream-text');
+            const liveIndicator = document.getElementById('liveIndicator');
+            const streamMeta = document.getElementById('streamMeta');
+            const nextRaceName = document.getElementById('nextRaceName');
+            const nextRaceTrack = document.getElementById('nextRaceTrack');
+            const nextRaceDateTime = document.getElementById('nextRaceDateTime');
+            const viewersCount = document.getElementById('viewersCount');
+            const streamUptime = document.getElementById('streamUptime');
+
+            let streamStartTime = null;
+            let isStreamLive = false;
+
+            function getNextRace() {
+                const now = new Date();
+                return races
+                    .map(r => {
+                        const raceDate = new Date(`${r.date}T19:00:00`);
+                        return { ...r, raceDate };
+                    })
+                    .filter(r => r.raceDate > now)
+                    .sort((a, b) => a.raceDate - b.raceDate)[0];
+            }
+
+            const nextRace = getNextRace();
+
+            if (!nextRace) {
+                countdownEl.innerHTML = '<div class="no-races">Žádné další závody naplánovány</div>';
+                streamLink.style.display = 'none';
+                return;
+            }
+
+            // Naplní informace o závodě
+            nextRaceName.textContent = nextRace.name;
+            nextRaceTrack.textContent = nextRace.track;
+            nextRaceDateTime.textContent = nextRace.raceDate.toLocaleDateString("cs-CZ", {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            function updateCountdown() {
+                const now = new Date();
+                const diff = nextRace.raceDate - now;
+
+                // Pokud je závod živě (15 minut před a 3 hodiny po startu)
+                const isLiveWindow = diff <= 15 * 60 * 1000 && diff > -3 * 60 * 60 * 1000;
+
+                if (isLiveWindow && diff <= 0) {
+                    // STREAM JE ŽIVĚ
+                    if (!isStreamLive) {
+                        isStreamLive = true;
+                        streamStartTime = new Date();
+                        liveIndicator.classList.remove('hidden');
+                        streamLink.classList.add('live');
+                        streamText.textContent = 'Sleduj živý přenos';
+                        streamMeta.classList.remove('hidden');
+                        countdownEl.style.display = 'none';
+
+                        // Simulace diváků (v reálném případě bys získal data z YouTube API)
+                        updateViewers();
+                    }
+
+                    updateStreamUptime();
+
+                } else if (isLiveWindow && diff > 0) {
+                    // 15 minut před startem - přípravná fáze
+                    liveIndicator.classList.remove('hidden');
+                    liveIndicator.querySelector('.live-text').textContent = 'ZAČÍNÁ BRZY';
+                    streamText.textContent = 'Připravte se na stream';
+
+                    // Normální countdown
+                    updateCountdownDisplay(diff);
+
+                } else if (diff <= -3 * 60 * 60 * 1000) {
+                    // Závod skončil před více než 3 hodinami
+                    countdownEl.innerHTML = '<div class="race-finished">Závod byl dokončen</div>';
+                    streamLink.style.display = 'none';
+                    liveIndicator.classList.add('hidden');
+                    clearInterval(interval);
+                    return;
+
+                } else {
+                    // Normální countdown
+                    liveIndicator.classList.add('hidden');
+                    streamLink.classList.remove('live');
+                    streamText.textContent = 'Sleduj stream na YouTube';
+                    streamMeta.classList.add('hidden');
+                    updateCountdownDisplay(diff);
+                }
+            }
+
+            function updateCountdownDisplay(diff) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                const seconds = Math.floor((diff / 1000) % 60);
+
+                document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+                document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+            }
+
+            function updateStreamUptime() {
+                if (!streamStartTime) return;
+
+                const uptime = Math.floor((new Date() - streamStartTime) / 1000);
+                const hours = Math.floor(uptime / 3600);
+                const minutes = Math.floor((uptime % 3600) / 60);
+
+                streamUptime.textContent = `• Stream běží: ${hours}h ${minutes}m`;
+            }
+
+            function updateViewers() {
+                // Simulace počtu diváků (v reálném případě bys použil YouTube API)
+                const baseViewers = 50;
+                const randomFactor = Math.random() * 30;
+                const viewers = Math.floor(baseViewers + randomFactor);
+                viewersCount.textContent = `• Diváků online: ${viewers}`;
+            }
+
+            // Simulace změn počtu diváků během streamu
+            setInterval(() => {
+                if (isStreamLive) {
+                    updateViewers();
+                }
+            }, 30000); // Aktualizace každých 30 sekund
 
             updateCountdown();
             const interval = setInterval(updateCountdown, 1000);
