@@ -1381,6 +1381,167 @@ footer {
     }
 }
 
+/* Styly pro světlý režim - sekce další závod */
+body[data-theme="light"] .next-race-section {
+    background: var(--card-bg);
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 8px 32px rgba(211, 47, 47, 0.1);
+}
+
+body[data-theme="light"] .next-race-info {
+    background: rgba(211, 47, 47, 0.05);
+    border-left: 4px solid var(--accent-color);
+    border: 1px solid var(--card-border);
+}
+
+body[data-theme="light"] .race-basic-info h3 {
+    color: var(--accent-color);
+}
+
+body[data-theme="light"] .race-track {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+body[data-theme="light"] .race-datetime {
+    color: var(--text-dark);
+    opacity: 0.8;
+}
+
+/* Countdown v světlém režimu */
+body[data-theme="light"] .countdown-item {
+    background: rgba(211, 47, 47, 0.1);
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.15);
+}
+
+body[data-theme="light"] .countdown-item span:first-child {
+    color: var(--accent-color);
+}
+
+body[data-theme="light"] .countdown-label {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+/* Live indikátor v světlém režimu */
+body[data-theme="light"] .live-indicator {
+    background: linear-gradient(135deg, #d32f2f, #f44336);
+    color: white;
+    border: 2px solid #d32f2f;
+    box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+}
+
+body[data-theme="light"] .live-pulse {
+    background: white;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* Stream link v světlém režimu */
+body[data-theme="light"] .stream-link {
+    background: linear-gradient(135deg, #d32f2f, #b71c1c);
+    border: 2px solid #d32f2f;
+    box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+    color: white;
+}
+
+body[data-theme="light"] .stream-link:hover {
+    background: linear-gradient(135deg, #b71c1c, #d32f2f);
+    box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
+}
+
+/* Stream meta info v světlém režimu */
+body[data-theme="light"] .stream-meta {
+    color: var(--text-dark);
+    opacity: 0.8;
+}
+
+/* Přípravný stav v světlém režimu */
+body[data-theme="light"] .live-indicator.preparing {
+    background: linear-gradient(135deg, var(--vrl-blue), #1565c0);
+    border: 2px solid var(--vrl-blue);
+}
+
+body[data-theme="light"] .live-indicator.preparing .live-pulse {
+    background: #ffd54f;
+    box-shadow: 0 0 8px rgba(255, 213, 79, 0.8);
+}
+
+/* Stavy bez závodů v světlém režimu */
+body[data-theme="light"] .no-races,
+body[data-theme="light"] .race-finished {
+    color: var(--text-dark);
+    background: rgba(211, 47, 47, 0.05);
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+}
+
+/* Vylepšení viditelnosti countdown containeru */
+body[data-theme="light"] .countdown-container {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Zvýraznění celé sekce v světlém režimu */
+body[data-theme="light"] .next-race-section {
+    position: relative;
+}
+
+body[data-theme="light"] .next-race-section::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, var(--accent-color), transparent, var(--accent-color));
+    border-radius: 17px;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+/* Zvýraznění při živém streamu v světlém režimu */
+body[data-theme="light"] .stream-link.live {
+    animation: lightStreamPulse 1.5s infinite;
+}
+
+@keyframes lightStreamPulse {
+    0%, 100% { 
+        box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4);
+        transform: scale(1);
+    }
+    50% { 
+        box-shadow: 0 4px 25px rgba(211, 47, 47, 0.7);
+        transform: scale(1.05);
+    }
+}
+
+/* Zvýraznění countdown čísel v světlém režimu */
+body[data-theme="light"] .countdown-item span:first-child {
+    text-shadow: 0 2px 4px rgba(211, 47, 47, 0.2);
+    font-weight: 800;
+}
+
+/* Responzivní úpravy pro světlý režim */
+@media (max-width: 768px) {
+    body[data-theme="light"] .next-race-section {
+        margin: 2rem 0;
+        padding: 1.5rem;
+    }
+    
+    body[data-theme="light"] .countdown-item {
+        border: 1px solid var(--accent-color);
+        min-width: 55px;
+    }
+    
+    body[data-theme="light"] .countdown-item span:first-child {
+        font-size: 1.3rem;
+    }
+}
+
 @media (max-width: 768px) {
     header {
         position: fixed;
