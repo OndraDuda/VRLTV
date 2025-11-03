@@ -1176,40 +1176,209 @@ footer {
     color: var(--footer-text);
 }
 
-.next-race {
-    margin: 2rem 0;
+/* Sekce dalšího závodu */
+.next-race-section {
+    margin: 3rem 0;
+    padding: 2rem;
     background: var(--card-bg);
+    border-radius: 15px;
     border: 1px solid var(--card-border);
-    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.next-race-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.next-race-info {
+    text-align: center;
     padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border-left: 4px solid var(--f1-red);
+}
+
+.race-basic-info h3 {
+    color: var(--f1-red);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.race-track {
+    font-weight: bold;
+    color: var(--vrl-blue);
+    margin-bottom: 0.5rem;
+}
+
+.race-datetime {
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+/* Race status */
+.race-status {
     text-align: center;
 }
 
-.next-race .countdown {
-    font-size: 1.5rem;
+/* Live indikátor */
+.live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #ff4444;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
     margin-bottom: 1rem;
+    animation: pulse 2s infinite;
 }
 
-.next-race .stream-link-wrapper a {
-    color: var(--vrl-blue);
+.live-pulse {
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    animation: blink 1.5s infinite;
+}
+
+.live-text {
     font-weight: bold;
+    font-size: 1.1rem;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Countdown */
+.countdown-container {
+    margin: 1.5rem 0;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    min-width: 80px;
+}
+
+.countdown-item span:first-child {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--f1-red);
+    font-family: 'Courier New', monospace;
+}
+
+.countdown-label {
+    font-size: 0.8rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-top: 0.3rem;
+}
+
+/* Stream link */
+.stream-link-container {
+    margin-top: 1.5rem;
+}
+
+.stream-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #ff0000, #cc0000);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
     text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
 }
 
-.next-race .stream-link-wrapper a:hover {
-    text-decoration: underline;
+.stream-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
+    background: linear-gradient(135deg, #cc0000, #ff0000);
 }
 
-body[data-theme="light"] input,
-body[data-theme="light"] textarea,
-body[data-theme="light"] select {
-    background: var(--card-bg);
-    color: var(--text-dark);
-    border: 1px solid var(--card-border);
+.stream-link.live {
+    animation: streamPulse 1.5s infinite;
 }
 
-main {
-    margin-bottom: 50px;
+@keyframes streamPulse {
+    0%, 100% { 
+        box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        transform: scale(1);
+    }
+    50% { 
+        box-shadow: 0 4px 25px rgba(255, 0, 0, 0.6);
+        transform: scale(1.05);
+    }
+}
+
+.stream-meta {
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.viewers-count, .stream-uptime {
+    margin: 0 0.5rem;
+}
+
+/* Hidden class */
+.hidden {
+    display: none !important;
+}
+
+/* Responzivní design */
+@media (max-width: 768px) {
+    .next-race-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .countdown {
+        gap: 0.5rem;
+    }
+    
+    .countdown-item {
+        min-width: 60px;
+        padding: 0.8rem;
+    }
+    
+    .countdown-item span:first-child {
+        font-size: 1.5rem;
+    }
+    
+    .next-race-info {
+        padding: 1rem;
+    }
+    
+    .race-basic-info h3 {
+        font-size: 1.2rem;
+    }
 }
 
 @media (max-width: 768px) {
