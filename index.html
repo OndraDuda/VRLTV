@@ -159,7 +159,7 @@
 
                     <!-- Stream link -->
                     <div class="stream-link-container">
-                        <a href="https://www.youtube.com/watch?v=gV-F7vFL0vA" id="stream-link" class="stream-link"
+                        <a href="https://www.youtube.com/watch?v=SHtND9QYC8o" id="stream-link" class="stream-link"
                             target="_blank">
                             <i class="fab fa-youtube"></i>
                             <span id="stream-text">Sleduj stream na YouTube</span>
@@ -550,9 +550,11 @@
 
                     updateStreamUptime();
 
+                    // V části pro 15 minut před startem - přípravná fáze
                 } else if (isLiveWindow && diff > 0) {
                     // 15 minut před startem - přípravná fáze
                     liveIndicator.classList.remove('hidden');
+                    liveIndicator.classList.add('preparing'); // Přidá třídu pro světlý režim
                     liveIndicator.querySelector('.live-text').textContent = 'ZAČÍNÁ BRZY';
                     streamText.textContent = 'Připravte se na stream';
 
@@ -568,7 +570,8 @@
                     return;
 
                 } else {
-                    // Normální countdown
+                    // Odstraní preparing třídu když není v přípravném režimu
+                    liveIndicator.classList.remove('preparing');
                     liveIndicator.classList.add('hidden');
                     streamLink.classList.remove('live');
                     streamText.textContent = 'Sleduj stream na YouTube';
