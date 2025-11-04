@@ -474,12 +474,16 @@
             }
         }
 
-        // Zobrazení porovnání
         document.getElementById('showComparisonBtn').addEventListener('click', function () {
             if (!favoriteDriver || comparisonDrivers.length === 0) return;
 
-            createPointsChart();
+            // Nejprve zobrazíme sekci
             document.getElementById('pointsChartSection').style.display = 'block';
+
+            // Poté s malým zpožděním vytvoříme graf, aby se canvas stihl zobrazit
+            setTimeout(() => {
+                createPointsChart();
+            }, 100);
 
             // Scroll k grafu
             document.getElementById('pointsChartSection').scrollIntoView({ behavior: 'smooth' });
