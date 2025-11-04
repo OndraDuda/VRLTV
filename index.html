@@ -291,7 +291,7 @@
         const YOUTUBE_API_KEY = 'AIzaSyB5q7AGW9zjLDOdHj_-IerZwsRmmGcZXKY';
         const YOUTUBE_CHANNEL_ID = 'UC0XDTMlGN34SRTv8upjA1gw';
 
-        // Data závodů - YouTube ID budou doplněna automaticky podle živého streamu
+        // Data závodů
         const races = [
             { round: "R1", name: "Austrálie", date: "2025-09-09", track: "Melbourne Grand Prix Circuit" },
             { round: "R2", name: "Velká Británie", date: "2025-09-16", track: "Silverstone Circuit" },
@@ -317,7 +317,8 @@
             { round: "R21", name: "Abu Dhabi", date: "2026-04-28", track: "Yas Marina Circuit" }
         ];
 
-        // Proměnné pro ukládání stavu streamu
+        // Globální proměnné pro správu stavu
+        let currentDisplayedRace = null;
         let currentLiveStream = null;
         let streamCheckInterval = null;
 
@@ -367,18 +368,20 @@
             }
         }
 
-        // Funkce pro získání aktuálního závodu
+        // Funkce pro získání aktuálního závodu (běžícího nebo do 3 hodin po skončení)
         function getCurrentRace() {
             const now = new Date();
 
-            return races
+            const currentRaces = races
                 .map(r => {
                     const raceStart = new Date(`${r.date}T19:00:00`);
                     const raceEnd = new Date(raceStart.getTime() + 3 * 60 * 60 * 1000);
                     return { ...r, raceStart, raceEnd };
                 })
                 .filter(r => now >= r.raceStart && now <= r.raceEnd)
-                .sort((a, b) => a.raceStart - b.raceStart)[0];
+                .sort((a, b) => a.raceStart - b.raceStart);
+
+            return currentRaces.length > 0 ? currentRaces[0] : null;
         }
 
         // Funkce pro získání dalšího závodu
@@ -386,21 +389,25 @@
             const currentRace = getCurrentRace();
             const now = new Date();
 
+            // Pokud máme aktuální závod, vrátíme ho
             if (currentRace) {
                 return currentRace;
             }
 
-            return races
+            // Jinak najdeme další nadcházející závod
+            const upcomingRaces = races
                 .map(r => {
                     const raceStart = new Date(`${r.date}T19:00:00`);
                     return { ...r, raceStart };
                 })
                 .filter(r => r.raceStart > now)
-                .sort((a, b) => a.raceStart - b.raceStart)[0];
+                .sort((a, b) => a.raceStart - b.raceStart);
+
+            return upcomingRaces.length > 0 ? upcomingRaces[0] : null;
         }
 
-        // Funkce pro získání nadcházejících závodů
-        function getUpcomingRaces(excludeRace, limit = null) {
+        // Funkce pro získání nadcházejících závodů (bez aktuálního)
+        function getUpcomingRaces(limit = null) {
             const now = new Date();
             const currentRace = getCurrentRace();
 
@@ -471,35 +478,22 @@
             return null;
         }
 
-        // Hlavní funkce pro aktualizaci streamu
-        async function updateStreamStatus() {
-            const nextRace = getNextRace();
-            const streamData = await getCurrentLiveStream();
-
-            const countdownEl = document.getElementById('countdown');
-            const streamLink = document.getElementById('stream-link');
-            const streamText = document.getElementById('stream-text');
-            const liveIndicator = document.getElementById('liveIndicator');
-            const streamMeta = document.getElementById('streamMeta');
+        // Funkce pro aktualizaci zobrazení závodu
+        function updateRaceDisplay(race) {
             const nextRaceName = document.getElementById('nextRaceName');
             const nextRaceTrack = document.getElementById('nextRaceTrack');
             const nextRaceDateTime = document.getElementById('nextRaceDateTime');
-            const viewersCount = document.getElementById('viewersCount');
-            const streamUptime = document.getElementById('streamUptime');
 
-            if (!nextRace) {
-                countdownEl.innerHTML = '<div class="no-races">Žádné další závody naplánovány</div>';
-                streamLink.style.display = 'none';
+            if (!race) {
                 nextRaceName.textContent = "Žádný naplánovaný závod";
                 nextRaceTrack.textContent = "---";
                 nextRaceDateTime.textContent = "---";
                 return;
             }
 
-            // Naplní základní informace o závodě
-            nextRaceName.textContent = nextRace.name;
-            nextRaceTrack.textContent = nextRace.track;
-            nextRaceDateTime.textContent = nextRace.raceStart.toLocaleDateString("cs-CZ", {
+            nextRaceName.textContent = race.name;
+            nextRaceTrack.textContent = race.track;
+            nextRaceDateTime.textContent = race.raceStart.toLocaleDateString("cs-CZ", {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
@@ -507,15 +501,69 @@
                 hour: '2-digit',
                 minute: '2-digit'
             });
+        }
+
+        // Funkce pro aktualizaci countdownu
+        function updateCountdownDisplay(targetDate) {
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                // Čas již uplynul - zobrazíme nulu
+                document.getElementById('cd-days').textContent = '00';
+                document.getElementById('cd-hours').textContent = '00';
+                document.getElementById('cd-minutes').textContent = '00';
+                document.getElementById('cd-seconds').textContent = '00';
+                return false;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+            document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+
+            return true;
+        }
+
+        // Hlavní funkce pro aktualizaci stavu streamu a závodu
+        async function updateStreamStatus() {
+            const streamData = await getCurrentLiveStream();
+            const currentRace = getCurrentRace();
+            const nextRace = getNextRace();
+
+            const countdownEl = document.getElementById('countdown');
+            const streamLink = document.getElementById('stream-link');
+            const streamText = document.getElementById('stream-text');
+            const liveIndicator = document.getElementById('liveIndicator');
+            const streamMeta = document.getElementById('streamMeta');
+            const viewersCount = document.getElementById('viewersCount');
+            const streamUptime = document.getElementById('streamUptime');
+
+            // Pokud není žádný závod
+            if (!nextRace) {
+                countdownEl.innerHTML = '<div class="no-races">Žádné další závody naplánovány</div>';
+                streamLink.style.display = 'none';
+                updateRaceDisplay(null);
+                return;
+            }
 
             const now = new Date();
             const raceStart = nextRace.raceStart;
             const raceEnd = new Date(raceStart.getTime() + 3 * 60 * 60 * 1000);
-            const diffToStart = raceStart - now;
-            const diffToEnd = raceEnd - now;
 
+            // Kontrola, zda se má přepnout na nový závod
+            if (!currentDisplayedRace || currentDisplayedRace.date !== nextRace.date) {
+                currentDisplayedRace = nextRace;
+                updateRaceDisplay(nextRace);
+            }
+
+            // Pokud je stream živý a odpovídá aktuálnímu závodu
             if (streamData.isLive) {
-                // SKUTEČNĚ ŽIVÝ STREAM
                 currentLiveStream = streamData;
 
                 // Získání detailů streamu
@@ -523,13 +571,6 @@
 
                 // Aktualizace odkazu na stream
                 streamLink.href = `https://www.youtube.com/watch?v=${streamData.videoId}`;
-
-                // Pokus o detekci závodu z názvu streamu
-                const detectedRace = detectRaceFromStream(streamData.title);
-                if (detectedRace && detectedRace.name !== nextRace.name) {
-                    nextRaceName.textContent = detectedRace.name;
-                    nextRaceTrack.textContent = detectedRace.track;
-                }
 
                 // Zobrazení LIVE indikátoru
                 liveIndicator.classList.remove('hidden');
@@ -546,77 +587,86 @@
                     }
                 }
 
-            } else if (now >= raceStart && now <= raceEnd) {
-                // Časové okno závodu, ale stream není živý
-                liveIndicator.classList.remove('hidden');
-                liveIndicator.classList.add('preparing');
-                liveIndicator.querySelector('.live-text').textContent = 'ČEKÁME NA STREAM';
-                streamText.textContent = 'Stream by měl brzy začít';
-                streamMeta.classList.add('hidden');
-                countdownEl.style.display = 'flex';
-                updateCountdownDisplay(diffToEnd);
-
-            } else if (diffToStart <= 15 * 60 * 1000 && diffToStart > 0) {
-                // 15 minut před startem
-                liveIndicator.classList.remove('hidden');
-                liveIndicator.classList.add('preparing');
-                liveIndicator.querySelector('.live-text').textContent = 'ZAČÍNÁ BRZY';
-                streamText.textContent = 'Připravte se na stream';
-                streamMeta.classList.add('hidden');
-                countdownEl.style.display = 'flex';
-                updateCountdownDisplay(diffToStart);
-
-            } else if (diffToStart <= 0 && diffToEnd <= 0) {
-                // Závod skončil
-                countdownEl.innerHTML = '<div class="race-finished">Závod byl dokončen</div>';
-                streamLink.style.display = 'none';
-                liveIndicator.classList.add('hidden');
-
             } else {
-                // Normální countdown
-                liveIndicator.classList.remove('preparing');
+                // STREAM NENÍ ŽIVÝ
+
+                // Skryjeme LIVE indikátor a metadata
                 liveIndicator.classList.add('hidden');
+                streamMeta.classList.add('hidden');
                 streamLink.classList.remove('live');
                 streamText.textContent = 'Sleduj stream na YouTube';
-                streamMeta.classList.add('hidden');
                 countdownEl.style.display = 'flex';
-                updateCountdownDisplay(diffToStart);
-            }
 
-            function updateCountdownDisplay(diff) {
-                const isNegative = diff < 0;
-                const absDiff = Math.abs(diff);
+                // Pokud je závod v časovém okně (od startu do 3 hodin po startu)
+                if (now >= raceStart && now <= raceEnd) {
+                    // Závod by měl běžet, ale stream není živý
+                    liveIndicator.classList.remove('hidden');
+                    liveIndicator.classList.add('preparing');
+                    liveIndicator.querySelector('.live-text').textContent = 'ČEKÁME NA STREAM';
+                    streamText.textContent = 'Stream by měl brzy začít';
 
-                const days = Math.floor(absDiff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((absDiff / (1000 * 60 * 60)) % 24);
-                const minutes = Math.floor((absDiff / (1000 * 60)) % 60);
-                const seconds = Math.floor((absDiff / 1000) % 60);
+                    // Odpočet do konce časového okna
+                    updateCountdownDisplay(raceEnd);
 
-                document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
-                document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-                document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
-                document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+                } else if (now < raceStart) {
+                    // Závod ještě nezačal - normální odpočet
+                    const timeToStart = updateCountdownDisplay(raceStart);
+
+                    // 15 minut před startem - přípravná fáze
+                    if (timeToStart && (raceStart - now) <= 15 * 60 * 1000) {
+                        liveIndicator.classList.remove('hidden');
+                        liveIndicator.classList.add('preparing');
+                        liveIndicator.querySelector('.live-text').textContent = 'ZAČÍNÁ BRZY';
+                        streamText.textContent = 'Připravte se na stream';
+                    }
+                } else {
+                    // Závod již skončil - přejdeme na další
+                    const nextUpcomingRace = getNextRace();
+                    if (nextUpcomingRace && nextUpcomingRace.date !== currentDisplayedRace.date) {
+                        // Přepneme na nový závod
+                        currentDisplayedRace = nextUpcomingRace;
+                        updateRaceDisplay(nextUpcomingRace);
+                        updateCountdownDisplay(nextUpcomingRace.raceStart);
+                    } else {
+                        countdownEl.innerHTML = '<div class="race-finished">Závod byl dokončen</div>';
+                    }
+                }
             }
         }
 
         // Inicializace stránky
         document.addEventListener("DOMContentLoaded", async () => {
-            // První načtení stavu streamu
+            // První načtení stavu
             await updateStreamStatus();
 
             // Pravidelné aktualizace streamu (každých 30 sekund)
             streamCheckInterval = setInterval(updateStreamStatus, 30000);
 
-            // Nadcházející závody
-            const nextRace = getNextRace();
-            const upcomingRaces = getUpcomingRaces(nextRace, 5);
+            // Pravidelná aktualizace countdownu (každou sekundu)
+            const countdownInterval = setInterval(() => {
+                if (currentDisplayedRace) {
+                    const now = new Date();
+                    const raceStart = currentDisplayedRace.raceStart;
+
+                    if (now < raceStart) {
+                        updateCountdownDisplay(raceStart);
+                    } else {
+                        const raceEnd = new Date(raceStart.getTime() + 3 * 60 * 60 * 1000);
+                        if (now <= raceEnd) {
+                            updateCountdownDisplay(raceEnd);
+                        }
+                    }
+                }
+            }, 1000);
+
+            // Naplnění nadcházejících závodů
+            const upcomingRaces = getUpcomingRaces(5);
             populateCalendar("calendar", upcomingRaces);
 
-            // Automatické obnovení seznamu závodů
+            // Automatické obnovení seznamu závodů každou minutu
             function scheduleRefresh() {
                 setTimeout(() => {
-                    const newNextRace = getNextRace();
-                    const newUpcomingRaces = getUpcomingRaces(newNextRace, 5);
+                    const newUpcomingRaces = getUpcomingRaces(5);
                     populateCalendar("calendar", newUpcomingRaces);
                     scheduleRefresh();
                 }, 60000);
