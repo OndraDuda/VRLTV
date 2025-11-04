@@ -2644,28 +2644,28 @@ body[data-theme="light"] .race-finished {
     margin: 0;
 }
 
-/* OPRAVA PRO GRAF - ZAJISTÍ SPRÁVNOU VELIKOST */
+/* SEKCE GRAFU TÝMŮ - VYLEPŠENÁ RESPONZIVITA */
+/* VYLEPŠENÉ CSS PRO GRAF TÝMŮ */
+/* VYLEPŠENÉ CSS PRO GRAF JEZDCŮ - LEPŠÍ OSTROST */
 .points-chart-section {
     background: var(--card-bg);
     border-radius: 15px;
-    padding: 2rem;
+    padding: 1.5rem;
     margin: 2rem auto;
     max-width: 1200px;
     border: 1px solid var(--card-border);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 95%;
+    overflow: hidden;
 }
 
-
-/* OPRAVA PRO GRAF - ZAJISTÍ SPRÁVNÉ ZOBRAZENÍ */
 .chart-container {
     position: relative;
-    height: 500px; /* Zvýšená výška */
+    height: 400px;
     width: 100%;
     margin: 1rem auto 0;
 }
-
 
 #pointsChart {
     width: 100% !important;
@@ -2673,93 +2673,132 @@ body[data-theme="light"] .race-finished {
     display: block;
 }
 
-canvas#pointsChart {
-    width: 100% !important;
-    height: 100% !important;
+/* ZAJIŠTĚNÍ OSTROSTI GRAFU */
+canvas {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
 }
 
-/* RESPONZIVITA */
-@media (max-width: 768px) {
-    .favorite-driver-section {
-        padding: 1.5rem;
-        margin: 1rem;
-    }
-
-    .favorite-driver-info {
-        padding: 1.5rem;
-    }
-
-    .favorite-driver-name {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-
-    .favorite-driver-name span:first-child {
-        font-size: 1.5rem;
-    }
-
-    .favorite-driver-details {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.8rem;
-    }
-
-    .comparison-section {
-        padding: 1.5rem;
-    }
-
-    .comparison-controls {
-        flex-direction: column;
-    }
-
-    .comparison-controls select {
-        min-width: unset;
-        width: 100%;
-    }
-
-    .comparison-drivers-container {
-        grid-template-columns: 1fr;
-    }
-
-    .comparison-actions {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .comparison-actions .btn {
-        width: 100%;
-        max-width: 200px;
-    }
-
+/* RESPONZIVITA PRO TABLET */
+@media (max-width: 1024px) {
     .points-chart-section {
-        padding: 1.5rem;
-        margin: 1rem;
-        width: 90%;
+        padding: 1.2rem;
+        margin: 1.5rem auto;
+        width: 92%;
     }
-
-    .chart-container {
-        height: 400px; /* Menší výška na mobilech */
-    }
-}
-
-@media (max-width: 480px) {
+    
     .chart-container {
         height: 350px;
     }
-    
+}
+
+/* RESPONZIVITA PRO MOBIL */
+@media (max-width: 768px) {
     .points-chart-section {
         padding: 1rem;
-        width: 85%;
-    }
-
-    .favorite-driver-details {
-        grid-template-columns: 1fr;
+        margin: 1rem auto;
+        width: 90%;
+        border-radius: 12px;
     }
     
-    .favorite-driver-info > div:not(.favorite-driver-name) {
-        font-size: 1rem;
+    .chart-container {
+        height: 300px;
+        margin: 0.5rem auto 0;
     }
 }
+
+/* RESPONZIVITA PRO MALÉ MOBILY */
+@media (max-width: 480px) {
+    .points-chart-section {
+        padding: 0.8rem;
+        margin: 0.8rem auto;
+        width: 85%;
+        border-radius: 10px;
+    }
+    
+    .chart-container {
+        height: 250px;
+    }
+    
+    .points-chart-section .table-title {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+    }
+}
+
+/* RESPONZIVITA PRO VELMI MALÉ OBRAZOVKY */
+@media (max-width: 360px) {
+    .chart-container {
+        height: 220px;
+    }
+    
+    .points-chart-section {
+        padding: 0.6rem;
+        margin: 0.6rem auto;
+        width: 95%;
+    }
+    
+    .points-chart-section .table-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* VYLEPŠENÍ LEGENDY PRO MOBIL */
+@media (max-width: 768px) {
+    .chartjs-legend {
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        padding: 0 10px !important;
+    }
+    
+    .chartjs-legend-item {
+        margin: 2px 4px !important;
+        font-size: 0.7rem !important;
+    }
+    
+    .chartjs-legend-item > span {
+        width: 8px !important;
+        height: 8px !important;
+        margin-right: 4px !important;
+    }
+}
+
+/* SVĚTLÝ REŽIM PRO GRAF JEZDCŮ */
+body[data-theme="light"] .chart-container {
+    background: white;
+    border-radius: 8px;
+    padding: 8px;
+    border: 1px solid var(--card-border);
+}
+
+/* LEPŠÍ INTERAKCE NA MOBILU */
+@media (max-width: 768px) {
+    .points-chart-section {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .chart-container {
+        touch-action: pan-x pan-y;
+    }
+}
+/* ZAJIŠTĚNÍ OSTROSTI GRAFU */
+canvas {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+/* SVĚTLÝ REŽIM */
+body[data-theme="light"] .chart-container {
+    background: white;
+    border-radius: 8px;
+    padding: 8px;
+    border: 1px solid var(--card-border);
+}
+
 
 /* SVĚTLÝ REŽIM */
 body[data-theme="light"] .favorite-driver-section,
@@ -2834,89 +2873,4 @@ body[data-theme="light"] .driver-selector select {
 body[data-theme="light"] .driver-selector select:focus {
     border-color: var(--accent-color);
     box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.2);
-}
-
-/* SEKCE GRAFU - ZAROVNÁNÍ DO STŘEDU */
-.points-chart-section {
-    background: var(--card-bg);
-    border-radius: 15px;
-    padding: 2rem;
-    margin: 2rem auto;
-    max-width: 1200px;
-    border: 1px solid var(--card-border);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-/* OPRAVA PRO GRAF - ZAJISTÍ SPRÁVNÉ ZOBRAZENÍ */
-.chart-container {
-    position: relative;
-    height: 400px;
-    width: 100%;
-    margin: 1rem auto 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#pointsChart {
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-    margin: 0 auto;
-}
-
-/* Zajistí, že graf bude vždy na středu i při různých velikostech */
-canvas#pointsChart {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Pro lepší responzivitu grafu */
-@media (max-width: 768px) {
-    .points-chart-section {
-        padding: 1.5rem;
-        margin: 1rem;
-    }
-    
-    .chart-container {
-        height: 300px;
-    }
-}
-
-@media (max-width: 480px) {
-    .chart-container {
-        height: 250px;
-    }
-}
-
-/* Zajistí, že nadpis sekce grafu je také na středu */
-.points-chart-section .table-title {
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-/* OPRAVA PRO GRAF - ZAJISTÍ SPRÁVNÉ ZOBRAZENÍ */
-.chart-container {
-    position: relative;
-    height: 400px;
-    width: 100%;
-    margin: 1rem auto 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#pointsChart {
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-    margin: 0 auto;
-}
-
-body[data-theme="light"] .chart-container {
-    background: white;
-    border-radius: 8px;
-    padding: 10px;
 }
