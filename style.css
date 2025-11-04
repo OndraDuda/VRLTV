@@ -1,29 +1,29 @@
 :root {
-    --f1-red: #FF6D00;
-    --vrl-blue: #8B4513;
-    --vrl-purple: #4B0082;
-    --dark-bg: #1A1A1A;
-    --light-bg: #1A1A1A;
+    --f1-red: #FF4242;
+    --vrl-blue: #A10404;
+    --vrl-purple: #4E0303;
+    --dark-bg: #110C0C;
+    --light-bg: #110C0C;
     --text-light: #FFFFFF;
     --text-dark: #FFFFFF;
-    --card-bg: #2D2D2D;
-    --card-border: #8B4513;
-    --header-bg: linear-gradient(135deg, #1A1A1A 0%, #4B0082 100%);
-    --track-card-border: #8B4513;
-    --bg-page: #1A1A1A;
-    --bg-card: #2D2D2D;
+    --card-bg: #1a1a1a;
+    --card-border: #4E0303;
+    --header-bg: linear-gradient(135deg, #110C0C 0%, #A10404 100%);
+    --track-card-border: #4E0303;
+    --bg-page: #121212;
+    --bg-card: #1e1e1e;
     --text-color: #ffffff;
-    --accent-color: #FF6D00;
-    --error-color: #FF4444;
+    --accent-color: #0077ff;
+    --error-color: #ff4d4d;
     --discord-color: #5865F2;
     --discord-hover: #4752c4;
     --gold: #FFD700;
     --silver: #C0C0C0;
     --bronze: #CD7F32;
-    --footer-bg: #2D2D2D;
-    --footer-text: #CCCCCC;
-    --table-hover: rgba(139, 69, 19, 0.1);
-    --table-even: rgba(75, 0, 130, 0.05);
+    --footer-bg: #222;
+    --footer-text: #ccc;
+    --table-hover: rgba(0, 0, 0, 0.08);
+    --table-even: rgba(0, 0, 0, 0.03);
 }
 
 [data-theme="light"] {
@@ -1176,370 +1176,40 @@ footer {
     color: var(--footer-text);
 }
 
-/* Sekce dalšího závodu */
-.next-race-section {
-    margin: 3rem 0;
-    padding: 2rem;
+.next-race {
+    margin: 2rem 0;
     background: var(--card-bg);
-    border-radius: 15px;
     border: 1px solid var(--card-border);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-.next-race-container {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
-    align-items: center;
-}
-
-.next-race-info {
-    text-align: center;
+    border-radius: 10px;
     padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    border-left: 4px solid var(--f1-red);
-}
-
-.race-basic-info h3 {
-    color: var(--f1-red);
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.race-track {
-    font-weight: bold;
-    color: var(--vrl-blue);
-    margin-bottom: 0.5rem;
-}
-
-.race-datetime {
-    color: var(--text-color);
-    opacity: 0.8;
-}
-
-/* Race status */
-.race-status {
     text-align: center;
 }
 
-/* Live indikátor */
-.live-indicator {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: #ff4444;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
+.next-race .countdown {
+    font-size: 1.5rem;
     margin-bottom: 1rem;
-    animation: pulse 2s infinite;
 }
 
-.live-pulse {
-    width: 12px;
-    height: 12px;
-    background: white;
-    border-radius: 50%;
-    animation: blink 1.5s infinite;
-}
-
-.live-text {
+.next-race .stream-link-wrapper a {
+    color: var(--vrl-blue);
     font-weight: bold;
-    font-size: 1.1rem;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
-
-/* Countdown */
-.countdown-container {
-    margin: 1.5rem 0;
-}
-
-.countdown {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.countdown-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 1rem;
-    border-radius: 10px;
-    min-width: 80px;
-}
-
-.countdown-item span:first-child {
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--f1-red);
-    font-family: 'Courier New', monospace;
-}
-
-.countdown-label {
-    font-size: 0.8rem;
-    color: var(--text-color);
-    opacity: 0.8;
-    margin-top: 0.3rem;
-}
-
-/* Stream link */
-.stream-link-container {
-    margin-top: 1.5rem;
-}
-
-.stream-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: linear-gradient(135deg, #ff0000, #cc0000);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 25px;
     text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
 }
 
-.stream-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
-    background: linear-gradient(135deg, #cc0000, #ff0000);
+.next-race .stream-link-wrapper a:hover {
+    text-decoration: underline;
 }
 
-.stream-link.live {
-    animation: streamPulse 1.5s infinite;
-}
-
-@keyframes streamPulse {
-    0%, 100% { 
-        box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
-        transform: scale(1);
-    }
-    50% { 
-        box-shadow: 0 4px 25px rgba(255, 0, 0, 0.6);
-        transform: scale(1.05);
-    }
-}
-
-.stream-meta {
-    margin-top: 0.8rem;
-    font-size: 0.9rem;
-    color: var(--text-color);
-    opacity: 0.8;
-}
-
-.viewers-count, .stream-uptime {
-    margin: 0 0.5rem;
-}
-
-/* Hidden class */
-.hidden {
-    display: none !important;
-}
-
-/* Responzivní design */
-@media (max-width: 768px) {
-    .next-race-container {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .countdown {
-        gap: 0.5rem;
-    }
-    
-    .countdown-item {
-        min-width: 60px;
-        padding: 0.8rem;
-    }
-    
-    .countdown-item span:first-child {
-        font-size: 1.5rem;
-    }
-    
-    .next-race-info {
-        padding: 1rem;
-    }
-    
-    .race-basic-info h3 {
-        font-size: 1.2rem;
-    }
-}
-
-/* Styly pro světlý režim - sekce další závod */
-body[data-theme="light"] .next-race-section {
+body[data-theme="light"] input,
+body[data-theme="light"] textarea,
+body[data-theme="light"] select {
     background: var(--card-bg);
-    border: 2px solid var(--accent-color);
-    box-shadow: 0 8px 32px rgba(211, 47, 47, 0.1);
-}
-
-body[data-theme="light"] .next-race-info {
-    background: rgba(211, 47, 47, 0.05);
-    border-left: 4px solid var(--accent-color);
+    color: var(--text-dark);
     border: 1px solid var(--card-border);
 }
 
-body[data-theme="light"] .race-basic-info h3 {
-    color: var(--accent-color);
-}
-
-body[data-theme="light"] .race-track {
-    color: var(--accent-color);
-    font-weight: 600;
-}
-
-body[data-theme="light"] .race-datetime {
-    color: var(--text-dark);
-    opacity: 0.8;
-}
-
-/* Countdown v světlém režimu */
-body[data-theme="light"] .countdown-item {
-    background: rgba(211, 47, 47, 0.1);
-    border: 2px solid var(--accent-color);
-    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.15);
-}
-
-body[data-theme="light"] .countdown-item span:first-child {
-    color: var(--accent-color);
-}
-
-body[data-theme="light"] .countdown-label {
-    color: var(--text-dark);
-    font-weight: 500;
-}
-
-/* Live indikátor v světlém režimu */
-body[data-theme="light"] .live-indicator {
-    background: linear-gradient(135deg, #d32f2f, #f44336);
-    color: white;
-    border: 2px solid #d32f2f;
-    box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
-}
-
-body[data-theme="light"] .live-pulse {
-    background: white;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-}
-
-/* Stream link v světlém režimu */
-body[data-theme="light"] .stream-link {
-    background: linear-gradient(135deg, #d32f2f, #b71c1c);
-    border: 2px solid #d32f2f;
-    box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
-    color: white;
-}
-
-body[data-theme="light"] .stream-link:hover {
-    background: linear-gradient(135deg, #b71c1c, #d32f2f);
-    box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
-}
-
-/* Stream meta info v světlém režimu */
-body[data-theme="light"] .stream-meta {
-    color: var(--text-dark);
-    opacity: 0.8;
-}
-
-/* Přípravný stav v světlém režimu */
-body[data-theme="light"] .live-indicator.preparing {
-    background: linear-gradient(135deg, var(--vrl-blue), #1565c0);
-    border: 2px solid var(--vrl-blue);
-}
-
-body[data-theme="light"] .live-indicator.preparing .live-pulse {
-    background: #ffd54f;
-    box-shadow: 0 0 8px rgba(255, 213, 79, 0.8);
-}
-
-/* Stavy bez závodů v světlém režimu */
-body[data-theme="light"] .no-races,
-body[data-theme="light"] .race-finished {
-    color: var(--text-dark);
-    background: rgba(211, 47, 47, 0.05);
-    border-radius: 8px;
-    border: 1px solid var(--card-border);
-}
-
-/* Vylepšení viditelnosti countdown containeru */
-body[data-theme="light"] .countdown-container {
-    background: rgba(255, 255, 255, 0.5);
-    padding: 1rem;
-    border-radius: 12px;
-    border: 1px solid var(--card-border);
-    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Zvýraznění celé sekce v světlém režimu */
-body[data-theme="light"] .next-race-section {
-    position: relative;
-}
-
-body[data-theme="light"] .next-race-section::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(135deg, var(--accent-color), transparent, var(--accent-color));
-    border-radius: 17px;
-    z-index: -1;
-    opacity: 0.1;
-}
-
-/* Zvýraznění při živém streamu v světlém režimu */
-body[data-theme="light"] .stream-link.live {
-    animation: lightStreamPulse 1.5s infinite;
-}
-
-@keyframes lightStreamPulse {
-    0%, 100% { 
-        box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4);
-        transform: scale(1);
-    }
-    50% { 
-        box-shadow: 0 4px 25px rgba(211, 47, 47, 0.7);
-        transform: scale(1.05);
-    }
-}
-
-/* Zvýraznění countdown čísel v světlém režimu */
-body[data-theme="light"] .countdown-item span:first-child {
-    text-shadow: 0 2px 4px rgba(211, 47, 47, 0.2);
-    font-weight: 800;
-}
-
-/* Responzivní úpravy pro světlý režim */
-@media (max-width: 768px) {
-    body[data-theme="light"] .next-race-section {
-        margin: 2rem 0;
-        padding: 1.5rem;
-    }
-    
-    body[data-theme="light"] .countdown-item {
-        border: 1px solid var(--accent-color);
-        min-width: 55px;
-    }
-    
-    body[data-theme="light"] .countdown-item span:first-child {
-        font-size: 1.3rem;
-    }
+main {
+    margin-bottom: 50px;
 }
 
 @media (max-width: 768px) {
@@ -2359,63 +2029,357 @@ body[data-theme="light"] .race-results-table tbody tr:nth-child(3) td:first-chil
     font-weight: bold;
 }
 
-/* Styly pro oblíbeného jezdce */
-.favorite-driver-section {
-    background: linear-gradient(135deg, var(--vrl-blue) 0%, var(--vrl-purple) 100%);
-    color: var(--text-light);
+/* 🎯 SEKCE DALŠÍHO ZÁVODU — SLUČENÁ & UNIFIKOVANÁ VERZE */
+/* Využívá pouze CSS proměnné definované v :root a [data-theme="light"] */
+
+/* Základní kontejner */
+.next-race-section {
+    margin: 3rem 0;
     padding: 2rem;
-    margin: 2rem auto;
+    background: var(--card-bg);
     border-radius: 15px;
-    width: 90%;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.next-race-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
     max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Info o závodě */
+.next-race-info {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border-left: 4px solid var(--f1-red);
+    width: 100%;
+    max-width: 500px;
+}
+
+.race-basic-info h3 {
+    color: var(--f1-red);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.race-track {
+    font-weight: bold;
+    color: var(--vrl-blue);
+    margin-bottom: 0.5rem;
+}
+
+.race-datetime {
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+/* Stav závodu */
+.race-status {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Live indikátor */
+.live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--f1-red);
+    color: var(--text-light);
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    animation: pulse 2s infinite;
+    justify-content: center;
+}
+
+.live-pulse {
+    width: 12px;
+    height: 12px;
+    background: var(--text-light);
+    border-radius: 50%;
+    animation: blink 1.5s infinite;
+}
+
+.live-text {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Animace */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Countdown */
+.countdown-container {
+    margin: 1.5rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 600px;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    min-width: 80px;
+    flex: 1;
+    max-width: 100px;
+}
+
+.countdown-item span:first-child {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--f1-red);
+    font-family: 'Courier New', monospace;
+}
+
+.countdown-label {
+    font-size: 0.8rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-top: 0.3rem;
+}
+
+/* Stream link */
+.stream-link-container {
+    margin-top: 1.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stream-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--f1-red), var(--vrl-blue));
+    color: var(--text-light);
+    padding: 12px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    justify-content: center;
+}
+
+.stream-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, var(--vrl-blue), var(--f1-red));
+}
+
+.stream-link.live {
+    animation: streamPulse 1.5s infinite;
+}
+
+@keyframes streamPulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
+        transform: scale(1.05);
+    }
+}
+
+.stream-meta {
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    text-align: center;
+}
+
+.viewers-count,
+.stream-uptime {
+    margin: 0 0.5rem;
+}
+
+/* Skrytí */
+.hidden {
+    display: none !important;
+}
+
+/* 🌞 Světlý režim */
+body[data-theme="light"] .next-race-section {
+    background: var(--card-bg);
+    border: 2px solid var(--accent-color);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-.favorite-driver-card {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 1.5rem;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
+body[data-theme="light"] .next-race-info {
+    background: rgba(255, 255, 255, 0.6);
+    border-left: 4px solid var(--accent-color);
+    border: 1px solid var(--card-border);
 }
 
-.favorite-driver-info {
-    flex: 1;
+body[data-theme="light"] .race-basic-info h3 {
+    color: var(--accent-color);
 }
 
-.favorite-driver-name {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    color: var(--text-light);
+body[data-theme="light"] .race-track {
+    color: var(--accent-color);
+    font-weight: 600;
 }
 
-.favorite-driver-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.favorite-driver-detail {
-    text-align: center;
-    padding: 0.8rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-}
-
-.favorite-driver-detail div:first-child {
-    font-size: 0.9rem;
+body[data-theme="light"] .race-datetime {
+    color: var(--text-dark);
     opacity: 0.8;
-    margin-bottom: 0.3rem;
 }
 
-.favorite-driver-detail div:last-child {
-    font-size: 1.2rem;
-    font-weight: bold;
+/* Countdown v světlém režimu */
+body[data-theme="light"] .countdown-item {
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body[data-theme="light"] .countdown-item span:first-child {
+    color: var(--accent-color);
+}
+
+body[data-theme="light"] .countdown-label {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+/* Live indikátor v světlém režimu */
+body[data-theme="light"] .live-indicator {
+    background: linear-gradient(135deg, var(--accent-color), var(--f1-red));
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme="light"] .live-pulse {
+    background: var(--text-light);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* Stream link v světlém režimu */
+body[data-theme="light"] .stream-link {
+    background: linear-gradient(135deg, var(--accent-color), var(--f1-red));
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     color: var(--text-light);
+}
+
+body[data-theme="light"] .stream-link:hover {
+    background: linear-gradient(135deg, var(--f1-red), var(--accent-color));
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Stream meta info */
+body[data-theme="light"] .stream-meta {
+    color: var(--text-dark);
+    opacity: 0.8;
+}
+
+/* Stavy bez závodů */
+body[data-theme="light"] .no-races,
+body[data-theme="light"] .race-finished {
+    color: var(--text-dark);
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+/* 📱 Responzivita */
+@media (max-width: 768px) {
+    .next-race-section {
+        margin: 2rem 0;
+        padding: 1.5rem;
+    }
+
+    .countdown {
+        gap: 0.5rem;
+    }
+
+    .countdown-item {
+        min-width: 60px;
+        padding: 0.8rem;
+        max-width: 70px;
+    }
+
+    .countdown-item span:first-child {
+        font-size: 1.5rem;
+    }
+
+    .next-race-info {
+        padding: 1rem;
+        max-width: 100%;
+    }
+
+    .race-basic-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .stream-link {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 769px) {
+    .next-race-container {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .next-race-info {
+        max-width: 400px;
+    }
+
+    .race-status {
+        max-width: 600px;
+    }
+}
+
+/* STYLY PRO SEKCI OBLÍBENÉHO JEZDCE */
+.favorite-driver-section {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .driver-selector {
@@ -2424,61 +2388,314 @@ body[data-theme="light"] .race-results-table tbody tr:nth-child(3) td:first-chil
 }
 
 .driver-selector select {
-    padding: 12px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    background: var(--card-bg);
-    color: var(--text-color);
-    min-width: 300px;
-    cursor: pointer;
-    border: 1px solid var(--card-border);
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 16px;
+    border: 2px solid var(--vrl-blue);
+    border-radius: 10px;
+    background: var(--dark-bg);
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.driver-selector select:focus {
+    outline: none;
+    border-color: var(--f1-red);
+    box-shadow: 0 0 0 3px rgba(255, 66, 66, 0.2);
+}
+
+/* KARTA OBLÍBENÉHO JEZDCE */
+.favorite-driver-card {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.favorite-driver-info {
+    background: linear-gradient(135deg, var(--dark-bg), var(--vrl-purple));
+    padding: 2rem;
+    border-radius: 12px;
+    border-left: 6px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+}
+
+.favorite-driver-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, transparent 40%, rgba(255, 215, 0, 0.1));
+    border-radius: 0 0 0 100%;
+}
+
+.favorite-driver-name {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.favorite-driver-name span:first-child {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-light);
 }
 
 .favorite-badge {
-    background: var(--gold);
-    color: #000;
-    padding: 4px 12px;
+    background: linear-gradient(135deg, var(--gold), #FFA500);
+    color: var(--text-dark);
+    padding: 6px 12px;
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: bold;
-    margin-left: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: pulse 2s infinite;
 }
 
-/* Zvýraznění oblíbeného jezdce v tabulce */
-.drivers-table tbody tr.favorite-driver-row {
-    background: rgba(139, 69, 19, 0.1);
-    border-left: 4px solid var(--vrl-blue);
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
-.drivers-table tbody tr.favorite-driver-row:hover {
-    background: rgba(139, 69, 19, 0.2);
-    transform: translateX(5px);
+.favorite-driver-info > div:not(.favorite-driver-name) {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
 }
 
-.drivers-table tbody tr.favorite-driver-row td:nth-child(3)::after {
-    content: " ⭐";
+.favorite-driver-info strong {
     color: var(--gold);
 }
 
+.favorite-driver-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.favorite-driver-detail {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.favorite-driver-detail:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.favorite-driver-detail div:first-child {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+}
+
+.favorite-driver-detail div:last-child {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--gold);
+}
+
+/* SEKCE POROVNÁNÍ */
+.comparison-section {
+    background: var(--dark-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+}
+
+.comparison-section h3 {
+    color: var(--f1-red);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.comparison-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.comparison-controls select {
+    flex: 1;
+    min-width: 250px;
+    padding: 10px 12px;
+    border: 2px solid var(--vrl-blue);
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+.btn-small {
+    background: linear-gradient(135deg, var(--vrl-blue), var(--vrl-purple));
+    color: var(--text-light);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-small:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* KONTEJNER PRO POROVNÁVANÉ JEZDCE */
+.comparison-drivers-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.comparison-driver-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.comparison-driver-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-color: var(--vrl-blue);
+}
+
+.comparison-driver-info {
+    flex: 1;
+}
+
+.comparison-driver-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.comparison-driver-name span:first-child {
+    font-weight: bold;
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.driver-number {
+    background: var(--vrl-blue);
+    color: var(--text-light);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.remove-comparison-btn {
+    background: rgba(255, 66, 66, 0.2);
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.remove-comparison-btn:hover {
+    background: var(--error-color);
+    color: var(--text-light);
+    transform: scale(1.1);
+}
+
+/* AKCE POROVNÁNÍ */
+.comparison-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.comparison-actions .btn {
+    margin: 0;
+}
+
+/* OPRAVA PRO GRAF - ZAJISTÍ SPRÁVNOU VELIKOST */
+.points-chart-section {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 95%;
+}
+
+
+/* OPRAVA PRO GRAF - ZAJISTÍ SPRÁVNÉ ZOBRAZENÍ */
+.chart-container {
+    position: relative;
+    height: 500px; /* Zvýšená výška */
+    width: 100%;
+    margin: 1rem auto 0;
+}
+
+
+#pointsChart {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+canvas#pointsChart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* RESPONZIVITA */
 @media (max-width: 768px) {
     .favorite-driver-section {
-        width: 95%;
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .favorite-driver-info {
         padding: 1.5rem;
     }
 
-    .favorite-driver-card {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-    }
-
-    .driver-selector select {
-        min-width: 250px;
-        width: 90%;
-    }
-
     .favorite-driver-name {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .favorite-driver-name span:first-child {
         font-size: 1.5rem;
     }
 
@@ -2486,245 +2703,220 @@ body[data-theme="light"] .race-results-table tbody tr:nth-child(3) td:first-chil
         grid-template-columns: repeat(2, 1fr);
         gap: 0.8rem;
     }
+
+    .comparison-section {
+        padding: 1.5rem;
+    }
+
+    .comparison-controls {
+        flex-direction: column;
+    }
+
+    .comparison-controls select {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .comparison-drivers-container {
+        grid-template-columns: 1fr;
+    }
+
+    .comparison-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .comparison-actions .btn {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .points-chart-section {
+        padding: 1.5rem;
+        margin: 1rem;
+        width: 90%;
+    }
+
+    .chart-container {
+        height: 400px; /* Menší výška na mobilech */
+    }
 }
 
-/* Styly pro světlý režim */
-[data-theme="light"] .favorite-driver-section {
-    background: linear-gradient(135deg, var(--accent-color) 0%, #f5f5f5 100%);
-    color: var(--text-dark);
+@media (max-width: 480px) {
+    .chart-container {
+        height: 350px;
+    }
+    
+    .points-chart-section {
+        padding: 1rem;
+        width: 85%;
+    }
+
+    .favorite-driver-details {
+        grid-template-columns: 1fr;
+    }
+    
+    .favorite-driver-info > div:not(.favorite-driver-name) {
+        font-size: 1rem;
+    }
 }
 
-[data-theme="light"] .favorite-driver-card {
-    background: rgba(255, 255, 255, 0.3);
-}
-
-[data-theme="light"] .favorite-driver-name {
-    color: var(--text-dark);
-}
-
-[data-theme="light"] .favorite-driver-detail {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-[data-theme="light"] .favorite-driver-detail div:last-child {
-    color: var(--text-dark);
-}
-
-[data-theme="light"] .driver-selector select {
+/* SVĚTLÝ REŽIM */
+body[data-theme="light"] .favorite-driver-section,
+/* Oprava pro světlý režim grafu */
+body[data-theme="light"] .points-chart-section {
     background: var(--card-bg);
+    border: 2px solid var(--accent-color);
+}
+
+body[data-theme="light"] .favorite-driver-info {
+    background: linear-gradient(135deg, var(--card-bg), #f8f9fa);
+    border-left: 6px solid var(--accent-color);
+}
+
+body[data-theme="light"] .favorite-driver-name span:first-child {
     color: var(--text-dark);
-    border: 1px solid var(--card-border);
 }
 
-[data-theme="light"] .drivers-table tbody tr.favorite-driver-row {
-    background: rgba(211, 47, 47, 0.1);
-    border-left: 4px solid var(--accent-color);
-}
-
-[data-theme="light"] .drivers-table tbody tr.favorite-driver-row:hover {
-    background: rgba(211, 47, 47, 0.2);
-}
-
-/* Styly pro sekci porovnání */
-.comparison-section {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.comparison-section h3 {
-    color: var(--text-light);
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.comparison-controls {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-}
-
-.comparison-controls select {
-    padding: 10px 15px;
-    font-size: 14px;
-    border: none;
-    border-radius: 8px;
-    background: var(--card-bg);
-    color: var(--text-color);
-    min-width: 250px;
-    cursor: pointer;
-    border: 1px solid var(--card-border);
-}
-
-.btn-small {
-    display: inline-block;
-    background: linear-gradient(to right, var(--vrl-blue), var(--vrl-purple));
-    color: var(--text-light);
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 20px;
-    font-weight: bold;
-    transition: all 0.3s;
-    border: none;
-    cursor: pointer;
-    font-size: 0.9rem;
-}
-
-.btn-small:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-.comparison-drivers-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin: 20px 0;
-    justify-content: center;
-}
-
-.comparison-driver-card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    padding: 15px;
-    position: relative;
-    min-width: 180px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    /* Přidáno pro lepší pozicování křížku */
-    padding-right: 40px;
-}
-
-.comparison-driver-info {
-    width: 100%;
-}
-
-.comparison-driver-name {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.comparison-driver-name span:first-child {
-    font-weight: bold;
-    font-size: 1rem;
-}
-
-.remove-comparison-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
+body[data-theme="light"] .favorite-badge {
+    background: linear-gradient(135deg, var(--accent-color), #d32f2f);
     color: white;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s;
-    font-size: 0.8rem;
 }
 
-.remove-comparison-btn:hover {
-    background: rgba(255, 99, 132, 0.7);
+body[data-theme="light"] .favorite-driver-info strong {
+    color: var(--accent-color);
 }
 
-.comparison-actions {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin-top: 20px;
+body[data-theme="light"] .favorite-driver-detail {
+    background: rgba(211, 47, 47, 0.05);
+    border: 1px solid rgba(211, 47, 47, 0.1);
 }
 
-/* Styly pro graf */
+body[data-theme="light"] .favorite-driver-detail div:last-child {
+    color: var(--accent-color);
+}
+
+body[data-theme="light"] .comparison-section {
+    background: #f8f9fa;
+    border: 2px solid var(--accent-color);
+}
+
+body[data-theme="light"] .comparison-section h3 {
+    color: var(--accent-color);
+}
+
+body[data-theme="light"] .comparison-controls select {
+    background: white;
+    color: var(--text-dark);
+    border: 2px solid var(--accent-color);
+}
+
+body[data-theme="light"] .comparison-driver-card {
+    background: white;
+    border: 1px solid var(--accent-color);
+}
+
+body[data-theme="light"] .comparison-driver-name span:first-child {
+    color: var(--text-dark);
+}
+
+body[data-theme="light"] .driver-number {
+    background: var(--accent-color);
+    color: white;
+}
+
+body[data-theme="light"] .driver-selector select {
+    background: white;
+    color: var(--text-dark);
+    border: 2px solid var(--accent-color);
+}
+
+body[data-theme="light"] .driver-selector select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.2);
+}
+
+/* SEKCE GRAFU - ZAROVNÁNÍ DO STŘEDU */
 .points-chart-section {
     background: var(--card-bg);
     border-radius: 15px;
     padding: 2rem;
     margin: 2rem auto;
-    width: 90%;
-    max-width: 1000px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
     border: 1px solid var(--card-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
+/* OPRAVA PRO GRAF - ZAJISTÍ SPRÁVNÉ ZOBRAZENÍ */
 .chart-container {
     position: relative;
     height: 400px;
     width: 100%;
+    margin: 1rem auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Styly pro světlý režim */
-[data-theme="light"] .comparison-section {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+#pointsChart {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: 0 auto;
 }
 
-[data-theme="light"] .comparison-section h3 {
-    color: var(--text-dark);
+/* Zajistí, že graf bude vždy na středu i při různých velikostech */
+canvas#pointsChart {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-[data-theme="light"] .comparison-driver-card {
-    background: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="light"] .remove-comparison-btn {
-    background: rgba(0, 0, 0, 0.1);
-    color: var(--text-dark);
-}
-
-[data-theme="light"] .remove-comparison-btn:hover {
-    background: rgba(255, 99, 132, 0.7);
-    color: white;
-}
-
-[data-theme="light"] .points-chart-section {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-}
-
-/* Responzivní design */
+/* Pro lepší responzivitu grafu */
 @media (max-width: 768px) {
-    .comparison-controls {
-        flex-direction: column;
-    }
-    
-    .comparison-controls select {
-        min-width: 200px;
-        width: 100%;
-    }
-    
-    .comparison-drivers-container {
-        justify-content: center;
-    }
-    
-    .comparison-driver-card {
-        min-width: 150px;
-        padding-right: 40px;
+    .points-chart-section {
+        padding: 1.5rem;
+        margin: 1rem;
     }
     
     .chart-container {
         height: 300px;
     }
-    
-    .points-chart-section {
-        padding: 1.5rem;
-        width: 95%;
+}
+
+@media (max-width: 480px) {
+    .chart-container {
+        height: 250px;
     }
-    
-    .comparison-actions {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .comparison-actions .btn {
-        width: 200px;
-    }
+}
+
+/* Zajistí, že nadpis sekce grafu je také na středu */
+.points-chart-section .table-title {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* OPRAVA PRO GRAF - ZAJISTÍ SPRÁVNÉ ZOBRAZENÍ */
+.chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+    margin: 1rem auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pointsChart {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+body[data-theme="light"] .chart-container {
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
 }
