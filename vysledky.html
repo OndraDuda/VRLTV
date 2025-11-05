@@ -112,64 +112,31 @@
     // Výsledky závodů
     const raceResults = [
       {
-        round: "R1 – Melbourne Grand Prix Circuit",
+        round: "R7 – Suzuka International Racing Course",
         results: [
-          { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 25 },
-          { name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 18 },
-          { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 15 },
-          { name: "Matěj Csiba", team: "Williams", country: "sk", points: 12 },
-          { name: "Oliver Maťko", team: "Ferrari", country: "sk", points: 10 }, // přeřazen do Ferrari
-          { name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 8 },
-          { name: "Tadeáš Šmídl", team: "Red Bull", country: "cz", points: 6 },
-          { name: "Tomáš Novák", team: "Haas", country: "cz", points: 4 },
-          { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 2 },
-          { name: "Matěj Doha", team: "Alpine", country: "cz", points: 1 }
-        ]
-
-      },
-      {
-        round: "R2 – Silverstone Circuit",
-        results: [
-          { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 25 },
-          { name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 18 },
+          { name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 25 },
+          { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 18 },
           { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 15 },
           { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 12 },
-          { name: "Oliver Maťko", team: "Aston Martin", country: "sk", points: 10 },
-          { name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 8 },
-          { name: "Tomáš Novák", team: "Haas", country: "cz", points: 6 },
-          { name: "Luboš Novotný", team: "Ferrari", country: "cz", points: 4 },
-          { name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 2 },
-          { name: "Jakub Fabian", team: "Sauber", country: "cz", points: 1 }
-        ]
-      },
-      {
-        round: "R3 – Bahrain International Circuit",
-        results: [
-          { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 25 },
-          { name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 18 },
-          { name: "Matyáš Kasl", team: "Williams", country: "cz", points: 15 },
-          { name: "Oliver Maťko", team: "Aston Martin", country: "sk", points: 12 },
-          { name: "Tomáš Novák", team: "Haas", country: "cz", points: 10 },
-          { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 8 },
-          { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 6 },
-          { name: "Oliver Stavač", team: "Sauber", country: "sk", points: 4 },
-          { name: "Zdeněk Pohlreich", team: "Mercedes", country: "cz", points: 2 },
-          { name: "Jakub Fabian", team: "Sauber", country: "cz", points: 1 }
-        ]
-      },
-      {
-        round: "R4 – Miami International Autodrome",
-        results: [
-          { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 25 },
-          { name: "Matěj Csiba", team: "Williams", country: "sk", points: 18 },
-          { name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 15 },
-          { name: "Oliver Maťko", team: "Aston Martin", country: "sk", points: 12 },
-          { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 10 },
+          { name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 10 },
           { name: "Oliver Stavač", team: "Sauber", country: "sk", points: 8 },
-          { name: "Tomáš Novák", team: "Haas", country: "cz", points: 6 },
+          { name: "Jakub Fabian", team: "Sauber", country: "cz", points: 6 },
+          { name: "Oliver Čobrda", team: "Alpine", country: "cz", points: 4 },
+          { name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 2 },
+          { name: "Ján Bubák", team: "Williams", country: "sk", points: 1 }
+        ]
+      },
+      {
+        round: "R6 – Baku City Circuit",
+        results: [
+          { name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 25 },
+          { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 18 },
+          { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 15 },
+          { name: "Oliver Stavač", team: "Sauber", country: "sk", points: 12 },
+          { name: "Jakub Fabian", team: "Sauber", country: "cz", points: 10 },
+          { name: "Luboš Novotný", team: "Ferrari", country: "cz", points: 8 },
+          { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 6 },
           { name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 4 },
-          { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 2 },
-          { name: "Viktor Koutný", team: "Red Bull (Záloha)", country: "cz", points: 1 }
         ]
       },
       {
@@ -188,33 +155,66 @@
         ]
       },
       {
-        round: "R6 – Baku City Circuit",
+        round: "R4 – Miami International Autodrome",
         results: [
-          { name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 25 },
-          { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 18 },
-          { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 15 },
-          { name: "Oliver Stavač", team: "Sauber", country: "sk", points: 12 },
-          { name: "Jakub Fabian", team: "Sauber", country: "cz", points: 10 },
-          { name: "Luboš Novotný", team: "Ferrari", country: "cz", points: 8 },
-          { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 6 },
+          { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 25 },
+          { name: "Matěj Csiba", team: "Williams", country: "sk", points: 18 },
+          { name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 15 },
+          { name: "Oliver Maťko", team: "Aston Martin", country: "sk", points: 12 },
+          { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 10 },
+          { name: "Oliver Stavač", team: "Sauber", country: "sk", points: 8 },
+          { name: "Tomáš Novák", team: "Haas", country: "cz", points: 6 },
           { name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 4 },
+          { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 2 },
+          { name: "Viktor Koutný", team: "Red Bull (Záloha)", country: "cz", points: 1 }
         ]
       },
       {
-        round: "R7 – Suzuka International Racing Course",
+        round: "R3 – Bahrain International Circuit",
         results: [
-          { name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 25 },
-          { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 18 },
-          { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 15 },
-          { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 12 },
-          { name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 10 },
-          { name: "Oliver Stavač", team: "Sauber", country: "sk", points: 8 },
-          { name: "Jakub Fabian", team: "Sauber", country: "cz", points: 6 },
-          { name: "Oliver Čobrda", team: "Alpine", country: "cz", points: 4 },
-          { name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 2 },
-          { name: "Ján Bubák", team: "Williams", country: "sk", points: 1 }
+          { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 25 },
+          { name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 18 },
+          { name: "Matyáš Kasl", team: "Williams", country: "cz", points: 15 },
+          { name: "Oliver Maťko", team: "Aston Martin", country: "sk", points: 12 },
+          { name: "Tomáš Novák", team: "Haas", country: "cz", points: 10 },
+          { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 8 },
+          { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 6 },
+          { name: "Oliver Stavač", team: "Sauber", country: "sk", points: 4 },
+          { name: "Zdeněk Pohlreich", team: "Mercedes", country: "cz", points: 2 },
+          { name: "Jakub Fabian", team: "Sauber", country: "cz", points: 1 }
         ]
       },
+      {
+        round: "R2 – Silverstone Circuit",
+        results: [
+          { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 25 },
+          { name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 18 },
+          { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 15 },
+          { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 12 },
+          { name: "Oliver Maťko", team: "Aston Martin", country: "sk", points: 10 },
+          { name: "Filip Kratochvil", team: "Aston Martin", country: "cz", points: 8 },
+          { name: "Tomáš Novák", team: "Haas", country: "cz", points: 6 },
+          { name: "Luboš Novotný", team: "Ferrari", country: "cz", points: 4 },
+          { name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 2 },
+          { name: "Jakub Fabian", team: "Sauber", country: "cz", points: 1 }
+        ]
+      },
+      {
+        round: "R1 – Melbourne Grand Prix Circuit",
+        results: [
+          { name: "Josef Kubeš", team: "Ferrari", country: "cz", points: 25 },
+          { name: "Martin Klaboch", team: "Mercedes", country: "cz", points: 18 },
+          { name: "Maxim Heligr", team: "McLaren", country: "cz", points: 15 },
+          { name: "Matěj Csiba", team: "Williams", country: "sk", points: 12 },
+          { name: "Oliver Maťko", team: "Ferrari", country: "sk", points: 10 }, // přeřazen do Ferrari
+          { name: "Andrej Erdelský", team: "Racing Bulls", country: "sk", points: 8 },
+          { name: "Tadeáš Šmídl", team: "Red Bull", country: "cz", points: 6 },
+          { name: "Tomáš Novák", team: "Haas", country: "cz", points: 4 },
+          { name: "Matěj Vaculík", team: "McLaren", country: "cz", points: 2 },
+          { name: "Matěj Doha", team: "Alpine", country: "cz", points: 1 }
+        ]
+
+      }
     ];
 
 
