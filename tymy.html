@@ -134,6 +134,20 @@
     <script src="js/global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        // Definice aktuálních jezdců v týmech
+        const currentTeamDrivers = {
+            'McLaren': ['Maxim Heligr', 'Matěj Vaculík'],
+            'Mercedes': ['Martin Klaboch', 'Zdeněk Pohlreich'],
+            'Ferrari': ['Josef Kubeš', 'Luboš Novotný'],
+            'Aston Martin': ['Matyáš Kasl', 'Filip Kratochvil'],
+            'Williams': ['Max Novotný', 'Ján Bubák'],
+            'Haas': ['Tomáš Novák', 'Matěj Švec'],
+            'Sauber': ['Oliver Stavač', 'Jakub Fabian'],
+            'Racing Bulls': ['Andrej Erdelský','Jáchym Majvald'],
+            'Alpine': ['Oliver Čobrda', 'Viktor Koutný'],
+            'Red Bull': ['Petr Strouhal', 'Oskar Anděl']
+        };
+
         // Data závodů z výsledků
         const raceResults = [
             {
@@ -266,7 +280,7 @@
                     // Přidáme body týmu
                     teams[teamName].points += result.points;
 
-                    // Přidáme jezdce do týmu
+                    // Přidáme jezdce do týmu (všichni co kdy bodovali)
                     teams[teamName].drivers.add(result.name);
 
                     // Spočítáme umístění
@@ -318,7 +332,8 @@
                 .map(([team, stats]) => ({
                     team,
                     ...stats,
-                    drivers: Array.from(stats.drivers).join(', ')
+                    // Použijeme aktuální jezdce z definice currentTeamDrivers
+                    currentDrivers: currentTeamDrivers[team] || Array.from(stats.drivers)
                 }))
                 .sort((a, b) => b.points - a.points);
 
@@ -330,7 +345,7 @@
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td><strong>${index + 1}</strong></td>
-                    <td class="team-cell" data-drivers="${team.drivers}">${team.team}</td>
+                    <td class="team-cell" data-drivers="${team.currentDrivers.join(', ')}">${team.team}</td>
                     <td><strong>${team.points}</strong></td>
                     <td>${loss === 0 ? "-" : loss}</td>
                     <td>${team.wins}</td>
@@ -484,7 +499,7 @@
 
             document.querySelectorAll('.team-cell').forEach(cell => {
                 cell.addEventListener('mouseenter', e => {
-                    tooltip.textContent = 'Jezdci: ' + cell.dataset.drivers;
+                    tooltip.textContent = 'Aktuální jezdci: ' + cell.dataset.drivers;
                     tooltip.style.display = 'block';
                 });
                 cell.addEventListener('mousemove', e => {
