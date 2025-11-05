@@ -406,10 +406,11 @@
             return upcomingRaces.length > 0 ? upcomingRaces[0] : null;
         }
 
-        // Funkce pro získání nadcházejících závodů (bez aktuálního)
+        // Funkce pro získání nadcházejících závodů (bez aktuálního a bez dalšího závodu)
         function getUpcomingRaces(limit = null) {
             const now = new Date();
             const currentRace = getCurrentRace();
+            const nextRace = getNextRace();
 
             const upcoming = races
                 .map(r => {
@@ -417,7 +418,17 @@
                     return { ...r, raceStart };
                 })
                 .filter(r => r.raceStart > now)
-                .filter(r => !currentRace || r.date !== currentRace.date)
+                .filter(r => {
+                    // Odstraníme závod, který je aktuální (currentRace)
+                    if (currentRace && r.date === currentRace.date) {
+                        return false;
+                    }
+                    // Odstraníme závod, který je zobrazen jako další závod (nextRace)
+                    if (nextRace && r.date === nextRace.date) {
+                        return false;
+                    }
+                    return true;
+                })
                 .sort((a, b) => a.raceStart - b.raceStart);
 
             return limit ? upcoming.slice(0, limit) : upcoming;
