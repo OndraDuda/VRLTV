@@ -72,6 +72,7 @@
           <option value="komentator">Komentátor</option>
           <option value="grafik">Grafik</option>
           <option value="strihac">Střihač</option>
+          <option value="admin">Admin</option>
         </select>
 
         <!-- Formulář pro jezdce -->
@@ -194,6 +195,24 @@
           <label for="procStrih">Proč chceš být střihačem?</label>
           <textarea id="procStrih" name="procStrih"
             placeholder="Baví mě video tvorba a chci dělat sestřihy závodů."></textarea>
+        </div>
+
+        <div class="form-section" id="adminForm">
+          <h3>Formulář pro Admina</h3>
+          <label for="discordGraf">Discord Nick</label>
+          <input type="text" id="discordAdmin" name="discordAdmin" placeholder="např. Admin">
+
+          <label for="realnameGraf">Reálné Jméno</label>
+          <input type="text" id="realnameAdmin" name="realnameGraf" placeholder="např. Karel Dvořák">
+
+          <label for="zkusenostiGraf">Jaké máte zkušenosti se správou závodních lig?</label>
+          <textarea id="zkusenostiAdmin" name="zkusenostiGraf" placeholder="Dělám admina na VRL."></textarea>
+
+          <label for="procGraf">Proč chcete být adminem zrovna ve VRL?</label>
+          <textarea id="procAdmin" name="procGraf" placeholder="Chci pomoci s menežování serveru."></textarea>
+          
+          <label for="procGraf">Jak byste chtěl přispět VRL?</label>
+          <textarea id="prispetAdmin" name="procGraf" placeholder="Chci pomoci s menežování serveru."></textarea>
         </div>
 
         <button type="submit" class="btn">📧 Odeslat</button>
