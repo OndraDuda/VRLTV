@@ -1,438 +1,709 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfólio Ondřeje Dudy – vývojáře se zaměřením na weby, databáze a programování.">
-    <meta property="og:title" content="Ondřej Duda | Creative Developer">
-    <meta property="og:description" content="Moderní weby, programování v C# a Pythonu, databáze.">
-    <meta property="og:image" content="https://source.unsplash.com/random/800x800/?developer">
-    <meta property="og:type" content="website">
-
-    <title>Ondřej Duda | Creative Developer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #6c5ce7;
-            --secondary: #a8a5e6;
-            --accent: #ffd700;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            color: white;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            background: #0f0f1f;
-        }
-
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1.5rem 0;
-            backdrop-filter: blur(10px);
-            background: rgba(15, 15, 31, 0.8);
-            z-index: 1000;
-        }
-
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--accent);
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .hero-content {
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .about {
-            padding: 8rem 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-        }
-
-        .about-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-img {
-            width: 100%;
-            max-width: 400px;
-            border-radius: 1rem;
-            box-shadow: 0 0 30px rgba(108, 92, 231, 0.3);
-            transition: 0.3s;
-        }
-
-        .about-img:hover {
-            transform: translateY(-10px);
-        }
-
-        .contact {
-            padding: 8rem 2rem;
-            text-align: center;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .social-link {
-            padding: 1.5rem 3rem;
-            border: 2px solid var(--primary);
-            border-radius: 50px;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: 0.3s;
-            background: rgba(108, 92, 231, 0.1);
-        }
-
-        .blurred-section {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-        }   
-
-        .social-link:hover {
-            background: var(--primary);
-            transform: translateY(-5px);
-        }
-
-        .logo-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .logo-info {
-            position: absolute;
-            top: 140%;
-            left: 0;
-            width: 300px;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            color: white;
-            border-radius: 1rem;
-            font-size: 0.9rem;
-            line-height: 1.4;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 999;
-        }
-
-        .logo-container:hover .logo-info {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .projects {
-            padding: 8rem 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            color: white;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .project-card {
-            background: rgba(108, 92, 231, 0.1);
-            padding: 1.5rem;
-            border-radius: 1rem;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(108, 92, 231, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .project-card h3 {
-            margin-bottom: 0.75rem;
-            color: var(--accent);
-        }
-
-        .project-card a {
-            color: var(--accent);
-            text-decoration: underline;
-            font-weight: 600;
-        }
-
-
-        @media (max-width: 768px) {
-            .about-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-        }
-
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        html { 
-            scroll-behavior: smooth;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-    </style>
+    <title>VRL - Velocity Racing League - Season 2</title>
+    <link rel="icon" type="image/png" href="VRL_logo_nove.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div id="particles-js"></div>
 
-    <nav>
-        <div class="nav-content">
-            <div class="logo-container">
-                <a href="#" class="logo">OD</a>
-                <div class="logo-info">
-                    <strong>Ondřej Duda</strong><br>
-                    Student Střední Školy Teleinformatiky Ostrava-Poruba<br>
-                    Obor: Informační technologie<br>
-                    17 let (narozen 17. 5. 2008)<br>
-                    Ostrava-Jih<br>
-                    Baví mě: programování (C#, Python), databáze a závodní hry
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="vrl_high_res.png" alt="F1 VRL Logo" class="logo-img">
+                    </a>
                 </div>
-            </div>
-            <div class="nav-links">
-                <a href="#about">O mně</a>
-                <a href="#projects">Projekty</a>
-                <a href="#contact">Kontakt</a>
+                <div class="header-controls">
+                    <button class="theme-switch" id="themeSwitch">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+                <nav id="mobileNav">
+                    <ul>
+                        <li><a href="index.html">Domů</a></li>
+                        <li><a href="calendar.html">Kalendář</a></li>
+                        <li><a href="jezdci.html">Jezdci</a></li>
+                        <li><a href="tymy.html">Týmy</a></li>
+                        <li><a href="okruh.html">Okruhy</a></li>
+                        <li><a href="vysledky.html">Výsledky</a></li>
+                        <li><a href="prihlasky.html">Příhlášky</a></li>
+                        <li><a href="https://discord.gg/CMxscEUcRd" class="discord-btn"><i class="fab fa-discord"></i>
+                                Discord</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
-    </nav>
-
+    </header>
 
     <section class="hero">
-        <div class="hero-content">
-            <h1 class="floating">Vítejte ve světě kreativního vývoje</h1>
-            <p>Programmer and Database Developer and Manager</p>
-            <div class="social-links">
-                <a href="mailto:dudic.ondra@gmail.com" class="social-link">
-                    <i class="fas fa-envelope"></i>
-                    E-mail
-                </a>
-                <a href="https://discord.com/users/801752475493072896" class="social-link" target="_blank">
-                    <i class="fab fa-discord"></i>
-                    Discord
-                </a>
-                <a href="https://github.com/OndraDuda" class="social-link" target="_blank">
-                    <i class="fab fa-github"></i>
-                    GitHub
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="about">
-        <div class="about-content">
-            <img src="https://source.unsplash.com/random/800x800/?developer" alt="Ondřej Duda" class="about-img">
-            <div>
-                <h2>O mně</h2>
-                <p>Jsem student Střední školy Teleinformatiky v Ostravě-Porubě, obor Informační technologie. Je mi 17 let a bydlím v Ostravě-Jihu. Baví mě programování, zejména v jazycích C# a Python, práce s databázemi a také závodní hry jako Real Racing.</p>
-            
-                <h3>Specializuji se na:</h3>
-                <ul>
-                    <li>Programování v C# a Pythonu</li>
-                    <li>Vývoj webových stránek (HTML, CSS)</li>
-                    <li>Správa a vývoj databází</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-
-    <section id="projects" class="projects blurred-section" style="padding: 8rem 2rem;">
-        <div class="projects-content" style="max-width: 1200px; margin: 0 auto;">
-            <h2>Projekty</h2>
-            <div class="projects-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem;">
-                <!-- Projekt 1 -->
-                <div class="project-card" style="background: rgba(108, 92, 231, 0.1); padding: 1.5rem; border-radius: 1rem; backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(108, 92, 231, 0.3);">
-                    <h3>Aplikace napojena na dabazi pro měření teplot</h3>
-                    <p>Vyvinul jsem aplikaci pro ukládáíní a zobrazování dat podle uložených měření(prozatím na tlačítko random)</p>
-                    <a href="#" style="color: var(--accent); text-decoration: underline;">Více informací</a>
-                </div>
-
-                <!-- Projekt 2 -->
-                <div class="project-card" style="background: rgba(108, 92, 231, 0.1); padding: 1.5rem; border-radius: 1rem; backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(108, 92, 231, 0.3);">
-                    <h3>Webová stránka pro školní kroužek</h3>
-                    <p>Vytvořil jsem moderní responzivní web pomocí HTML, CSS a JavaScriptu pro školní IT kroužek.</p>
-                    <a href="#" style="color: var(--accent); text-decoration: underline;">Zobrazit projekt</a>
-                </div>
-            
-                <!-- Projekt 3 -->
-                <div class="project-card" style="background: rgba(108, 92, 231, 0.1); padding: 1.5rem; border-radius: 1rem; backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(108, 92, 231, 0.3);">
-                    <h3>Automatizace databázových záloh</h3>
-                    <p>Napsal jsem skript v Pythonu, který pravidelně zálohuje databáze a ukládá je bezpečně na cloud.</p>
-                    <a href="#" style="color: var(--accent); text-decoration: underline;">Podrobnosti</a>
+        <div class="hero-fade"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h2>Velocity Racing League</h2>
+                <p>Druhá sezóna VRL je v plném proudu.</p>
+                <div>
+                    <a href="https://discord.gg/CMxscEUcRd" class="btn"><i class="fab fa-discord"></i> Připojit se na
+                        Discord</a>
                 </div>
             </div>
         </div>
     </section>
 
-    
-    <section id="contact" class="contact blurred-section">
-        <h2>Kontakt</h2>
-        <p>Máš zájem o spolupráci nebo se chceš jen na něco zeptat? Napiš mi!</p>
+    <div class="container">
+        <section class="season-info">
+            <h2>SEZÓNA 2 - DŮLEŽITÉ INFORMACE</h2>
+            <p>Druhá sezóna VRL přináší nové okruhy a ještě více napětí!</p>
+            <div class="season-details">
+                <div class="detail-card">
+                    <h3><i class="fas fa-calendar-alt"></i> Formát</h3>
+                    <p>20 závodů<br>2 části sezóny<br>Short kvalifikace<br>50% závody</p>
+                </div>
 
-        <form action="mailto:dudic.ondra@gmail.com" method="POST" enctype="text/plain" style="max-width: 600px; margin: 2rem auto 0;">
-            <input type="text" name="name" placeholder="Tvé jméno" required style="width: 100%; padding: 1rem; margin-bottom: 1rem; border-radius: 10px; border: none;">
-            <input type="email" name="email" placeholder="Tvůj e-mail" required style="width: 100%; padding: 1rem; margin-bottom: 1rem; border-radius: 10px; border: none;">
-            <textarea name="message" placeholder="Zpráva" rows="6" required style="width: 100%; padding: 1rem; margin-bottom: 1rem; border-radius: 10px; border: none;"></textarea>
-            <button type="submit" style="padding: 1rem 2rem; border: none; border-radius: 50px; background: var(--primary); color: white; cursor: pointer; transition: 0.3s;">
-                Odeslat
-            </button>
-        </form>
+                <div class="detail-card">
+                    <h3><i class="fas fa-trophy"></i> Bodování</h3>
+                    <p>1. Místo 25<br>2. Místo 18<br>3. Místo 15<br>12-10-8-6-4-2-1</p>
+                </div>
 
-        <div class="social-links">
-            <a href="mailto:dudic.ondra@gmail.com" class="social-link">
-                <i class="fas fa-envelope"></i>
-                E-mail
-            </a>
-            <a href="https://discord.com/users/801752475493072896" class="social-link" target="_blank">
-                <i class="fab fa-discord"></i>
-                Discord
-            </a>
-            <a href="https://github.com/OndraDuda" class="social-link" target="_blank">
-                <i class="fab fa-github"></i>
-                GitHub
-            </a>
+                <div class="detail-card">
+                    <h3><i class="fas fa-gamepad"></i> Platforma</h3>
+                    <p>F1 25<br> PC Steam/EA<br>PS/Xbox</p>
+                </div>
+
+                <div class="detail-card">
+                    <h3><i class="fas fa-book"></i> Pravidla</h3>
+                    <p>Pravidla ligy a závodění</p>
+                    <a href="https://docs.google.com/document/d/1o9ULOGPHiwvApBRguubZ3BCT3zQkdIPZtWpjO5tcUpc/edit?tab=t.0"
+                        class="btn"> Pravidla</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="news-section">
+            <h2 class="section-title">Novinky</h2>
+
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-content">
+                        <h3>VRL SMP – Nový Minecraft projekt!</h3>
+                        <p>Představujeme VRL SMP, komunitní Minecraft server pro všechny fanoušky VRL.</p>
+                        <a href="novinky1.html" class="btn">Číst více</a>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <div class="news-content">
+                        <h3>VC Kanady</h3>
+                        <p>Souhrn Věcí co se stalo ve Velké Ceně Kanady</p>
+                        <a href="novinky2.html" class="btn">Číst více</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <h2 class="section-title">Další Závod</h2>
+        <!-- Sekce Další závod -->
+        <section class="next-race-section">
+            <div class="next-race-container">
+                <!-- Informace o nadcházejícím závodě -->
+                <div class="next-race-info" id="nextRaceInfo">
+                    <div class="race-basic-info">
+                        <h3 id="nextRaceName">--</h3>
+                        <p class="race-track" id="nextRaceTrack">--</p>
+                        <p class="race-datetime" id="nextRaceDateTime">--</p>
+                    </div>
+                </div>
+
+                <!-- Countdown a stream status -->
+                <div class="race-status">
+                    <!-- LIVE indikátor -->
+                    <div class="live-indicator hidden" id="liveIndicator">
+                        <span class="live-pulse"></span>
+                        <span class="live-text">LIVE NOW</span>
+                    </div>
+
+                    <!-- Countdown -->
+                    <div class="countdown-container">
+                        <div id="countdown" class="countdown">
+                            <div class="countdown-item">
+                                <span id="cd-days">--</span>
+                                <span class="countdown-label">dní</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span id="cd-hours">--</span>
+                                <span class="countdown-label">hodin</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span id="cd-minutes">--</span>
+                                <span class="countdown-label">minut</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span id="cd-seconds">--</span>
+                                <span class="countdown-label">sekund</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stream link -->
+                    <div class="stream-link-container">
+                        <a href="https://www.youtube.com/watch?v=v367B7fvRV4" id="stream-link" class="stream-link"
+                            target="_blank">
+                            <i class="fab fa-youtube"></i>
+                            <span id="stream-text">Sleduj stream na YouTube</span>
+                        </a>
+
+                        <!-- Dodatečné stream info -->
+                        <div class="stream-meta hidden" id="streamMeta">
+                            <span class="viewers-count" id="viewersCount">• Počet diváků: --</span>
+                            <span class="stream-uptime" id="streamUptime">• Stream běží: --</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="section-title">Nadcházející závody</h2>
+        <section class="calendar" id="calendar"></section>
+
+        <a href="calendar.html" class="btn">Zobrazit celý kalendář</a>
+
+        <h2 class="section-title">PRŮBĚŽNÉ POŘADÍ</h2>
+        <div class="standings-container">
+            <section class="standings">
+                <div class="standings-card">
+                    <div class="standings-header">
+                        <h3>Jezdci</h3>
+                    </div>
+                    <div class="standings-body">
+                        <div class="driver-row">
+                            <div class="driver-name">M. Heligr</div>
+                            <div class="driver-points">150 bodů</div>
+                        </div>
+                        <div class="driver-row">
+                            <div class="driver-name">M. Klaboch</div>
+                            <div class="driver-points">132 bodů</div>
+                        </div>
+                        <div class="driver-row">
+                            <div class="driver-name">J. Kubeš</div>
+                            <div class="driver-points">109 bodů</div>
+                        </div>
+                        <div class="driver-row">
+                            <div class="driver-name">F. Kratochvil</div>
+                            <div class="driver-points">73 bodů</div>
+                        </div>
+                        <div class="driver-row">
+                            <div class="driver-name">M. Vaculík</div>
+                            <div class="driver-points">60 bodů</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="standings-card">
+                    <div class="standings-header">
+                        <h3>Týmy</h3>
+                    </div>
+                    <div class="standings-body">
+                        <div class="driver-row">
+                            <div class="driver-name">McLaren</div>
+                            <div class="driver-points">210 bodů</div>
+                        </div>
+                        <div class="driver-row">
+                            <div class="driver-name">Mercedes</div>
+                            <div class="driver-points">157 bodů</div>
+                        </div>
+                        <div class="driver-row">
+                            <div class="driver-name">Ferrari</div>
+                            <div class="driver-points">131 bodů</div>
+                        </div>
+                        <div class="driver-row">
+                            <div class="driver-name">Aston Martin</div>
+                            <div class="driver-points">125 bodů</div>
+                        </div>
+                        <div class="driver-row">
+                            <div class="driver-name">Sauber</div>
+                            <div class="driver-points">97 bodů</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-    </section>
+    </div>
 
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>VRL</h3>
+                    <p>Virtuální závodní liga pro nadšence Formule 1. Připoj se k nám a zažij motorsport z pohodlí
+                        domova.</p>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/vrl_velocityracingleague/"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@Velocity_Racing_League_VRL"><i class="fab fa-youtube"></i></a>
+                        <a href="https://discord.gg/CMxscEUcRd"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.tiktok.com/@velocity_racingleague" target="_blank"><i
+                                class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Navigace</h3>
+                    <ul>
+                        <li><a href="index.html">Domů</a></li>
+                        <li><a href="calendar.html">Kalendář</a></li>
+                        <li><a href="jezdci.html">Jezdci</a></li>
+                        <li><a href="tymy.html">Týmy</a></li>
+                        <li><a href="okruh.html">Okruhy</a></li>
+                        <li><a href="vysledky.html">Výsledky</a></li>
+                        <li><a href="prihlasky.html">Příhlášky</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Organizátoři</h3>
+                    <ul>
+                        <li><a href="https://www.instagram.com/matyaasko/">Matěj Vaculík</a></li>
+                        <li><a href="https://www.instagram.com/beeeeuuuuu/">Maxim Heligr</a></li>
+                        <li><a href="https://www.instagram.com/_.duda.o._/">Ondra Duda</a></li>
+                        <li><a href="https://www.instagram.com/klabochmartin?igsh=Ym1pN29hNTFmbjBx&utm_source=qr">Martin
+                                Klaboch</a></li>
+                        <li><a href="https://www.instagram.com/olinkkt/">Oliver Seidl</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 VRL. Všechna práva vyhrazena.</p>
+            </div>
+        </div>
+    </footer>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/global.js"></script>
     <script>
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 80 },
-                color: { value: '#6c5ce7' },
-                shape: { type: 'circle' },
-                opacity: { value: 0.5 },
-                size: { value: 3 },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: 'none',
-                    random: false,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false,
+        // YouTube API konfigurace
+        const YOUTUBE_API_KEY = 'AIzaSyB5q7AGW9zjLDOdHj_-IerZwsRmmGcZXKY';
+        const YOUTUBE_CHANNEL_ID = 'UC0XDTMlGN34SRTv8upjA1gw';
+
+        // Data závodů
+        const races = [
+            { round: "R1", name: "Austrálie", date: "2025-09-09", track: "Melbourne Grand Prix Circuit" },
+            { round: "R2", name: "Velká Británie", date: "2025-09-16", track: "Silverstone Circuit" },
+            { round: "R3", name: "Bahrain", date: "2025-09-30", track: "Bahrain International Circuit" },
+            { round: "R4", name: "Miami", date: "2025-10-07", track: "Miami International Autodrome" },
+            { round: "R5", name: "Imola", date: "2025-10-14", track: "Autodromo Enzo e Dino Ferrari" },
+            { round: "R6", name: "Ázerbájdžán", date: "2025-10-21", track: "Baku City Circuit" },
+            { round: "R7", name: "Japonsko", date: "2025-11-04", track: "Suzuka International Racing Course" },
+            { round: "R8", name: "Kanada", date: "2025-11-11", track: "Circuit Gilles Villeneuve" },
+            { round: "R9", name: "Singapur", date: "2025-11-18", track: "Marina Bay Street Circuit" },
+            { round: "R10", name: "Belgie", date: "2025-12-02", track: "Circuit de Spa-Francorchamps" },
+            { round: "R11", name: "Španělsko", date: "2025-12-16", track: "Circuit de Barcelona-Catalunya" },
+            { round: "R12", name: "Mexiko", date: "2026-01-06", track: "Autódromo Hermanos Rodríguez" },
+            { round: "R13", name: "Brazílie", date: "2026-01-20", track: "Autódromo José Carlos Pace" },
+            { round: "R14", name: "USA", date: "2026-02-03", track: "Circuit of the Americas" },
+            { round: "S1", name: "Sprint Reverse Rakousko", date: "2026-02-17", track: "Red Bull Ring" },
+            { round: "R15", name: "Rakousko", date: "2026-02-17", track: "Red Bull Ring" },
+            { round: "R16", name: "Monako", date: "2026-03-03", track: "Circuit de Monaco" },
+            { round: "R17", name: "Itálie", date: "2026-03-10", track: "Autodromo Nazionale Monza" },
+            { round: "R18", name: "Maďarsko", date: "2026-03-24", track: "Hungaroring" },
+            { round: "R19", name: "Katar", date: "2026-04-07", track: "Losail International Circuit" },
+            { round: "R20", name: "Saudská Arábie", date: "2026-04-21", track: "Jeddah Corniche Circuit" },
+            { round: "R21", name: "Abu Dhabi", date: "2026-04-28", track: "Yas Marina Circuit" }
+        ];
+
+        // Globální proměnné pro správu stavu
+        let currentDisplayedRace = null;
+        let currentLiveStream = null;
+        let streamCheckInterval = null;
+
+        // Funkce pro získání aktuálního živého streamu z kanálu
+        async function getCurrentLiveStream() {
+            try {
+                const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YOUTUBE_CHANNEL_ID}&eventType=live&type=video&key=${YOUTUBE_API_KEY}`);
+                const data = await response.json();
+
+                if (data.items && data.items.length > 0) {
+                    const liveVideo = data.items[0];
+                    return {
+                        isLive: true,
+                        videoId: liveVideo.id.videoId,
+                        title: liveVideo.snippet.title,
+                        publishedAt: liveVideo.snippet.publishedAt,
+                        channelTitle: liveVideo.snippet.channelTitle
+                    };
                 }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: { enable: true, mode: 'repulse' },
-                    onclick: { enable: true, mode: 'push' },
-                    resize: true
+                return { isLive: false };
+            } catch (error) {
+                console.error('Chyba při načítání živých streamů:', error);
+                return { isLive: false, error: true };
+            }
+        }
+
+        // Funkce pro získání detailních informací o streamu
+        async function getStreamDetails(videoId) {
+            try {
+                const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails,snippet,statistics&id=${videoId}&key=${YOUTUBE_API_KEY}`);
+                const data = await response.json();
+
+                if (data.items && data.items.length > 0) {
+                    const video = data.items[0];
+                    return {
+                        concurrentViewers: video.liveStreamingDetails?.concurrentViewers || 0,
+                        actualStartTime: video.liveStreamingDetails?.actualStartTime || null,
+                        scheduledStartTime: video.liveStreamingDetails?.scheduledStartTime || null,
+                        title: video.snippet.title,
+                        description: video.snippet.description
+                    };
+                }
+                return null;
+            } catch (error) {
+                console.error('Chyba při načítání detailů streamu:', error);
+                return null;
+            }
+        }
+
+        // Funkce pro získání aktuálního závodu (běžícího nebo do 3 hodin po skončení)
+        function getCurrentRace() {
+            const now = new Date();
+
+            const currentRaces = races
+                .map(r => {
+                    const raceStart = new Date(`${r.date}T19:00:00`);
+                    const raceEnd = new Date(raceStart.getTime() + 3 * 60 * 60 * 1000);
+                    return { ...r, raceStart, raceEnd };
+                })
+                .filter(r => now >= r.raceStart && now <= r.raceEnd)
+                .sort((a, b) => a.raceStart - b.raceStart);
+
+            return currentRaces.length > 0 ? currentRaces[0] : null;
+        }
+
+        // Funkce pro získání dalšího závodu
+        function getNextRace() {
+            const currentRace = getCurrentRace();
+            const now = new Date();
+
+            // Pokud máme aktuální závod, vrátíme ho
+            if (currentRace) {
+                return currentRace;
+            }
+
+            // Jinak najdeme další nadcházející závod
+            const upcomingRaces = races
+                .map(r => {
+                    const raceStart = new Date(`${r.date}T19:00:00`);
+                    return { ...r, raceStart };
+                })
+                .filter(r => r.raceStart > now)
+                .sort((a, b) => a.raceStart - b.raceStart);
+
+            return upcomingRaces.length > 0 ? upcomingRaces[0] : null;
+        }
+
+        // Funkce pro získání nadcházejících závodů (bez aktuálního a bez dalšího závodu)
+        function getUpcomingRaces(limit = null) {
+            const now = new Date();
+            const currentRace = getCurrentRace();
+            const nextRace = getNextRace();
+
+            const upcoming = races
+                .map(r => {
+                    const raceStart = new Date(`${r.date}T19:00:00`);
+                    return { ...r, raceStart };
+                })
+                .filter(r => r.raceStart > now)
+                .filter(r => {
+                    // Odstraníme závod, který je aktuální (currentRace)
+                    if (currentRace && r.date === currentRace.date) {
+                        return false;
+                    }
+                    // Odstraníme závod, který je zobrazen jako další závod (nextRace)
+                    if (nextRace && r.date === nextRace.date) {
+                        return false;
+                    }
+                    return true;
+                })
+                .sort((a, b) => a.raceStart - b.raceStart);
+
+            return limit ? upcoming.slice(0, limit) : upcoming;
+        }
+
+        // Funkce pro vypsání závodů do kalendáře
+        function populateCalendar(containerId, racesToShow) {
+            const calendar = document.getElementById(containerId);
+            calendar.innerHTML = '';
+
+            if (racesToShow.length === 0) {
+                calendar.innerHTML = '<div class="no-races">Žádné další nadcházející závody</div>';
+                return;
+            }
+
+            racesToShow.forEach(race => {
+                const raceCard = document.createElement('div');
+                raceCard.className = 'race-card';
+
+                raceCard.innerHTML = `
+                <div class="race-date">
+                    <div class="race-round">${race.round}</div>
+                    <strong>${race.raceStart.toLocaleDateString("cs-CZ")}</strong>
+                </div>
+                <div class="race-info">
+                    <h3>${race.name}</h3>
+                    <p class="race-track">${race.track}</p>
+                    <p>19:00 | Krátká kvalifikace | 50 % Závod</p>
+                </div>
+            `;
+
+                calendar.appendChild(raceCard);
+            });
+        }
+
+        // Funkce pro formátování času
+        function formatUptime(startTime) {
+            const uptime = Math.floor((new Date() - new Date(startTime)) / 1000);
+            const hours = Math.floor(uptime / 3600);
+            const minutes = Math.floor((uptime % 3600) / 60);
+            return `${hours}h ${minutes}m`;
+        }
+
+        // Funkce pro analýzu názvu streamu a určení závodu
+        function detectRaceFromStream(title) {
+            if (!title) return null;
+
+            const titleLower = title.toLowerCase();
+
+            // Prohledáme názvy závodů v názvu streamu
+            for (const race of races) {
+                const raceNameLower = race.name.toLowerCase();
+                if (titleLower.includes(raceNameLower)) {
+                    return race;
                 }
             }
+
+            return null;
+        }
+
+        // Funkce pro aktualizaci zobrazení závodu
+        function updateRaceDisplay(race) {
+            const nextRaceName = document.getElementById('nextRaceName');
+            const nextRaceTrack = document.getElementById('nextRaceTrack');
+            const nextRaceDateTime = document.getElementById('nextRaceDateTime');
+
+            if (!race) {
+                nextRaceName.textContent = "Žádný naplánovaný závod";
+                nextRaceTrack.textContent = "---";
+                nextRaceDateTime.textContent = "---";
+                return;
+            }
+
+            nextRaceName.textContent = race.name;
+            nextRaceTrack.textContent = race.track;
+            nextRaceDateTime.textContent = race.raceStart.toLocaleDateString("cs-CZ", {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Funkce pro aktualizaci countdownu
+        function updateCountdownDisplay(targetDate) {
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                // Čas již uplynul - zobrazíme nulu
+                document.getElementById('cd-days').textContent = '00';
+                document.getElementById('cd-hours').textContent = '00';
+                document.getElementById('cd-minutes').textContent = '00';
+                document.getElementById('cd-seconds').textContent = '00';
+                return false;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+            document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+
+            return true;
+        }
+
+        // Hlavní funkce pro aktualizaci stavu streamu a závodu
+        async function updateStreamStatus() {
+            const streamData = await getCurrentLiveStream();
+            const currentRace = getCurrentRace();
+            const nextRace = getNextRace();
+
+            const countdownEl = document.getElementById('countdown');
+            const streamLink = document.getElementById('stream-link');
+            const streamText = document.getElementById('stream-text');
+            const liveIndicator = document.getElementById('liveIndicator');
+            const streamMeta = document.getElementById('streamMeta');
+            const viewersCount = document.getElementById('viewersCount');
+            const streamUptime = document.getElementById('streamUptime');
+
+            // Pokud není žádný závod
+            if (!nextRace) {
+                countdownEl.innerHTML = '<div class="no-races">Žádné další závody naplánovány</div>';
+                streamLink.style.display = 'none';
+                updateRaceDisplay(null);
+                return;
+            }
+
+            const now = new Date();
+            const raceStart = nextRace.raceStart;
+            const raceEnd = new Date(raceStart.getTime() + 3 * 60 * 60 * 1000);
+
+            // Kontrola, zda se má přepnout na nový závod
+            if (!currentDisplayedRace || currentDisplayedRace.date !== nextRace.date) {
+                currentDisplayedRace = nextRace;
+                updateRaceDisplay(nextRace);
+            }
+
+            // Pokud je stream živý a odpovídá aktuálnímu závodu
+            if (streamData.isLive) {
+                currentLiveStream = streamData;
+
+                // Získání detailů streamu
+                const streamDetails = await getStreamDetails(streamData.videoId);
+
+                // Aktualizace odkazu na stream
+                streamLink.href = `https://www.youtube.com/watch?v=${streamData.videoId}`;
+
+                // Zobrazení LIVE indikátoru
+                liveIndicator.classList.remove('hidden');
+                streamLink.classList.add('live');
+                streamText.textContent = 'Sleduj živý přenos';
+                streamMeta.classList.remove('hidden');
+                countdownEl.style.display = 'none';
+
+                // Aktualizace metadat
+                if (streamDetails) {
+                    viewersCount.textContent = `• Diváků online: ${streamDetails.concurrentViewers.toLocaleString()}`;
+                    if (streamDetails.actualStartTime) {
+                        streamUptime.textContent = `• Stream běží: ${formatUptime(streamDetails.actualStartTime)}`;
+                    }
+                }
+
+            } else {
+                // STREAM NENÍ ŽIVÝ
+
+                // Skryjeme LIVE indikátor a metadata
+                liveIndicator.classList.add('hidden');
+                streamMeta.classList.add('hidden');
+                streamLink.classList.remove('live');
+                streamText.textContent = 'Sleduj stream na YouTube';
+                countdownEl.style.display = 'flex';
+
+                // Pokud je závod v časovém okně (od startu do 3 hodin po startu)
+                if (now >= raceStart && now <= raceEnd) {
+                    // Závod by měl běžet, ale stream není živý
+                    liveIndicator.classList.remove('hidden');
+                    liveIndicator.classList.add('preparing');
+                    liveIndicator.querySelector('.live-text').textContent = 'ČEKÁME NA STREAM';
+                    streamText.textContent = 'Stream by měl brzy začít';
+
+                    // Odpočet do konce časového okna
+                    updateCountdownDisplay(raceEnd);
+
+                } else if (now < raceStart) {
+                    // Závod ještě nezačal - normální odpočet
+                    const timeToStart = updateCountdownDisplay(raceStart);
+
+                    // 15 minut před startem - přípravná fáze
+                    if (timeToStart && (raceStart - now) <= 15 * 60 * 1000) {
+                        liveIndicator.classList.remove('hidden');
+                        liveIndicator.classList.add('preparing');
+                        liveIndicator.querySelector('.live-text').textContent = 'ZAČÍNÁ BRZY';
+                        streamText.textContent = 'Připravte se na stream';
+                    }
+                } else {
+                    // Závod již skončil - přejdeme na další
+                    const nextUpcomingRace = getNextRace();
+                    if (nextUpcomingRace && nextUpcomingRace.date !== currentDisplayedRace.date) {
+                        // Přepneme na nový závod
+                        currentDisplayedRace = nextUpcomingRace;
+                        updateRaceDisplay(nextUpcomingRace);
+                        updateCountdownDisplay(nextUpcomingRace.raceStart);
+                    } else {
+                        countdownEl.innerHTML = '<div class="race-finished">Závod byl dokončen</div>';
+                    }
+                }
+            }
+        }
+
+        // Inicializace stránky
+        document.addEventListener("DOMContentLoaded", async () => {
+            // První načtení stavu
+            await updateStreamStatus();
+
+            // Pravidelné aktualizace streamu (každých 30 sekund)
+            streamCheckInterval = setInterval(updateStreamStatus, 30000);
+
+            // Pravidelná aktualizace countdownu (každou sekundu)
+            const countdownInterval = setInterval(() => {
+                if (currentDisplayedRace) {
+                    const now = new Date();
+                    const raceStart = currentDisplayedRace.raceStart;
+
+                    if (now < raceStart) {
+                        updateCountdownDisplay(raceStart);
+                    } else {
+                        const raceEnd = new Date(raceStart.getTime() + 3 * 60 * 60 * 1000);
+                        if (now <= raceEnd) {
+                            updateCountdownDisplay(raceEnd);
+                        }
+                    }
+                }
+            }, 1000);
+
+            // Naplnění nadcházejících závodů
+            const upcomingRaces = getUpcomingRaces(5);
+            populateCalendar("calendar", upcomingRaces);
+
+            // Automatické obnovení seznamu závodů každou minutu
+            function scheduleRefresh() {
+                setTimeout(() => {
+                    const newUpcomingRaces = getUpcomingRaces(5);
+                    populateCalendar("calendar", newUpcomingRaces);
+                    scheduleRefresh();
+                }, 60000);
+            }
+
+            scheduleRefresh();
+        });
+
+        // Scrollování headeru na mobilu
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', () => {
+            const st = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (window.innerWidth <= 768) {
+                if (st > lastScrollTop) {
+                    header.style.top = "-120px";
+                } else {
+                    header.style.top = "0";
+                }
+            }
+
+            lastScrollTop = st <= 0 ? 0 : st;
         });
     </script>
 </body>
+
 </html>
