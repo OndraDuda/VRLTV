@@ -161,6 +161,7 @@
                             <i class="fab fa-youtube"></i>
                             <span id="stream-text">Sleduj stream na YouTube</span>
                         </a>
+
                         <!-- Hlasování o jezdci dne -->
                         <a href="driver-of-the-day.html" id="voting-link" class="stream-link voting-link">
                             <i class="fas fa-vote-yea"></i>
@@ -270,7 +271,6 @@
                         <li><a href="okruh.html">Okruhy</a></li>
                         <li><a href="vysledky.html">Výsledky</a></li>
                         <li><a href="prihlasky.html">Příhlášky</a></li>
-                        <li><a href="driver-of-the-day.html">Driver of the Day</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -327,29 +327,6 @@
         let currentDisplayedRace = null;
         let currentLiveStream = null;
         let streamCheckInterval = null;
-
-        // Funkce pro kontrolu, zda je hlasování aktivní
-        function isVotingActive(race) {
-            if (!race) return false;
-
-            const now = new Date();
-            const raceStart = new Date(`${race.date}T19:00:00`);
-            const votingStart = new Date(raceStart.getTime() - 60 * 60 * 1000); // 1 hodina před závodem
-            const votingEnd = new Date(raceStart.getTime() + 60 * 60 * 1000); // 1 hodina po závodu
-
-            return now >= votingStart && now <= votingEnd;
-        }
-
-        // Funkce pro aktualizaci zobrazení hlasování
-        function updateVotingDisplay(race) {
-            const votingLink = document.getElementById('voting-link');
-
-            if (isVotingActive(race)) {
-                votingLink.classList.remove('hidden');
-            } else {
-                votingLink.classList.add('hidden');
-            }
-        }
 
         // Funkce pro získání aktuálního živého streamu z kanálu
         async function getCurrentLiveStream() {
@@ -601,9 +578,6 @@
                 currentDisplayedRace = nextRace;
                 updateRaceDisplay(nextRace);
             }
-
-            // Aktualizace zobrazení hlasování
-            updateVotingDisplay(nextRace);
 
             // Pokud je stream živý a odpovídá aktuálnímu závodu
             if (streamData.isLive) {
