@@ -95,6 +95,11 @@
     <script src="js/global.js"></script>
 
     <script>
+        // SPRÁVNÉ HODNOTY PODLE TVÉHO OBRÁZKU
+        const BIN_ID = "69275fffae596e708f72d9a1";  // Tvůj první Bin
+        const API_KEY = "$2a$10$F2bQxjNK9iS.c4XhkVnMJu/L.LdsAvJ5RFFUdr82YqHRVLomgoEla";  // Klíč k prvnímu Binu
+        const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
         const drivers = [
             { number: 71, name: "Petr Stouhal", team: "Red Bull" },
             { number: 7, name: "Josef Kubeš", team: "Ferrari" },
@@ -119,7 +124,6 @@
             { number: 21, name: "Adam Gallus", team: "Záloha" }
         ];
 
-        // závody 1:1 převzaté z tvého index.html
         const races = [
             { round: "R1", name: "Austrálie", date: "2025-09-09", track: "Melbourne Grand Prix Circuit" },
             { round: "R2", name: "Velká Británie", date: "2025-09-16", track: "Silverstone Circuit" },
@@ -147,6 +151,7 @@
         ];
         let currentRace = null;
 
+        // === Funkce pro získání device ID ===
         function getDeviceId() {
             let id = localStorage.getItem("vrl_device_id");
             if (!id) {
@@ -170,6 +175,13 @@
             return now < raceStart.getTime() - 3600000;
         }
 
+        function isRacePast(r) {
+            const now = new Date();
+            const raceStart = new Date(`${r.date}T19:00:00`);
+            const votingEnd = new Date(raceStart.getTime() + 48 * 3600000);
+            return now > votingEnd;
+        }
+
         function getTimeUntilVotingStart(r) {
             const now = new Date();
             const raceStart = new Date(`${r.date}T19:00:00`);
@@ -185,56 +197,75 @@
             return `${m}m`;
         }
 
-        function getVotes(r) {
-            return JSON.parse(localStorage.getItem("votes_" + r.date) || '{"votes":{},"devices":{}}');
+        // === Načtení hlasů z JsonBin ===
+        async function getVotes(r) {
+            try {
+                console.log("Načítám data z JSON Bin...");
+                const res = await fetch(API_URL, {
+                    headers: { "X-Master-Key": API_KEY }
+                });
+                
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                
+                const json = await res.json();
+                console.log("Data načtena:", json);
+                
+                const data = json.record;
+
+                return {
+                    votes: data.votes[r.date] || {},
+                    devices: data.devices[r.date] || {}
+                };
+            } catch (e) {
+                console.error("Chyba při načítání JSON Bin:", e);
+                return { votes: {}, devices: {} };
+            }
         }
 
-        function saveVotes(r, data) {
-            localStorage.setItem("votes_" + r.date, JSON.stringify(data));
-        }
-
-        function displayRaceList() {
+        async function displayRaceList() {
             const list = document.getElementById("raceList");
             list.innerHTML = "";
 
-            races.forEach(r => {
-                const voting = isVotingActive(r);       // hlasování probíhá
-                const upcoming = isVotingUpcoming(r);   // závod teprve přijde
-                const store = getVotes(r);
+            for (const r of races) {
+                const voting = isVotingActive(r);
+                const upcoming = isVotingUpcoming(r);
+                const past = isRacePast(r);
+                const store = await getVotes(r);
                 const voted = !!store.devices[getDeviceId()];
 
                 let status = "";
-                let buttons = `<button class="btn btn-results" onclick="openResults('${r.date}')">Výsledky</button>`;
+                let buttons = "";
 
                 if (voting) {
                     status = voted ? "✅ Už jste hlasovali" : "🔵 Hlasování probíhá";
                     if (!voted) {
-                        buttons = `<button class="btn btn-vote vote-active" onclick="openVote('${r.date}')">Hlasovat</button>` + buttons;
+                        buttons = `<button class="btn btn-vote vote-active" onclick="openVote('${r.date}')">Hlasovat</button>`;
                     }
+                    buttons += `<button class="btn btn-results" onclick="openResults('${r.date}')">Výsledky</button>`;
                 } else if (upcoming) {
                     status = `🟡 Začíná za ${formatTime(getTimeUntilVotingStart(r))}`;
-                    // připravované tlačítko tmavé a jiný tvar
-                    buttons = `<button class="btn btn-vote vote-inactive" disabled>Hlasovat</button>` + buttons;
-                } else {
+                    buttons = `<button class="btn btn-vote vote-inactive" disabled>Hlasovat</button>
+                              <button class="btn btn-results" onclick="openResults('${r.date}')">Výsledky</button>`;
+                } else if (past) {
+                    // Závody, které se již jely - pouze tlačítko Výsledky
                     status = "✔ Hlasování ukončeno";
-                    // ujeté závody → tlačítko není
+                    buttons = `<button class="btn btn-results" onclick="openResults('${r.date}')">Výsledky</button>`;
                 }
 
                 list.innerHTML += `
-            <div class="race-item">
-                <div class="race-header">
-                    <h3>${r.round} – ${r.name}</h3>
-                    <div>${status}</div>
-                </div>
-                <p><strong>Trať:</strong> ${r.track}</p>
-                <p><strong>Datum:</strong> ${new Date(r.date).toLocaleDateString("cs-CZ")} v 19:00</p>
-                <div class="race-actions">${buttons}</div>
-            </div>`;
-            });
+                <div class="race-item">
+                    <div class="race-header">
+                        <h3>${r.round} – ${r.name}</h3>
+                        <div>${status}</div>
+                    </div>
+                    <p><strong>Trať:</strong> ${r.track}</p>
+                    <p><strong>Datum:</strong> ${new Date(r.date).toLocaleDateString("cs-CZ")} v 19:00</p>
+                    <div class="race-actions">${buttons}</div>
+                </div>`;
+            }
         }
-
-
-
 
         function populateDrivers() {
             const sel = document.getElementById("driverSelect");
@@ -249,17 +280,18 @@
             document.getElementById("votingModal").style.display = "block";
         }
 
-        function openResults(date) {
+        // === Zobrazení výsledků ===
+        async function openResults(date) {
             const r = races.find(x => x.date === date);
             const modal = document.getElementById("resultsModal");
             const out = document.getElementById("resultsContainer");
 
-            const data = getVotes(r);
+            const data = await getVotes(r);
             const votes = data.votes;
 
             document.getElementById("resultsRaceName").innerText = "Výsledky – " + r.name;
 
-            if (Object.keys(votes).length === 0) {
+            if (!votes || Object.keys(votes).length === 0) {
                 out.innerHTML = "<p>Zatím nikdo nehlasoval.</p>";
                 modal.style.display = "block";
                 return;
@@ -289,22 +321,83 @@
             document.getElementById("resultsModal").style.display = "none";
         }
 
-        document.getElementById("submitVote").onclick = function () {
+        // === Odeslání hlasu - OPRAVENÁ VERZE ===
+        document.getElementById("submitVote").onclick = async function () {
             const num = document.getElementById("driverSelect").value;
             if (!num) return alert("Vyber jezdce!");
 
-            const data = getVotes(currentRace);
-            const dev = getDeviceId();
+            try {
+                console.log("Začínám proces hlasování...");
 
-            if (data.devices[dev]) return alert("Už jste hlasovali!");
+                // Načíst aktuální data
+                const res = await fetch(API_URL, {
+                    headers: { "X-Master-Key": API_KEY }
+                });
+                
+                console.log("Stav odpovědi při čtení:", res.status);
+                
+                if (!res.ok) {
+                    throw new Error(`Chyba při načítání: ${res.status}`);
+                }
+                
+                const json = await res.json();
+                console.log("Data načtena z JSON Bin:", json);
+                
+                let allData = json.record;
 
-            data.votes[num] = (data.votes[num] || 0) + 1;
-            data.devices[dev] = true;
+                // Inicializovat strukturu, pokud neexistuje
+                if (!allData) {
+                    console.log("AllData je prázdné, inicializuji...");
+                    allData = {};
+                }
+                if (!allData.votes) allData.votes = {};
+                if (!allData.devices) allData.devices = {};
+                if (!allData.votes[currentRace.date]) allData.votes[currentRace.date] = {};
+                if (!allData.devices[currentRace.date]) allData.devices[currentRace.date] = {};
 
-            saveVotes(currentRace, data);
-            closeModals();
-            displayRaceList();
-            alert("Hlas odeslán.");
+                const dev = getDeviceId();
+                console.log("Device ID:", dev);
+
+                // Kontrola, zda uživatel již hlasoval
+                if (allData.devices[currentRace.date][dev]) {
+                    return alert("Už jste hlasovali!");
+                }
+
+                // Přidání hlasu
+                allData.votes[currentRace.date][num] = (allData.votes[currentRace.date][num] || 0) + 1;
+                console.log("Hlas přidán pro jezdce č.", num);
+
+                // Označení zařízení jako odhlasovaného
+                allData.devices[currentRace.date][dev] = true;
+
+                console.log("Data k odeslání:", allData);
+
+                // Uložit zpět
+                const putRes = await fetch(API_URL, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-Master-Key": API_KEY
+                    },
+                    body: JSON.stringify(allData)
+                });
+
+                console.log("Stav odpovědi při ukládání:", putRes.status);
+
+                if (!putRes.ok) {
+                    throw new Error(`Chyba při ukládání: ${putRes.status}`);
+                }
+
+                const putJson = await putRes.json();
+                console.log("Odpověď po uložení:", putJson);
+
+                closeModals();
+                displayRaceList();
+                alert("Hlas odeslán.");
+            } catch (error) {
+                console.error("Chyba při odesílání hlasu:", error);
+                alert("Došlo k chybě při odesílání hlasu: " + error.message);
+            }
         };
 
         displayRaceList();
