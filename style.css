@@ -2901,6 +2901,25 @@ body[data-theme="light"] .driver-selector select:focus {
     box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.2);
 }
 
+.voting-link {
+    background: linear-gradient(135deg, var(--gold), var(--f1-red)) !important;
+    margin-top: 10px;
+}
+
+.voting-link:hover {
+    background: linear-gradient(135deg, var(--f1-red), var(--gold)) !important;
+    transform: translateY(-2px);
+}
+
+body[data-theme="light"] .voting-link {
+    background: linear-gradient(135deg, var(--accent-color), var(--f1-red)) !important;
+    color: white !important;
+}
+
+body[data-theme="light"] .voting-link:hover {
+    background: linear-gradient(135deg, var(--f1-red), var(--accent-color)) !important;
+}
+
 .voting-status {
     margin: 2rem 0;
     padding: 1.5rem;
@@ -2913,6 +2932,12 @@ body[data-theme="light"] .driver-selector select:focus {
 .status-active {
     background: linear-gradient(135deg, var(--card-bg), rgba(0, 255, 0, 0.1));
     border: 2px solid #00aa00;
+    color: var(--text-color);
+}
+
+.status-voted {
+    background: linear-gradient(135deg, var(--card-bg), rgba(255, 215, 0, 0.1));
+    border: 2px solid var(--gold);
     color: var(--text-color);
 }
 
@@ -3027,13 +3052,30 @@ body[data-theme="light"] .driver-selector select:focus {
     opacity: 0.8;
 }
 
-.total-votes {
-    text-align: center;
+.voting-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
     margin-top: 1.5rem;
     padding: 1rem;
     background: var(--dark-bg);
     border-radius: 8px;
-    font-size: 1.1rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item strong {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--f1-red);
+}
+
+.stat-item span {
+    font-size: 0.9rem;
+    opacity: 0.8;
 }
 
 .no-votes {
@@ -3044,23 +3086,6 @@ body[data-theme="light"] .driver-selector select:focus {
     border: 2px dashed var(--card-border);
     font-style: italic;
     opacity: 0.7;
-}
-
-.btn-small {
-    background: linear-gradient(135deg, var(--vrl-blue), var(--vrl-purple));
-    color: var(--text-light);
-    padding: 8px 16px;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-}
-
-.btn-small:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -3087,8 +3112,403 @@ body[data-theme="light"] .driver-selector select:focus {
     .result-bar-container {
         width: 100%;
     }
+
+    .voting-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
 }
 
+body[data-theme="light"] .driver-selector select {
+    background: white;
+    color: var(--text-dark);
+    border: 2px solid var(--accent-color);
+}
+
+body[data-theme="light"] .result-row {
+    background: white;
+    border: 1px solid var(--accent-color);
+}
+
+body[data-theme="light"] .result-row.podium {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-color: var(--accent-color);
+}
+
+body[data-theme="light"] .result-bar-ainer {
+    background: #e0e0e0;
+}
+
+body[data-theme="light"] .voting-stats {
+    background: #f0f0f0;
+}
+
+/* STYLY PRO HLASOVÁNÍ O JEZDCE DNE */
+.race-list {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.driver-of-the-day {
+    background: var(--card-bg);
+    padding: 1rem 1rem 2rem 1rem;
+    /* spodní padding větší pro prostor pod obsahem */
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3rem;
+    border: 2px solid var(--card-border);
+    text-align: center;
+
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.race-list td,
+.race-list th {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.driver-of-the-day p {
+    margin-bottom: 1rem;
+    /* mezera mezi textem a tabulkou */
+}
+
+.race-item {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.race-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.race-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.race-header h3 {
+    color: var(--f1-red);
+    margin: 0;
+}
+
+.race-info {
+    margin-bottom: 1.5rem;
+}
+
+.race-info p {
+    margin: 0.3rem 0;
+    color: var(--text-color);
+}
+
+.race-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.status-active {
+    background: linear-gradient(135deg, #00aa00, #008800);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.status-upcoming {
+    background: linear-gradient(135deg, #ffaa00, #ff8800);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.status-finished {
+    background: linear-gradient(135deg, var(--vrl-purple), var(--vrl-blue));
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.status-voted {
+    background: linear-gradient(135deg, var(--gold), #ffaa00);
+    color: var(--text-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.btn-vote {
+    background: linear-gradient(135deg, var(--f1-red), var(--vrl-blue));
+}
+
+.btn-results {
+    background: linear-gradient(135deg, var(--vrl-blue), var(--vrl-purple));
+}
+
+.btn-disabled {
+    background: var(--dark-bg) !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+}
+
+/* MODAL STYLY */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: 5% auto;
+    padding: 2rem;
+    border: 1px solid var(--card-border);
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.close {
+    color: var(--text-color);
+    float: right;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    margin-top: -0.5rem;
+}
+
+.close:hover {
+    color: var(--f1-red);
+}
+
+.driver-selector {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+}
+
+.driver-selector select {
+    padding: 12px 16px;
+    border: 2px solid var(--vrl-blue);
+    border-radius: 8px;
+    background: var(--dark-bg);
+    color: var(--text-light);
+    font-size: 1rem;
+    flex: 1;
+    min-width: 250px;
+}
+
+.voting-note {
+    text-align: center;
+    font-style: italic;
+    opacity: 0.8;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+/* VÝSLEDKY */
+.results-table {
+    margin: 1.5rem 0;
+}
+
+.container2 {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.result-row {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    transition: transform 0.3s ease;
+    gap: 1rem;
+}
+
+.result-row:hover {
+    transform: translateX(5px);
+    border-color: var(--vrl-blue);
+}
+
+.result-row.podium {
+    background: linear-gradient(135deg, var(--dark-bg), var(--vrl-purple));
+    border-color: var(--f1-red);
+}
+
+.result-position {
+    font-weight: bold;
+    font-size: 1.2rem;
+    min-width: 60px;
+    text-align: center;
+}
+
+.result-driver {
+    flex: 1;
+    min-width: 150px;
+}
+
+.result-team {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 0.2rem;
+}
+
+.result-bar-container {
+    flex: 2;
+    background: var(--dark-bg);
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    min-width: 100px;
+}
+
+.result-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--f1-red), var(--vrl-blue));
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+.result-votes {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 80px;
+}
+
+.vote-count {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--f1-red);
+}
+
+.vote-percentage {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.voting-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--dark-bg);
+    border-radius: 8px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item strong {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--f1-red);
+}
+
+.stat-item span {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.no-votes {
+    text-align: center;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 2px dashed var(--card-border);
+    font-style: italic;
+    opacity: 0.7;
+}
+
+/* RESPONZIVITA */
+@media (max-width: 768px) {
+    .race-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .race-actions {
+        flex-direction: column;
+    }
+
+    .driver-selector {
+        flex-direction: column;
+    }
+
+    .driver-selector select {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .result-row {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.8rem;
+    }
+
+    .result-position,
+    .result-votes {
+        min-width: unset;
+    }
+
+    .result-bar-container {
+        width: 100%;
+    }
+
+    .voting-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .modal-content {
+        margin: 10% auto;
+        width: 95%;
+        padding: 1.5rem;
+    }
+}
+
+/* SVĚTLÝ REŽIM */
 body[data-theme="light"] .driver-selector select {
     background: white;
     color: var(--text-dark);
@@ -3109,25 +3529,109 @@ body[data-theme="light"] .result-bar-container {
     background: #e0e0e0;
 }
 
-body[data-theme="light"] .total-votes {
+body[data-theme="light"] .voting-stats {
     background: #f0f0f0;
 }
 
-.voting-link {
-    background: linear-gradient(135deg, var(--gold), var(--f1-red)) !important;
-    margin-top: 10px;
+body[data-theme="light"] .race-item {
+    background: white;
+    border: 1px solid var(--accent-color);
 }
 
-.voting-link:hover {
-    background: linear-gradient(135deg, var(--f1-red), var(--gold)) !important;
-    transform: translateY(-2px);
+body[data-theme="light"] .modal-content {
+    background: white;
+    border: 2px solid var(--accent-color);
 }
 
-body[data-theme="light"] .voting-link {
-    background: linear-gradient(135deg, var(--accent-color), var(--f1-red)) !important;
-    color: white !important;
+.race-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-body[data-theme="light"] .voting-link:hover {
-    background: linear-gradient(135deg, var(--f1-red), var(--accent-color)) !important;
+.race-item {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+.race-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.race-actions button {
+    margin-right: 10px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background: var(--card-bg);
+    margin: 10% auto;
+    padding: 25px;
+    border-radius: 12px;
+    width: 95%;
+    max-width: 450px;
+}
+
+.close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.results-table {
+    margin-top: 20px;
+}
+
+.result-row {
+    padding: 10px;
+    background: var(--bg2);
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.result-bar {
+    height: 10px;
+    background: var(--accent);
+    border-radius: 5px;
+}
+
+.btn-vote {
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+/* tlačítko aktivní – světlé a běžný tvar */
+.btn-vote.vote-active {
+    background-color: #4CAF50;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* tlačítko neaktivní – tmavé a trochu jiný tvar */
+.btn-vote.vote-inactive {
+    background-color: #888;
+    /* šedá barva */
+    color: #ddd;
+    border-radius: 5px;
+    /* jiný tvar */
+    cursor: not-allowed;
+    box-shadow: none;
 }
