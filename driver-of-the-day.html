@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRL - Driver of the Day</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="VRL_logo_nove.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="vrl_high_res.png" class="logo-img" alt="">
+                    </a>
+                </div>
+
+                <div class="header-controls">
+                    <button class="theme-switch" id="themeSwitch">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+
+                <nav id="mobileNav">
+                    <ul>
+                        <li><a href="index.html">Domů</a></li>
+                        <li><a href="calendar.html">Kalendář</a></li>
+                        <li><a href="jezdci.html">Jezdci</a></li>
+                        <li><a href="tymy.html">Týmy</a></li>
+                        <li><a href="okruh.html">Okruhy</a></li>
+                        <li><a href="vysledky.html">Výsledky</a></li>
+                        <li><a href="prihlasky.html">Příhlášky</a></li>
+                        <li><a href="https://discord.gg/CMxscEUcRd" class="discord-btn"><i class="fab fa-discord"></i>
+                                Discord</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-fade"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h2>Driver of the Day</h2>
+                <p>Hlasujte pro nejlepšího jezdce VRL závodu</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="season-info">
+            <h2>Driver of the Day – Sezóna 2</h2>
+            <p>Výsledky lze zobrazit vždy • Hlasovat jde jen v aktivním okně</p>
+
+            <div class="race-list" id="raceList"></div>
+        </section>
+    </div>
+
+    <!-- Modal – HLASOVÁNÍ -->
+    <div id="votingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModals()">&times;</span>
+            <h3 id="modalRaceName">Hlasovat pro jezdce dne</h3>
+
+            <div class="driver-selector">
+                <select id="driverSelect">
+                    <option value="">Vyberte jezdce</option>
+                </select>
+            </div>
+
+            <button id="submitVote" class="btn">Odeslat hlas</button>
+            <p style="opacity:0.7;margin-top:10px">Každé zařízení může hlasovat pouze jednou.</p>
+        </div>
+    </div>
+
+    <!-- Modal – VÝSLEDKY -->
+    <div id="resultsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModals()">&times;</span>
+            <h3 id="resultsRaceName">Výsledky hlasování</h3>
+            <div id="resultsContainer"></div>
+        </div>
+    </div>
+
+    <script src="js/global.js"></script>
+
+    <script>
+        const drivers = [
+            { number: 71, name: "Petr Stouhal", team: "Red Bull" },
+            { number: 7, name: "Josef Kubeš", team: "Ferrari" },
+            { number: 2, name: "Zdeněk Pohlreich", team: "Mercedes" },
+            { number: 1, name: "Maxim Heligr", team: "McLaren" },
+            { number: 56, name: "Filip Kratochvíl", team: "Aston Martin" },
+            { number: 24, name: "Viktor Koutný", team: "Alpine" },
+            { number: 97, name: "Andrej Erdelský", team: "Racing Bulls" },
+            { number: 20, name: "Tomáš Novák", team: "Haas" },
+            { number: 19, name: "Ján Bubák", team: "Williams" },
+            { number: 99, name: "Jakub Fabian", team: "Sauber" },
+            { number: 13, name: "Oscar Anděl", team: "Red Bull" },
+            { number: 28, name: "Luboš Novotný", team: "Ferrari" },
+            { number: 12, name: "Martin Klaboch", team: "Mercedes" },
+            { number: 96, name: "Matěj Vaculík", team: "McLaren" },
+            { number: 4, name: "Max Novotný", team: "Williams" },
+            { number: 11, name: "Oliver Čobrde", team: "Alpine" },
+            { number: 67, name: "Jáchym Majvald", team: "Racing Bulls" },
+            { number: 25, name: "Matěj Švec", team: "Haas" },
+            { number: 26, name: "Matyáš Kasl", team: "Aston Martin" },
+            { number: 66, name: "Oliver Stavač", team: "Sauber" },
+            { number: 21, name: "Adam Gallus", team: "Záloha" }
+        ];
+
+        // závody 1:1 převzaté z tvého index.html
+        const races = [
+            { round: "R1", name: "Austrálie", date: "2025-09-09", track: "Melbourne Grand Prix Circuit" },
+            { round: "R2", name: "Velká Británie", date: "2025-09-16", track: "Silverstone Circuit" },
+            { round: "R3", name: "Bahrain", date: "2025-09-30", track: "Bahrain International Circuit" },
+            { round: "R4", name: "Miami", date: "2025-10-07", track: "Miami International Autodrome" },
+            { round: "R5", name: "Imola", date: "2025-10-14", track: "Autodromo Enzo e Dino Ferrari" },
+            { round: "R6", name: "Ázerbájdžán", date: "2025-10-21", track: "Baku City Circuit" },
+            { round: "R7", name: "Japonsko", date: "2025-11-04", track: "Suzuka" },
+            { round: "R8", name: "Kanada", date: "2025-11-11", track: "Gilles Villeneuve" },
+            { round: "R9", name: "Singapur", date: "2025-11-18", track: "Marina Bay" },
+            { round: "R11", name: "Španělsko", date: "2025-11-26", track: "Barcelona-Catalunya" },
+            { round: "R10", name: "Belgie", date: "2025-12-02", track: "Spa-Francorchamps" },
+            { round: "R11", name: "Španělsko", date: "2025-12-16", track: "Barcelona-Catalunya" },
+            { round: "R12", name: "Mexiko", date: "2026-01-06", track: "Hermanos Rodríguez" },
+            { round: "R13", name: "Brazílie", date: "2026-01-20", track: "Interlagos" },
+            { round: "R14", name: "USA", date: "2026-02-03", track: "COTA" },
+            { round: "S1", name: "Sprint Reverse Rakousko", date: "2026-02-17", track: "Red Bull Ring" },
+            { round: "R15", name: "Rakousko", date: "2026-02-17", track: "Red Bull Ring" },
+            { round: "R16", name: "Monako", date: "2026-03-03", track: "Monaco" },
+            { round: "R17", name: "Itálie", date: "2026-03-10", track: "Monza" },
+            { round: "R18", name: "Maďarsko", date: "2026-03-24", track: "Hungaroring" },
+            { round: "R19", name: "Katar", date: "2026-04-07", track: "Losail" },
+            { round: "R20", name: "Saudská Arábie", date: "2026-04-21", track: "Jeddah" },
+            { round: "R21", name: "Abu Dhabi", date: "2026-04-28", track: "Yas Marina" }
+        ];
+        let currentRace = null;
+
+        function getDeviceId() {
+            let id = localStorage.getItem("vrl_device_id");
+            if (!id) {
+                id = "DEV_" + Math.random().toString(36).slice(2);
+                localStorage.setItem("vrl_device_id", id);
+            }
+            return id;
+        }
+
+        function isVotingActive(r) {
+            const now = new Date();
+            const raceStart = new Date(`${r.date}T19:00:00`);
+            const votingStart = new Date(raceStart.getTime() - 3600000);
+            const votingEnd = new Date(raceStart.getTime() + 48 * 3600000);
+            return now >= votingStart && now <= votingEnd;
+        }
+
+        function isVotingUpcoming(r) {
+            const now = new Date();
+            const raceStart = new Date(`${r.date}T19:00:00`);
+            return now < raceStart.getTime() - 3600000;
+        }
+
+        function getTimeUntilVotingStart(r) {
+            const now = new Date();
+            const raceStart = new Date(`${r.date}T19:00:00`);
+            return (raceStart.getTime() - 3600000) - now;
+        }
+
+        function formatTime(ms) {
+            const d = Math.floor(ms / 86400000);
+            const h = Math.floor((ms % 86400000) / 3600000);
+            const m = Math.floor((ms % 3600000) / 60000);
+            if (d > 0) return `${d}d ${h}h ${m}m`;
+            if (h > 0) return `${h}h ${m}m`;
+            return `${m}m`;
+        }
+
+        function getVotes(r) {
+            return JSON.parse(localStorage.getItem("votes_" + r.date) || '{"votes":{},"devices":{}}');
+        }
+
+        function saveVotes(r, data) {
+            localStorage.setItem("votes_" + r.date, JSON.stringify(data));
+        }
+
+        function displayRaceList() {
+            const list = document.getElementById("raceList");
+            list.innerHTML = "";
+
+            races.forEach(r => {
+                const voting = isVotingActive(r);       // hlasování probíhá
+                const upcoming = isVotingUpcoming(r);   // závod teprve přijde
+                const store = getVotes(r);
+                const voted = !!store.devices[getDeviceId()];
+
+                let status = "";
+                let buttons = `<button class="btn btn-results" onclick="openResults('${r.date}')">Výsledky</button>`;
+
+                if (voting) {
+                    status = voted ? "✅ Už jste hlasovali" : "🔵 Hlasování probíhá";
+                    if (!voted) {
+                        buttons = `<button class="btn btn-vote vote-active" onclick="openVote('${r.date}')">Hlasovat</button>` + buttons;
+                    }
+                } else if (upcoming) {
+                    status = `🟡 Začíná za ${formatTime(getTimeUntilVotingStart(r))}`;
+                    // připravované tlačítko tmavé a jiný tvar
+                    buttons = `<button class="btn btn-vote vote-inactive" disabled>Hlasovat</button>` + buttons;
+                } else {
+                    status = "✔ Hlasování ukončeno";
+                    // ujeté závody → tlačítko není
+                }
+
+                list.innerHTML += `
+            <div class="race-item">
+                <div class="race-header">
+                    <h3>${r.round} – ${r.name}</h3>
+                    <div>${status}</div>
+                </div>
+                <p><strong>Trať:</strong> ${r.track}</p>
+                <p><strong>Datum:</strong> ${new Date(r.date).toLocaleDateString("cs-CZ")} v 19:00</p>
+                <div class="race-actions">${buttons}</div>
+            </div>`;
+            });
+        }
+
+
+
+
+        function populateDrivers() {
+            const sel = document.getElementById("driverSelect");
+            sel.innerHTML = "<option value=''>Vyber jezdce</option>";
+            drivers.forEach(d => sel.innerHTML += `<option value="${d.number}">${d.number} – ${d.name} (${d.team})</option>`);
+        }
+
+        function openVote(date) {
+            currentRace = races.find(r => r.date === date);
+            document.getElementById("modalRaceName").innerText = "Hlasovat – " + currentRace.name;
+            populateDrivers();
+            document.getElementById("votingModal").style.display = "block";
+        }
+
+        function openResults(date) {
+            const r = races.find(x => x.date === date);
+            const modal = document.getElementById("resultsModal");
+            const out = document.getElementById("resultsContainer");
+
+            const data = getVotes(r);
+            const votes = data.votes;
+
+            document.getElementById("resultsRaceName").innerText = "Výsledky – " + r.name;
+
+            if (Object.keys(votes).length === 0) {
+                out.innerHTML = "<p>Zatím nikdo nehlasoval.</p>";
+                modal.style.display = "block";
+                return;
+            }
+
+            const sorted = Object.entries(votes)
+                .map(([num, v]) => {
+                    const d = drivers.find(x => x.number == num);
+                    return { ...d, votes: v };
+                })
+                .sort((a, b) => b.votes - a.votes);
+
+            out.innerHTML = sorted.map((d, i) => `
+                <div class="result-row">
+                    <div>${i + 1}.</div>
+                    <div><strong>${d.name}</strong> (#${d.number})</div>
+                    <div class="result-bar-container"><div class="result-bar" style="width:${d.votes * 10}px"></div></div>
+                    <div>${d.votes} hlasů</div>
+                </div>
+            `).join("");
+
+            modal.style.display = "block";
+        }
+
+        function closeModals() {
+            document.getElementById("votingModal").style.display = "none";
+            document.getElementById("resultsModal").style.display = "none";
+        }
+
+        document.getElementById("submitVote").onclick = function () {
+            const num = document.getElementById("driverSelect").value;
+            if (!num) return alert("Vyber jezdce!");
+
+            const data = getVotes(currentRace);
+            const dev = getDeviceId();
+
+            if (data.devices[dev]) return alert("Už jste hlasovali!");
+
+            data.votes[num] = (data.votes[num] || 0) + 1;
+            data.devices[dev] = true;
+
+            saveVotes(currentRace, data);
+            closeModals();
+            displayRaceList();
+            alert("Hlas odeslán.");
+        };
+
+        displayRaceList();
+        setInterval(displayRaceList, 60000);
+    </script>
+
+</body>
+
+</html>
