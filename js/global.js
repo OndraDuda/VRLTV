@@ -1,6 +1,30 @@
 // Global JavaScript functionality for VRL website
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    const snowContainer = document.getElementById('snowContainer');
+    const SNOW_COUNT = 150; // počet vloček - klidně zvyš :)
+
+    function createSnow() {
+        for (let i = 0; i < SNOW_COUNT; i++) {
+            const flake = document.createElement('div');
+            flake.classList.add('snowflake');
+            flake.textContent = '❄';
+
+            const size = Math.random() * 10 + 10; // 10–20px
+            const duration = Math.random() * 12 + 10; // 10–22s
+            const delay = Math.random() * 10;
+
+            flake.style.left = Math.random() * 100 + 'vw';
+            flake.style.fontSize = size + 'px';
+            flake.style.animationDuration = duration + 's';
+            flake.style.animationDelay = delay + 's';
+
+            snowContainer.appendChild(flake);
+        }
+    }
+
+    createSnow();
+
     // Theme toggle functionality
     const themeSwitch = document.getElementById('themeSwitch');
     if (themeSwitch) {
