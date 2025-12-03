@@ -61,9 +61,11 @@
     </section>
 
     <h2 class="section-title">KALENDÁŘ ZÁVODŮ - SEZÓNA 2</h2>
-    <section class="calendar" id="calendar">
-        <!-- JavaScript naplní kalendář -->
-    </section>
+
+    <div class="calendar-wrapper">
+        <section class="calendar" id="calendar"></section>
+        <div id="monthlyCalendar" class="monthly-calendar"></div>
+    </div>
 
     <footer>
         <div class="container">
@@ -174,6 +176,110 @@
         document.addEventListener('DOMContentLoaded', () => {
             populateCalendar();
         });
+
+        // funkce pro zjištění dne v týdnu
+        function getDayName(dateString) {
+            const days = ["Neděle", "Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek", "Sobota"];
+            const parts = dateString.split(".");
+            const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
+            return days[dateObj.getDay()];
+        }
+
+        let currentMonth = 11;  // Září (0 = leden, 8 = září)
+        let currentYear = 2025;
+
+        function generateMonthlyCalendar(month, year) {
+            const container = document.getElementById("monthlyCalendar");
+            container.innerHTML = "";
+
+            const monthNames = [
+                "Leden", "Únor", "Březen", "Duben", "Květen", "Červen",
+                "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec"
+            ];
+
+            // 🔥 HLAVIČKA SE ŠIPKAMI
+            container.innerHTML += `
+        <div class="mc-header">
+            <span class="mc-arrow" id="prevMonth">&#10094;</span>
+            <span>${monthNames[month]} ${year}</span>
+            <span class="mc-arrow" id="nextMonth">&#10095;</span>
+        </div>
+    `;
+
+            const grid = document.createElement("div");
+            grid.className = "mc-grid";
+
+            // Dny v týdnu
+            ["Po", "Út", "St", "Čt", "Pá", "So", "Ne"].forEach(d => {
+                const day = document.createElement("div");
+                day.style.textAlign = "center";
+                day.style.fontWeight = "bold";
+                day.textContent = d;
+                grid.appendChild(day);
+            });
+
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const offset = (firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1);
+
+            // prázdné dny
+            for (let i = 0; i < offset; i++) {
+                const empty = document.createElement("div");
+                empty.className = "mc-day outside";
+                grid.appendChild(empty);
+            }
+
+            // dny měsíce
+            for (let day = 1; day <= lastDay.getDate(); day++) {
+                const cell = document.createElement("div");
+                cell.className = "mc-day";
+                cell.innerHTML = day;
+
+                const dateStr = `${day}.${month + 1}.${year}`;
+                const race = races.find(r => r.date === dateStr);
+
+                if (race) {
+                    cell.classList.add("race");
+                    cell.innerHTML = `
+                ${day}
+                <div class="mc-tooltip">
+                    <strong>${race.name}</strong><br>
+                    ${race.track}<br>
+                    19:00
+                </div>
+            `;
+                }
+
+                grid.appendChild(cell);
+            }
+
+            container.appendChild(grid);
+
+            // 🔥 OVLÁDÁNÍ ŠIPEK
+            document.getElementById("prevMonth").addEventListener("click", () => {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                generateMonthlyCalendar(currentMonth, currentYear);
+            });
+
+            document.getElementById("nextMonth").addEventListener("click", () => {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                generateMonthlyCalendar(currentMonth, currentYear);
+            });
+        }
+
+        // po načtení stránky zobraz první měsíc se závodem
+        document.addEventListener("DOMContentLoaded", () => {
+            generateMonthlyCalendar(currentMonth, currentYear);
+        });
+
     </script>
 </body>
 
