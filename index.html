@@ -1,717 +1,366 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="cs">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VRL - Velocity Racing League - Season 2</title>
-    <link rel="icon" type="image/png" href="VRL_logo_nove.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Web nedostupný • index.html</title>
+    <meta name="description"
+        content="Jedno-souborová stránka zobrazující, že web je nedostupný, s náhledem různých chybových stavů (404, 500, 503, 403) — určené pro přesměrování nebo maintenance." />
+    <style>
+        :root {
+            --bg: #0f1724;
+            --card: #0b1220;
+            --muted: #9aa4b2;
+            --accent: #ff6b6b;
+            --glass: rgba(255, 255, 255, 0.04)
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: linear-gradient(180deg, #071019 0%, #071a2a 60%);
+            color: #e6eef6
+        }
+
+        .wrap {
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 48px
+        }
+
+        .card {
+            width: 960px;
+            max-width: 100%;
+            background: linear-gradient(180deg, var(--card), rgba(7, 26, 42, 0.6));
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+            backdrop-filter: blur(6px);
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 20px;
+            align-items: center
+        }
+
+        .left {
+            padding: 12px
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .logo svg {
+            width: 48px;
+            height: 48px
+        }
+
+        h1 {
+            font-size: 20px;
+            margin: 8px 0 0
+        }
+
+        p.lead {
+            color: var(--muted);
+            margin: 10px 0 22px
+        }
+
+        .big-error {
+            font-size: 86px;
+            line-height: 1;
+            color: var(--accent);
+            font-weight: 700
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #dfe9f5;
+            margin-bottom: 12px
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px
+        }
+
+        .btn {
+            appearance: none;
+            border: 0;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: var(--glass);
+            color: #dfe9f5;
+            font-weight: 600;
+            cursor: pointer
+        }
+
+        .btn.primary {
+            background: linear-gradient(90deg, #ff7b7b, #ffb86b);
+            color: #081022
+        }
+
+        .btn.ghost {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.06)
+        }
+
+        .right {
+            padding: 12px
+        }
+
+        .panel {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 260px
+        }
+
+        .error-title {
+            font-size: 28px;
+            margin: 0 0 6px
+        }
+
+        .error-desc {
+            color: var(--muted);
+            margin-bottom: 12px
+        }
+
+        pre {
+            background: rgba(2, 8, 18, 0.6);
+            padding: 12px;
+            border-radius: 8px;
+            overflow: auto;
+            color: #b9d7ff
+        }
+
+        .mini {
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 14px;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        /* error badges */
+        .badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px
+        }
+
+        .badge {
+            padding: 6px 8px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            font-weight: 600
+        }
+
+        /* responsive */
+        @media (max-width:880px) {
+            .card {
+                grid-template-columns: 1fr;
+                gap: 14px;
+                padding: 18px
+            }
+
+            .left {
+                order: 2
+            }
+
+            .right {
+                order: 1
+            }
+        }
+
+        /* small animation */
+        .pulse {
+            animation: pulse 2s infinite
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1)
+            }
+
+            50% {
+                transform: scale(1.02)
+            }
+
+            100% {
+                transform: scale(1)
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div id="snowContainer"></div>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="vrl_high_res.png" alt="F1 VRL Logo" class="logo-img">
-                    </a>
+    <div class="wrap">
+        <div class="card" role="main" aria-labelledby="main-title">
+            <div class="left">
+                <div class="logo" aria-hidden="true">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="8" y="8" width="84" height="84" rx="14" fill="#071a2a" stroke="#0b1220" />
+                        <path d="M26 62c6-10 18-18 26-26 6-6 12-14 22-16" stroke="#ff6b6b" stroke-width="4"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <circle cx="72" cy="72" r="6" fill="#ffb86b" />
+                    </svg>
+                    <div>
+                        <h1 id="main-title">Web nedostupný</h1>
+                        <p class="lead">Tato stránka slouží jako jedno-souborový zástupce pro oznámení výpadku nebo
+                            údržby. Vyber chybu níže pro ukázku.</p>
+                    </div>
                 </div>
-                <div class="header-controls">
-                    <button class="theme-switch" id="themeSwitch">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
+
+                <div style="margin-top:16px">
+                    <div class="controls" role="tablist" aria-label="Simulované chyby">
+                        <button class="btn" data-error="offline">Offline (lokálně)</button>
+                        <button class="btn" data-error="404">404 Not Found</button>
+                        <button class="btn" data-error="500">500 Internal</button>
+                        <button class="btn" data-error="503">503 Service Unavailable</button>
+                        <button class="btn" data-error="403">403 Forbidden</button>
+                        <button class="btn" data-error="dns">DNS error</button>
+                        <button class="btn" data-error="timeout">Timeout</button>
+                        <button class="btn" id="random">Náhodná chyba</button>
+                    </div>
                 </div>
-                <nav id="mobileNav">
-                    <ul>
-                        <li><a href="index.html">Domů</a></li>
-                        <li><a href="calendar.html">Kalendář</a></li>
-                        <li><a href="jezdci.html">Jezdci</a></li>
-                        <li><a href="tymy.html">Týmy</a></li>
-                        <li><a href="okruh.html">Okruhy</a></li>
-                        <li><a href="vysledky.html">Výsledky</a></li>
-                        <li><a href="prihlasky.html">Příhlášky</a></li>
-                        <li><a href="https://discord.gg/CMxscEUcRd" class="discord-btn"><i class="fab fa-discord"></i>
-                                Discord</a></li>
-                    </ul>
-                </nav>
+
+                <div class="badges" aria-hidden="true">
+                    <span class="badge">HTML5</span>
+                    <span class="badge">Single file</span>
+                    <span class="badge">Accessible</span>
+                    <span class="badge">No server</span>
+                </div>
+
+                <div class="mini" style="margin-top:18px">Tip: uložte soubor jako <code>index.html</code> a nahrajte na
+                    server nebo je použijte pro přesměrování během údržby.</div>
             </div>
-        </div>
-    </header>
 
-    <section class="hero">
-        <div class="hero-fade"></div>
-        <div class="container">
-            <div class="hero-content">
-                <h2>Velocity Racing League</h2>
-                <p>Druhá sezóna VRL jede. A přejeme vám příjemné prožití vánočních svátků a nového roku.</p>
-                <div>
-                    <a href="https://discord.gg/CMxscEUcRd" class="btn"><i class="fab fa-discord"></i> Připojit se na
-                        Discord</a>
+            <div class="right">
+                <div class="panel" id="panel" tabindex="0">
+                    <!-- dynamic content inserted by JS -->
+                    <div id="initial" class="content">
+                        <div class="big-error pulse">504</div>
+                        <h2 class="error-title">Stránka aktuálně nedostupná</h2>
+                        <p class="error-desc">Server neodpovídá nebo probíhá údržba. Zkuste obnovit stránku nebo přijďte
+                            později.</p>
+                        <pre id="meta">Čas: <span id="time"></span>
+Adresa: / (simulace)</pre>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="container">
-        <section class="season-info">
-            <h2>SEZÓNA 2 - DŮLEŽITÉ INFORMACE</h2>
-            <p>Druhá sezóna VRL přináší nové okruhy a ještě více napětí!</p>
-            <div class="season-details">
-                <div class="detail-card">
-                    <h3><i class="fas fa-calendar-alt"></i> Formát</h3>
-                    <p>20 závodů<br>2 části sezóny<br>Short kvalifikace<br>50% závody</p>
-                </div>
-
-                <div class="detail-card">
-                    <h3><i class="fas fa-trophy"></i> Bodování</h3>
-                    <p>1. Místo 25<br>2. Místo 18<br>3. Místo 15<br>12-10-8-6-4-2-1</p>
-                </div>
-
-                <div class="detail-card">
-                    <h3><i class="fas fa-gamepad"></i> Platforma</h3>
-                    <p>F1 25<br> PC Steam/EA<br>PS/Xbox</p>
-                </div>
-
-                <div class="detail-card">
-                    <h3><i class="fas fa-book"></i> Pravidla</h3>
-                    <p>Pravidla ligy a závodění</p>
-                    <a href="https://docs.google.com/document/d/1o9ULOGPHiwvApBRguubZ3BCT3zQkdIPZtWpjO5tcUpc/edit?tab=t.0"
-                        class="btn"> Pravidla</a>
+                <div class="footer">
+                    <div class="mini">Kontakt: <strong>support@example.cz</strong></div>
+                    <div class="mini">Verze: 1.0 • Local</div>
                 </div>
             </div>
-        </section>
-
-        <section class="news-section">
-            <h2 class="section-title">Novinky</h2>
-
-            <div class="news-grid">
-                <article class="news-card">
-                    <div class="news-content">
-                        <h3>VRL SMP – Nový Minecraft projekt!</h3>
-                        <p>Představujeme VRL SMP, komunitní Minecraft server pro všechny fanoušky VRL.</p>
-                        <a href="novinky1.html" class="btn">Číst více</a>
-                    </div>
-                </article>
-
-                <article class="news-card">
-                    <div class="news-content">
-                        <h3>VC Kanady</h3>
-                        <p>Souhrn Věcí co se stalo ve Velké Ceně Kanady</p>
-                        <a href="novinky2.html" class="btn">Číst více</a>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <h2 class="section-title">Další Závod</h2>
-        <!-- Sekce Další závod -->
-        <section class="next-race-section">
-            <div class="next-race-container">
-                <!-- Informace o nadcházejícím závodě -->
-                <div class="next-race-info" id="nextRaceInfo">
-                    <div class="race-basic-info">
-                        <h3 id="nextRaceName">--</h3>
-                        <p class="race-track" id="nextRaceTrack">--</p>
-                        <p class="race-datetime" id="nextRaceDateTime">--</p>
-                    </div>
-                </div>
-
-                <!-- Countdown a stream status -->
-                <div class="race-status">
-                    <!-- LIVE indikátor -->
-                    <div class="live-indicator hidden" id="liveIndicator">
-                        <span class="live-pulse"></span>
-                        <span class="live-text">LIVE NOW</span>
-                    </div>
-
-                    <!-- Countdown -->
-                    <div class="countdown-container">
-                        <div id="countdown" class="countdown">
-                            <div class="countdown-item">
-                                <span id="cd-days">--</span>
-                                <span class="countdown-label">dní</span>
-                            </div>
-                            <div class="countdown-item">
-                                <span id="cd-hours">--</span>
-                                <span class="countdown-label">hodin</span>
-                            </div>
-                            <div class="countdown-item">
-                                <span id="cd-minutes">--</span>
-                                <span class="countdown-label">minut</span>
-                            </div>
-                            <div class="countdown-item">
-                                <span id="cd-seconds">--</span>
-                                <span class="countdown-label">sekund</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Stream link -->
-                    <div class="stream-link-container">
-                        <a href="https://www.youtube.com/watch?v=v367B7fvRV4" id="stream-link" class="stream-link"
-                            target="_blank">
-                            <i class="fab fa-youtube"></i>
-                            <span id="stream-text">Sleduj stream na YouTube</span>
-                        </a>
-
-                        <!-- Hlasování o jezdci dne -->
-                        <a href="driver-of-the-day.html" id="voting-link" class="stream-link voting-link">
-                            <i class="fas fa-vote-yea"></i>
-                            <span>Hlasuj o jezdci dne</span>
-                        </a>
-
-                        <!-- Dodatečné stream info -->
-                        <div class="stream-meta hidden" id="streamMeta">
-                            <span class="viewers-count" id="viewersCount">• Počet diváků: --</span>
-                            <span class="stream-uptime" id="streamUptime">• Stream běží: --</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <h2 class="section-title">Nadcházející závody</h2>
-        <section class="calendar2" id="calendar"></section>
-
-        <a href="calendar.html" class="btn">Zobrazit celý kalendář</a>
-
-        <h2 class="section-title">PRŮBĚŽNÉ POŘADÍ</h2>
-        <div class="standings-container">
-            <section class="standings">
-                <div class="standings-card">
-                    <div class="standings-header">
-                        <h3>Jezdci</h3>
-                    </div>
-                    <div class="standings-body">
-                        <div class="driver-row">
-                            <div class="driver-name">M. Heligr</div>
-                            <div class="driver-points">175 bodů</div>
-                        </div>
-                        <div class="driver-row">
-                            <div class="driver-name">M. Klaboch</div>
-                            <div class="driver-points">132 bodů</div>
-                        </div>
-                        <div class="driver-row">
-                            <div class="driver-name">J. Kubeš</div>
-                            <div class="driver-points">113 bodů</div>
-                        </div>
-                        <div class="driver-row">
-                            <div class="driver-name">F. Kratochvil</div>
-                            <div class="driver-points">91 bodů</div>
-                        </div>
-                        <div class="driver-row">
-                            <div class="driver-name">M. Vaculík</div>
-                            <div class="driver-points">68 bodů</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="standings-card">
-                    <div class="standings-header">
-                        <h3>Týmy</h3>
-                    </div>
-                    <div class="standings-body">
-                        <div class="driver-row">
-                            <div class="driver-name">McLaren</div>
-                            <div class="driver-points">243 bodů</div>
-                        </div>
-                        <div class="driver-row">
-                            <div class="driver-name">Mercedes</div>
-                            <div class="driver-points">167 bodů</div>
-                        </div>
-                        <div class="driver-row">
-                            <div class="driver-name">Aston Martin</div>
-                            <div class="driver-points">143 bodů</div>
-                        </div>
-                        <div class="driver-row">
-                            <div class="driver-name">Ferrari</div>
-                            <div class="driver-points">135 bodů</div>
-                        </div>
-                        <div class="driver-row">
-                            <div class="driver-name">Sauber</div>
-                            <div class="driver-points">101 bodů</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>VRL</h3>
-                    <p>Virtuální závodní liga pro nadšence Formule 1. Připoj se k nám a zažij motorsport z pohodlí
-                        domova.</p>
-                    <div class="social-icons">
-                        <a href="https://www.instagram.com/vrl_velocityracingleague/"><i
-                                class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@Velocity_Racing_League_VRL"><i class="fab fa-youtube"></i></a>
-                        <a href="https://discord.gg/CMxscEUcRd"><i class="fab fa-discord"></i></a>
-                        <a href="https://www.tiktok.com/@velocity_racingleague" target="_blank"><i
-                                class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Navigace</h3>
-                    <ul>
-                        <li><a href="index.html">Domů</a></li>
-                        <li><a href="calendar.html">Kalendář</a></li>
-                        <li><a href="jezdci.html">Jezdci</a></li>
-                        <li><a href="tymy.html">Týmy</a></li>
-                        <li><a href="okruh.html">Okruhy</a></li>
-                        <li><a href="vysledky.html">Výsledky</a></li>
-                        <li><a href="prihlasky.html">Příhlášky</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Organizátoři</h3>
-                    <ul>
-                        <li><a href="https://www.instagram.com/matyaasko/">Matěj Vaculík</a></li>
-                        <li><a href="https://www.instagram.com/beeeeuuuuu/">Maxim Heligr</a></li>
-                        <li><a href="https://www.instagram.com/_.duda.o._/">Ondra Duda</a></li>
-                        <li><a href="https://www.instagram.com/klabochmartin?igsh=Ym1pN29hNTFmbjBx&utm_source=qr">Martin
-                                Klaboch</a></li>
-                        <li><a href="https://www.instagram.com/olinkkt/">Oliver Seidl</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 VRL. Všechna práva vyhrazena.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="js/global.js"></script>
     <script>
-        
+        // small single-file simulator for various HTTP/network errors
+        const panel = document.getElementById('panel');
+        const timeEl = document.getElementById('time');
+        function updateTime() { timeEl.textContent = new Date().toLocaleString('cs-CZ'); }
+        updateTime(); setInterval(updateTime, 60000);
 
-        // YouTube API konfigurace
-        const YOUTUBE_API_KEY = 'AIzaSyB5q7AGW9zjLDOdHj_-IerZwsRmmGcZXKY';
-        const YOUTUBE_CHANNEL_ID = 'UC0XDTMlGN34SRTv8upjA1gw';
+        const templates = {
+            offline: {
+                code: 'OFFLINE',
+                title: 'Žádné připojení',
+                desc: 'Váš prohlížeč není připojen k internetu nebo server není dostupný. Zkontrolujte síťové připojení.',
+                meta: 'navigator.onLine: ' + (navigator.onLine ? 'true' : 'false') + '\nUser agent: ' + navigator.userAgent
+            },
+            '404': {
+                code: '404', title: 'Nenalezeno', desc: 'Požadovaný obsah nebyl nalezen na serveru. Zkontrolujte URL nebo použijte domovskou stránku.',
+                meta: 'Requested URL: /unknown\nHint: Ověřte přesměrování nebo pravidla v .htaccess'
+            },
+            '500': {
+                code: '500', title: 'Chyba serveru', desc: 'Na serveru došlo k neočekávané chybě. Technici byli informováni.',
+                meta: 'Stack: internal-server-error\nID požadavku: ' + Math.random().toString(36).slice(2, 10)
+            },
+            '503': {
+                code: '503', title: 'Služba nedostupná', desc: 'Server momentálně přetížen nebo probíhá údržba. Zkuste to prosím později.',
+                meta: 'Retry-After: 300\nPool size: 0/10'
+            },
+            '403': {
+                code: '403', title: 'Přístup odepřen', desc: 'Nemáte oprávnění k prohlížení této stránky.',
+                meta: 'Permission: denied\nRole: guest'
+            },
+            dns: { code: 'DNS', title: 'DNS chyba', desc: 'Doménové jméno nelze vyřešit — zkontrolujte DNS záznamy nebo propagaci domény.', meta: 'Resolver: 127.0.0.53\nNXDOMAIN' },
+            timeout: { code: 'TIMEOUT', title: 'Vypršel čas požadavku', desc: 'Server nereaguje v časovém limitu. Může jít o dočasný problém sítě.', meta: 'Timeout: 30s\nTries: 3' }
+        };
 
-        // Data závodů
-        const races = [
-            { round: "R1", name: "Austrálie", date: "2025-09-09", track: "Melbourne Grand Prix Circuit" },
-            { round: "R2", name: "Velká Británie", date: "2025-09-16", track: "Silverstone Circuit" },
-            { round: "R3", name: "Bahrain", date: "2025-09-30", track: "Bahrain International Circuit" },
-            { round: "R4", name: "Miami", date: "2025-10-07", track: "Miami International Autodrome" },
-            { round: "R5", name: "Imola", date: "2025-10-14", track: "Autodromo Enzo e Dino Ferrari" },
-            { round: "R6", name: "Ázerbájdžán", date: "2025-10-21", track: "Baku City Circuit" },
-            { round: "R7", name: "Japonsko", date: "2025-11-04", track: "Suzuka International Racing Course" },
-            { round: "R8", name: "Kanada", date: "2025-11-11", track: "Circuit Gilles Villeneuve" },
-            { round: "R9", name: "Singapur", date: "2025-11-18", track: "Marina Bay Street Circuit" },
-            { round: "R10", name: "Belgie", date: "2025-12-02", track: "Circuit de Spa-Francorchamps" },
-            { round: "R11", name: "Španělsko", date: "2025-12-16", track: "Circuit de Barcelona-Catalunya" },
-            { round: "R12", name: "Mexiko", date: "2026-01-06", track: "Autódromo Hermanos Rodríguez" },
-            { round: "R13", name: "Brazílie", date: "2026-01-20", track: "Autódromo José Carlos Pace" },
-            { round: "R14", name: "USA", date: "2026-02-03", track: "Circuit of the Americas" },
-            { round: "S1", name: "Sprint Reverse Rakousko", date: "2026-02-17", track: "Red Bull Ring" },
-            { round: "R15", name: "Rakousko", date: "2026-02-17", track: "Red Bull Ring" },
-            { round: "R16", name: "Monako", date: "2026-03-03", track: "Circuit de Monaco" },
-            { round: "R17", name: "Itálie", date: "2026-03-10", track: "Autodromo Nazionale Monza" },
-            { round: "R18", name: "Maďarsko", date: "2026-03-24", track: "Hungaroring" },
-            { round: "R19", name: "Katar", date: "2026-04-07", track: "Losail International Circuit" },
-            { round: "R20", name: "Saudská Arábie", date: "2026-04-21", track: "Jeddah Corniche Circuit" },
-            { round: "R21", name: "Abu Dhabi", date: "2026-04-28", track: "Yas Marina Circuit" }
-        ];
-
-        // Globální proměnné pro správu stavu
-        let currentDisplayedRace = null;
-        let currentLiveStream = null;
-        let streamCheckInterval = null;
-
-        // Funkce pro získání aktuálního živého streamu z kanálu
-        async function getCurrentLiveStream() {
-            try {
-                const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YOUTUBE_CHANNEL_ID}&eventType=live&type=video&key=${YOUTUBE_API_KEY}`);
-                const data = await response.json();
-
-                if (data.items && data.items.length > 0) {
-                    const liveVideo = data.items[0];
-                    return {
-                        isLive: true,
-                        videoId: liveVideo.id.videoId,
-                        title: liveVideo.snippet.title,
-                        publishedAt: liveVideo.snippet.publishedAt,
-                        channelTitle: liveVideo.snippet.channelTitle
-                    };
-                }
-                return { isLive: false };
-            } catch (error) {
-                console.error('Chyba při načítání živých streamů:', error);
-                return { isLive: false, error: true };
-            }
+        function render(t) {
+            const html = `
+        <div>
+          <div class="big-error">${t.code}</div>
+          <h2 class="error-title">${t.title}</h2>
+          <p class="error-desc">${t.desc}</p>
+          <pre>${t.meta}\nČas: ${new Date().toLocaleString('cs-CZ')}</pre>
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <button class="btn primary" onclick="location.reload()">Zkusit znovu</button>
+            <button class="btn ghost" onclick="showHome()">Zobrazit informace</button>
+            <button class="btn" onclick="downloadLog('${escape(t.code)}')">Stáhnout log</button>
+          </div>
+        </div>
+      `;
+            panel.innerHTML = html;
+            panel.focus();
         }
 
-        // Funkce pro získání detailních informací o streamu
-        async function getStreamDetails(videoId) {
-            try {
-                const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails,snippet,statistics&id=${videoId}&key=${YOUTUBE_API_KEY}`);
-                const data = await response.json();
-
-                if (data.items && data.items.length > 0) {
-                    const video = data.items[0];
-                    return {
-                        concurrentViewers: video.liveStreamingDetails?.concurrentViewers || 0,
-                        actualStartTime: video.liveStreamingDetails?.actualStartTime || null,
-                        scheduledStartTime: video.liveStreamingDetails?.scheduledStartTime || null,
-                        title: video.snippet.title,
-                        description: video.snippet.description
-                    };
-                }
-                return null;
-            } catch (error) {
-                console.error('Chyba při načítání detailů streamu:', error);
-                return null;
-            }
+        function showHome() {
+            panel.innerHTML = document.getElementById('initial').outerHTML;
+            updateTime();
         }
 
-        // Funkce pro získání aktuálního závodu (běžícího nebo do 3 hodin po skončení)
-        function getCurrentRace() {
-            const now = new Date();
-
-            const currentRaces = races
-                .map(r => {
-                    const raceStart = new Date(`${r.date}T19:00:00`);
-                    const raceEnd = new Date(raceStart.getTime() + 3 * 60 * 60 * 1000);
-                    return { ...r, raceStart, raceEnd };
-                })
-                .filter(r => now >= r.raceStart && now <= r.raceEnd)
-                .sort((a, b) => a.raceStart - b.raceStart);
-
-            return currentRaces.length > 0 ? currentRaces[0] : null;
+        function downloadLog(code) {
+            const now = new Date().toISOString().replace(/[:.]/g, '-');
+            const filename = `error-${code}-${now}.txt`;
+            const content = `Error: ${code}\nTime: ${new Date().toLocaleString('cs-CZ')}\nUserAgent: ${navigator.userAgent}\n`;
+            const blob = new Blob([content], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = filename;
+            document.body.appendChild(a); a.click(); a.remove();
         }
 
-        // Funkce pro získání dalšího závodu
-        function getNextRace() {
-            const currentRace = getCurrentRace();
-            const now = new Date();
+        document.querySelectorAll('[data-error]').forEach(btn => btn.addEventListener('click', e => {
+            const key = e.currentTarget.getAttribute('data-error');
+            const t = templates[key] || templates['500'];
+            render(t);
+        }));
 
-            // Pokud máme aktuální závod, vrátíme ho
-            if (currentRace) {
-                return currentRace;
-            }
-
-            // Jinak najdeme další nadcházející závod
-            const upcomingRaces = races
-                .map(r => {
-                    const raceStart = new Date(`${r.date}T19:00:00`);
-                    return { ...r, raceStart };
-                })
-                .filter(r => r.raceStart > now)
-                .sort((a, b) => a.raceStart - b.raceStart);
-
-            return upcomingRaces.length > 0 ? upcomingRaces[0] : null;
-        }
-
-        // Funkce pro získání nadcházejících závodů (bez aktuálního a bez dalšího závodu)
-        function getUpcomingRaces(limit = null) {
-            const now = new Date();
-            const currentRace = getCurrentRace();
-            const nextRace = getNextRace();
-
-            const upcoming = races
-                .map(r => {
-                    const raceStart = new Date(`${r.date}T19:00:00`);
-                    return { ...r, raceStart };
-                })
-                .filter(r => r.raceStart > now)
-                .filter(r => {
-                    // Odstraníme závod, který je aktuální (currentRace)
-                    if (currentRace && r.date === currentRace.date) {
-                        return false;
-                    }
-                    // Odstraníme závod, který je zobrazen jako další závod (nextRace)
-                    if (nextRace && r.date === nextRace.date) {
-                        return false;
-                    }
-                    return true;
-                })
-                .sort((a, b) => a.raceStart - b.raceStart);
-
-            return limit ? upcoming.slice(0, limit) : upcoming;
-        }
-
-        // Funkce pro vypsání závodů do kalendáře
-        function populateCalendar(containerId, racesToShow) {
-            const calendar = document.getElementById(containerId);
-            calendar.innerHTML = '';
-
-            if (racesToShow.length === 0) {
-                calendar.innerHTML = '<div class="no-races">Žádné další nadcházející závody</div>';
-                return;
-            }
-
-            racesToShow.forEach(race => {
-                const raceCard = document.createElement('div');
-                raceCard.className = 'race-card';
-
-                raceCard.innerHTML = `
-                <div class="race-date">
-                    <div class="race-round">${race.round}</div>
-                    <strong>${race.raceStart.toLocaleDateString("cs-CZ")}</strong>
-                </div>
-                <div class="race-info">
-                    <h3>${race.name}</h3>
-                    <p class="race-track">${race.track}</p>
-                    <p>19:00 | Krátká kvalifikace | 50 % Závod</p>
-                </div>
-            `;
-
-                calendar.appendChild(raceCard);
-            });
-        }
-
-        // Funkce pro formátování času
-        function formatUptime(startTime) {
-            const uptime = Math.floor((new Date() - new Date(startTime)) / 1000);
-            const hours = Math.floor(uptime / 3600);
-            const minutes = Math.floor((uptime % 3600) / 60);
-            return `${hours}h ${minutes}m`;
-        }
-
-        // Funkce pro analýzu názvu streamu a určení závodu
-        function detectRaceFromStream(title) {
-            if (!title) return null;
-
-            const titleLower = title.toLowerCase();
-
-            // Prohledáme názvy závodů v názvu streamu
-            for (const race of races) {
-                const raceNameLower = race.name.toLowerCase();
-                if (titleLower.includes(raceNameLower)) {
-                    return race;
-                }
-            }
-
-            return null;
-        }
-
-        // Funkce pro aktualizaci zobrazení závodu
-        function updateRaceDisplay(race) {
-            const nextRaceName = document.getElementById('nextRaceName');
-            const nextRaceTrack = document.getElementById('nextRaceTrack');
-            const nextRaceDateTime = document.getElementById('nextRaceDateTime');
-
-            if (!race) {
-                nextRaceName.textContent = "Žádný naplánovaný závod";
-                nextRaceTrack.textContent = "---";
-                nextRaceDateTime.textContent = "---";
-                return;
-            }
-
-            nextRaceName.textContent = race.name;
-            nextRaceTrack.textContent = race.track;
-            nextRaceDateTime.textContent = race.raceStart.toLocaleDateString("cs-CZ", {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-        }
-
-        // Funkce pro aktualizaci countdownu
-        function updateCountdownDisplay(targetDate) {
-            const now = new Date();
-            const diff = targetDate - now;
-
-            if (diff <= 0) {
-                // Čas již uplynul - zobrazíme nulu
-                document.getElementById('cd-days').textContent = '00';
-                document.getElementById('cd-hours').textContent = '00';
-                document.getElementById('cd-minutes').textContent = '00';
-                document.getElementById('cd-seconds').textContent = '00';
-                return false;
-            }
-
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((diff / (1000 * 60)) % 60);
-            const seconds = Math.floor((diff / 1000) % 60);
-
-            document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
-            document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
-
-            return true;
-        }
-
-        // Hlavní funkce pro aktualizaci stavu streamu a závodu
-        async function updateStreamStatus() {
-            const streamData = await getCurrentLiveStream();
-            const currentRace = getCurrentRace();
-            const nextRace = getNextRace();
-
-            const countdownEl = document.getElementById('countdown');
-            const streamLink = document.getElementById('stream-link');
-            const streamText = document.getElementById('stream-text');
-            const liveIndicator = document.getElementById('liveIndicator');
-            const streamMeta = document.getElementById('streamMeta');
-            const viewersCount = document.getElementById('viewersCount');
-            const streamUptime = document.getElementById('streamUptime');
-
-            // Pokud není žádný závod
-            if (!nextRace) {
-                countdownEl.innerHTML = '<div class="no-races">Žádné další závody naplánovány</div>';
-                streamLink.style.display = 'none';
-                updateRaceDisplay(null);
-                return;
-            }
-
-            const now = new Date();
-            const raceStart = nextRace.raceStart;
-            const raceEnd = new Date(raceStart.getTime() + 3 * 60 * 60 * 1000);
-
-            // Kontrola, zda se má přepnout na nový závod
-            if (!currentDisplayedRace || currentDisplayedRace.date !== nextRace.date) {
-                currentDisplayedRace = nextRace;
-                updateRaceDisplay(nextRace);
-            }
-
-            // Pokud je stream živý a odpovídá aktuálnímu závodu
-            if (streamData.isLive) {
-                currentLiveStream = streamData;
-
-                // Získání detailů streamu
-                const streamDetails = await getStreamDetails(streamData.videoId);
-
-                // Aktualizace odkazu na stream
-                streamLink.href = `https://www.youtube.com/watch?v=${streamData.videoId}`;
-
-                // Zobrazení LIVE indikátoru
-                liveIndicator.classList.remove('hidden');
-                streamLink.classList.add('live');
-                streamText.textContent = 'Sleduj živý přenos';
-                streamMeta.classList.remove('hidden');
-                countdownEl.style.display = 'none';
-
-                // Aktualizace metadat
-                if (streamDetails) {
-                    viewersCount.textContent = `• Diváků online: ${streamDetails.concurrentViewers.toLocaleString()}`;
-                    if (streamDetails.actualStartTime) {
-                        streamUptime.textContent = `• Stream běží: ${formatUptime(streamDetails.actualStartTime)}`;
-                    }
-                }
-
-            } else {
-                // STREAM NENÍ ŽIVÝ
-
-                // Skryjeme LIVE indikátor a metadata
-                liveIndicator.classList.add('hidden');
-                streamMeta.classList.add('hidden');
-                streamLink.classList.remove('live');
-                streamText.textContent = 'Sleduj stream na YouTube';
-                countdownEl.style.display = 'flex';
-
-                // Pokud je závod v časovém okně (od startu do 3 hodin po startu)
-                if (now >= raceStart && now <= raceEnd) {
-                    // Závod by měl běžet, ale stream není živý
-                    liveIndicator.classList.remove('hidden');
-                    liveIndicator.classList.add('preparing');
-                    liveIndicator.querySelector('.live-text').textContent = 'ČEKÁME NA STREAM';
-                    streamText.textContent = 'Stream by měl brzy začít';
-
-                    // Odpočet do konce časového okna
-                    updateCountdownDisplay(raceEnd);
-
-                } else if (now < raceStart) {
-                    // Závod ještě nezačal - normální odpočet
-                    const timeToStart = updateCountdownDisplay(raceStart);
-
-                    // 15 minut před startem - přípravná fáze
-                    if (timeToStart && (raceStart - now) <= 15 * 60 * 1000) {
-                        liveIndicator.classList.remove('hidden');
-                        liveIndicator.classList.add('preparing');
-                        liveIndicator.querySelector('.live-text').textContent = 'ZAČÍNÁ BRZY';
-                        streamText.textContent = 'Připravte se na stream';
-                    }
-                } else {
-                    // Závod již skončil - přejdeme na další
-                    const nextUpcomingRace = getNextRace();
-                    if (nextUpcomingRace && nextUpcomingRace.date !== currentDisplayedRace.date) {
-                        // Přepneme na nový závod
-                        currentDisplayedRace = nextUpcomingRace;
-                        updateRaceDisplay(nextUpcomingRace);
-                        updateCountdownDisplay(nextUpcomingRace.raceStart);
-                    } else {
-                        countdownEl.innerHTML = '<div class="race-finished">Závod byl dokončen</div>';
-                    }
-                }
-            }
-        }
-
-        // Inicializace stránky
-        document.addEventListener("DOMContentLoaded", async () => {
-            // První načtení stavu
-            await updateStreamStatus();
-
-            // Pravidelné aktualizace streamu (každých 30 sekund)
-            streamCheckInterval = setInterval(updateStreamStatus, 30000);
-
-            // Pravidelná aktualizace countdownu (každou sekundu)
-            const countdownInterval = setInterval(() => {
-                if (currentDisplayedRace) {
-                    const now = new Date();
-                    const raceStart = currentDisplayedRace.raceStart;
-
-                    if (now < raceStart) {
-                        updateCountdownDisplay(raceStart);
-                    } else {
-                        const raceEnd = new Date(raceStart.getTime() + 3 * 60 * 60 * 1000);
-                        if (now <= raceEnd) {
-                            updateCountdownDisplay(raceEnd);
-                        }
-                    }
-                }
-            }, 1000);
-
-            // Naplnění nadcházejících závodů
-            const upcomingRaces = getUpcomingRaces(5);
-            populateCalendar("calendar", upcomingRaces);
-
-            // Automatické obnovení seznamu závodů každou minutu
-            function scheduleRefresh() {
-                setTimeout(() => {
-                    const newUpcomingRaces = getUpcomingRaces(5);
-                    populateCalendar("calendar", newUpcomingRaces);
-                    scheduleRefresh();
-                }, 60000);
-            }
-
-            scheduleRefresh();
+        document.getElementById('random').addEventListener('click', () => {
+            const keys = Object.keys(templates);
+            const k = keys[Math.floor(Math.random() * keys.length)];
+            render(templates[k]);
         });
 
-        // Scrollování headeru na mobilu
-        let lastScrollTop = 0;
-        const header = document.querySelector('header');
-
-        window.addEventListener('scroll', () => {
-            const st = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (window.innerWidth <= 768) {
-                if (st > lastScrollTop) {
-                    header.style.top = "-120px";
-                } else {
-                    header.style.top = "0";
-                }
-            }
-
-            lastScrollTop = st <= 0 ? 0 : st;
+        // keyboard shortcuts for convenience
+        window.addEventListener('keydown', (e) => {
+            if (e.key === '1') render(templates['404']);
+            if (e.key === '2') render(templates['500']);
+            if (e.key === '3') render(templates['503']);
+            if (e.key === '4') render(templates['403']);
+            if (e.key === '0') showHome();
         });
+
+        // initial
+        showHome();
     </script>
 </body>
 
